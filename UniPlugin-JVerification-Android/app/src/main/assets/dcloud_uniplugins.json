@@ -1,0 +1,17 @@
+{
+  "nativePlugins": [
+    {
+      "hooksClass": "",
+      "plugins": [
+        {
+          "type": "module",
+          "name": "JIGUANG-JVerification",
+          "class": "cn.jiguang.uniplugin_jverification.JVerificationWXModule"
+        }
+      ]
+    },
+    {
+      "hooksClass": "uni.dcloud.io.uniplugin_stepcounter.StepCounterHookProxy"
+    }
+  ]
+}
