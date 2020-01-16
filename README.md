@@ -15,7 +15,7 @@ const jv = uni.requireNativePlugin('JIGUANG-JVerification');
 
 
 ## DEMO 体验
-按照以下步骤快速体验 JVerification_Hbuilder_demo：
+按照以下步骤快速体验 JVerification_Hbuilder_demo：
 - 1.在[极光 portal](https://www.jiguang.cn/accounts/platform)注册应用并开通认证功能。
 - 2.在项目 manifest.json 中配置您申请的极光 appkey 信息
 - 3.HbuilderX 中制作打包自定义基座，包名，签名，bundleID 需要与对应 appkey 配置的应用信息保持一致

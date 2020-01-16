@@ -153,7 +153,7 @@ jv.loginAuth({
 iOS 和 Android 分开设置
 
 ### API - setCustomUIWithConfigAndroid
-修改 Android 授权页面主题，，支持传入竖屏和横屏两套config。sdk会根据当前横竖屏状态动态切换，需在 loginAuth 接口之前调用。
+修改 Android 授权页面主题，支持传入竖屏和横屏两套config。sdk会根据当前横竖屏状态动态切换，需在 loginAuth 接口之前调用。
 
 #### 接口定义
 
