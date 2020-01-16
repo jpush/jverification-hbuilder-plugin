@@ -6,7 +6,11 @@
 - 1.将 nativeplugins/JIGUANG-JVerification 导入项目对应位置。
 - 2.项目 manifest.json 中接入 JIGUANG-JVerification 插件。并配置好 appkey([极光 portal]() 注册分配)，channel 信息。
 
-![配置](/doc/conf.png)
+<p align="center">
+    <a target="_blank">
+        <img src="doc/conf.png" alt="config" width=600/>
+    </a>
+</p>
 
 - 3.在项目中引用插件
 ```
@@ -20,6 +24,12 @@ const jv = uni.requireNativePlugin('JIGUANG-JVerification');
 - 2.在项目 manifest.json 中配置您申请的极光 appkey 信息
 - 3.HbuilderX 中制作打包自定义基座，包名，签名，bundleID 需要与对应 appkey 配置的应用信息保持一致
 - 4.HbuilderX 使用自定义基座运行即可
+
+<p align="center">
+    <a target="_blank">
+        <img src="doc/demo.jpeg" alt="demo" width=400/>
+    </a>
+</p>
 
 
 ## API 说明
