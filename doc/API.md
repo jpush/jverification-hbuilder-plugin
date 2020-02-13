@@ -104,12 +104,12 @@ jv.preLogin(7000,result=>{
 
 ## 清除预取号缓存
 
-### API - clearPreLoginCach()
+### API - clearPreLoginCache()
 清除预取号缓存。
 
 #### 示例
 ```javascript
-jv.clearPreLoginCach();
+jv.clearPreLoginCache();
 ```
 
 ## 请求授权一键登录
