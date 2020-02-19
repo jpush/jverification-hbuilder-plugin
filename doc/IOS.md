@@ -112,11 +112,11 @@
 ![JVerification](https://docs.jiguang.cn/jverification/image/cutomeUI_description.png)
 
 #### 关于图片资源
-iOS 请将图片放到 JVerificationResour.bundle 中。
+iOS 请将图片放到 JVerificationResource.bundle 中。
 
-比如需要设置一键登录授权页背景图片，在 JVerificationResour.bundle 添加 bg.png 图片后，调用
+比如需要设置一键登录授权页背景图片，在 JVerificationResource.bundle 添加 bg.png 图片后，调用
 ```javascript
-jv.setCustomUIWithConfigAndroid({
+jv.setCustomUIWithConfigiOS({
 		authPageBackgroundImage:"bg"
 	})
 ```
