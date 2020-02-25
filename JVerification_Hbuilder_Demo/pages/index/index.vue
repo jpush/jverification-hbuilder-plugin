@@ -9,6 +9,7 @@
 		<button type="primary" @click="clearPreLoginCache()">清除预取号缓存</button>
 		<button type="primary" @click="loginAuth()">请求授权一键登录</button>
 		<button type="primary" @click="setCustomUIWithConfig()">自定义授权页面样式</button>
+		<button type="primary" @click="setCustomDialog()">自定义弹窗授权页</button>
 		<view class="msg-box" >
 			<text class="msg">{{msg}}</text>
 		</view>
@@ -100,7 +101,29 @@
 						setNavColor:0xff000000,
 						setLogBtnText:" 极光认证测试 ",
 						setPrivacyState:false,
-						setAppPrivacyColor:[0xff00f000,0xff000000]
+						setAppPrivacyColor:[0xff00f000,0xff000000],
+					})
+				}
+				
+			},
+			setCustomDialog:function(){
+				if(uni.getSystemInfoSync().platform == "ios"){
+					this.jv.setCustomUIWithConfigiOS({
+						navColor:0xff000000,
+						logBtnText:" 极光认证测试 ",
+						privacyState:true,
+						appPrivacyColor:[0xff000000,0xff000000],
+						showWindow:true,
+						windowConstraints:[500,500,0,0]
+						
+					})
+				}else{
+					this.jv.setCustomUIWithConfigAndroid({
+						setNavColor:0xff000000,
+						setLogBtnText:" 极光认证测试 ",
+						setPrivacyState:false,
+						setAppPrivacyColor:[0xff00f000,0xff000000],
+						setDialogTheme:[360, 600, 0, 0, false]
 					})
 				}
 				

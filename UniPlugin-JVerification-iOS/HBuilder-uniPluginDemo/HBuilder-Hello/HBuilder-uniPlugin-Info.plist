@@ -4,6 +4,8 @@
 <dict>
 	<key>JVerification</key>
 	<dict>
+		<key>CHANNEL</key>
+		<string>test</string>
 		<key>APP_KEY</key>
 		<string>f83829ae3da54571ddf130d0</string>
 	</dict>
@@ -439,7 +441,7 @@
 	<array>
 		<dict>
 			<key>hooksClass</key>
-			<string>DCRichAlertProxy</string>
+			<string></string>
 			<key>plugins</key>
 			<array>
 				<dict>
@@ -447,14 +449,6 @@
 					<string>JVerificationModule</string>
 					<key>name</key>
 					<string>JIGUANG-JVerification</string>
-					<key>type</key>
-					<string>module</string>
-				</dict>
-				<dict>
-					<key>class</key>
-					<string>DCRichAlertModule</string>
-					<key>name</key>
-					<string>DCloud-RichAlert</string>
 					<key>type</key>
 					<string>module</string>
 				</dict>
