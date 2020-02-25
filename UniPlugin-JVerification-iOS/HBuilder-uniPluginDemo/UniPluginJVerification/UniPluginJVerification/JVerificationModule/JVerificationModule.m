@@ -258,6 +258,7 @@ static  NSString* showWindow=@"showWindow";
 static  NSString* windowBackgroundImage=@"windowBackgroundImage";
 static  NSString* windowBackgroundAlpha=@"windowBackgroundAlpha";
 static  NSString* windowCornerRadius=@"windowCornerRadius";
+static  NSString* windowConstraints=@"windowConstraints";
 
 void setJVUIConfig(NSString* key ,NSDictionary *dict,
 JVUIConfig *jvUIConfig){
@@ -396,6 +397,17 @@ JVUIConfig *jvUIConfig){
         jvUIConfig.windowBackgroundAlpha = [dict[key] floatValue];
     }else if([key containsString:windowCornerRadius]){
         jvUIConfig.windowCornerRadius = [dict[key] floatValue];
+    }else if([key containsString:windowConstraints]){
+        NSArray* cons = dict[key];
+        CGFloat windowW = [cons[0] floatValue];
+        CGFloat windowH = [cons[1] floatValue];
+        CGFloat windowX = [cons[2] floatValue];
+        CGFloat windowY = [cons[3] floatValue];
+        JVLayoutConstraint *windowConstraintX = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSuper attribute:NSLayoutAttributeCenterX multiplier:1 constant:windowX];
+        JVLayoutConstraint *windowConstraintY = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSuper attribute:NSLayoutAttributeCenterY multiplier:1 constant:windowY];
+        JVLayoutConstraint *windowConstraintW = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeWidth multiplier:1 constant:windowW];
+        JVLayoutConstraint *windowConstraintH = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeHeight multiplier:1 constant:windowH];
+        jvUIConfig.windowConstraints = @[windowConstraintX,windowConstraintY,windowConstraintW,windowConstraintH];
     }
     
 }

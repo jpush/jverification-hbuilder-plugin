@@ -108,6 +108,8 @@
 |windowBackgroundImage|String|弹框内部背景图片|
 |windowBackgroundAlpha|float|弹窗外侧 透明度  0~1.0|
 |windowCornerRadius|float|弹窗圆角数值|
+|windowConstraints|float,float,float,float|弹窗布局对象(窗口宽度，窗口高度，窗口相对屏幕中心的x轴偏移量，窗口相对屏幕中心的y轴偏移量)|
+
 
 ![JVerification](https://docs.jiguang.cn/jverification/image/cutomeUI_description.png)
 
