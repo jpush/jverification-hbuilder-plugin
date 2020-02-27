@@ -211,7 +211,7 @@ jv.setCustomUIWithConfigAndroid({
 
 下面插件介绍aar打包步骤：
 
-1.将[UniPlugin-JVerification-Android]导入 AndroidStudio 中
+1.将[UniPlugin-JVerification-Android](https://github.com/jpush/jverification-hbuilder-plugin/tree/master/UniPlugin-JVerification-Android)导入 AndroidStudio 中
 
 2.在 drawable 对应目录下加入自己的图片资源
 <p align="center">
@@ -226,7 +226,7 @@ jv.setCustomUIWithConfigAndroid({
     </a>
 </p>
 
-4.替换插件包中的 [uniplugin_jverification-release.aar](https://github.com/jpush/jverification-hbuilder-plugin/tree/master/UniPlugin-JVerification-Android)
+4.替换插件包中的 [uniplugin_jverification-release.aar](https://github.com/jpush/jverification-hbuilder-plugin/tree/master/nativeplugins/JIGUANG-JVerification/android)
 <p align="center">
     <a target="_blank">
         <img src="step3.png" alt="demo" width=400/>
