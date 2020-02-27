@@ -177,7 +177,7 @@ type = button 的属性
 |textColor|int|文字颜色|
 |textSize|int|文字大小|
 |bgColor|int|背景颜色|
-|bgImgPath|String|背景图片，可以放到 uniapp 项目下，比如 static/qq.png|
+|bgImgPath|String|背景图片|
 
 type = image 的属性
 
