@@ -89,6 +89,7 @@
 			},
 			// 自定义授权页面 UI 样式
 			setCustomUIWithConfig:function(){
+				let self = this;
 				if(uni.getSystemInfoSync().platform == "ios"){
 					this.jv.setCustomUIWithConfigiOS({
 						navColor:0xff000000,
@@ -97,11 +98,36 @@
 						appPrivacyColor:[0xff000000,0xff000000]
 					})
 				}else{
+					this.jv.addCustomViewsClickCallback(id=>{
+						self.showModal('customViewclick',"id:"+id);
+					});
 					this.jv.setCustomUIWithConfigAndroid({
 						setNavColor:0xff000000,
 						setLogBtnText:" 极光认证测试 ",
 						setPrivacyState:false,
 						setAppPrivacyColor:[0xff00f000,0xff000000],
+						addCustomViews:[{
+							type:"text",
+							finishFlag:false,
+							id:"id1",
+							width:100,
+							height:50,
+							text:"自定义tv",
+							textSize:20,
+							align:15,
+							margins:[0,100,0,0],
+							bgColor:0xff7b68ee
+						},
+						{
+							type:"image",
+							finishFlag:true,
+							id:"id2",
+							width:50,
+							height:50,
+							align:13,
+							margins:[0,0,0,0],
+							bgImgPath:"static/qq.png"
+						}]
 					})
 				}
 				
@@ -109,10 +135,7 @@
 			setCustomDialog:function(){
 				if(uni.getSystemInfoSync().platform == "ios"){
 					this.jv.setCustomUIWithConfigiOS({
-						navColor:0xff000000,
-						logBtnText:" 极光认证测试 ",
-						privacyState:true,
-						appPrivacyColor:[0xff000000,0xff000000],
+						autoLayout:true,
 						showWindow:true,
 						windowConstraints:[500,500,0,0]
 						
@@ -123,7 +146,7 @@
 						setLogBtnText:" 极光认证测试 ",
 						setPrivacyState:false,
 						setAppPrivacyColor:[0xff00f000,0xff000000],
-						setDialogTheme:[360, 600, 0, 0, false]
+						setDialogTheme:[300, 400, 0, 0, false]
 					})
 				}
 				

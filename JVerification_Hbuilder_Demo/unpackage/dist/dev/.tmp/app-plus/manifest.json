@@ -85,10 +85,10 @@
     },
     "nativePlugins": {
       "JIGUANG-JVerification": {
-        "JPUSH_APPKEY_IOS": "f83829ae3da54571ddf130d0",
-        "JPUSH_CHANNEL_IOS": "ddd",
+        "JPUSH_APPKEY_IOS": "3bc7fe126f892557a954aa07",
+        "JPUSH_CHANNEL_IOS": "3bc7fe126f892557a954aa07",
         "JPUSH_CHANNEL_ANDROID": "3bc7fe126f892557a954aa07",
-        "JPUSH_APPKEY_ANDROID": "ddd",
+        "JPUSH_APPKEY_ANDROID": "3bc7fe126f892557a954aa07",
         "__plugin_info__": {
           "name": "JIGUANG-JVerification",
           "description": "极光认证Hbuilder插件",

@@ -177,6 +177,16 @@ jv.setCustomUIWithConfigAndroid({
 })
 ```
 
+#### API - addCustomViewsClickCallback
+添加自定义 view 回调。配合 setCustomUIWithConfigAndroid 的  addCustomViews 属性一起使用
+
+##### 示例
+```javascript
+jv.addCustomViewsClickCallback(id=>{
+
+})
+```
+
 ### API - setCustomUIWithConfigiOS
 修改 iOS 授权页面主题，需在 loginAuth 接口之前调用。
 

@@ -31,7 +31,7 @@ repositories {
 
 dependencies {
     // 正式打包时[gradle-->:uniplugin_jverification->assembleRelease] ,请将 implementation 改为 compileOnly。
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    compileOnly fileTree(include: ['*.jar'], dir: 'libs')
     compileOnly fileTree(include: ['uniapp-release.aar'], dir: '../app/libs')
     compileOnly 'com.android.support:recyclerview-v7:25.3.1'
     compileOnly 'com.android.support:support-v4:25.3.1'

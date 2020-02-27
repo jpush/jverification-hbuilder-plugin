@@ -104,4 +104,22 @@ public class JConstants {
     public static final String setNeedCloseAnim = "setNeedCloseAnim";
     //   授权页弹窗模式 setDialogTheme
     public static final String setDialogTheme = "setDialogTheme";
+    // 自定义View
+    public static final String addCustomViews = "addCustomViews";
+    public static final String finishFlag = "finishFlag";
+    public static final String type = "type";
+    public static final String type_text = "text";
+    public static final String type_button = "button";
+    public static final String type_image = "image";
+    public static final String id = "id";
+    public static final String margins = "margins";
+    public static final String align = "align";
+    public static final String width = "width";
+    public static final String height = "height";
+    public static final String text = "text";
+    public static final String textSize = "textSize";
+    public static final String textColor = "textColor";
+    public static final String backgroundColor = "bgColor";
+    public static final String backgroundImg = "bgImgPath";
+
 }

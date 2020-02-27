@@ -389,7 +389,7 @@ JVUIConfig *jvUIConfig){
         jvUIConfig.sloganTextColor = UIColorFromRGBValue([dict[key] intValue]);
     }
     //    弹窗
-    else if([key containsString:sloganOffsetY]){
+    else if([key containsString:showWindow]){
         jvUIConfig.showWindow = [dict[key] boolValue];
     }else if([key containsString:windowBackgroundImage]){
         jvUIConfig.windowBackgroundImage =  [UIImage imageNamed:dict[key]];
@@ -408,6 +408,7 @@ JVUIConfig *jvUIConfig){
         JVLayoutConstraint *windowConstraintW = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeWidth multiplier:1 constant:windowW];
         JVLayoutConstraint *windowConstraintH = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeHeight multiplier:1 constant:windowH];
         jvUIConfig.windowConstraints = @[windowConstraintX,windowConstraintY,windowConstraintW,windowConstraintH];
+        jvUIConfig.windowHorizontalConstraints = jvUIConfig.windowConstraints;
     }
     
 }

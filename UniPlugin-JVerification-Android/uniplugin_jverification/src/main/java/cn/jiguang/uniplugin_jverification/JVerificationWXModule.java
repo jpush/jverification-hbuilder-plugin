@@ -1,5 +1,18 @@
 package cn.jiguang.uniplugin_jverification;
 
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.taobao.weex.WXSDKEngine;
@@ -7,10 +20,14 @@ import com.taobao.weex.annotation.JSMethod;
 import com.taobao.weex.bridge.JSCallback;
 
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import cn.jiguang.uniplugin_jverification.common.JConstants;
 import cn.jiguang.uniplugin_jverification.common.JLogger;
 import cn.jiguang.verifysdk.api.AuthPageEventListener;
 import cn.jiguang.verifysdk.api.JVerificationInterface;
+import cn.jiguang.verifysdk.api.JVerifyUIClickCallback;
 import cn.jiguang.verifysdk.api.JVerifyUIConfig;
 import cn.jiguang.verifysdk.api.LoginSettings;
 import cn.jiguang.verifysdk.api.PreLoginListener;
@@ -139,8 +156,12 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
             JVerifyUIConfig.Builder uiConfigLandscape = getBuilder(jsonObjectLandscape);
             JVerificationInterface.setCustomUIWithConfig(uiConfigPortrait.build(), uiConfigLandscape.build());
         }
+    }
 
-
+    private JSCallback mCustomViewsClickCallback;
+    @JSMethod(uiThread = true)
+    public void addCustomViewsClickCallback(final JSCallback callback) {
+        mCustomViewsClickCallback = callback;
     }
 
 
@@ -409,6 +430,130 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
             JSONArray jsonArray = jsonObject.getJSONArray(JConstants.setDialogTheme);
             uiConfigBuilder.setDialogTheme(jsonArray.getIntValue(0), jsonArray.getIntValue(1),
                     jsonArray.getIntValue(2), jsonArray.getIntValue(3), jsonArray.getBooleanValue(4));
+        }
+
+        if(jsonObject.containsKey(JConstants.addCustomViews)){
+            JSONArray jsonArray = jsonObject.getJSONArray(JConstants.addCustomViews);
+            JLogger.d("setCustomViews:"+jsonArray.toJSONString());
+            for (int i = 0; i < jsonArray.size(); i++) {
+                JSONObject viewConfig =jsonArray.getJSONObject(i);
+                String type  = viewConfig.getString(JConstants.type);
+
+                int width  = viewConfig.getIntValue(JConstants.width);
+                int height  = viewConfig.getIntValue(JConstants.height);
+                RelativeLayout.LayoutParams mLayoutParams = new RelativeLayout.LayoutParams(dp2Pix( width), dp2Pix(height));
+
+                if(viewConfig.containsKey(JConstants.align)){
+                    int align = viewConfig.getIntValue(JConstants.align);
+                    mLayoutParams.addRule(align, RelativeLayout.TRUE);
+                }
+                if(viewConfig.containsKey(JConstants.margins)){
+                    JSONArray marigns = viewConfig.getJSONArray(JConstants.margins);
+                    mLayoutParams.setMargins(dp2Pix(marigns.getIntValue(0)), dp2Pix(marigns.getIntValue(1)), dp2Pix(marigns.getIntValue(2)), dp2Pix(marigns.getIntValue(3)));
+
+                }
+
+                String id = viewConfig.getString(JConstants.id);
+                String text = viewConfig.getString(JConstants.text);
+                int textColor = viewConfig.getIntValue(JConstants.textColor);
+                int textSize = viewConfig.getIntValue(JConstants.textSize);
+                int bgColor = viewConfig.getIntValue(JConstants.backgroundColor);
+                String bgImgPath = viewConfig.getString(JConstants.backgroundImg);
+                View view =null;
+                if(type.equals(JConstants.type_text) ){
+                    TextView textView = new TextView(mWXSDKInstance.getContext());
+                    textView.setText(text);
+                    if(viewConfig.containsKey(JConstants.textColor)){
+                        textView.setTextColor(textColor);
+                    }
+                    if(viewConfig.containsKey(JConstants.textSize)){
+                        textView.setTextSize(textSize);
+                    }
+                    if(viewConfig.containsKey(JConstants.backgroundColor)){
+                        textView.setBackgroundColor(bgColor);
+                    }
+                    textView.setLayoutParams(mLayoutParams);
+                    view = textView;
+
+                }else if(type.equals(JConstants.type_button)){
+                    Button button = new Button(mWXSDKInstance.getContext());
+                    button.setText(text);
+                    if(viewConfig.containsKey(JConstants.textColor)){
+                        button.setTextColor(textColor);
+                    }
+                    if(viewConfig.containsKey(JConstants.textSize)){
+                        button.setTextSize(textSize);
+                    }
+                    if(viewConfig.containsKey(JConstants.backgroundColor)){
+                        button.setBackgroundColor(bgColor);
+                    }
+                    if(viewConfig.containsKey(JConstants.backgroundImg)){
+                        Bitmap bm = getAssetsBitmap(getAssetPicPath(bgImgPath));
+                        Drawable drawable = new BitmapDrawable(mWXSDKInstance.getContext().getResources(),bm);
+                        button.setBackground(drawable);
+                    }
+                    button.setLayoutParams(mLayoutParams);
+                    view = button;
+
+                }else if(type.equals(JConstants.type_image)){
+                    if(viewConfig.containsKey(JConstants.backgroundImg)){
+                        ImageView imageView = new ImageView(mWXSDKInstance.getContext());
+                        imageView.setImageBitmap(getAssetsBitmap(getAssetPicPath(bgImgPath)));
+                        imageView.setLayoutParams(mLayoutParams);
+                        view = imageView;
+                    }
+                }
+                if(view!=null){
+                    boolean finishFlag  = viewConfig.getBooleanValue(JConstants.finishFlag);
+                    view.setTag(R.id.tag_custom_id,id);
+                    uiConfigBuilder.addCustomView(view,finishFlag, new JVerifyUIClickCallback() {
+                        @Override
+                        public void onClicked(Context context, View view) {
+                            String id = (String) view.getTag(R.id.tag_custom_id);
+                            JLogger.d( "click custom view :"+id);
+                            if(mCustomViewsClickCallback!=null){
+                                mCustomViewsClickCallback.invokeAndKeepAlive(id);
+                            }
+                        }
+                    });
+                }
+
+            }
+
+        }
+    }
+
+    public  String getAssetPicPath(String imgPath){
+        String bundle = mWXSDKInstance.getBundleUrl();
+        JLogger.d( "mWXSDKInstance.getBundleUrl():"+bundle);
+        String path =bundle.substring(bundle.lastIndexOf("apps/__UNI__"),bundle.lastIndexOf("/"))+"/"+imgPath;
+        JLogger.d("getAssetPicPath:"+ path);
+        return path;
+    }
+
+
+    /** 根据路径获取Bitmap图片
+     * @param path
+     * @return
+     */
+    public  Bitmap getAssetsBitmap(String path){
+        AssetManager am = mWXSDKInstance.getContext().getAssets();
+        InputStream inputStream = null;
+        try {
+            inputStream = am.open(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+        return bitmap;
+    }
+
+    private int dp2Pix( float dp) {
+        try {
+            float density = mWXSDKInstance.getContext().getResources().getDisplayMetrics().density;
+            return (int) (dp * density + 0.5F);
+        } catch (Exception e) {
+            return (int) dp;
         }
     }
 
