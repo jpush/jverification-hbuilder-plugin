@@ -12,6 +12,9 @@
 #import "JVERIFICATIONService.h"
 // 如果需要使用 idfa 功能所需要引入的头文件（可选）
 #import <AdSupport/AdSupport.h>
+#import "PDRCoreApp.h"
+#import "PDRCoreAppManager.h"
+#import "PDRCoreAppInfo.h"
 
 //常量
 #define ENABLE         @"enable"
@@ -221,20 +224,33 @@ static  NSString* logoWidth=@"logoWidth";
 static  NSString* logoHeight=@"logoHeight";
 static  NSString* logoOffsetY=@"logoOffsetY";
 static  NSString* logoHidden=@"logoHidden";
+static  NSString* logoConstraints=@"logoConstraints";
+static  NSString* logoHorizontalConstraints=@"logoHorizontalConstraints";
+
 //登录按钮
 static  NSString* logBtnText=@"logBtnText";
 static  NSString* logBtnOffsetY=@"logBtnOffsetY";
 static  NSString* logBtnTextColor=@"logBtnTextColor";
 static  NSString* logBtnImgs=@"logBtnImgs";
+static  NSString* logBtnConstraints=@"logBtnConstraints";
+static  NSString* logBtnHorizontalConstraints=@"logBtnHorizontalConstraints";
+
 //手机号码
 static  NSString* numberColor=@"numberColor";
 static  NSString* numberSize=@"numberSize";
 static  NSString* numFieldOffsetY=@"numFieldOffsetY";
+static  NSString* numberConstraints=@"numberConstraints";
+static  NSString* numberHorizontalConstraints=@"numberHorizontalConstraints";
+
 //checkBox
 static  NSString* uncheckedImg=@"uncheckedImg";
 static  NSString* checkedImg=@"checkedImg";
 static  NSString* checkViewHidden=@"checkViewHidden";
 static  NSString* privacyState=@"privacyState";
+static  NSString* checkViewConstraints=@"checkViewConstraints";
+static  NSString* checkViewHorizontalConstraints=@"checkViewHorizontalConstraints";
+
+
 //隐私协议栏
 static  NSString* appPrivacyOne=@"appPrivacyOne";
 static  NSString* appPrivacyTwo=@"appPrivacyTwo";
@@ -244,6 +260,9 @@ static  NSString* privacyOffsetY=@"privacyOffsetY";
 static  NSString* privacyComponents=@"privacyComponents";
 static  NSString* privacyShowBookSymbol=@"privacyShowBookSymbol";
 static  NSString* privacyLineSpacing=@"privacyLineSpacing";
+static  NSString* privacyConstraints=@"privacyConstraints";
+static  NSString* privacyHorizontalConstraints=@"privacyHorizontalConstraints";
+
 //隐私协议页面
 static  NSString* agreementNavBackgroundColor=@"agreementNavBackgroundColor";
 static  NSString* agreementNavText=@"agreementNavText";
@@ -253,18 +272,31 @@ static  NSString* agreementNavReturnImage=@"agreementNavReturnImage";
 //slogan
 static  NSString* sloganOffsetY=@"sloganOffsetY";
 static  NSString* sloganTextColor=@"sloganTextColor";
+static  NSString* sloganConstraints=@"sloganConstraints";
+static  NSString* sloganHorizontalConstraints=@"sloganHorizontalConstraints";
 //弹窗
 static  NSString* showWindow=@"showWindow";
 static  NSString* windowBackgroundImage=@"windowBackgroundImage";
 static  NSString* windowBackgroundAlpha=@"windowBackgroundAlpha";
 static  NSString* windowCornerRadius=@"windowCornerRadius";
 static  NSString* windowConstraints=@"windowConstraints";
+static  NSString* windowHorizontalConstraints=@"windowHorizontalConstraints";
+static  NSString* windowCloseBtnConstraints=@"windowCloseBtnConstraints";
+static  NSString* windowCloseBtnHorizontalConstraints=@"windowCloseBtnHorizontalConstraints";
+static  NSString* windowCloseBtnImgs=@"windowCloseBtnImgs";
+//loading
+static  NSString* loadingConstraints=@"loadingConstraints";
+static  NSString* loadingHorizontalConstraints=@"loadingHorizontalConstraints";
+
 
 void setJVUIConfig(NSString* key ,NSDictionary *dict,
 JVUIConfig *jvUIConfig){
+    PDRCoreAppInfo *appinfo = [PDRCore Instance].appManager.getMainAppInfo;
     //授权页面设置
     if ([key containsString:authPageBackgroundImage]) {
-        jvUIConfig.authPageBackgroundImage = [UIImage imageNamed:dict[key]];
+        NSString *namePath = dict[key];
+        NSString *authBgPath = [appinfo.wwwPath stringByAppendingFormat:@"/%@",namePath];
+        jvUIConfig.authPageBackgroundImage = [UIImage imageNamed:authBgPath];
     }else if([key containsString:autoLayout]){
         jvUIConfig.autoLayout = [dict[key] boolValue];
     }else if([key containsString:shouldAutorotate]){
@@ -282,7 +314,8 @@ JVUIConfig *jvUIConfig){
         NSArray* textArry = dict[key];
         jvUIConfig.navText = getNSAttributedString(textArry);
     }else if([key containsString:navReturnImg]){
-        jvUIConfig.navReturnImg = [UIImage imageNamed:dict[key]];
+        NSString *navReturnImgPath = [appinfo.wwwPath stringByAppendingFormat:@"/%@",dict[key]];
+        jvUIConfig.navReturnImg = [UIImage imageNamed:navReturnImgPath];
     }else if([key containsString:prefersStatusBarHidden]){
         jvUIConfig.prefersStatusBarHidden =[dict[key] boolValue];
     }else if([key containsString:navTransparent]){
@@ -292,12 +325,14 @@ JVUIConfig *jvUIConfig){
     }else if([key containsString:navDividingLineHidden]){
         jvUIConfig.navDividingLineHidden =[dict[key] boolValue];
     }else if([key containsString:navBarBackGroundImage]){
-        jvUIConfig.navBarBackGroundImage = [UIImage imageNamed:dict[key]];
+        NSString *navBarBackGroundImagePath = [appinfo.wwwPath stringByAppendingFormat:@"/%@",dict[key]];
+        jvUIConfig.navBarBackGroundImage = [UIImage imageNamed:navBarBackGroundImagePath];
     }
     
     //    LOGO
     else if([key containsString:logoImg]){
-        jvUIConfig.logoImg = [UIImage imageNamed:dict[key]];
+        NSString *logoPath = [appinfo.wwwPath stringByAppendingFormat:@"/%@",dict[key]];
+        jvUIConfig.logoImg = [[UIImage alloc] initWithContentsOfFile:logoPath];
     }else if([key containsString:logoWidth]){
         jvUIConfig.logoWidth =  [dict[key] floatValue];//CGFloat ;
     }else if([key containsString:logoHeight]){
@@ -306,6 +341,12 @@ JVUIConfig *jvUIConfig){
         jvUIConfig.logoOffsetY =[dict[key] floatValue];//CGFloat;
     }else if([key containsString:logoHidden]){
         jvUIConfig.logoHidden =[dict[key] boolValue];//BOOL
+    }else if ([key containsString:logoConstraints]){
+        NSArray* logoCons = dict[key];
+        jvUIConfig.logoConstraints = [JVerificationModule configConstraintWithAttributes:logoCons];
+    }else if ([key containsString:logoHorizontalConstraints]){
+        NSArray* logoHCons = dict[key];
+        jvUIConfig.logoHorizontalConstraints = [JVerificationModule configConstraintWithAttributes:logoHCons];
     }
     //    登录按钮
     
@@ -317,12 +358,19 @@ JVUIConfig *jvUIConfig){
         jvUIConfig.logBtnTextColor = UIColorFromRGBValue([dict[key] intValue]);//UIColor;
     }else if([key containsString:logBtnImgs]){
         NSArray* imgPaths = dict[key];
-        NSArray* logBtnImgs = [[NSArray alloc] initWithObjects:
-                               [UIImage imageNamed:imgPaths[0]],
-                               [UIImage imageNamed:imgPaths[1]],
-                               [UIImage imageNamed:imgPaths[2]],
-                               nil];
+        NSMutableArray *logBtnImgs = [NSMutableArray arrayWithCapacity:3];
+        for (int i = 0; i < imgPaths.count; i++) {
+            NSString *logBtnPath = [appinfo.wwwPath stringByAppendingFormat:@"/%@",imgPaths[i]];
+            UIImage *logBtnImage = [UIImage imageNamed:logBtnPath];
+            [logBtnImgs addObject:logBtnImage];
+        }
         jvUIConfig.logBtnImgs = logBtnImgs;
+    }else if ([key containsString:logBtnConstraints]){
+        NSArray* logBtnCons = dict[key];
+        jvUIConfig.logBtnConstraints = [JVerificationModule configConstraintWithAttributes:logBtnCons];
+    }else if ([key containsString:logBtnHorizontalConstraints]){
+        NSArray* logBtnHCons = dict[key];
+        jvUIConfig.logBtnHorizontalConstraints = [JVerificationModule configConstraintWithAttributes:logBtnHCons];
     }
     //    手机号码
     else if([key containsString:numberColor]){
@@ -331,16 +379,32 @@ JVUIConfig *jvUIConfig){
         jvUIConfig.numberSize = [dict[key] floatValue];
     }else if([key containsString:numFieldOffsetY]){
         jvUIConfig.numFieldOffsetY = [dict[key] floatValue];
+    }else if ([key containsString:numberConstraints]){
+        NSArray* numberConstraints = dict[key];
+        jvUIConfig.numberConstraints = [JVerificationModule configConstraintWithAttributes:numberConstraints];
+    }else if ([key containsString:numberHorizontalConstraints]){
+        NSArray* numberHorizontalConstraints = dict[key];
+        jvUIConfig.numberHorizontalConstraints = [JVerificationModule configConstraintWithAttributes:numberHorizontalConstraints];
     }
+    
+    
     //    checkBox
     else if([key containsString:uncheckedImg]){
-        jvUIConfig.uncheckedImg = [UIImage imageNamed:dict[key]];
+        NSString *uncheckedImgPath = [appinfo.wwwPath stringByAppendingFormat:@"/%@",dict[key]];
+        jvUIConfig.uncheckedImg = [UIImage imageNamed:uncheckedImgPath];
     }else if([key containsString:checkedImg]){
-        jvUIConfig.checkedImg = [UIImage imageNamed:dict[key]];
+        NSString *checkedImgPath = [appinfo.wwwPath stringByAppendingFormat:@"/%@",dict[key]];
+        jvUIConfig.checkedImg = [UIImage imageNamed:checkedImgPath];
     }else if([key containsString:checkViewHidden]){
         jvUIConfig.checkViewHidden = [dict[key] boolValue];
     }else if([key containsString:privacyState]){
         jvUIConfig.privacyState = [dict[key] boolValue];
+    }else if ([key containsString:checkViewConstraints]){
+        NSArray* checkViewConstraints = dict[key];
+        jvUIConfig.checkViewConstraints = [JVerificationModule configConstraintWithAttributes:checkViewConstraints];
+    }else if ([key containsString:checkViewHorizontalConstraints]){
+        NSArray* checkViewHorizontalConstraints = dict[key];
+        jvUIConfig.checkViewHorizontalConstraints = [JVerificationModule configConstraintWithAttributes:checkViewHorizontalConstraints];
     }
     //    隐私协议栏
     
@@ -365,6 +429,12 @@ JVUIConfig *jvUIConfig){
         jvUIConfig.privacyShowBookSymbol = [dict[key] boolValue];
     }else if([key containsString:privacyLineSpacing]){
         jvUIConfig.privacyLineSpacing = [dict[key] floatValue];
+    }else if ([key containsString:privacyConstraints]){
+        NSArray* privacyConstraints = dict[key];
+        jvUIConfig.privacyConstraints = [JVerificationModule configConstraintWithAttributes:privacyConstraints];
+    }else if ([key containsString:privacyHorizontalConstraints]){
+        NSArray* privacyHorizontalConstraints = dict[key];
+        jvUIConfig.privacyHorizontalConstraints = [JVerificationModule configConstraintWithAttributes:privacyHorizontalConstraints];
     }
     
     //    隐私协议页面
@@ -380,38 +450,87 @@ JVUIConfig *jvUIConfig){
         NSArray* textArry = dict[key];
         jvUIConfig.secondPrivacyAgreementNavText = getNSAttributedString(textArry);
     }else if([key containsString:agreementNavReturnImage]){
-        jvUIConfig.agreementNavReturnImage = [UIImage imageNamed:dict[key]];
+        NSString *agreementNavReturnImagePath = [appinfo.wwwPath stringByAppendingFormat:@"/%@",dict[key]];
+        jvUIConfig.agreementNavReturnImage = [UIImage imageNamed:agreementNavReturnImagePath];
     }
     //    slogan
     else if([key containsString:sloganOffsetY]){
         jvUIConfig.sloganOffsetY = [dict[key] floatValue];
     }else if([key containsString:sloganTextColor]){
         jvUIConfig.sloganTextColor = UIColorFromRGBValue([dict[key] intValue]);
+    }else if ([key containsString:sloganHorizontalConstraints]){
+        NSArray* sloganHorizontalConstraints = dict[key];
+        jvUIConfig.sloganHorizontalConstraints = [JVerificationModule configConstraintWithAttributes:sloganHorizontalConstraints];
+    }else if ([key containsString:sloganConstraints]){
+        NSArray* sloganConstraints = dict[key];
+        jvUIConfig.sloganConstraints = [JVerificationModule configConstraintWithAttributes:sloganConstraints];
     }
+    
+    
     //    弹窗
     else if([key containsString:showWindow]){
         jvUIConfig.showWindow = [dict[key] boolValue];
     }else if([key containsString:windowBackgroundImage]){
-        jvUIConfig.windowBackgroundImage =  [UIImage imageNamed:dict[key]];
+        NSString *windowBackgroundImagePath = [appinfo.wwwPath stringByAppendingFormat:@"/%@",dict[key]];
+        jvUIConfig.windowBackgroundImage =  [UIImage imageNamed:windowBackgroundImagePath];
     }else if([key containsString:windowBackgroundAlpha]){
         jvUIConfig.windowBackgroundAlpha = [dict[key] floatValue];
     }else if([key containsString:windowCornerRadius]){
         jvUIConfig.windowCornerRadius = [dict[key] floatValue];
     }else if([key containsString:windowConstraints]){
-        NSArray* cons = dict[key];
-        CGFloat windowW = [cons[0] floatValue];
-        CGFloat windowH = [cons[1] floatValue];
-        CGFloat windowX = [cons[2] floatValue];
-        CGFloat windowY = [cons[3] floatValue];
-        JVLayoutConstraint *windowConstraintX = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSuper attribute:NSLayoutAttributeCenterX multiplier:1 constant:windowX];
-        JVLayoutConstraint *windowConstraintY = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSuper attribute:NSLayoutAttributeCenterY multiplier:1 constant:windowY];
-        JVLayoutConstraint *windowConstraintW = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeWidth multiplier:1 constant:windowW];
-        JVLayoutConstraint *windowConstraintH = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeHeight multiplier:1 constant:windowH];
-        jvUIConfig.windowConstraints = @[windowConstraintX,windowConstraintY,windowConstraintW,windowConstraintH];
-        jvUIConfig.windowHorizontalConstraints = jvUIConfig.windowConstraints;
+        NSArray* consWindow = dict[key];
+        jvUIConfig.windowConstraints = [JVerificationModule configConstraintWithAttributes:consWindow];
+    }else if([key containsString:windowHorizontalConstraints]){
+        NSArray* windowHorizontalConstraints = dict[key];
+        jvUIConfig.windowHorizontalConstraints = [JVerificationModule configConstraintWithAttributes:windowHorizontalConstraints];
+    }else if ([key containsString:windowCloseBtnImgs]){
+        NSArray *imageNames = dict[key];
+        if ([imageNames isKindOfClass:[NSArray class]]) {
+            NSMutableArray *images = [NSMutableArray arrayWithCapacity:3];
+            for (int i = 0; i< imageNames.count; i++) {
+                NSString *windowCloseBtnImgPath = [appinfo.wwwPath stringByAppendingFormat:@"/%@",imageNames[i]];
+                UIImage *closeImage  = [UIImage imageNamed:windowCloseBtnImgPath];
+                if (closeImage) {
+                    [images addObject:closeImage];
+                }
+                jvUIConfig.windowCloseBtnImgs = images;
+            }
+        }
+    }else if ([key containsString:@"windowCloseBtnConstraints"]){
+         NSArray* windowCloseBtnConstraints = dict[key];
+         jvUIConfig.windowCloseBtnConstraints = [JVerificationModule configConstraintWithAttributes:windowCloseBtnConstraints];
+    }else if ([key containsString:@"windowCloseBtnHorizontalConstraints"]){
+         NSArray* windowCloseBtnHorizontalConstraints = dict[key];
+         jvUIConfig.windowCloseBtnHorizontalConstraints = [JVerificationModule configConstraintWithAttributes:windowCloseBtnHorizontalConstraints];
+    }
+    //loading
+    else if ([key containsString:@"loadingConstraints"]){
+         NSArray* loadingConstraints = dict[key];
+         jvUIConfig.loadingConstraints = [JVerificationModule configConstraintWithAttributes:loadingConstraints];
+    }else if ([key containsString:@"loadingHorizontalConstraints"]){
+         NSArray* loadingHorizontalConstraints = dict[key];
+         jvUIConfig.loadingHorizontalConstraints = [JVerificationModule configConstraintWithAttributes:loadingHorizontalConstraints];
     }
     
 }
+
++ (NSArray*)configConstraintWithAttributes:(NSArray*)keys{
+    NSLog(@"keys:%lu",(unsigned long)keys.count);
+    NSAssert(keys.count ==4, @"你必须按照文档规则设置参数(centerX,centerY,width,height)");
+    NSMutableArray *constraints = [NSMutableArray arrayWithCapacity:4];
+    NSArray* cons = keys;
+    CGFloat centerX = [cons[0] floatValue];
+    CGFloat centerY = [cons[1] floatValue];
+    CGFloat w = [cons[2] floatValue];
+    CGFloat h = [cons[3] floatValue];
+    JVLayoutConstraint *constraintX = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSuper attribute:NSLayoutAttributeCenterX multiplier:1 constant:centerX];
+    JVLayoutConstraint *constraintY = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemSuper attribute:NSLayoutAttributeCenterY multiplier:1 constant:centerY];
+    JVLayoutConstraint *constraintW = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeWidth multiplier:1 constant:w];
+    JVLayoutConstraint *constraintH = [JVLayoutConstraint constraintWithAttribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:JVLayoutItemNone attribute:NSLayoutAttributeHeight multiplier:1 constant:h];
+    [constraints addObjectsFromArray:@[constraintX,constraintY,constraintW,constraintH]];
+    return constraints;
+}
+
 
 NSAttributedString *getNSAttributedString(NSArray* textArry ){
     if (3 == textArry.count) {
