@@ -4,7 +4,7 @@
     "iPhone",
     "iPad"
   ],
-  "id": "__UNI__EA8156B",
+  "id": "__UNI__6F8A505",
   "name": "JVerification_Hbuilder_Demo",
   "version": {
     "name": "1.0.0",
@@ -85,10 +85,10 @@
     },
     "nativePlugins": {
       "JIGUANG-JVerification": {
-        "JPUSH_APPKEY_IOS": "3bc7fe126f892557a954aa07",
-        "JPUSH_CHANNEL_IOS": "3bc7fe126f892557a954aa07",
-        "JPUSH_CHANNEL_ANDROID": "3bc7fe126f892557a954aa07",
-        "JPUSH_APPKEY_ANDROID": "3bc7fe126f892557a954aa07",
+        "JPUSH_APPKEY_ANDROID": "",
+        "JPUSH_CHANNEL_IOS": "",
+        "JPUSH_APPKEY_IOS": "",
+        "JPUSH_CHANNEL_ANDROID": "",
         "__plugin_info__": {
           "name": "JIGUANG-JVerification",
           "description": "极光认证Hbuilder插件",
@@ -100,9 +100,9 @@
           "bought": -1,
           "pid": "",
           "parameters": {
-            "JPUSH_APPKEY_IOS": {
-              "des": "[iOS]极光 portal 配置应用信息时分配的 AppKey",
-              "key": "JVerification:APP_KEY",
+            "JPUSH_APPKEY_ANDROID": {
+              "des": "[Android]极光 portal 配置应用信息时分配的 AppKey",
+              "key": "JPUSH_APPKEY",
               "value": ""
             },
             "JPUSH_CHANNEL_IOS": {
@@ -110,23 +110,24 @@
               "key": "JVerification:CHANNEL",
               "value": ""
             },
+            "JPUSH_APPKEY_IOS": {
+              "des": "[iOS]极光 portal 配置应用信息时分配的 AppKey",
+              "key": "JVerification:APP_KEY",
+              "value": ""
+            },
             "JPUSH_CHANNEL_ANDROID": {
               "des": "[Android]用于统计分发渠道，不需要可填默认值 developer-default",
               "key": "JPUSH_CHANNEL",
-              "value": ""
-            },
-            "JPUSH_APPKEY_ANDROID": {
-              "des": "[Android]极光 portal 配置应用信息时分配的 AppKey",
-              "key": "JPUSH_APPKEY",
               "value": ""
             }
           }
         }
       }
     },
+    "arguments": "{\"name\":\"\",\"path\":\"\",\"query\":\"\",\"id\":0}",
     "allowsInlineMediaPlayback": true,
     "uni-app": {
-      "compilerVersion": "2.4.6",
+      "compilerVersion": "2.6.1",
       "control": "v8",
       "nvueCompiler": "uni-app",
       "renderer": "auto",
@@ -134,5 +135,6 @@
         "flex-direction": "column"
       }
     }
-  }
+  },
+  "usingComponents": {}
 }

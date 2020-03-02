@@ -138,7 +138,6 @@
   |属性|参数类型|说明|
   |:-----:|:----:|------|
   |type|String|可填 label 或 button 或 imageView|
-  |id|String|标志当前 view 的唯一 id|
   |width|float|控件宽度|
   |height|float|控件长度|
   |top|float|距离授权页父视图顶部的距离|
@@ -154,7 +153,7 @@
   |text|String|文字内容|
   |textColor|int|文字颜色|
   |textFont|int|文字大小|
-  |textAlignment|int|背景颜色|
+  |textAlignment|int|0 居左,1 居中,2居右|
   |numberOfLines|int|行数|
    + type = button 的属性
 
@@ -162,12 +161,13 @@
   |:-----:|:----:|:----:|
   |title|String|文字内容|
   |textColor|int|文字颜色|
+  |id|String|标志当前 button 的唯一 id|
   |textFont|int|文字大小|
   |isFinish|bool|是否在授权页面通过自定义控件button的点击关闭授权页面|
   |normalImagePath|String|button正常情况下背景图片路径|
   |selectImagePath|String|button选中q下情况下背景图片路径|
   
-  + type = image 的属性
+  + type = imageView 的属性
   |属性|参数类型|说明|
   |:-----:|:----:|:----:|
   |imagePath|String|背景图片路径|

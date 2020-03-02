@@ -90,12 +90,50 @@
 			// 自定义授权页面 UI 样式
 			setCustomUIWithConfig:function(){
 				let self = this;
+				this.jv.addCustomViewsClickCallback(id=>{
+					self.showModal('customViewclick',"id:"+id);
+				});
+				
 				if(uni.getSystemInfoSync().platform == "ios"){
 					this.jv.setCustomUIWithConfigiOS({
 						navColor:0xff000000,
-						logBtnText:" 极光认证测试 ",
+						logBtnText:"极光认证测试",
 						privacyState:true,
-						appPrivacyColor:[0xff000000,0xff000000]
+						appPrivacyColor:[0xff000200,0xff000000],
+						addCustomViews:[{
+								type:"label",
+								width:120,
+								height:20,
+								top:320,
+								left:100,
+								backgroundColor:0xff7b68ee,
+								text:"自定义label",
+								textFont:20,
+								textAlignment:15,
+								numberOfLines:2,
+								cornerRadius:10,
+								textColor:0xff000000
+							},
+							{
+								type:"button",
+								id: "buttonTest",
+								width:80,
+								height:44,
+								textColor:0xFFC0CB,
+								cornerRadius:22,
+								left:50,
+								bottom: -100,
+								title:"点击测试",
+							},
+							{
+								type:"imageView",
+								width:50,
+								height:50,
+								cornerRadius:25,
+								right:-100,
+								bottom: -100,
+								imagePath:"static/qq.png"
+							}]
 					})
 				}else{
 					this.jv.addCustomViewsClickCallback(id=>{
@@ -135,10 +173,29 @@
 			setCustomDialog:function(){
 				if(uni.getSystemInfoSync().platform == "ios"){
 					this.jv.setCustomUIWithConfigiOS({
+						navCustom:true,
 						autoLayout:true,
 						showWindow:true,
-						windowConstraints:[500,500,0,0]
-						
+						windowConstraints:[0,0,300,300],
+						windowBackgroundAlpha: 0.3,
+						//logo
+						logoImg:"static/logo.png",
+						logoConstraints:[0,-100,60,60],
+						//number
+						numberConstraints:[0,-42,200,14],
+						//slogn
+						sloganConstraints:[0,-20,200,14],
+						//登录按钮
+						logBtnConstraints:[0,20,220,40],
+						logBtnText:"一键登录",
+						logBtnTextColor:0x0000FF,
+						windowCornerRadius:10,
+						privacyConstraints:[0,100,200,40],
+						checkViewConstraints:[-108,100,10,10],
+						windowCloseBtnConstraints:[-135,-135,20,20],
+						loadingConstraints:[0,0,20,20],
+						windowCloseBtnImgs:["static/windowClose","static/windowClose"],
+						windowBackgroundImage:"static/bg.jpeg"
 					})
 				}else{
 					this.jv.setCustomUIWithConfigAndroid({
