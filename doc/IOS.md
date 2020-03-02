@@ -148,6 +148,7 @@
   |cornerRadius|float|自定义控件的圆角值|
   
   + type = label 的属性
+  
   |属性|参数类型|说明|
   |:-----:|:----:|:----:|
   |text|String|文字内容|
@@ -168,6 +169,7 @@
   |selectImagePath|String|button选中q下情况下背景图片路径|
   
   + type = imageView 的属性
+  
   |属性|参数类型|说明|
   |:-----:|:----:|:----:|
   |imagePath|String|背景图片路径|
