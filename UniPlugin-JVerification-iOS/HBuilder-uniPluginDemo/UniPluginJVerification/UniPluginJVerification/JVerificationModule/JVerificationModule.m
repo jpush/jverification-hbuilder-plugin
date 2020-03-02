@@ -30,8 +30,16 @@ NSString *const infoConfig_JVerification     = @"JVerification";
 NSString *const infoConfig_JVerification_APP_KEY     = @"APP_KEY";
 NSString *const infoConfig_JVerification_CHANNEL     = @"CHANNEL";
 typedef void (^clickCallBack)(NSString* identifer);
+
+@interface JVCustomViewModel : NSObject
+@property(nonatomic,strong)UIView *view;
+@property(nonatomic,copy)NSString *identifer;
+@end
+@implementation JVCustomViewModel
+
+@end
 @interface JVerificationModule()
-@property(nonatomic,strong)NSMutableDictionary *btnDict;
+@property(nonatomic,strong)NSMutableArray *btnModelArray;
 @property(nonatomic,copy) clickCallBack clickCallBack;
 @end
 @implementation JVerificationModule
@@ -192,7 +200,7 @@ BOOL debugMode = false;
 - (void)dismissLoginAuth:(BOOL)needCloseAnim callback:(WXModuleKeepAliveCallback)callback
 {
     [self logger:@"dismissLoginAuth with anim:" log:needCloseAnim?@"true":@"false"];
-    [self.btnDict removeAllObjects];
+    [self.btnModelArray removeAllObjects];
     [JVERIFICATIONService dismissLoginControllerAnimated:needCloseAnim completion:^{
         NSDictionary *data = [self convertToResult:0 content:@"ok"];
         callback(data,NO);
@@ -207,14 +215,14 @@ BOOL debugMode = false;
     for(NSString * key in arrayKeys){
         setJVUIConfig(key,params,config);
     }
-    if ([params.allKeys containsObject:addCustomView]){
-        config.customLoadingViewBlock = ^(UIView *View){
+    [JVERIFICATIONService customUIWithConfig:config customViews:^(UIView *customAreaView) {
+        if ([arrayKeys containsObject:addCustomView]){
             if([params[addCustomView] isKindOfClass:[NSArray class]]){
-                [self addCustomView:params[addCustomView] superView:View];
+                [self addCustomView:params[addCustomView] superView:customAreaView];
             }
-        };
-    }
-    [JVERIFICATIONService customUIWithConfig:config];
+        }
+
+    }];
 }
 
 
@@ -304,7 +312,7 @@ static  NSString* loadingConstraints=@"loadingConstraints";
 static  NSString* loadingHorizontalConstraints=@"loadingHorizontalConstraints";
 
 //addCustomView
-static  NSString* addCustomView = @"addCustomView";
+static  NSString* addCustomView = @"addCustomViews";
 
 
 void setJVUIConfig(NSString* key ,NSDictionary *dict,
@@ -548,7 +556,9 @@ JVUIConfig *jvUIConfig){
     for (int i = 0; i< viewsInfo.count; i++) {
         NSDictionary *viewInfo = viewsInfo[i];
         if ([viewInfo isKindOfClass:[NSDictionary class]]) {
-            NSString *type =  viewInfo[@"typ"];
+            PDRCoreAppInfo *appinfo = [PDRCore Instance].appManager.getMainAppInfo;
+
+            NSString *type =  viewInfo[@"type"];
             UIView *childrenView = nil;
             if ([type isEqualToString:@"label"]) {//
                 childrenView = [[UILabel alloc] init];
@@ -560,7 +570,7 @@ JVUIConfig *jvUIConfig){
                     label.textColor = UIColorFromRGBValue([viewInfo[@"textColor"] intValue]);
                 }
                 if ([viewInfo.allKeys containsObject:@"text"]) {
-                    label.text = [viewInfo[@"text"] stringValue];
+                    label.text = viewInfo[@"text"];
                 }
                 if ([viewInfo.allKeys containsObject:@"numberOfLines"]) {
                      label.numberOfLines = [viewInfo[@"numberOfLines"] intValue];
@@ -571,7 +581,8 @@ JVUIConfig *jvUIConfig){
             }else if ([type isEqualToString:@"imageView"]){
                 childrenView = [[UIImageView alloc] init];
                 if([viewInfo.allKeys containsObject:@"imagePath"]){
-                    [(UIImageView*)childrenView setImage:[UIImage imageNamed:viewInfo[@"imagePath"]]];
+                    NSString*imagePath = [appinfo.wwwPath stringByAppendingFormat:@"/%@",viewInfo[@"imagePath"]];
+                    [(UIImageView*)childrenView setImage:[UIImage imageNamed:imagePath]];
                 }
             }else if ([type isEqualToString:@"button"]){
                 childrenView = [[UIButton alloc] init];
@@ -586,30 +597,33 @@ JVUIConfig *jvUIConfig){
                     [btn setTitleColor:UIColorFromRGBValue([viewInfo[@"textColor"] intValue]) forState:UIControlStateNormal];
                 }
                 if ([viewInfo.allKeys containsObject:@"normalImagePath"]) {
-                    [btn setImage:[UIImage imageNamed:viewInfo[@"normalImagePath"]] forState:UIControlStateNormal];
+                    NSString*normalImagePath = [appinfo.wwwPath stringByAppendingFormat:@"/%@",viewInfo[@"normalImagePath"]];
+                    [btn setImage:[UIImage imageNamed:normalImagePath] forState:UIControlStateNormal];
                 }
                 if ([viewInfo.allKeys containsObject:@"selectImagePath"]) {
-                    [btn setImage:[UIImage imageNamed:viewInfo[@"selectImagePath"]] forState:UIControlStateSelected];
+                    NSString*selectImagePath = [appinfo.wwwPath stringByAppendingFormat:@"/%@",viewInfo[@"selectImagePath"]];
+                    [btn setImage:[UIImage imageNamed:selectImagePath] forState:UIControlStateHighlighted];
                 }
                 if ([viewInfo.allKeys containsObject:@"isFinish"]) {
                   btn.tag = [viewInfo[@"isFinish"] boolValue];
                 }
-                if (!self.btnDict) {
-                    self.btnDict = [[NSMutableDictionary alloc] init];
+                if (!self.btnModelArray) {
+                    self.btnModelArray = [[NSMutableArray alloc] init];
                 }
                 if([viewInfo.allKeys containsObject:@"id"]){
-                    //TODO:绑定视图
+                    //:绑定视图
                     NSString *identifer = viewInfo[@"id"];
-                    [self.btnDict addEntriesFromDictionary:@{btn:identifer}];
+                    JVCustomViewModel *viewModel = [[JVCustomViewModel alloc] init];
+                    viewModel.view = btn;
+                    viewModel.identifer = identifer;
+                    [self.btnModelArray addObject:viewModel];
                 }
 
                 [btn addTarget:self action:@selector(btnClcik:) forControlEvents:UIControlEventTouchUpInside];
             }
             NSAssert(childrenView, @"不支持设置的视图类型");
-            
-
-            
             [superView addSubview:childrenView];
+            childrenView.translatesAutoresizingMaskIntoConstraints = NO;
             if ([viewInfo.allKeys containsObject:@"backgroundColor"]) {
                 childrenView.backgroundColor = UIColorFromRGBValue([viewInfo[@"backgroundColor"] intValue]);
             }
@@ -660,9 +674,14 @@ JVUIConfig *jvUIConfig){
     if (btn.tag) {
         [JVERIFICATIONService dismissLoginControllerAnimated:YES completion:nil];
     }
-    NSString *identifer = [self.btnDict objectForKey:btn];
-    if (self.clickCallBack) {
-        self.clickCallBack(identifer);
+    for (int i = 0; i < self.btnModelArray.count; i++) {
+        JVCustomViewModel *viewModel = self.btnModelArray[i];
+        if ([viewModel.view isEqual:btn]) {
+            NSString *identifer = viewModel.identifer;
+            if (self.clickCallBack) {
+                self.clickCallBack(identifer);
+            }
+        }
     }
 }
 
