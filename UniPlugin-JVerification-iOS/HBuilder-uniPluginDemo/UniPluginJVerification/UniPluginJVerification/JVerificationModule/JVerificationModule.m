@@ -26,15 +26,14 @@
 
 #define UIColorFromRGBValue(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-
-
 NSString *const infoConfig_JVerification     = @"JVerification";
 NSString *const infoConfig_JVerification_APP_KEY     = @"APP_KEY";
 NSString *const infoConfig_JVerification_CHANNEL     = @"CHANNEL";
-@interface JVerificationModule ()
-
+typedef void (^clickCallBack)(NSString* identifer);
+@interface JVerificationModule()
+@property(nonatomic,strong)NSMutableDictionary *btnDict;
+@property(nonatomic,copy) clickCallBack clickCallBack;
 @end
-
 @implementation JVerificationModule
 
 @synthesize weexInstance;
@@ -49,6 +48,9 @@ WX_EXPORT_METHOD(@selector(clearPreLoginCache))
 WX_EXPORT_METHOD(@selector(loginAuth:callback:eventCallback:))
 WX_EXPORT_METHOD(@selector(dismissLoginAuth:callback:))
 WX_EXPORT_METHOD(@selector(setCustomUIWithConfigiOS:))
+
+WX_EXPORT_METHOD(@selector(addCustomViewsClickCallback:))
+
 
 BOOL debugMode = false;
 
@@ -144,6 +146,11 @@ BOOL debugMode = false;
     }];
 }
 
+- (void)addCustomViewsClickCallback:(WXModuleCallback)clickCallBack{
+    self.clickCallBack = ^(NSString *identifer){
+        clickCallBack(identifer);
+    };
+}
 - (void)loginAuth:(NSDictionary*)params callback:(WXModuleKeepAliveCallback)callback eventCallback:(WXModuleKeepAliveCallback)eventCallback
 {
      [self logger:@"loginAuth with params:" log:params];
@@ -185,6 +192,7 @@ BOOL debugMode = false;
 - (void)dismissLoginAuth:(BOOL)needCloseAnim callback:(WXModuleKeepAliveCallback)callback
 {
     [self logger:@"dismissLoginAuth with anim:" log:needCloseAnim?@"true":@"false"];
+    [self.btnDict removeAllObjects];
     [JVERIFICATIONService dismissLoginControllerAnimated:needCloseAnim completion:^{
         NSDictionary *data = [self convertToResult:0 content:@"ok"];
         callback(data,NO);
@@ -198,6 +206,13 @@ BOOL debugMode = false;
     NSArray* arrayKeys = [params allKeys];
     for(NSString * key in arrayKeys){
         setJVUIConfig(key,params,config);
+    }
+    if ([params.allKeys containsObject:addCustomView]){
+        config.customLoadingViewBlock = ^(UIView *View){
+            if([params[addCustomView] isKindOfClass:[NSArray class]]){
+                [self addCustomView:params[addCustomView] superView:View];
+            }
+        };
     }
     [JVERIFICATIONService customUIWithConfig:config];
 }
@@ -287,6 +302,9 @@ static  NSString* windowCloseBtnImgs=@"windowCloseBtnImgs";
 //loading
 static  NSString* loadingConstraints=@"loadingConstraints";
 static  NSString* loadingHorizontalConstraints=@"loadingHorizontalConstraints";
+
+//addCustomView
+static  NSString* addCustomView = @"addCustomView";
 
 
 void setJVUIConfig(NSString* key ,NSDictionary *dict,
@@ -511,12 +529,145 @@ JVUIConfig *jvUIConfig){
          NSArray* loadingHorizontalConstraints = dict[key];
          jvUIConfig.loadingHorizontalConstraints = [JVerificationModule configConstraintWithAttributes:loadingHorizontalConstraints];
     }
+}
+// type  top,left,right,bottom, width, height  backgroundColor cornerRadius  //公有属性
+
+/*
+ typ = imageView
+ imagePath
+ 
+ typ = label
+ textFont, textColor, numberOfLines,textAlignment(0 left,1 center ,2 right ),text
+
+ typ = button
+ textFont, textColor,normalImagePath,selectImagePath,isFinish（0，1）, title，id
+
+ */
+
+-(void)addCustomView:(NSArray*)viewsInfo superView:(UIView*)superView{
+    for (int i = 0; i< viewsInfo.count; i++) {
+        NSDictionary *viewInfo = viewsInfo[i];
+        if ([viewInfo isKindOfClass:[NSDictionary class]]) {
+            NSString *type =  viewInfo[@"typ"];
+            UIView *childrenView = nil;
+            if ([type isEqualToString:@"label"]) {//
+                childrenView = [[UILabel alloc] init];
+                UILabel *label =(UILabel *)childrenView;
+                if ([viewInfo.allKeys containsObject:@"textFont"]) {
+                    label.font = [UIFont systemFontOfSize:[viewInfo[@"textFont"] floatValue]];
+                }
+                if ([viewInfo.allKeys containsObject:@"textColor"]) {
+                    label.textColor = UIColorFromRGBValue([viewInfo[@"textColor"] intValue]);
+                }
+                if ([viewInfo.allKeys containsObject:@"text"]) {
+                    label.text = [viewInfo[@"text"] stringValue];
+                }
+                if ([viewInfo.allKeys containsObject:@"numberOfLines"]) {
+                     label.numberOfLines = [viewInfo[@"numberOfLines"] intValue];
+                }
+                if ([viewInfo.allKeys containsObject:@"textAlignment"]) {
+                     label.textAlignment = [viewInfo[@"numberOfLines"] intValue];
+                }
+            }else if ([type isEqualToString:@"imageView"]){
+                childrenView = [[UIImageView alloc] init];
+                if([viewInfo.allKeys containsObject:@"imagePath"]){
+                    [(UIImageView*)childrenView setImage:[UIImage imageNamed:viewInfo[@"imagePath"]]];
+                }
+            }else if ([type isEqualToString:@"button"]){
+                childrenView = [[UIButton alloc] init];
+                UIButton *btn = (UIButton*)childrenView;
+                if ([viewInfo.allKeys containsObject:@"textFont"]) {
+                    btn.titleLabel.font = [UIFont systemFontOfSize:[viewInfo[@"textFont"] floatValue]];
+                }
+                if ([viewInfo.allKeys containsObject:@"title"]) {
+                    [btn setTitle:viewInfo[@"title"] forState:UIControlStateNormal];
+                }
+                if ([viewInfo.allKeys containsObject:@"textColor"]) {
+                    [btn setTitleColor:UIColorFromRGBValue([viewInfo[@"textColor"] intValue]) forState:UIControlStateNormal];
+                }
+                if ([viewInfo.allKeys containsObject:@"normalImagePath"]) {
+                    [btn setImage:[UIImage imageNamed:viewInfo[@"normalImagePath"]] forState:UIControlStateNormal];
+                }
+                if ([viewInfo.allKeys containsObject:@"selectImagePath"]) {
+                    [btn setImage:[UIImage imageNamed:viewInfo[@"selectImagePath"]] forState:UIControlStateSelected];
+                }
+                if ([viewInfo.allKeys containsObject:@"isFinish"]) {
+                  btn.tag = [viewInfo[@"isFinish"] boolValue];
+                }
+                if (!self.btnDict) {
+                    self.btnDict = [[NSMutableDictionary alloc] init];
+                }
+                if([viewInfo.allKeys containsObject:@"id"]){
+                    //TODO:绑定视图
+                    NSString *identifer = viewInfo[@"id"];
+                    [self.btnDict addEntriesFromDictionary:@{btn:identifer}];
+                }
+
+                [btn addTarget:self action:@selector(btnClcik:) forControlEvents:UIControlEventTouchUpInside];
+            }
+            NSAssert(childrenView, @"不支持设置的视图类型");
+            
+
+            
+            [superView addSubview:childrenView];
+            if ([viewInfo.allKeys containsObject:@"backgroundColor"]) {
+                childrenView.backgroundColor = UIColorFromRGBValue([viewInfo[@"backgroundColor"] intValue]);
+            }
+            if([viewInfo.allKeys containsObject:@"cornerRadius"]){
+                childrenView.layer.masksToBounds = YES;
+                childrenView.layer.cornerRadius = [viewInfo[@"cornerRadius"] floatValue];
+            }
+
+            if ([viewInfo.allKeys containsObject:@"top"]) {
+                CGFloat top = [viewInfo[@"top"] floatValue];
+                NSLayoutConstraint *topCon =  [NSLayoutConstraint constraintWithItem:childrenView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:superView attribute:NSLayoutAttributeTop multiplier:1 constant:top];
+                [superView addConstraint:topCon];
+            }
+            if ([viewInfo.allKeys containsObject:@"left"]) {
+                CGFloat left = [viewInfo[@"left"] floatValue];
+                NSLayoutConstraint *leftCon =  [NSLayoutConstraint constraintWithItem:childrenView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:superView attribute:NSLayoutAttributeLeft multiplier:1 constant:left];
+                [superView addConstraint:leftCon];
+            }
+            if ([viewInfo.allKeys containsObject:@"right"]) {
+                CGFloat right = [viewInfo[@"right"] floatValue];
+                NSLayoutConstraint *rightCon =  [NSLayoutConstraint constraintWithItem:childrenView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:superView attribute:NSLayoutAttributeRight multiplier:1 constant:right];
+                [superView addConstraint:rightCon];
+            }
+            if ([viewInfo.allKeys containsObject:@"bottom"]) {
+                CGFloat bottom = [viewInfo[@"bottom"] floatValue];
+                NSLayoutConstraint *bottomCon =  [NSLayoutConstraint constraintWithItem:childrenView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:superView attribute:NSLayoutAttributeBottom multiplier:1 constant:bottom];
+                [superView addConstraint:bottomCon];
+            }
+            
+            if ( [viewInfo.allKeys containsObject:@"height"]) {
+                CGFloat height = [viewInfo[@"height"] floatValue];
+                NSLayoutConstraint *heightCon = [NSLayoutConstraint constraintWithItem:childrenView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeHeight multiplier:1 constant:height];
+                [childrenView addConstraint:heightCon];
+            }
+            if ([viewInfo.allKeys containsObject:@"width"]) {
+                CGFloat width =  [viewInfo[@"width"] floatValue];
+                NSLayoutConstraint *widthCon = [NSLayoutConstraint constraintWithItem:childrenView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1 constant:width];
+                [childrenView addConstraint:widthCon];
+            }
+
+        }
+    }
+    
     
 }
 
+- (void)btnClcik:(UIButton*)btn{
+    if (btn.tag) {
+        [JVERIFICATIONService dismissLoginControllerAnimated:YES completion:nil];
+    }
+    NSString *identifer = [self.btnDict objectForKey:btn];
+    if (self.clickCallBack) {
+        self.clickCallBack(identifer);
+    }
+}
+
 + (NSArray*)configConstraintWithAttributes:(NSArray*)keys{
-    NSLog(@"keys:%lu",(unsigned long)keys.count);
-    NSAssert(keys.count ==4, @"你必须按照文档规则设置参数(centerX,centerY,width,height)");
+    NSAssert(keys.count == 4, @"你必须按照文档规则设置参数(centerX,centerY,width,height)");
     NSMutableArray *constraints = [NSMutableArray arrayWithCapacity:4];
     NSArray* cons = keys;
     CGFloat centerX = [cons[0] floatValue];
