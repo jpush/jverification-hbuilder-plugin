@@ -54,8 +54,8 @@
         "nativePlugins" : {
             "JG-JVerification" : {
                 "JPUSH_APPKEY_IOS" : "",
-                "JPUSH_CHANNEL_ANDROID" : "",
-                "JPUSH_APPKEY_ANDROID" : "",
+                "JPUSH_CHANNEL_ANDROID" : "3bc7fe126f892557a954aa07",
+                "JPUSH_APPKEY_ANDROID" : "3bc7fe126f892557a954aa07",
                 "JPUSH_CHANNEL_IOS" : "",
                 "__plugin_info__" : {
                     "name" : "JG-JVerification",
