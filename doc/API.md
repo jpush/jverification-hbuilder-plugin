@@ -2,7 +2,7 @@
 
 ## 引用方式
 ```javascript
-const jv = uni.requireNativePlugin('JIGUANG-JVerification');
+const jv = uni.requireNativePlugin('JG-JVerification');
 ```
 
 ## 设置 debug 模式
