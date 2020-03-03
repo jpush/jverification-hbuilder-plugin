@@ -17,7 +17,7 @@
 </template>
 
 <script>
-	const jv = uni.requireNativePlugin('JIGUANG-JVerification')
+	const jv = uni.requireNativePlugin('JG-JVerification')
 	export default {
 		data() {
 			return {

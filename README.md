@@ -14,7 +14,7 @@
 
 - 3.在项目中引用插件
 ```
-const jv = uni.requireNativePlugin('JIGUANG-JVerification');
+const jv = uni.requireNativePlugin('JG-JVerification');
 ```
 
 

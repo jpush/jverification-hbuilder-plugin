@@ -448,7 +448,7 @@
 					<key>class</key>
 					<string>JVerificationModule</string>
 					<key>name</key>
-					<string>JIGUANG-JVerification</string>
+					<string>JG-JVerification</string>
 					<key>type</key>
 					<string>module</string>
 				</dict>

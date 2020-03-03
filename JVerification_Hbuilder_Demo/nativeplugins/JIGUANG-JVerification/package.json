@@ -1,6 +1,6 @@
 {
-	"name": "JIGUANG-JVerification",
-	"id": "JIGUANG-JVerification",
+	"name": "JG-JVerification",
+	"id": "JG-JVerification",
 	"version": "1.0.1",
 	"description": "极光认证Hbuilder插件",
 	"_dp_type":"nativeplugin",
@@ -8,7 +8,7 @@
 		"ios": {
 			"plugins": [{
 				"type": "module",
-				"name": "JIGUANG-JVerification",
+				"name": "JG-JVerification",
 				"class": "JVerificationModule"
 			}],
 			"integrateType": "framework",
@@ -46,7 +46,7 @@
 			"plugins": [
 				{
 					"type": "module",
-					"name": "JIGUANG-JVerification",
+					"name": "JG-JVerification",
 					"class": "cn.jiguang.uniplugin_jverification.JVerificationWXModule"
 				}
 			],
