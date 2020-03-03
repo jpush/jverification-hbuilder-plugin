@@ -5,7 +5,7 @@
       "plugins": [
         {
           "type": "module",
-          "name": "JIGUANG-JVerification",
+          "name": "JG-JVerification",
           "class": "cn.jiguang.uniplugin_jverification.JVerificationWXModule"
         }
       ]

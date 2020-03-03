@@ -2,11 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>JVerification</key>
-	<dict>
-		<key>APP_KEY</key>
-		<string>f83829ae3da54571ddf130d0</string>
-	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
@@ -82,6 +77,13 @@
 	<string>13453452345</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>JVerification</key>
+	<dict>
+		<key>APP_KEY</key>
+		<string>a0e6ace8d5b3e0247e3f58db</string>
+		<key>CHANNEL</key>
+		<string>test</string>
+	</dict>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>tencentweiboSdkv2</string>
@@ -439,22 +441,14 @@
 	<array>
 		<dict>
 			<key>hooksClass</key>
-			<string>DCRichAlertProxy</string>
+			<string></string>
 			<key>plugins</key>
 			<array>
 				<dict>
 					<key>class</key>
 					<string>JVerificationModule</string>
 					<key>name</key>
-					<string>JIGUANG-JVerification</string>
-					<key>type</key>
-					<string>module</string>
-				</dict>
-				<dict>
-					<key>class</key>
-					<string>DCRichAlertModule</string>
-					<key>name</key>
-					<string>DCloud-RichAlert</string>
+					<string>JG-JVerification</string>
 					<key>type</key>
 					<string>module</string>
 				</dict>

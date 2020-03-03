@@ -9,6 +9,7 @@
 		<button type="primary" @click="clearPreLoginCache()">清除预取号缓存</button>
 		<button type="primary" @click="loginAuth()">请求授权一键登录</button>
 		<button type="primary" @click="setCustomUIWithConfig()">自定义授权页面样式</button>
+		<button type="primary" @click="setCustomDialog()">自定义弹窗授权页</button>
 		<view class="msg-box" >
 			<text class="msg">{{msg}}</text>
 		</view>
@@ -16,7 +17,7 @@
 </template>
 
 <script>
-	const jv = uni.requireNativePlugin('JIGUANG-JVerification')
+	const jv = uni.requireNativePlugin('JG-JVerification')
 	export default {
 		data() {
 			return {
@@ -88,19 +89,121 @@
 			},
 			// 自定义授权页面 UI 样式
 			setCustomUIWithConfig:function(){
+				let self = this;
+				this.jv.addCustomViewsClickCallback(id=>{
+					self.showModal('customViewclick',"id:"+id);
+				});
+				
 				if(uni.getSystemInfoSync().platform == "ios"){
 					this.jv.setCustomUIWithConfigiOS({
 						navColor:0xff000000,
-						logBtnText:" 极光认证测试 ",
+						logBtnText:"极光认证测试",
 						privacyState:true,
-						appPrivacyColor:[0xff000000,0xff000000]
+						appPrivacyColor:[0xff000200,0xff000000],
+						addCustomViews:[{
+								type:"label",
+								width:120,
+								height:20,
+								top:320,
+								left:100,
+								backgroundColor:0xff7b68ee,
+								text:"自定义label",
+								textFont:20,
+								textAlignment:15,
+								numberOfLines:2,
+								cornerRadius:10,
+								textColor:0xff000000
+							},
+							{
+								type:"button",
+								id: "buttonTest",
+								width:80,
+								height:44,
+								textColor:0xFFC0CB,
+								cornerRadius:22,
+								left:50,
+								bottom: -100,
+								title:"点击测试",
+							},
+							{
+								type:"imageView",
+								width:50,
+								height:50,
+								cornerRadius:25,
+								right:-100,
+								bottom: -100,
+								imagePath:"static/qq.png"
+							}]
+					})
+				}else{
+					this.jv.addCustomViewsClickCallback(id=>{
+						self.showModal('customViewclick',"id:"+id);
+					});
+					this.jv.setCustomUIWithConfigAndroid({
+						setNavColor:0xff000000,
+						setLogBtnText:" 极光认证测试 ",
+						setPrivacyState:false,
+						setAppPrivacyColor:[0xff00f000,0xff000000],
+						addCustomViews:[{
+							type:"text",
+							finishFlag:false,
+							id:"id1",
+							width:100,
+							height:50,
+							text:"自定义tv",
+							textSize:20,
+							align:15,
+							margins:[0,100,0,0],
+							bgColor:0xff7b68ee
+						},
+						{
+							type:"image",
+							finishFlag:true,
+							id:"id2",
+							width:50,
+							height:50,
+							align:13,
+							margins:[0,0,0,0],
+							bgImgPath:"static/qq.png"
+						}]
+					})
+				}
+				
+			},
+			setCustomDialog:function(){
+				if(uni.getSystemInfoSync().platform == "ios"){
+					this.jv.setCustomUIWithConfigiOS({
+						navCustom:true,
+						autoLayout:true,
+						showWindow:true,
+						windowConstraints:[0,0,300,300],
+						windowBackgroundAlpha: 0.3,
+						//logo
+						logoImg:"static/logo.png",
+						logoConstraints:[0,-100,60,60],
+						//number
+						numberConstraints:[0,-42,200,14],
+						//slogn
+						sloganConstraints:[0,-20,200,14],
+						//登录按钮
+						logBtnConstraints:[0,20,220,40],
+						logBtnText:"一键登录",
+						logBtnTextColor:0x0000FF,
+						windowCornerRadius:10,
+						privacyConstraints:[0,100,200,40],
+						checkViewConstraints:[-108,100,10,10],
+						windowCloseBtnConstraints:[-135,-135,20,20],
+						loadingConstraints:[0,0,20,20],
+						windowCloseBtnImgs:["static/windowClose","static/windowClose"],
+						windowBackgroundImage:"static/bg.jpeg"
 					})
 				}else{
 					this.jv.setCustomUIWithConfigAndroid({
 						setNavColor:0xff000000,
 						setLogBtnText:" 极光认证测试 ",
 						setPrivacyState:false,
-						setAppPrivacyColor:[0xff00f000,0xff000000]
+						setAppPrivacyColor:[0xff00f000,0xff000000],
+						setDialogTheme:[300, 400, 0, 0, false]
 					})
 				}
 				

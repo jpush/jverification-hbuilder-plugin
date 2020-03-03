@@ -2,6 +2,9 @@
 
 [极光认证](https://www.jiguang.cn/) 官方支持的 Hbuilder 插件（Android & iOS）。是基于 HBuilder 提供的 [uni-app 原生插件扩展](https://ask.dcloud.net.cn/article/35428) 进而开发出的认证插件。开发者可以轻松将极光认证集成到自己的项目中，从而在 js 层实现对认证的控制。
 
+## uniapp插件市场地址
+[极光认证官方SDK](https://ext.dcloud.net.cn/plugin?id=1356)
+
 ## 接入
 - 1.将 nativeplugins/JIGUANG-JVerification 导入项目对应位置。
 - 2.项目 manifest.json 中接入 JIGUANG-JVerification 插件。并配置好 appkey([极光 portal]() 注册分配)，channel 信息。
@@ -14,7 +17,7 @@
 
 - 3.在项目中引用插件
 ```
-const jv = uni.requireNativePlugin('JIGUANG-JVerification');
+const jv = uni.requireNativePlugin('JG-JVerification');
 ```
 
 

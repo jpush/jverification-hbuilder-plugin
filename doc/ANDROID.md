@@ -135,11 +135,66 @@
 |:-----:|:----:|:----:|
 |setNeedStartAnim|boolean|设置拉起授权页时是否需要显示默认动画。默认展示。since 2.5.2|
 |setNeedCloseAnim|boolean|设置关闭授权页时是否需要显示默认动画。默认展示。since 2.5.2|
-               
+
++ 弹窗模式
+
+|方法|参数类型|说明|
+|:-----:|:----:|:----:|
+|setDialogTheme|int,int,int,int,boolean|设置授权页为弹窗模式(窗口宽度，窗口高度，窗口相对屏幕中心的x轴偏移量，窗口相对屏幕中心的y轴偏移量，窗口是否居屏幕底部。设置后offsetY将失效)，单位dp。注：窗口不支持导航栏|
+
++ SDK授权页面添加自定义控件
+
+|方法|参数类型|说明|
+|:-----:|:----:|:----:|
+|addCustomViews|view 数组|在授权页面添加自定义控件|
+
+view 共有属性
+
+|属性|参数类型|说明|
+|:-----:|:----:|:----:|
+|finishFlag|boolean|是否在授权页面通过自定义控件的点击finish授权页面|
+|type|String|可填 text 或 button 或 image|
+|id|String|标志当前 view 的唯一 id|
+|width|int|控件宽度|
+|height|int|控件长度|
+|margins|int,int,int,int|距离屏幕 左，上，右，下的距离|
+|align|int|居中方式：9：ALIGN_PARENT_LEFT，10：ALIGN_PARENT_TOP，11：ALIGN_PARENT_RIGHT，12：ALIGN_PARENT_BOTTOM，13：CENTER_IN_PARENT，14：CENTER_HORIZONTAL，15：CENTER_VERTICAL|
+
+type = text 的属性
+
+|属性|参数类型|说明|
+|:-----:|:----:|:----:|
+|text|String|文字内容|
+|textColor|int|文字颜色|
+|textSize|int|文字大小|
+|bgColor|int|背景颜色|
+
+type = button 的属性
+
+|属性|参数类型|说明|
+|:-----:|:----:|:----:|
+|text|String|文字内容|
+|textColor|int|文字颜色|
+|textSize|int|文字大小|
+|bgColor|int|背景颜色|
+|bgImgPath|String|背景图片|
+
+type = image 的属性
+
+|属性|参数类型|说明|
+|:-----:|:----:|:----:|
+|bgImgPath|String|背景图片|
+
+
+  
 
 ![JVerification](https://docs.jiguang.cn/jverification/image/cutomeUI_description_android.png)
 
 #### 关于图片资源
+##### addCustomViews 中的bgImgPath 属性
+添加自定义控件中的背景图片可以直接引用 uniapp 项目中的图片资源。比如"static/qq.png"
+
+##### 其他的图片资源设置
 Android 请将图片放到原生 res/drawable 目录下,设置路径时直接填图片名称即可。
 
 比如需要设置一键登录授权页背景图片，在 res/drawable 添加了 bg.png 图片后，调用
@@ -148,3 +203,41 @@ jv.setCustomUIWithConfigAndroid({
 		setAuthBGImgPath:"bg"
 	})
 ```
+
+##### 如何添加到原生 res/drawable 目录下？
+第一种：uniapp 离线打包，在AS中加入图片资源。
+
+第二种：可以将图片资源打包到插件aar包中，替换uniplugin_jverification-release.aar.
+
+下面插件介绍aar打包步骤：
+
+1.将[UniPlugin-JVerification-Android](https://github.com/jpush/jverification-hbuilder-plugin/tree/master/UniPlugin-JVerification-Android)导入 AndroidStudio 中
+
+2.在 drawable 对应目录下加入自己的图片资源
+<p align="center">
+    <a target="_blank">
+        <img src="step1.png" alt="demo" width=400/>
+    </a>
+</p>
+3.执行 UniPlugin-JVerification-Android assembleRelease 打包
+<p align="center">
+    <a target="_blank">
+        <img src="step2.png" alt="demo" width=400/>
+    </a>
+</p>
+
+4.替换插件包中的 [uniplugin_jverification-release.aar](https://github.com/jpush/jverification-hbuilder-plugin/tree/master/nativeplugins/JIGUANG-JVerification/android)
+<p align="center">
+    <a target="_blank">
+        <img src="step3.png" alt="demo" width=400/>
+    </a>
+</p>
+5.重新制作自定义基座后，便可在项目中使用：
+
+```javascript
+jv.setCustomUIWithConfigAndroid({
+		setAuthBGImgPath:"main_bg"
+	})
+```
+
+

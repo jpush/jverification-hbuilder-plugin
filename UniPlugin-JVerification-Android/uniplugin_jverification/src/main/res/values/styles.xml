@@ -1,0 +1,13 @@
+<resources>
+
+    <style name="ActivityDialogStyle">
+        <!--去掉action bar和标题栏-->
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <!--背景透明-->
+        <item name="android:windowIsTranslucent">true</item>
+        <!--dialog圆角-->
+        <item name="android:windowBackground">@drawable/dialog_bg</item>
+    </style>
+
+</resources>

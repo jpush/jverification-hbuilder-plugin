@@ -2,7 +2,7 @@
 
 ## 引用方式
 ```javascript
-const jv = uni.requireNativePlugin('JIGUANG-JVerification');
+const jv = uni.requireNativePlugin('JG-JVerification');
 ```
 
 ## 设置 debug 模式
@@ -174,6 +174,16 @@ jv.setCustomUIWithConfigAndroid({
     setLogBtnText:" 极光认证测试 ",
     setPrivacyState:false,
     setAppPrivacyColor:[0xff00f000,0xff000000]
+})
+```
+
+#### API - addCustomViewsClickCallback
+添加自定义 view 回调。配合 setCustomUIWithConfigAndroid 的  addCustomViews 属性一起使用
+
+##### 示例
+```javascript
+jv.addCustomViewsClickCallback(id=>{
+
 })
 ```
 
