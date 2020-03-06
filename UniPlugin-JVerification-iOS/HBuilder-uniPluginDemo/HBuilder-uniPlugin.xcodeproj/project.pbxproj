@@ -134,7 +134,6 @@
 		67229AD1230171AE0093F29A /* libDCUniAmap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67229AC9230171AE0093F29A /* libDCUniAmap.a */; };
 		67229AD2230171AE0093F29A /* libDCUniVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67229ACA230171AE0093F29A /* libDCUniVideo.a */; };
 		67229AD3230171AE0093F29A /* libDCUniBarcode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67229ACB230171AE0093F29A /* libDCUniBarcode.a */; };
-		67229AD4230171AE0093F29A /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67229ACC230171AE0093F29A /* IJKMediaFramework.framework */; };
 		67229AD6230171AE0093F29A /* libDCUniGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67229ACE230171AE0093F29A /* libDCUniGPUImage.a */; };
 		67229AD8230171AE0093F29A /* libDCUniMap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67229AD0230171AE0093F29A /* libDCUniMap.a */; };
 		6729046A23542975004DE4EB /* uni-app-service.js in Resources */ = {isa = PBXBuildFile; fileRef = 6729046923542975004DE4EB /* uni-app-service.js */; };
@@ -1521,6 +1520,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/../SDK/libs",
 					"$(PROJECT_DIR)",
+					"\"$(SRCROOT)/../SDK/Libs\"",
 				);
 				MACH_O_TYPE = mh_execute;
 				OTHER_LDFLAGS = "-ObjC";
