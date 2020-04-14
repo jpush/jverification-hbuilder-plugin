@@ -127,7 +127,7 @@
     "arguments": "{\"name\":\"\",\"path\":\"\",\"query\":\"\",\"id\":0}",
     "allowsInlineMediaPlayback": true,
     "uni-app": {
-      "compilerVersion": "2.4.6",
+      "compilerVersion": "2.6.1",
       "control": "v8",
       "nvueCompiler": "uni-app",
       "renderer": "auto",
@@ -135,5 +135,6 @@
         "flex-direction": "column"
       }
     }
-  }
+  },
+  "usingComponents": {}
 }

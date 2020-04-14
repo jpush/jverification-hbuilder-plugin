@@ -7,10 +7,12 @@
 //
 
 /**
- 定制版SDK v3.7.0 20191017 bitcode
+ 定制版SDK v3.7.2 20191217
  */
 
 #import <Foundation/Foundation.h>
+#import "EAccountPreLoginConfigModel.h"
+#import "EAccountCTEConfig.h"
 
 /**
  声明一个block
@@ -44,12 +46,21 @@ typedef   void (^failureHandler) (NSError * _Nonnull error);
 
 /**
  *@description 预登录接口
+ @param model 接口超时时间配置
+ */
+
++ (void)requestPRELogin:(EAccountPreLoginConfigModel * _Nonnull)model
+             completion:(nonnull successHandler)completion
+                failure:(nonnull failureHandler)fail;
+
+/**
+ *@description 预登录接口
  @param apiTimeoutInterval 接口超时时间，传0或者小于0的数，则默认为3s
  */
 
 + (void)requestPreLogin:(NSTimeInterval)apiTimeoutInterval
                       completion:(nonnull successHandler)completion
-                         failure:(nonnull failureHandler)fail;
+                         failure:(nonnull failureHandler)fail DEPRECATED_MSG_ATTRIBUTE("Please use `requestPRELogin:completion:failure:` instead");
 
 
 /**
@@ -59,7 +70,9 @@ typedef   void (^failureHandler) (NSError * _Nonnull error);
 
 + (void)getMobileCodeWithTimeout:(NSTimeInterval)apiTimeoutInterval
                       completion:(nonnull successHandler)completion
-                         failure:(nonnull failureHandler)fail  DEPRECATED_MSG_ATTRIBUTE("Method deprecated. Use `requestPreLogin:completion:failure:`");
+                         failure:(nonnull failureHandler)fail  DEPRECATED_MSG_ATTRIBUTE("Please use `requestPreLogin:completion:failure:` instead");
 
+
++ (void)setDomainName:(EAccountCTEConfig *)config;
 
 @end
