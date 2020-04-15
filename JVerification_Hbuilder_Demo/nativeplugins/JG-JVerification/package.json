@@ -7,7 +7,7 @@
 	"_dp_nativeplugin":{
 		"ios": {
 			"plugins": [{
-				"type": "module",
+				"type": "module", 
 				"name": "JG-JVerification",
 				"class": "JVerificationModule"
 			}],
