@@ -126,4 +126,6 @@ public class JConstants {
     public static final String PHONE_NUMBER = "phoneNumber";
     public static final String SING_ID = "signID";
     public static final String TEMPLATE_ID = "templateID";
+    public static final String INTERVAL_TIME = "intervalTime";
+
 }

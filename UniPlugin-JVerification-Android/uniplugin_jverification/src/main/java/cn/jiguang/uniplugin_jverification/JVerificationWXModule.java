@@ -181,8 +181,8 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
         String templateID = "";
         if (object != null) {
             phoneNumber = object.containsKey(JConstants.PHONE_NUMBER) ? object.getString(JConstants.PHONE_NUMBER):"18925247365";
-            signID = object.containsKey(JConstants.SING_ID) ? object.getString(JConstants.SING_ID):"13478";
-            templateID = object.containsKey(JConstants.TEMPLATE_ID) ? object.getString(JConstants.TEMPLATE_ID):"178502";
+            signID = object.containsKey(JConstants.SING_ID) ? object.getString(JConstants.SING_ID):"13649";
+            templateID = object.containsKey(JConstants.TEMPLATE_ID) ? object.getString(JConstants.TEMPLATE_ID):"1";
         }
         JVerificationInterface.getSmsCode(mWXSDKInstance.getContext(), phoneNumber, signID, templateID, new RequestCallback<String>() {
             @Override
@@ -203,10 +203,14 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
     }
     // 设置前后两次获取验证码的时间间隔
     @JSMethod(uiThread = true)
-    public void setTimeWithConfig(String intervalTime, final JSCallback callback) {
-        JLogger.d("setTimeWithConfig intervalTime:"+intervalTime);
+    public void setTimeWithConfig(JSONObject object, final JSCallback callback) {
+        String intervalTime = "";
+        if (object != null) {
+            intervalTime = object.containsKey(JConstants.INTERVAL_TIME) ? object.getString(JConstants.INTERVAL_TIME):"3000";
+        }
         int time;
         time = Integer.parseInt(intervalTime);
+        System.out.println("setTimeWithConfig intervalTime:"+time);
         JVerificationInterface.setSmsIntervalTime(time);
     }
 

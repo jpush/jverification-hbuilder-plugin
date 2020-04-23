@@ -222,8 +222,8 @@
 				let self = this;
 				self.jv.getCode({
 					phoneNumber :  "18925247365",
-					signID : "13478",
-					templateID : "178502"
+					signID : "13649",  // ios:13478 android:13649
+					templateID : "1" // ios: 178502 android:1
 				},result=>{
 					self.showModal('getCode',JSON.stringify(result));
 				},event=>{
@@ -233,7 +233,7 @@
 			// 设置前后两次获取验证码的时间间隔
 			setTimeWithConfig(){
 				this.jv.setTimeWithConfig({
-					intervalTime:30000,
+					intervalTime:1000,
 				})
 			}
 		}

@@ -29,6 +29,12 @@ android {
         ignoreAssetsPattern "!.svn:!.git:.*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~"
     }
     /*代码结束*/
+    // 加签名文件
+    signingConfigs {
+        debug {
+            storeFile file("./debug.keystore")
+        }
+    }
 }
 repositories {
     flatDir {

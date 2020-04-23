@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#define JVER_VERSION_NUMBER 2.6.0
+#define JVER_VERSION_NUMBER 2.6.2
 
 
 /**
