@@ -669,7 +669,6 @@
 				67229AD1230171AE0093F29A /* libDCUniAmap.a in Frameworks */,
 				67229AD2230171AE0093F29A /* libDCUniVideo.a in Frameworks */,
 				67229AD3230171AE0093F29A /* libDCUniBarcode.a in Frameworks */,
-				67229AD4230171AE0093F29A /* IJKMediaFramework.framework in Frameworks */,
 				67229AD6230171AE0093F29A /* libDCUniGPUImage.a in Frameworks */,
 				67229AD8230171AE0093F29A /* libDCUniMap.a in Frameworks */,
 				672CE2B522DC916C005A0D88 /* libDCUniZXing.a in Frameworks */,
@@ -1614,8 +1613,8 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: 芸芸 敖 (U44A6GJ63Q)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 翰林 刘 (LVKR5M7XFD)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 翰林 刘 (LVKR5M7XFD)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 8X2A38Q9VD;
 				ENABLE_BITCODE = NO;
@@ -1646,10 +1645,10 @@
 				);
 				MACH_O_TYPE = mh_execute;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jiguang.verification;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.jiguang.login;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a7e03077-46db-4b91-b0c4-20fd613c1e14";
-				PROVISIONING_PROFILE_SPECIFIER = JVerificationDemo_dev;
+				PROVISIONING_PROFILE_SPECIFIER = "cn.jiguang.login-dev-20200313";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 i386 x86_64";
 				WRAPPER_EXTENSION = app;
@@ -1662,8 +1661,8 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: 芸芸 敖 (U44A6GJ63Q)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 翰林 刘 (LVKR5M7XFD)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 翰林 刘 (LVKR5M7XFD)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 8X2A38Q9VD;
 				ENABLE_BITCODE = NO;
@@ -1693,10 +1692,10 @@
 				);
 				MACH_O_TYPE = mh_execute;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jiguang.verification;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.jiguang.login;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = JVerificationDemo_dev;
+				PROVISIONING_PROFILE_SPECIFIER = "cn.jiguang.login-dev-20200313";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 i386 x86_64";
 				WRAPPER_EXTENSION = app;

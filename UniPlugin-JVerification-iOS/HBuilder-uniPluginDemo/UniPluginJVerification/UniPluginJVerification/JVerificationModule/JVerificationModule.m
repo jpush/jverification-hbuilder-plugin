@@ -58,7 +58,8 @@ WX_EXPORT_METHOD(@selector(dismissLoginAuth:callback:))
 WX_EXPORT_METHOD(@selector(setCustomUIWithConfigiOS:))
 
 WX_EXPORT_METHOD(@selector(addCustomViewsClickCallback:))
-
+WX_EXPORT_METHOD(@selector(getCode:callback:))
+WX_EXPORT_METHOD(@selector(setTimeWithConfig:))
 
 BOOL debugMode = false;
 
@@ -222,6 +223,43 @@ BOOL debugMode = false;
             }
         }
     }];
+}
+
+// 获取验证码
+- (void)getCode:(NSDictionary*)params callback:(WXModuleKeepAliveCallback)callback{
+    [self logger:@"getCode with params:" log:params];
+    NSString *phoneNumber = @"";
+    NSString *signID = @"";
+    NSString *templateID = @"";
+
+    if(params[@"phoneNumber"]){
+        phoneNumber = params[@"phoneNumber"];
+    }
+    if(params[@"signID"]){
+        signID = params[@"signID"];
+    }
+    if(params[@"templateID"]){
+        templateID = params[@"templateID"];
+    }
+    [JVERIFICATIONService getSMSCode:phoneNumber templateID:templateID signID:signID completionHandler:^(NSDictionary * _Nonnull result) {
+//        NSNumber *code = [result objectForKey:@"code"];
+//        NSString *uuid = [result objectForKey:@"uuid"];
+//        NSString *msg = [result objectForKey:@"msg"];
+//        NSDictionary *responseData = @{@"uuid":uuid,@"msg":msg,@"code":code};
+        callback(result,YES);
+    }];
+}
+
+// 设置前后两次获取验证码的时间间隔
+- (void)setTimeWithConfig:(NSDictionary*)params
+{
+    [self logger:@"setTimeWithConfig:" log:params];
+    NSString *intervalTime = @"";
+    if(params[@"intervalTime"]){
+        intervalTime = params[@"intervalTime"];
+    }
+    double time = [intervalTime doubleValue];
+    [JVERIFICATIONService setGetCodeInternal:time];
 }
 
 

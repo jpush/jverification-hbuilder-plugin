@@ -4,7 +4,7 @@
     "iPhone",
     "iPad"
   ],
-  "id": "__UNI__EA8156B",
+  "id": "__UNI__92139C4",
   "name": "JVerification_Hbuilder_Demo",
   "version": {
     "name": "1.0.0",
@@ -76,6 +76,7 @@
       },
       "apple": {},
       "plugins": {
+        "ad": null,
         "audio": {
           "mp3": {
             "description": "Android平台录音支持MP3格式文件"

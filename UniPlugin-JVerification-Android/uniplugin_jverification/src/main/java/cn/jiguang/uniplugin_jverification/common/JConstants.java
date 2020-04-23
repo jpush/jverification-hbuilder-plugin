@@ -122,4 +122,8 @@ public class JConstants {
     public static final String backgroundColor = "bgColor";
     public static final String backgroundImg = "bgImgPath";
 
+    //*******************************验证码*******************************
+    public static final String PHONE_NUMBER = "phoneNumber";
+    public static final String SING_ID = "signID";
+    public static final String TEMPLATE_ID = "templateID";
 }

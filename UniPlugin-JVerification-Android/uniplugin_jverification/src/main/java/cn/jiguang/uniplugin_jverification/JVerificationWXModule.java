@@ -172,6 +172,45 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
         return uiConfigBuilder;
     }
 
+    // 获取验证码
+    @JSMethod(uiThread = true)
+    public void getCode(JSONObject object, final JSCallback jsCallback) {
+        System.out.println("object:"+object);
+        String phoneNumber = "";
+        String signID = "";
+        String templateID = "";
+        if (object != null) {
+            phoneNumber = object.containsKey(JConstants.PHONE_NUMBER) ? object.getString(JConstants.PHONE_NUMBER):"18925247365";
+            signID = object.containsKey(JConstants.SING_ID) ? object.getString(JConstants.SING_ID):"13478";
+            templateID = object.containsKey(JConstants.TEMPLATE_ID) ? object.getString(JConstants.TEMPLATE_ID):"178502";
+        }
+        JVerificationInterface.getSmsCode(mWXSDKInstance.getContext(), phoneNumber, signID, templateID, new RequestCallback<String>() {
+            @Override
+            public void onResult(int code, String msg) {
+                if (jsCallback == null) return;
+                JSONObject result = new JSONObject();
+                result.put("code", code);
+                if(code == 3000) {
+                    result.put("uuid", msg);
+                    result.put("msg", "");
+                } else {
+                    result.put("uuid", "");
+                    result.put("msg", msg);
+                }
+                jsCallback.invoke(result);
+            }
+        });
+    }
+    // 设置前后两次获取验证码的时间间隔
+    @JSMethod(uiThread = true)
+    public void setTimeWithConfig(String intervalTime, final JSCallback callback) {
+        JLogger.d("setTimeWithConfig intervalTime:"+intervalTime);
+        int time;
+        time = Integer.parseInt(intervalTime);
+        JVerificationInterface.setSmsIntervalTime(time);
+    }
+
+
     private void setUiConfig(JVerifyUIConfig.Builder uiConfigBuilder, JSONObject jsonObject) {
         //  设置授权页背景
         if (jsonObject.containsKey(JConstants.setAuthBGImgPath)) {

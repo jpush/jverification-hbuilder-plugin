@@ -11,7 +11,7 @@ var __WXML_GLOBAL__ = {
 };
 var $gwx;
 
-/*v0.5vv_20190312_syb_scopedata*/window.__wcc_version__='v0.5vv_20190312_syb_scopedata';window.__wcc_version_info__={"customComponents":true,"fixZeroRpx":true,"propValueDeepCopy":false};
+/*v0.5vv_20190703_syb_scopedata*/window.__wcc_version__='v0.5vv_20190703_syb_scopedata';window.__wcc_version_info__={"customComponents":true,"fixZeroRpx":true,"propValueDeepCopy":false};
 var $gwxc
 var $gaic={}
 $gwx=function(path,global){
@@ -1014,8 +1014,9 @@ var t=JSON.parse(o);
 return $gdc(t,'nv_');
 }
 
-function _af(p, a, c){
-p.extraAttr = {"t_action": a, "t_cid": c};
+function _af(p, a, r, c){
+p.extraAttr = {"t_action": a, "t_rawid": r };
+if ( typeof(c) != 'undefined' ) p.extraAttr.t_cid = c;
 }
 
 function _gv( )
@@ -1102,6 +1103,14 @@ Z(z[1])
 Z([[4],[[5],[[4],[[5],[[5],[1,'tap']],[[4],[[5],[[4],[[5],[1,'setCustomDialog']]]]]]]]])
 Z(z[3])
 Z([3,'自定义弹窗授权页'])
+Z(z[1])
+Z([[4],[[5],[[4],[[5],[[5],[1,'tap']],[[4],[[5],[[4],[[5],[1,'getCode']]]]]]]]])
+Z(z[3])
+Z([3,'获取验证码'])
+Z(z[1])
+Z([[4],[[5],[[4],[[5],[[5],[1,'tap']],[[4],[[5],[[4],[[5],[1,'setTimeWithConfig']]]]]]]]])
+Z(z[3])
+Z([3,'设置获取验证码时间间隔'])
 Z([3,'msg-box'])
 Z([3,'msg'])
 Z([a,[[7],[3,'msg']]])
@@ -1156,14 +1165,22 @@ var hU=_mz(z,'button',['bindtap',37,'data-event-opts',1,'type',2],[],e,s,gg)
 var oV=_oz(z,40,e,s,gg)
 _(hU,oV)
 _(oB,hU)
-var cW=_n('view')
-_rz(z,cW,'class',41,e,s,gg)
-var oX=_n('text')
-_rz(z,oX,'class',42,e,s,gg)
-var lY=_oz(z,43,e,s,gg)
-_(oX,lY)
+var cW=_mz(z,'button',['bindtap',41,'data-event-opts',1,'type',2],[],e,s,gg)
+var oX=_oz(z,44,e,s,gg)
 _(cW,oX)
 _(oB,cW)
+var lY=_mz(z,'button',['bindtap',45,'data-event-opts',1,'type',2],[],e,s,gg)
+var aZ=_oz(z,48,e,s,gg)
+_(lY,aZ)
+_(oB,lY)
+var t1=_n('view')
+_rz(z,t1,'class',49,e,s,gg)
+var e2=_n('text')
+_rz(z,e2,'class',50,e,s,gg)
+var b3=_oz(z,51,e,s,gg)
+_(e2,b3)
+_(t1,e2)
+_(oB,t1)
 _(r,oB)
 return r
 }

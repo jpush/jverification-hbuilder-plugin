@@ -10,6 +10,8 @@
 		<button type="primary" @click="loginAuth()">请求授权一键登录</button>
 		<button type="primary" @click="setCustomUIWithConfig()">自定义授权页面样式</button>
 		<button type="primary" @click="setCustomDialog()">自定义弹窗授权页</button>
+		<button type="primary" @click="getCode()">获取验证码</button>
+		<button type="primary" @click="setTimeWithConfig()">设置获取验证码时间间隔</button>
 		<view class="msg-box" >
 			<text class="msg">{{msg}}</text>
 		</view>
@@ -214,6 +216,25 @@
 				    content,
 				});
 				this.msg = `${title} :${content}`;
+			},
+			// 获取验证码
+			getCode(){
+				let self = this;
+				self.jv.getCode({
+					phoneNumber :  "18925247365",
+					signID : "13478",
+					templateID : "178502"
+				},result=>{
+					self.showModal('getCode',JSON.stringify(result));
+				},event=>{
+					console.log("getCodeEvent:"+JSON.stringify(event));
+				})
+			},
+			// 设置前后两次获取验证码的时间间隔
+			setTimeWithConfig(){
+				this.jv.setTimeWithConfig({
+					intervalTime:30000,
+				})
 			}
 		}
 	}
