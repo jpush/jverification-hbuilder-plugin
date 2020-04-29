@@ -208,6 +208,64 @@ jv.setCustomUIWithConfigiOS({
     appPrivacyColor:[0xff000000,0xff000000]
 })
 ```
+### API - dismissLoginAuth
+隐藏登录页.当授权页被拉起以后，可调用此接口隐藏授权页。当一键登录自动隐藏授权页时，不建议调用此接口。
+
+#### 接口定义
+```javascript
+jv.dismissLoginAuth(flag)
+```
+#### 参数说明
+- flag:隐藏时是否需要动画。
+
+#### 示例
+```javascript
+jv.dismissLoginAuth(true)
+```
+
+## 获取验证码
+
+### API - getCode
+- 获取短信验证码，使用此功能需要在Portal控制台中极光短信模块添加短信签名和验证码短信模版，或者使用默认的签名或模版。详见：[操作指南](https://docs.jiguang.cn//jsms/guideline/JSMS_consoleguide/#_3)
+- 通过此接口获得到短信验证码后，需要调用极光验证码验证API来进行验证，详见：[验证码验证 API](https://docs.jiguang.cn//jsms/server/rest_api_jsms/#api_3)
+
+#### 接口定义
+```javascript
+jv.getCode(object)
+```
+#### 参数说明
+- Object
+
+|参数名称|参数类型|参数说明|
+|:-----:|:----:|:-----:|
+|phoneNumber|string|电话号码|
+|signID|string|短信签名ID，如果为nil，则为默认短信签名ID|
+|templateID|string|短信模板ID，如果为nil，则为默认短信模板ID|
+
+#### 示例
+```javascript
+jv.getCode({
+    phoneNumber :  "电话号码",
+    signID : "短信签名ID",
+    templateID : "短信模板ID"
+})
+```
+
+## 设置前后两次获取验证码的时间间隔
+
+### API - setTimeWithConfig(number)
+设置前后两次获取验证码的时间间隔。
+
+#### 参数说明
+- number:默认30000ms，有效范围(0,300000)。
+
+#### 示例
+```javascript
+jv.setTimeWithConfig(7000);
+```
+
+
+
 
 ## 错误码
 

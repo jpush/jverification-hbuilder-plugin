@@ -218,12 +218,12 @@
 				this.msg = `${title} :${content}`;
 			},
 			// 获取验证码
-			getCode(){
+			getCode:function(){
 				let self = this;
 				self.jv.getCode({
-					phoneNumber :  "18925247365",
-					signID : "13649",  // ios:13478 android:13649
-					templateID : "1" // ios: 178502 android:1
+					phoneNumber :  "18925241111", //在此替换你的phoneNumber
+					signID : "1",             //在此替换你的signID
+					templateID : "1"         //在此替换你的templateID
 				},result=>{
 					self.showModal('getCode',JSON.stringify(result));
 				},event=>{
@@ -231,10 +231,8 @@
 				})
 			},
 			// 设置前后两次获取验证码的时间间隔
-			setTimeWithConfig(){
-				this.jv.setTimeWithConfig({
-					intervalTime:1000,
-				})
+			setTimeWithConfig:function(){
+				this.jv.setTimeWithConfig(1000)
 			}
 		}
 	}

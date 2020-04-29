@@ -203,17 +203,10 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
     }
     // 设置前后两次获取验证码的时间间隔
     @JSMethod(uiThread = true)
-    public void setTimeWithConfig(JSONObject object, final JSCallback callback) {
-        String intervalTime = "";
-        if (object != null) {
-            intervalTime = object.containsKey(JConstants.INTERVAL_TIME) ? object.getString(JConstants.INTERVAL_TIME):"3000";
-        }
-        int time;
-        time = Integer.parseInt(intervalTime);
-        System.out.println("setTimeWithConfig intervalTime:"+time);
-        JVerificationInterface.setSmsIntervalTime(time);
+    public void setTimeWithConfig(int timeInter) {
+        System.out.println("object:"+timeInter);
+        JVerificationInterface.setSmsIntervalTime(timeInter);
     }
-
 
     private void setUiConfig(JVerifyUIConfig.Builder uiConfigBuilder, JSONObject jsonObject) {
         //  设置授权页背景

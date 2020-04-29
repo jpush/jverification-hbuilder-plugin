@@ -242,23 +242,14 @@ BOOL debugMode = false;
         templateID = params[@"templateID"];
     }
     [JVERIFICATIONService getSMSCode:phoneNumber templateID:templateID signID:signID completionHandler:^(NSDictionary * _Nonnull result) {
-//        NSNumber *code = [result objectForKey:@"code"];
-//        NSString *uuid = [result objectForKey:@"uuid"];
-//        NSString *msg = [result objectForKey:@"msg"];
-//        NSDictionary *responseData = @{@"uuid":uuid,@"msg":msg,@"code":code};
         callback(result,YES);
     }];
 }
 
 // 设置前后两次获取验证码的时间间隔
-- (void)setTimeWithConfig:(NSDictionary*)params
+- (void)setTimeWithConfig:(int)timeInter
 {
-    [self logger:@"setTimeWithConfig:" log:params];
-    NSString *intervalTime = @"";
-    if(params[@"intervalTime"]){
-        intervalTime = params[@"intervalTime"];
-    }
-    double time = [intervalTime doubleValue];
+    NSTimeInterval time  = timeInter;
     [JVERIFICATIONService setGetCodeInternal:time];
 }
 
