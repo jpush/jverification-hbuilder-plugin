@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#define JVER_VERSION_NUMBER 2.5.3
+#define JVER_VERSION_NUMBER 2.6.0
 
 
 /**
@@ -119,6 +119,8 @@ typedef NS_ENUM(NSUInteger, JVLayoutItem) {
 //MARK:图片设置************
 /**授权界面背景图片*/
 @property (nonatomic,strong) UIImage *authPageBackgroundImage;
+/**授权界面背景gif资源路径，与authPageBackgroundImage属性不可生效*/
+@property (nonatomic,copy) NSString *authPageGifImagePath;
 /**LOGO图片*/
 @property (nonatomic,strong) UIImage *logoImg;
 /**LOGO图片宽度*/
@@ -184,10 +186,12 @@ typedef NS_ENUM(NSUInteger, JVLayoutItem) {
 
 /**隐私条款一:数组（务必按顺序）
  @[条款名称,条款链接]
+ 条款链接， 支持在线文件和NSBundle本地文件，  沙盒中文件仅支持 NSTemporaryDirectory() 路径下文件
  */
 @property (nonatomic,strong) NSArray *appPrivacyOne;
 /**隐私条款二:数组（务必按顺序）
  @[条款名称,条款链接]
+ 条款链接， 支持在线文件和NSBundle本地文件，  沙盒中文件仅支持 NSTemporaryDirectory() 路径下文件
  */
 @property (nonatomic,strong) NSArray *appPrivacyTwo;
 /**隐私条款名称颜色
@@ -223,6 +227,16 @@ typedef NS_ENUM(NSUInteger, JVLayoutItem) {
  */
 @property (nonatomic,copy) void(^customPrivacyAlertViewBlock)(UIViewController * vc);
 
+/// 为隐私文本添加富文本属性，该方法的设置隐私协议富文本属性的优先级最高
+/// @param name  NSAttributedStringKey
+/// @param value NSAttributedStringKey 对应的值
+/// @param range  对应字符串范围
+- (void)addPrivacyTextAttribute:(NSAttributedStringKey)name value: (id)value range:(NSRange)range;
+
+/// 设置一键登录页面背景视频
+/// @param path  视频路径支持在线url或者本地视频路径
+/// @param imageName  视频未准备好播放时的占位图片名称
+- (void)setVideoBackgroudResource:(NSString*)path placeHolder:(NSString*)imageName;
 
 //MARK:slogan************
 
@@ -466,6 +480,26 @@ DEPRECATED_MSG_ATTRIBUTE("Please use JVUIConfig") @interface JVTelecomUIConfig :
  @param customViewsBlk 添加自定义视图block
 */
 + (void)customUIWithConfig:(JVUIConfig *)UIConfig customViews:(void(^)(UIView *customAreaView))customViewsBlk;
+
+/**
+ *  获取短信验证码 （最小间隔时间内只能调用一次）
+ *  v2.6.0之后新增接口
+ *  @param phoneNumber     手机号码
+ *  @param templateID 短信模板ID 如果为nil，则为默认短信签名ID
+ *  @param signID  签名ID 如果为nil，则为默认短信签名id
+ *  @param handler   block 回调， 成功的时返回的 result 字典包含uuid ,code, msg字段，uuid为此次获取的唯一标识码,  失败时result字段仅返回code ,msg字段
+ */
++ (void)getSMSCode:(NSString *)phoneNumber
+        templateID:(NSString * _Nullable)templateID
+            signID:(NSString * _Nullable)signID
+                completionHandler:(void (^_Nonnull)(NSDictionary * _Nonnull result))handler;
+/**
+ *  设置前后两次获取验证码的时间间隔 ,默认为30000ms （30s），有效间隔 (0,300000）
+ *  v2.6.0之后新增接口
+ *  在设置间隔时间内只能发送一次获取验证码的请求，SDK 默认是30s
+ *  @param intervalTime  时间间隔，单位 ms
+ */
++ (void)setGetCodeInternal:(NSTimeInterval)intervalTime;
 
 
 @end
