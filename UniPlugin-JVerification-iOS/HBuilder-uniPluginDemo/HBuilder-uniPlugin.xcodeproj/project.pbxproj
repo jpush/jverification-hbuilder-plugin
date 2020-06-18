@@ -178,41 +178,47 @@
 		8EED65A0198A5789000A4449 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED659F198A5789000A4449 /* Accounts.framework */; };
 		8EED65A6198A626B000A4449 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED65A5198A626B000A4449 /* MapKit.framework */; };
 		8EED65A8198A6273000A4449 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED65A7198A6273000A4449 /* OpenGLES.framework */; };
-		BB40378A2444609900E85760 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB4037682444609900E85760 /* mapapi.bundle */; };
-		BB40378B2444609900E85760 /* __uniappes6.js in Resources */ = {isa = PBXBuildFile; fileRef = BB4037692444609900E85760 /* __uniappes6.js */; };
-		BB40378C2444609900E85760 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB40376A2444609900E85760 /* AlipaySDK.bundle */; };
-		BB40378D2444609900E85760 /* uni-jsframework.js in Resources */ = {isa = PBXBuildFile; fileRef = BB40376B2444609900E85760 /* uni-jsframework.js */; };
-		BB40378E2444609900E85760 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB40376C2444609900E85760 /* WeiboSDK.bundle */; };
-		BB40378F2444609900E85760 /* weex-main-jsfm-nvue-uni.js in Resources */ = {isa = PBXBuildFile; fileRef = BB40376D2444609900E85760 /* weex-main-jsfm-nvue-uni.js */; };
-		BB4037902444609900E85760 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB40376E2444609900E85760 /* TencentOpenApi_IOS_Bundle.bundle */; };
-		BB4037912444609900E85760 /* weex-main-jsfm-uni.js in Resources */ = {isa = PBXBuildFile; fileRef = BB40376F2444609900E85760 /* weex-main-jsfm-uni.js */; };
-		BB4037922444609900E85760 /* bds_license.dat in Resources */ = {isa = PBXBuildFile; fileRef = BB4037712444609900E85760 /* bds_license.dat */; };
-		BB4037932444609900E85760 /* bds_easr_basic_model.dat in Resources */ = {isa = PBXBuildFile; fileRef = BB4037722444609900E85760 /* bds_easr_basic_model.dat */; };
-		BB4037942444609900E85760 /* bds_easr_mfe_cmvn.dat in Resources */ = {isa = PBXBuildFile; fileRef = BB4037732444609900E85760 /* bds_easr_mfe_cmvn.dat */; };
-		BB4037952444609900E85760 /* temp_license_2018-02-24.dat in Resources */ = {isa = PBXBuildFile; fileRef = BB4037742444609900E85760 /* temp_license_2018-02-24.dat */; };
-		BB4037962444609900E85760 /* bds_easr_mfe_dnn.dat in Resources */ = {isa = PBXBuildFile; fileRef = BB4037752444609900E85760 /* bds_easr_mfe_dnn.dat */; };
-		BB4037972444609900E85760 /* bds_easr_gramm.dat in Resources */ = {isa = PBXBuildFile; fileRef = BB4037762444609900E85760 /* bds_easr_gramm.dat */; };
-		BB4037982444609900E85760 /* bds_easr_wakeup_words.dat in Resources */ = {isa = PBXBuildFile; fileRef = BB4037772444609900E85760 /* bds_easr_wakeup_words.dat */; };
-		BB4037992444609900E85760 /* bds_easr_dnn_wakeup_model.dat in Resources */ = {isa = PBXBuildFile; fileRef = BB4037782444609900E85760 /* bds_easr_dnn_wakeup_model.dat */; };
-		BB40379A2444609900E85760 /* TZImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB4037792444609900E85760 /* TZImagePickerController.bundle */; };
-		BB40379B2444609900E85760 /* uni-app-service.js in Resources */ = {isa = PBXBuildFile; fileRef = BB40377A2444609900E85760 /* uni-app-service.js */; };
-		BB40379C2444609900E85760 /* PandoraApi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB40377B2444609900E85760 /* PandoraApi.bundle */; };
-		BB40379D2444609900E85760 /* unincomponents.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB40377C2444609900E85760 /* unincomponents.ttf */; };
-		BB40379E2444609900E85760 /* QHADVideoPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB40377D2444609900E85760 /* QHADVideoPlayer.bundle */; };
-		BB40379F2444609900E85760 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB40377E2444609900E85760 /* AMap.bundle */; };
-		BB4037A02444609900E85760 /* uni-jsframework-dev.js in Resources */ = {isa = PBXBuildFile; fileRef = BB40377F2444609900E85760 /* uni-jsframework-dev.js */; };
-		BB4037A12444609900E85760 /* userPosition@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB4037802444609900E85760 /* userPosition@2x.png */; };
-		BB4037A22444609900E85760 /* qucsdkResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB4037812444609900E85760 /* qucsdkResources.bundle */; };
-		BB4037A32444609900E85760 /* weex-main-jsfm-nvue.js in Resources */ = {isa = PBXBuildFile; fileRef = BB4037822444609900E85760 /* weex-main-jsfm-nvue.js */; };
-		BB4037A42444609900E85760 /* BUAdSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB4037832444609900E85760 /* BUAdSDK.bundle */; };
-		BB4037A52444609900E85760 /* DCPGVideo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB4037842444609900E85760 /* DCPGVideo.bundle */; };
-		BB4037A62444609900E85760 /* DCMediaVideo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB4037852444609900E85760 /* DCMediaVideo.bundle */; };
-		BB4037A72444609900E85760 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB4037862444609900E85760 /* SVProgressHUD.bundle */; };
-		BB4037A82444609900E85760 /* weex-polyfill.js in Resources */ = {isa = PBXBuildFile; fileRef = BB4037872444609900E85760 /* weex-polyfill.js */; };
-		BB4037A92444609900E85760 /* weex-main-jsfm.js in Resources */ = {isa = PBXBuildFile; fileRef = BB4037882444609900E85760 /* weex-main-jsfm.js */; };
-		BB4037AA2444609900E85760 /* weexUniJs.js in Resources */ = {isa = PBXBuildFile; fileRef = BB4037892444609900E85760 /* weexUniJs.js */; };
-		BBE0C61F24455EAC003DAF46 /* jcore-ios-2.2.4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBE0C61D24455EAC003DAF46 /* jcore-ios-2.2.4.a */; };
-		BBE0C62024455EAC003DAF46 /* jverification-ios-2.6.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBE0C61E24455EAC003DAF46 /* jverification-ios-2.6.0.a */; };
+		BB0EBE6724516FCB00C2E8C2 /* account_login_sdk_noui_core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03515D4723CD90BA009F3256 /* account_login_sdk_noui_core.framework */; };
+		BB0EBE6824516FCB00C2E8C2 /* account_login_sdk_noui_core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03515D4723CD90BA009F3256 /* account_login_sdk_noui_core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BB0EBE6924516FCB00C2E8C2 /* EAccountApiSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03515D4923CD90BA009F3256 /* EAccountApiSDK.framework */; };
+		BB0EBE6A24516FCB00C2E8C2 /* EAccountApiSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03515D4923CD90BA009F3256 /* EAccountApiSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BB0EBE6B24516FCB00C2E8C2 /* TYRZSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03515D4B23CD90BA009F3256 /* TYRZSDK.framework */; };
+		BB0EBE6C24516FCB00C2E8C2 /* TYRZSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 03515D4B23CD90BA009F3256 /* TYRZSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BB0EBE702451704200C2E8C2 /* account_login_sdk_noui_core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03515D4723CD90BA009F3256 /* account_login_sdk_noui_core.framework */; };
+		BB0EBE712451704200C2E8C2 /* EAccountApiSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03515D4923CD90BA009F3256 /* EAccountApiSDK.framework */; };
+		BB0EBE722451704200C2E8C2 /* jcore-ios-2.2.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0EBE6D24516FCC00C2E8C2 /* jcore-ios-2.2.5.a */; };
+		BB0EBE732451704200C2E8C2 /* jverification-ios-2.6.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0EBE6E24516FCC00C2E8C2 /* jverification-ios-2.6.2.a */; };
+		BB0EBE742451704200C2E8C2 /* OAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0EBE6F24516FCC00C2E8C2 /* OAuth.framework */; };
+		BB0EBE752451704200C2E8C2 /* OAuth.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB0EBE6F24516FCC00C2E8C2 /* OAuth.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BB10F415249B19BA00925ED4 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB10F3F7249B19B900925ED4 /* mapapi.bundle */; };
+		BB10F416249B19BA00925ED4 /* __uniappes6.js in Resources */ = {isa = PBXBuildFile; fileRef = BB10F3F8249B19B900925ED4 /* __uniappes6.js */; };
+		BB10F417249B19BA00925ED4 /* MiPassport.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB10F3F9249B19B900925ED4 /* MiPassport.bundle */; };
+		BB10F418249B19BA00925ED4 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB10F3FA249B19B900925ED4 /* AlipaySDK.bundle */; };
+		BB10F419249B19BA00925ED4 /* uni-jsframework.js in Resources */ = {isa = PBXBuildFile; fileRef = BB10F3FB249B19B900925ED4 /* uni-jsframework.js */; };
+		BB10F41A249B19BA00925ED4 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB10F3FC249B19B900925ED4 /* WeiboSDK.bundle */; };
+		BB10F41B249B19BA00925ED4 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB10F3FD249B19B900925ED4 /* TencentOpenApi_IOS_Bundle.bundle */; };
+		BB10F41C249B19BA00925ED4 /* bds_license.dat in Resources */ = {isa = PBXBuildFile; fileRef = BB10F3FF249B19B900925ED4 /* bds_license.dat */; };
+		BB10F41D249B19BA00925ED4 /* bds_easr_basic_model.dat in Resources */ = {isa = PBXBuildFile; fileRef = BB10F400249B19B900925ED4 /* bds_easr_basic_model.dat */; };
+		BB10F41E249B19BA00925ED4 /* bds_easr_mfe_cmvn.dat in Resources */ = {isa = PBXBuildFile; fileRef = BB10F401249B19B900925ED4 /* bds_easr_mfe_cmvn.dat */; };
+		BB10F41F249B19BA00925ED4 /* temp_license_2018-02-24.dat in Resources */ = {isa = PBXBuildFile; fileRef = BB10F402249B19B900925ED4 /* temp_license_2018-02-24.dat */; };
+		BB10F420249B19BA00925ED4 /* bds_easr_mfe_dnn.dat in Resources */ = {isa = PBXBuildFile; fileRef = BB10F403249B19B900925ED4 /* bds_easr_mfe_dnn.dat */; };
+		BB10F421249B19BA00925ED4 /* bds_easr_gramm.dat in Resources */ = {isa = PBXBuildFile; fileRef = BB10F404249B19B900925ED4 /* bds_easr_gramm.dat */; };
+		BB10F422249B19BA00925ED4 /* bds_easr_wakeup_words.dat in Resources */ = {isa = PBXBuildFile; fileRef = BB10F405249B19B900925ED4 /* bds_easr_wakeup_words.dat */; };
+		BB10F423249B19BA00925ED4 /* bds_easr_dnn_wakeup_model.dat in Resources */ = {isa = PBXBuildFile; fileRef = BB10F406249B19B900925ED4 /* bds_easr_dnn_wakeup_model.dat */; };
+		BB10F424249B19BA00925ED4 /* TZImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB10F407249B19B900925ED4 /* TZImagePickerController.bundle */; };
+		BB10F425249B19BA00925ED4 /* PandoraApi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB10F408249B19B900925ED4 /* PandoraApi.bundle */; };
+		BB10F426249B19BA00925ED4 /* unincomponents.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB10F409249B19BA00925ED4 /* unincomponents.ttf */; };
+		BB10F427249B19BA00925ED4 /* QHADVideoPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB10F40A249B19BA00925ED4 /* QHADVideoPlayer.bundle */; };
+		BB10F428249B19BA00925ED4 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB10F40B249B19BA00925ED4 /* AMap.bundle */; };
+		BB10F429249B19BA00925ED4 /* uni-jsframework-dev.js in Resources */ = {isa = PBXBuildFile; fileRef = BB10F40C249B19BA00925ED4 /* uni-jsframework-dev.js */; };
+		BB10F42A249B19BA00925ED4 /* userPosition@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB10F40D249B19BA00925ED4 /* userPosition@2x.png */; };
+		BB10F42B249B19BA00925ED4 /* qucsdkResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB10F40E249B19BA00925ED4 /* qucsdkResources.bundle */; };
+		BB10F42C249B19BA00925ED4 /* BUAdSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB10F40F249B19BA00925ED4 /* BUAdSDK.bundle */; };
+		BB10F42D249B19BA00925ED4 /* DCPGVideo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB10F410249B19BA00925ED4 /* DCPGVideo.bundle */; };
+		BB10F42E249B19BA00925ED4 /* DCMediaVideo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB10F411249B19BA00925ED4 /* DCMediaVideo.bundle */; };
+		BB10F42F249B19BA00925ED4 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB10F412249B19BA00925ED4 /* SVProgressHUD.bundle */; };
+		BB10F430249B19BA00925ED4 /* weex-polyfill.js in Resources */ = {isa = PBXBuildFile; fileRef = BB10F413249B19BA00925ED4 /* weex-polyfill.js */; };
+		BB10F431249B19BA00925ED4 /* weexUniJs.js in Resources */ = {isa = PBXBuildFile; fileRef = BB10F414249B19BA00925ED4 /* weexUniJs.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -431,6 +437,38 @@
 		8EED659F198A5789000A4449 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		8EED65A5198A626B000A4449 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		8EED65A7198A6273000A4449 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		BB0EBE6D24516FCC00C2E8C2 /* jcore-ios-2.2.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-2.2.5.a"; sourceTree = "<group>"; };
+		BB0EBE6E24516FCC00C2E8C2 /* jverification-ios-2.6.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jverification-ios-2.6.2.a"; sourceTree = "<group>"; };
+		BB0EBE6F24516FCC00C2E8C2 /* OAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OAuth.framework; sourceTree = "<group>"; };
+		BB10F3F7249B19B900925ED4 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mapapi.bundle; sourceTree = "<group>"; };
+		BB10F3F8249B19B900925ED4 /* __uniappes6.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = __uniappes6.js; sourceTree = "<group>"; };
+		BB10F3F9249B19B900925ED4 /* MiPassport.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MiPassport.bundle; sourceTree = "<group>"; };
+		BB10F3FA249B19B900925ED4 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		BB10F3FB249B19B900925ED4 /* uni-jsframework.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "uni-jsframework.js"; sourceTree = "<group>"; };
+		BB10F3FC249B19B900925ED4 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
+		BB10F3FD249B19B900925ED4 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		BB10F3FF249B19B900925ED4 /* bds_license.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bds_license.dat; sourceTree = "<group>"; };
+		BB10F400249B19B900925ED4 /* bds_easr_basic_model.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_basic_model.dat; sourceTree = "<group>"; };
+		BB10F401249B19B900925ED4 /* bds_easr_mfe_cmvn.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bds_easr_mfe_cmvn.dat; sourceTree = "<group>"; };
+		BB10F402249B19B900925ED4 /* temp_license_2018-02-24.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "temp_license_2018-02-24.dat"; sourceTree = "<group>"; };
+		BB10F403249B19B900925ED4 /* bds_easr_mfe_dnn.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_mfe_dnn.dat; sourceTree = "<group>"; };
+		BB10F404249B19B900925ED4 /* bds_easr_gramm.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bds_easr_gramm.dat; sourceTree = "<group>"; };
+		BB10F405249B19B900925ED4 /* bds_easr_wakeup_words.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_wakeup_words.dat; sourceTree = "<group>"; };
+		BB10F406249B19B900925ED4 /* bds_easr_dnn_wakeup_model.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_dnn_wakeup_model.dat; sourceTree = "<group>"; };
+		BB10F407249B19B900925ED4 /* TZImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TZImagePickerController.bundle; sourceTree = "<group>"; };
+		BB10F408249B19B900925ED4 /* PandoraApi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PandoraApi.bundle; sourceTree = "<group>"; };
+		BB10F409249B19BA00925ED4 /* unincomponents.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = unincomponents.ttf; sourceTree = "<group>"; };
+		BB10F40A249B19BA00925ED4 /* QHADVideoPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = QHADVideoPlayer.bundle; sourceTree = "<group>"; };
+		BB10F40B249B19BA00925ED4 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AMap.bundle; sourceTree = "<group>"; };
+		BB10F40C249B19BA00925ED4 /* uni-jsframework-dev.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "uni-jsframework-dev.js"; sourceTree = "<group>"; };
+		BB10F40D249B19BA00925ED4 /* userPosition@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userPosition@2x.png"; sourceTree = "<group>"; };
+		BB10F40E249B19BA00925ED4 /* qucsdkResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = qucsdkResources.bundle; sourceTree = "<group>"; };
+		BB10F40F249B19BA00925ED4 /* BUAdSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BUAdSDK.bundle; sourceTree = "<group>"; };
+		BB10F410249B19BA00925ED4 /* DCPGVideo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DCPGVideo.bundle; sourceTree = "<group>"; };
+		BB10F411249B19BA00925ED4 /* DCMediaVideo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DCMediaVideo.bundle; sourceTree = "<group>"; };
+		BB10F412249B19BA00925ED4 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		BB10F413249B19BA00925ED4 /* weex-polyfill.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "weex-polyfill.js"; sourceTree = "<group>"; };
+		BB10F414249B19BA00925ED4 /* weexUniJs.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = weexUniJs.js; sourceTree = "<group>"; };
 		BB4036A524445DA500E85760 /* PDRCoreAppWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDRCoreAppWindow.h; sourceTree = "<group>"; };
 		BB4036A624445DA500E85760 /* PDRNView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDRNView.h; sourceTree = "<group>"; };
 		BB4036A724445DA500E85760 /* PDRCommonString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDRCommonString.h; sourceTree = "<group>"; };
@@ -617,41 +655,6 @@
 		BB40376424445DA500E85760 /* SDImageAssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageAssetManager.h; sourceTree = "<group>"; };
 		BB40376524445DA500E85760 /* PDRCoreDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDRCoreDefs.h; sourceTree = "<group>"; };
 		BB40376624445DA500E85760 /* PDRCoreApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDRCoreApp.h; sourceTree = "<group>"; };
-		BB4037682444609900E85760 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mapapi.bundle; sourceTree = "<group>"; };
-		BB4037692444609900E85760 /* __uniappes6.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = __uniappes6.js; sourceTree = "<group>"; };
-		BB40376A2444609900E85760 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
-		BB40376B2444609900E85760 /* uni-jsframework.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "uni-jsframework.js"; sourceTree = "<group>"; };
-		BB40376C2444609900E85760 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
-		BB40376D2444609900E85760 /* weex-main-jsfm-nvue-uni.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "weex-main-jsfm-nvue-uni.js"; sourceTree = "<group>"; };
-		BB40376E2444609900E85760 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
-		BB40376F2444609900E85760 /* weex-main-jsfm-uni.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "weex-main-jsfm-uni.js"; sourceTree = "<group>"; };
-		BB4037712444609900E85760 /* bds_license.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bds_license.dat; sourceTree = "<group>"; };
-		BB4037722444609900E85760 /* bds_easr_basic_model.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_basic_model.dat; sourceTree = "<group>"; };
-		BB4037732444609900E85760 /* bds_easr_mfe_cmvn.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bds_easr_mfe_cmvn.dat; sourceTree = "<group>"; };
-		BB4037742444609900E85760 /* temp_license_2018-02-24.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "temp_license_2018-02-24.dat"; sourceTree = "<group>"; };
-		BB4037752444609900E85760 /* bds_easr_mfe_dnn.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_mfe_dnn.dat; sourceTree = "<group>"; };
-		BB4037762444609900E85760 /* bds_easr_gramm.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bds_easr_gramm.dat; sourceTree = "<group>"; };
-		BB4037772444609900E85760 /* bds_easr_wakeup_words.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_wakeup_words.dat; sourceTree = "<group>"; };
-		BB4037782444609900E85760 /* bds_easr_dnn_wakeup_model.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_dnn_wakeup_model.dat; sourceTree = "<group>"; };
-		BB4037792444609900E85760 /* TZImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TZImagePickerController.bundle; sourceTree = "<group>"; };
-		BB40377A2444609900E85760 /* uni-app-service.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "uni-app-service.js"; sourceTree = "<group>"; };
-		BB40377B2444609900E85760 /* PandoraApi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PandoraApi.bundle; sourceTree = "<group>"; };
-		BB40377C2444609900E85760 /* unincomponents.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = unincomponents.ttf; sourceTree = "<group>"; };
-		BB40377D2444609900E85760 /* QHADVideoPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = QHADVideoPlayer.bundle; sourceTree = "<group>"; };
-		BB40377E2444609900E85760 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AMap.bundle; sourceTree = "<group>"; };
-		BB40377F2444609900E85760 /* uni-jsframework-dev.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "uni-jsframework-dev.js"; sourceTree = "<group>"; };
-		BB4037802444609900E85760 /* userPosition@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userPosition@2x.png"; sourceTree = "<group>"; };
-		BB4037812444609900E85760 /* qucsdkResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = qucsdkResources.bundle; sourceTree = "<group>"; };
-		BB4037822444609900E85760 /* weex-main-jsfm-nvue.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "weex-main-jsfm-nvue.js"; sourceTree = "<group>"; };
-		BB4037832444609900E85760 /* BUAdSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BUAdSDK.bundle; sourceTree = "<group>"; };
-		BB4037842444609900E85760 /* DCPGVideo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DCPGVideo.bundle; sourceTree = "<group>"; };
-		BB4037852444609900E85760 /* DCMediaVideo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DCMediaVideo.bundle; sourceTree = "<group>"; };
-		BB4037862444609900E85760 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
-		BB4037872444609900E85760 /* weex-polyfill.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "weex-polyfill.js"; sourceTree = "<group>"; };
-		BB4037882444609900E85760 /* weex-main-jsfm.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "weex-main-jsfm.js"; sourceTree = "<group>"; };
-		BB4037892444609900E85760 /* weexUniJs.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = weexUniJs.js; sourceTree = "<group>"; };
-		BBE0C61D24455EAC003DAF46 /* jcore-ios-2.2.4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-2.2.4.a"; sourceTree = "<group>"; };
-		BBE0C61E24455EAC003DAF46 /* jverification-ios-2.6.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jverification-ios-2.6.0.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -989,7 +992,7 @@
 		8EED62A2198A1D13000A4449 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				BB4037672444609900E85760 /* Bundles */,
+				BB10F3F6249B19B900925ED4 /* Bundles */,
 				2F0BA4DB215BA12300F67004 /* LaunchScreen.storyboard */,
 				2F0BA3F8215B48A700F67004 /* Images.xcassets */,
 				8EED62A3198A1D13000A4449 /* HBuilder-uniPlugin-Info.plist */,
@@ -1035,6 +1038,51 @@
 				67065F2F2243868400DC71CA /* Default@2x.png */,
 			);
 			path = splash;
+			sourceTree = "<group>";
+		};
+		BB10F3F6249B19B900925ED4 /* Bundles */ = {
+			isa = PBXGroup;
+			children = (
+				BB10F3F7249B19B900925ED4 /* mapapi.bundle */,
+				BB10F3F8249B19B900925ED4 /* __uniappes6.js */,
+				BB10F3F9249B19B900925ED4 /* MiPassport.bundle */,
+				BB10F3FA249B19B900925ED4 /* AlipaySDK.bundle */,
+				BB10F3FB249B19B900925ED4 /* uni-jsframework.js */,
+				BB10F3FC249B19B900925ED4 /* WeiboSDK.bundle */,
+				BB10F3FD249B19B900925ED4 /* TencentOpenApi_IOS_Bundle.bundle */,
+				BB10F3FE249B19B900925ED4 /* BDSClientEASRResources */,
+				BB10F407249B19B900925ED4 /* TZImagePickerController.bundle */,
+				BB10F408249B19B900925ED4 /* PandoraApi.bundle */,
+				BB10F409249B19BA00925ED4 /* unincomponents.ttf */,
+				BB10F40A249B19BA00925ED4 /* QHADVideoPlayer.bundle */,
+				BB10F40B249B19BA00925ED4 /* AMap.bundle */,
+				BB10F40C249B19BA00925ED4 /* uni-jsframework-dev.js */,
+				BB10F40D249B19BA00925ED4 /* userPosition@2x.png */,
+				BB10F40E249B19BA00925ED4 /* qucsdkResources.bundle */,
+				BB10F40F249B19BA00925ED4 /* BUAdSDK.bundle */,
+				BB10F410249B19BA00925ED4 /* DCPGVideo.bundle */,
+				BB10F411249B19BA00925ED4 /* DCMediaVideo.bundle */,
+				BB10F412249B19BA00925ED4 /* SVProgressHUD.bundle */,
+				BB10F413249B19BA00925ED4 /* weex-polyfill.js */,
+				BB10F414249B19BA00925ED4 /* weexUniJs.js */,
+			);
+			name = Bundles;
+			path = ../../SDK/Bundles;
+			sourceTree = "<group>";
+		};
+		BB10F3FE249B19B900925ED4 /* BDSClientEASRResources */ = {
+			isa = PBXGroup;
+			children = (
+				BB10F3FF249B19B900925ED4 /* bds_license.dat */,
+				BB10F400249B19B900925ED4 /* bds_easr_basic_model.dat */,
+				BB10F401249B19B900925ED4 /* bds_easr_mfe_cmvn.dat */,
+				BB10F402249B19B900925ED4 /* temp_license_2018-02-24.dat */,
+				BB10F403249B19B900925ED4 /* bds_easr_mfe_dnn.dat */,
+				BB10F404249B19B900925ED4 /* bds_easr_gramm.dat */,
+				BB10F405249B19B900925ED4 /* bds_easr_wakeup_words.dat */,
+				BB10F406249B19B900925ED4 /* bds_easr_dnn_wakeup_model.dat */,
+			);
+			path = BDSClientEASRResources;
 			sourceTree = "<group>";
 		};
 		BB4036A424445DA500E85760 /* inc */ = {
@@ -1295,55 +1343,6 @@
 			path = Private;
 			sourceTree = "<group>";
 		};
-		BB4037672444609900E85760 /* Bundles */ = {
-			isa = PBXGroup;
-			children = (
-				BB40376A2444609900E85760 /* AlipaySDK.bundle */,
-				BB4037682444609900E85760 /* mapapi.bundle */,
-				BB4037692444609900E85760 /* __uniappes6.js */,
-				BB40376B2444609900E85760 /* uni-jsframework.js */,
-				BB40376C2444609900E85760 /* WeiboSDK.bundle */,
-				BB40376D2444609900E85760 /* weex-main-jsfm-nvue-uni.js */,
-				BB40376E2444609900E85760 /* TencentOpenApi_IOS_Bundle.bundle */,
-				BB40376F2444609900E85760 /* weex-main-jsfm-uni.js */,
-				BB4037702444609900E85760 /* BDSClientEASRResources */,
-				BB4037792444609900E85760 /* TZImagePickerController.bundle */,
-				BB40377A2444609900E85760 /* uni-app-service.js */,
-				BB40377B2444609900E85760 /* PandoraApi.bundle */,
-				BB40377C2444609900E85760 /* unincomponents.ttf */,
-				BB40377D2444609900E85760 /* QHADVideoPlayer.bundle */,
-				BB40377E2444609900E85760 /* AMap.bundle */,
-				BB40377F2444609900E85760 /* uni-jsframework-dev.js */,
-				BB4037802444609900E85760 /* userPosition@2x.png */,
-				BB4037812444609900E85760 /* qucsdkResources.bundle */,
-				BB4037822444609900E85760 /* weex-main-jsfm-nvue.js */,
-				BB4037832444609900E85760 /* BUAdSDK.bundle */,
-				BB4037842444609900E85760 /* DCPGVideo.bundle */,
-				BB4037852444609900E85760 /* DCMediaVideo.bundle */,
-				BB4037862444609900E85760 /* SVProgressHUD.bundle */,
-				BB4037872444609900E85760 /* weex-polyfill.js */,
-				BB4037882444609900E85760 /* weex-main-jsfm.js */,
-				BB4037892444609900E85760 /* weexUniJs.js */,
-			);
-			name = Bundles;
-			path = ../../SDK/Bundles;
-			sourceTree = "<group>";
-		};
-		BB4037702444609900E85760 /* BDSClientEASRResources */ = {
-			isa = PBXGroup;
-			children = (
-				BB4037712444609900E85760 /* bds_license.dat */,
-				BB4037722444609900E85760 /* bds_easr_basic_model.dat */,
-				BB4037732444609900E85760 /* bds_easr_mfe_cmvn.dat */,
-				BB4037742444609900E85760 /* temp_license_2018-02-24.dat */,
-				BB4037752444609900E85760 /* bds_easr_mfe_dnn.dat */,
-				BB4037762444609900E85760 /* bds_easr_gramm.dat */,
-				BB4037772444609900E85760 /* bds_easr_wakeup_words.dat */,
-				BB4037782444609900E85760 /* bds_easr_dnn_wakeup_model.dat */,
-			);
-			path = BDSClientEASRResources;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1422,74 +1421,70 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB40379E2444609900E85760 /* QHADVideoPlayer.bundle in Resources */,
-				BB40378B2444609900E85760 /* __uniappes6.js in Resources */,
-				BB40378A2444609900E85760 /* mapapi.bundle in Resources */,
-				BB4037A42444609900E85760 /* BUAdSDK.bundle in Resources */,
-				BB4037952444609900E85760 /* temp_license_2018-02-24.dat in Resources */,
-				BB4037A82444609900E85760 /* weex-polyfill.js in Resources */,
-				BB4037982444609900E85760 /* bds_easr_wakeup_words.dat in Resources */,
-				BB4037A02444609900E85760 /* uni-jsframework-dev.js in Resources */,
 				67065F4E2243868400DC71CA /* Default-Portrait7-1194h@2x~ipad.png in Resources */,
 				2F0BA3F9215B48A700F67004 /* Images.xcassets in Resources */,
-				BB4037992444609900E85760 /* bds_easr_dnn_wakeup_model.dat in Resources */,
 				67065F4C2243868400DC71CA /* Default-Landscape@2x~ipad.png in Resources */,
+				BB10F418249B19BA00925ED4 /* AlipaySDK.bundle in Resources */,
 				67065F442243868400DC71CA /* Default-Portrait@2x~ipad.png in Resources */,
-				BB4037972444609900E85760 /* bds_easr_gramm.dat in Resources */,
 				67065F402243868400DC71CA /* Default-Portrait7@2x~ipad.png in Resources */,
 				67065F512243868400DC71CA /* Default-Portrait7-1112h@2x~ipad.png in Resources */,
-				BB4037942444609900E85760 /* bds_easr_mfe_cmvn.dat in Resources */,
+				BB10F430249B19BA00925ED4 /* weex-polyfill.js in Resources */,
 				03515D7523CEF9B7009F3256 /* JVerificationResource.bundle in Resources */,
-				BB4037AA2444609900E85760 /* weexUniJs.js in Resources */,
-				BB4037A92444609900E85760 /* weex-main-jsfm.js in Resources */,
-				BB4037912444609900E85760 /* weex-main-jsfm-uni.js in Resources */,
 				67065F3F2243868400DC71CA /* Default-736h@3x.png in Resources */,
 				8EED62A6198A1D13000A4449 /* InfoPlist.strings in Resources */,
-				BB4037A62444609900E85760 /* DCMediaVideo.bundle in Resources */,
-				BB4037922444609900E85760 /* bds_license.dat in Resources */,
-				BB4037962444609900E85760 /* bds_easr_mfe_dnn.dat in Resources */,
-				BB4037A72444609900E85760 /* SVProgressHUD.bundle in Resources */,
 				67065F4B2243868400DC71CA /* Default@2x.png in Resources */,
+				BB10F41E249B19BA00925ED4 /* bds_easr_mfe_cmvn.dat in Resources */,
 				67065F492243868400DC71CA /* Default-896h@3x.png in Resources */,
-				BB4037902444609900E85760 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
-				BB40379B2444609900E85760 /* uni-app-service.js in Resources */,
-				BB4037A32444609900E85760 /* weex-main-jsfm-nvue.js in Resources */,
-				BB40378D2444609900E85760 /* uni-jsframework.js in Resources */,
+				BB10F417249B19BA00925ED4 /* MiPassport.bundle in Resources */,
+				BB10F42A249B19BA00925ED4 /* userPosition@2x.png in Resources */,
+				BB10F423249B19BA00925ED4 /* bds_easr_dnn_wakeup_model.dat in Resources */,
+				BB10F428249B19BA00925ED4 /* AMap.bundle in Resources */,
 				67065F552243868400DC71CA /* Default-Landscape-736h@3x.png in Resources */,
+				BB10F421249B19BA00925ED4 /* bds_easr_gramm.dat in Resources */,
+				BB10F42C249B19BA00925ED4 /* BUAdSDK.bundle in Resources */,
 				67065F4D2243868400DC71CA /* Default-Landscape7@2x~ipad.png in Resources */,
-				BB4037A52444609900E85760 /* DCPGVideo.bundle in Resources */,
 				2F0BA4DC215BA12300F67004 /* LaunchScreen.storyboard in Resources */,
 				67065F3B2243868400DC71CA /* Default-Landscape-812h@3x.png in Resources */,
+				BB10F425249B19BA00925ED4 /* PandoraApi.bundle in Resources */,
+				BB10F41A249B19BA00925ED4 /* WeiboSDK.bundle in Resources */,
+				BB10F41B249B19BA00925ED4 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				BB10F419249B19BA00925ED4 /* uni-jsframework.js in Resources */,
 				67065F412243868400DC71CA /* Default-Landscape-667h@2x.png in Resources */,
 				67065F3D2243868400DC71CA /* Default-Portrait~ipad.png in Resources */,
 				67065F3A2243868400DC71CA /* Default-896h@2x.png in Resources */,
+				BB10F41C249B19BA00925ED4 /* bds_license.dat in Resources */,
 				67065F3E2243868400DC71CA /* Default-667h@2x.png in Resources */,
 				67065F4A2243868400DC71CA /* Default.png in Resources */,
+				BB10F416249B19BA00925ED4 /* __uniappes6.js in Resources */,
+				BB10F41F249B19BA00925ED4 /* temp_license_2018-02-24.dat in Resources */,
+				BB10F429249B19BA00925ED4 /* uni-jsframework-dev.js in Resources */,
 				67065F452243868400DC71CA /* Default-Landscape~ipad.png in Resources */,
-				BB4037A22444609900E85760 /* qucsdkResources.bundle in Resources */,
+				BB10F415249B19BA00925ED4 /* mapapi.bundle in Resources */,
+				BB10F424249B19BA00925ED4 /* TZImagePickerController.bundle in Resources */,
+				BB10F42E249B19BA00925ED4 /* DCMediaVideo.bundle in Resources */,
 				67065F432243868400DC71CA /* Default-Portrait7-1366h@2x~ipad.png in Resources */,
 				67065F472243868400DC71CA /* Default-Landscape7~ipad.png in Resources */,
-				BB4037A12444609900E85760 /* userPosition@2x.png in Resources */,
-				BB40379F2444609900E85760 /* AMap.bundle in Resources */,
+				BB10F41D249B19BA00925ED4 /* bds_easr_basic_model.dat in Resources */,
+				BB10F427249B19BA00925ED4 /* QHADVideoPlayer.bundle in Resources */,
 				67065F502243868400DC71CA /* Default-812h@3x.png in Resources */,
 				67065F532243868400DC71CA /* Default-Landscape-1112h@2x~ipad.png in Resources */,
+				BB10F422249B19BA00925ED4 /* bds_easr_wakeup_words.dat in Resources */,
 				67065F482243868400DC71CA /* Default-Landscape-1194h@2x~ipad.png in Resources */,
+				BB10F42B249B19BA00925ED4 /* qucsdkResources.bundle in Resources */,
+				BB10F42F249B19BA00925ED4 /* SVProgressHUD.bundle in Resources */,
 				67065F3C2243868400DC71CA /* Default-Landscape-896h@3x.png in Resources */,
+				BB10F42D249B19BA00925ED4 /* DCPGVideo.bundle in Resources */,
+				BB10F420249B19BA00925ED4 /* bds_easr_mfe_dnn.dat in Resources */,
 				67E9CDCF22968D2E0076E0FB /* Localizable.strings in Resources */,
-				BB4037932444609900E85760 /* bds_easr_basic_model.dat in Resources */,
-				BB40378C2444609900E85760 /* AlipaySDK.bundle in Resources */,
 				67B7CAA221DCE8180083E96A /* control.xml in Resources */,
 				67065F422243868400DC71CA /* Default-Landscape-1366h@2x~ipad.png in Resources */,
+				BB10F431249B19BA00925ED4 /* weexUniJs.js in Resources */,
+				BB10F426249B19BA00925ED4 /* unincomponents.ttf in Resources */,
 				67065F522243868400DC71CA /* Default-Portrait7~ipad.png in Resources */,
-				BB40379C2444609900E85760 /* PandoraApi.bundle in Resources */,
 				67065F462243868400DC71CA /* Default-568h@2x.png in Resources */,
 				8EED6590198A3DF7000A4449 /* Pandora in Resources */,
 				67065F542243868400DC71CA /* Default-Landscape-896h@2x.png in Resources */,
-				BB40378F2444609900E85760 /* weex-main-jsfm-nvue-uni.js in Resources */,
-				BB40379D2444609900E85760 /* unincomponents.ttf in Resources */,
-				BB40379A2444609900E85760 /* TZImagePickerController.bundle in Resources */,
 				67065F4F2243868400DC71CA /* Default-Landscape-568h@2x.png in Resources */,
-				BB40378E2444609900E85760 /* WeiboSDK.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
