@@ -369,21 +369,21 @@ jv.setTimeWithConfig(7000);
 ## 常见问题
 - 1.这个sdk100M，会打包到apk吗？
  
- 包容量，与打包方式有关， 安卓应该在1M左右，看打包方式；iOS会大一些。可以看我们demo 的大小，
+  包容量，与打包方式有关， 安卓应该在1M左右，看打包方式；iOS会大一些。可以看我们demo 的大小，
  
- Android demo apk 最多也就 3 M，iOS 是 2.9M。https://docs.jiguang.cn/jverification/resources/#demo。
+  Android demo apk 最多也就 3 M，iOS 是 2.9M。https://docs.jiguang.cn/jverification/resources/#demo。
 
  - 2.demo跑不起来，脑壳疼。
 
- a、可以去GitHub上下载demo，用HbuilderX打开JVerification_Hbuilder_Demo文件，在manifest.json文件里面自己生成一个uniapp的appid，这是自动生成的。有的话换成自己的appid。
+   a、可以去GitHub上下载demo，用HbuilderX打开JVerification_Hbuilder_Demo文件，在manifest.json文件里面自己生成一个uniapp的appid，这是自动生成的。有的话换成自己的appid。
 
 ![first.png](https://img.jiguang.cn//jver/hbuilder/pluginfirst.png)
 
-b、配置您申请的极光 appkey 信息。
+   b、配置您申请的极光 appkey 信息。
 
 ![second.png](https://img.jiguang.cn//jver/hbuilder/pluginsecond.png)
 
-c、HbuilderX 中制作打包自定义基座。注意：包名，签名，证书，bundleID 需要与对应 appkey 配置的应用信息保持一致。（[极光 portal](https://www.jigu![third.png](https://img.jiguang.cn//jver/hbuilder/pluginthird.png)ang.cn/accounts/platform)注册分配）
+   c、HbuilderX 中制作打包自定义基座。注意：包名，签名，证书，bundleID 需要与对应 appkey 配置的应用信息保持一致。（[极光 portal](https://www.jigu![third.png](https://img.jiguang.cn//jver/hbuilder/pluginthird.png)ang.cn/accounts/platform)注册分配）
 
 ![third.png](https://img.jiguang.cn//jver/hbuilder/pluginthird.png)
 
@@ -391,7 +391,7 @@ c、HbuilderX 中制作打包自定义基座。注意：包名，签名，证书
 
  - 3.初始化老失败。
 
- 一定要填好[极光 portal](https://www.jiguang.cn/accounts/platform)分配的包名，签名，证书，bundleID和appkey，如果没填是初始化不成功的呀。
+   一定要填好[极光 portal](https://www.jiguang.cn/accounts/platform)分配的包名，签名，证书，bundleID和appkey，如果没填是初始化不成功的呀。
 
 
 
