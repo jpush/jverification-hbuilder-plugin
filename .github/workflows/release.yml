@@ -3,21 +3,26 @@ name: Upload Release Asset
 
 on:
   push:
-    branches: jg
+    tags: 
+      - 'v*.*.*'
+ 
 
 jobs:
   build:
     name: Upload Release Asset
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        version: [ 1.1.6 ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Gzip
+        
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      - name: Build project 
         run: |
-          tar -jcvf jver-${{ matrix.version }}.tar.gz nativeplugins
+          tar -jcvf jver-${{ steps.get_version.outputs.VERSION }}.tar.gz nativeplugins
+          ls -al
+          echo ${{ steps.get_version.outputs.VERSION }}
           
       - name: Create Release
         id: create_release
@@ -25,8 +30,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ matrix.version }}
-          release_name: V ${{ matrix.version }}
+          tag_name: ${{ steps.get_version.outputs.VERSION }}
+          release_name: ${{ steps.get_version.outputs.VERSION }}
           draft: false
           prerelease: false
            
@@ -37,6 +42,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./jver-${{ matrix.version }}.tar.gz
-          asset_name: jver-${{ matrix.version }}.tar.gz
+          asset_path: ./jver-${{ steps.get_version.outputs.VERSION }}.tar.gz
+          asset_name: jver-${{ steps.get_version.outputs.VERSION }}.tar.gz
           asset_content_type: application/zip
