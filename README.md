@@ -204,7 +204,7 @@ jv.setCustomUIWithConfigAndroid(JVerifyUIConfig,JVerifyUIConfig)
 ```
 
 #### 参数说明
-- JVerifyUIConfig（object）:Android 主题配置参数集合，参考[Android JVerifyUIConfig 说明](ANDROID.md)
+- JVerifyUIConfig（object）:Android 主题配置参数集合，参考[Android JVerifyUIConfig 说明](./doc/ANDROID.md)
 
 #### 示例
 ```javascript
@@ -236,7 +236,7 @@ jv.setCustomUIWithConfigiOS(JVerifyUIConfig)
 ```
 
 #### 参数说明
-- JVerifyUIConfig（object）:iOS 主题配置参数集合，参考[iOS JVerifyUIConfig 说明](IOS.md)
+- JVerifyUIConfig（object）:iOS 主题配置参数集合，参考[iOS JVerifyUIConfig 说明](./doc/IOS.md)
 
 #### 示例
 ```javascript
