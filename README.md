@@ -389,10 +389,13 @@ jv.setTimeWithConfig(7000);
 
 ![fourth.png](https://img.jiguang.cn//jver/hbuilder/pluginfourth.png)
 
- - 3.初始化老失败。
 
-   一定要填好[极光 portal](https://www.jiguang.cn/accounts/platform)分配的包名，签名，证书，bundleID和appkey，如果没填是初始化不成功的呀。
+ - 3.初始化一直报“8004，init failed”。
 
+   一定要填好[极光 portal](https://www.jiguang.cn/accounts/platform)分配的包名，签名，证书，bundleID和appkey，这些全是配套的，不能瞎填。
+![five.png](https://img.jiguang.cn//jver/hbuilder/pluginfive.png)
+
+![six.png](https://img.jiguang.cn//jver/hbuilder/pluginsix.png)
 
 
 ## License
