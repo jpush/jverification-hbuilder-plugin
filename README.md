@@ -204,7 +204,7 @@ jv.setCustomUIWithConfigAndroid(JVerifyUIConfig,JVerifyUIConfig)
 ```
 
 #### 参数说明
-- JVerifyUIConfig（object）:Android 主题配置参数集合，参考[Android JVerifyUIConfig 说明](ANDROID.md)
+- JVerifyUIConfig（object）:Android 主题配置参数集合，参考[Android JVerifyUIConfig 说明](./doc/ANDROID.md)
 
 #### 示例
 ```javascript
@@ -236,7 +236,7 @@ jv.setCustomUIWithConfigiOS(JVerifyUIConfig)
 ```
 
 #### 参数说明
-- JVerifyUIConfig（object）:iOS 主题配置参数集合，参考[iOS JVerifyUIConfig 说明](IOS.md)
+- JVerifyUIConfig（object）:iOS 主题配置参数集合，参考[iOS JVerifyUIConfig 说明](./doc/IOS.md)
 
 #### 示例
 ```javascript
@@ -369,29 +369,33 @@ jv.setTimeWithConfig(7000);
 ## 常见问题
 - 1.这个sdk100M，会打包到apk吗？
  
- 包容量，与打包方式有关， 安卓应该在1M左右，看打包方式；iOS会大一些。可以看我们demo 的大小，
+  包容量，与打包方式有关， 安卓应该在1M左右，看打包方式；iOS会大一些。可以看我们demo 的大小，
  
- Android demo apk 最多也就 3 M，iOS 是 2.9M。https://docs.jiguang.cn/jverification/resources/#demo。
+  Android demo apk 最多也就 3 M，iOS 是 2.9M。https://docs.jiguang.cn/jverification/resources/#demo。
 
  - 2.demo跑不起来，脑壳疼。
 
- a、可以去GitHub上下载demo，用HbuilderX打开JVerification_Hbuilder_Demo文件，在manifest.json文件里面自己生成一个uniapp的appid，这是自动生成的。有的话换成自己的appid。
+   a、可以去GitHub上下载demo，用HbuilderX打开JVerification_Hbuilder_Demo文件，在manifest.json文件里面自己生成一个uniapp的appid，这是自动生成的。有的话换成自己的appid。
 
 ![first.png](https://img.jiguang.cn//jver/hbuilder/pluginfirst.png)
 
-b、配置您申请的极光 appkey 信息。
+   b、配置您申请的极光 appkey 信息。
 
 ![second.png](https://img.jiguang.cn//jver/hbuilder/pluginsecond.png)
 
-c、HbuilderX 中制作打包自定义基座。注意：包名，签名，证书，bundleID 需要与对应 appkey 配置的应用信息保持一致。（[极光 portal](https://www.jigu![third.png](https://img.jiguang.cn//jver/hbuilder/pluginthird.png)ang.cn/accounts/platform)注册分配）
+   c、HbuilderX 中制作打包自定义基座。注意：包名，签名，证书，bundleID 需要与对应 appkey 配置的应用信息保持一致。（[极光 portal](https://www.jigu![third.png](https://img.jiguang.cn//jver/hbuilder/pluginthird.png)ang.cn/accounts/platform)注册分配）
 
 ![third.png](https://img.jiguang.cn//jver/hbuilder/pluginthird.png)
 
 ![fourth.png](https://img.jiguang.cn//jver/hbuilder/pluginfourth.png)
 
- - 3.初始化老失败。
+ - 3.初始化一直报“8004，init failed”。
 
- 一定要填好[极光 portal](https://www.jiguang.cn/accounts/platform)分配的包名，签名，证书，bundleID和appkey，如果没填是初始化不成功的呀。
+   一定要填好[极光 portal](https://www.jiguang.cn/accounts/platform)分配的包名，签名，证书，bundleID和appkey，这些全是配套的，不能瞎填。
+![five.png](https://img.jiguang.cn//jver/hbuilder/pluginfive.png)
+
+![six.png](https://img.jiguang.cn//jver/hbuilder/pluginsix.png)
+
 
 
 
