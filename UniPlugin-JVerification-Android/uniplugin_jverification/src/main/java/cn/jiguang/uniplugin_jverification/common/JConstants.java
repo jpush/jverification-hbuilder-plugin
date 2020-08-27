@@ -127,5 +127,8 @@ public class JConstants {
     public static final String SING_ID = "signID";
     public static final String TEMPLATE_ID = "templateID";
     public static final String INTERVAL_TIME = "intervalTime";
-
+    // 弹窗是否需要配置关闭按钮
+    public static final String PRIVACY_NEED_CLOSE = "privacyNeedClose";
+    // 弹窗关闭按钮模式
+    public static final String PRIVACY_CLOSE_THEME = "privacyCloseTheme";
 }

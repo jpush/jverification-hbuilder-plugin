@@ -146,6 +146,7 @@
 						setLogBtnText:" 极光认证测试 ",
 						setPrivacyState:false,
 						setAppPrivacyColor:[0xff00f000,0xff000000],
+						setLogoImgPath:"static/weixin.png",
 						addCustomViews:[{
 							type:"text",
 							finishFlag:false,
@@ -167,10 +168,9 @@
 							align:13,
 							margins:[0,0,0,0],
 							bgImgPath:"static/qq.png"
-						}]
+						}],
 					})
 				}
-				
 			},
 			setCustomDialog:function(){
 				if(uni.getSystemInfoSync().platform == "ios"){
@@ -202,10 +202,14 @@
 				}else{
 					this.jv.setCustomUIWithConfigAndroid({
 						setNavColor:0xff000000,
-						setLogBtnText:" 极光认证测试 ",
+						setLogBtnText:" 极光认证测试弹窗 ",
 						setPrivacyState:false,
 						setAppPrivacyColor:[0xff00f000,0xff000000],
-						setDialogTheme:[300, 400, 0, 0, false]
+						setDialogTheme:[300, 400, 0, 0, false],
+						setLogoImgPath:"static/big.jpg",
+						setAuthBGImgPath:"static/bg.jpeg",
+						privacyNeedClose:true,                       //弹窗是否需要关闭按钮 
+						privacyCloseTheme:[10, 60, 0, 0],            //弹窗关闭按钮偏移量 privacyNeedClose为true时，必须设置它的偏移量
 					})
 				}
 				

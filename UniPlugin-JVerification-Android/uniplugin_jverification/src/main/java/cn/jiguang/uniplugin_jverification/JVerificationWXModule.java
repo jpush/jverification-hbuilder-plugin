@@ -8,7 +8,9 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,9 +22,11 @@ import com.taobao.weex.annotation.JSMethod;
 import com.taobao.weex.bridge.JSCallback;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import cn.jiguang.uniplugin_jverification.common.CopyUtils;
 import cn.jiguang.uniplugin_jverification.common.JConstants;
 import cn.jiguang.uniplugin_jverification.common.JLogger;
 import cn.jiguang.verifysdk.api.AuthPageEventListener;
@@ -211,7 +215,9 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
     private void setUiConfig(JVerifyUIConfig.Builder uiConfigBuilder, JSONObject jsonObject) {
         //  设置授权页背景
         if (jsonObject.containsKey(JConstants.setAuthBGImgPath)) {
-            uiConfigBuilder.setAuthBGImgPath(jsonObject.getString(JConstants.setAuthBGImgPath));
+            String pathAndName = jsonObject.getString(JConstants.setAuthBGImgPath);
+            String realPath = getRealPath(pathAndName);
+            uiConfigBuilder.setAuthBGImgPath(realPath);
         }
         // 状态栏
         if (jsonObject.containsKey(JConstants.setStatusBarColorWithNav)) {
@@ -240,7 +246,9 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
             uiConfigBuilder.setNavTextColor(jsonObject.getIntValue(JConstants.setNavTextColor));
         }
         if (jsonObject.containsKey(JConstants.setNavReturnImgPath)) {
-            uiConfigBuilder.setNavReturnImgPath(jsonObject.getString(JConstants.setNavReturnImgPath));
+            String pathAndName = jsonObject.getString(JConstants.setNavReturnImgPath);
+            String realPath = getRealPath(pathAndName);
+            uiConfigBuilder.setNavReturnImgPath(realPath);
         }
         if (jsonObject.containsKey(JConstants.setNavTransparent)) {
             uiConfigBuilder.setNavTransparent(jsonObject.getBooleanValue(JConstants.setNavTransparent));
@@ -284,7 +292,9 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
             uiConfigBuilder.setLogoOffsetY(jsonObject.getIntValue(JConstants.setLogoOffsetY));
         }
         if (jsonObject.containsKey(JConstants.setLogoImgPath)) {
-            uiConfigBuilder.setLogoImgPath(jsonObject.getString(JConstants.setLogoImgPath));
+            String pathAndName = jsonObject.getString(JConstants.setLogoImgPath);
+            String realPath = getRealPath(pathAndName);
+            uiConfigBuilder.setLogoImgPath(realPath);
         }
         if (jsonObject.containsKey(JConstants.setLogoOffsetX)) {
             uiConfigBuilder.setLogoOffsetX(jsonObject.getIntValue(JConstants.setLogoOffsetX));
@@ -467,6 +477,23 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
             uiConfigBuilder.setDialogTheme(jsonArray.getIntValue(0), jsonArray.getIntValue(1),
                     jsonArray.getIntValue(2), jsonArray.getIntValue(3), jsonArray.getBooleanValue(4));
         }
+        // 弹窗是否需要关闭
+        if (jsonObject.containsKey(JConstants.PRIVACY_NEED_CLOSE) && jsonObject.containsKey(JConstants.PRIVACY_CLOSE_THEME)) {
+            boolean needClose = jsonObject.getBoolean(JConstants.PRIVACY_NEED_CLOSE);
+            Context context = mWXSDKInstance.getContext();
+            if(needClose) {
+                //自定义返回按钮示例 
+                ImageButton sampleReturnBtn = new ImageButton(context);
+                sampleReturnBtn.setImageResource(R.drawable.umcsdk_return_bg);
+                
+                RelativeLayout.LayoutParams returnLP = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                // 返回按钮样式
+                JSONArray array = jsonObject.containsKey(JConstants.PRIVACY_CLOSE_THEME) ? jsonObject.getJSONArray(JConstants.PRIVACY_CLOSE_THEME) : null;
+                returnLP.setMargins(array.getIntValue(0), array.getIntValue(1),array.getIntValue(2), array.getIntValue(3));
+                sampleReturnBtn.setLayoutParams(returnLP);
+                uiConfigBuilder.addCustomView(sampleReturnBtn,true,null);
+            }
+        }
 
         if(jsonObject.containsKey(JConstants.addCustomViews)){
             JSONArray jsonArray = jsonObject.getJSONArray(JConstants.addCustomViews);
@@ -557,6 +584,18 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
             }
 
         }
+    }
+
+
+    private String getRealPath(String pathName){
+        Context context = mWXSDKInstance.getContext();
+        String assetPicPath = getAssetPicPath(pathName);
+        String realPath = context.getCacheDir().getPath() + File.separator + pathName;
+        File file = new File(realPath);
+        JLogger.d(" full name : " + assetPicPath+ " size "+ assetPicPath.length());
+        CopyUtils.copyFile(context, assetPicPath, realPath);
+        JLogger.d(" full name : " + realPath+ " size "+ realPath.length());
+        return realPath;
     }
 
     public  String getAssetPicPath(String imgPath){
