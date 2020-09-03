@@ -203,7 +203,7 @@ BOOL debugMode = false;
     [self logger:@"dismissLoginAuth with anim:" log:needCloseAnim?@"true":@"false"];
     [self.btnModelArray removeAllObjects];
     [JVERIFICATIONService dismissLoginControllerAnimated:needCloseAnim completion:^{
-        NSDictionary *data = [self convertToResult:0 content:@"ok"];
+        NSDictionary *data = [self convertToResult:@0 content:@"ok"];
         callback(data,NO);
     }];
 }

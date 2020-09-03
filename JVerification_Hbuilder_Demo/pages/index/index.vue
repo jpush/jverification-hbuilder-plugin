@@ -126,6 +126,7 @@
 								left:50,
 								bottom: -100,
 								title:"点击测试",
+								isFinish:true,  // 是否在授权页面通过自定义控件button的点击关闭授权页面
 							},
 							{
 								type:"imageView",

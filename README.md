@@ -252,14 +252,19 @@ jv.setCustomUIWithConfigiOS({
 
 #### 接口定义
 ```javascript
-jv.dismissLoginAuth(flag)
+jv.dismissLoginAuth(flag, res=>{
+    //授权页隐藏完成
+})
 ```
 #### 参数说明
 - flag:隐藏时是否需要动画。
 
 #### 示例
 ```javascript
-jv.dismissLoginAuth(true)
+jv.dismissLoginAuth(true, 
+    res=>{
+        //授权页隐藏完成
+    })
 ```
 
 ## 获取验证码
