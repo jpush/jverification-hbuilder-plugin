@@ -165,8 +165,9 @@
   |id|String|标志当前 button 的唯一 id|
   |textFont|int|文字大小|
   |isFinish|bool|是否在授权页面通过自定义控件button的点击关闭授权页面|
-  |normalImagePath|String|button正常情况下背景图片路径|
-  |selectImagePath|String|button选中q下情况下背景图片路径|
+  |normalImagePath|String|设置button图片路径|
+  |backgroundImagePath|String|button正常情况下背景图片路径|
+  |selectImagePath|String|button选中情况下背景图片路径|
   
   + type = imageView 的属性
   

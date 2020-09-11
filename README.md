@@ -262,9 +262,9 @@ jv.dismissLoginAuth(flag, res=>{
 #### 示例
 ```javascript
 jv.dismissLoginAuth(true, 
-    res=>{
-        //授权页隐藏完成
-    })
+res=>{
+    //授权页隐藏完成
+})
 ```
 
 ## 获取验证码

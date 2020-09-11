@@ -119,14 +119,16 @@
 							{
 								type:"button",
 								id: "buttonTest",
-								width:80,
+								width:180,
 								height:44,
-								textColor:0xFFC0CB,
+								textColor:0xff000000,
 								cornerRadius:22,
 								left:50,
 								bottom: -100,
 								title:"点击测试",
 								isFinish:true,  // 是否在授权页面通过自定义控件button的点击关闭授权页面
+								backgroundImagePath: "static/big.jpg", // button正常情况下背景图片路径
+								// normalImagePath:"static/bg.jpeg"  // 设置button图片路径
 							},
 							{
 								type:"imageView",

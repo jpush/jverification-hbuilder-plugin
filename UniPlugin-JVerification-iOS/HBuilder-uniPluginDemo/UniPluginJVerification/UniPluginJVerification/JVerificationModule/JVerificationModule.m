@@ -626,7 +626,11 @@ JVUIConfig *jvUIConfig){
                 }
                 if ([viewInfo.allKeys containsObject:@"normalImagePath"]) {
                     NSString*normalImagePath = [appinfo.wwwPath stringByAppendingFormat:@"/%@",viewInfo[@"normalImagePath"]];
-                    [btn setImage:[UIImage imageNamed:normalImagePath] forState:UIControlStateNormal];
+                   [btn setImage:[UIImage imageNamed:normalImagePath] forState:UIControlStateNormal];
+                }
+                if ([viewInfo.allKeys containsObject:@"backgroundImagePath"]) {
+                    NSString*backgroundImagePath = [appinfo.wwwPath stringByAppendingFormat:@"/%@",viewInfo[@"backgroundImagePath"]];
+                    [btn setBackgroundImage:[UIImage imageNamed:backgroundImagePath] forState:UIControlStateNormal];
                 }
                 if ([viewInfo.allKeys containsObject:@"selectImagePath"]) {
                     NSString*selectImagePath = [appinfo.wwwPath stringByAppendingFormat:@"/%@",viewInfo[@"selectImagePath"]];
