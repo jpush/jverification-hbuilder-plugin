@@ -4,11 +4,12 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -20,7 +21,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.taobao.weex.WXSDKEngine;
 import com.taobao.weex.annotation.JSMethod;
 import com.taobao.weex.bridge.JSCallback;
-
 
 import java.io.File;
 import java.io.IOException;
@@ -48,10 +48,10 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
     }
 
     @JSMethod(uiThread = true)
-    public void init(JSONObject object,final JSCallback jsCallback) {
-        int timeout = object.containsKey("timeout")?object.getIntValue("timeout"):10000;
+    public void init(JSONObject object, final JSCallback jsCallback) {
+        int timeout = object.containsKey("timeout") ? object.getIntValue("timeout") : 10000;
         JLogger.d("init with timeout set:" + timeout);
-        JVerificationInterface.init(mWXSDKInstance.getContext().getApplicationContext(),timeout, new RequestCallback<String>() {
+        JVerificationInterface.init(mWXSDKInstance.getContext().getApplicationContext(), timeout, new RequestCallback<String>() {
             @Override
             public void onResult(int code, String content) {
                 if (jsCallback == null) return;
@@ -63,7 +63,7 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
 
     @JSMethod(uiThread = true)
     public void isInitSuccess(JSCallback callback) {
-        boolean succ =JVerificationInterface.isInitSuccess();
+        boolean succ = JVerificationInterface.isInitSuccess();
         JLogger.d("isInitSuccess:" + succ);
         if (callback == null) return;
         callback.invoke(convertToResult(succ));
@@ -71,7 +71,7 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
 
     @JSMethod(uiThread = true)
     public void checkVerifyEnable(JSCallback callback) {
-        boolean enable =JVerificationInterface.checkVerifyEnable(mWXSDKInstance.getContext());
+        boolean enable = JVerificationInterface.checkVerifyEnable(mWXSDKInstance.getContext());
         JLogger.d("checkVerifyEnable:" + enable);
         if (callback == null) return;
         callback.invoke(convertToResult(enable));
@@ -137,7 +137,7 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
 
     @JSMethod(uiThread = true)
     public void dismissLoginAuth(boolean needCloseAnim, final JSCallback callback) {
-        JLogger.d("dismissLoginAuth:"+needCloseAnim);
+        JLogger.d("dismissLoginAuth:" + needCloseAnim);
         JVerificationInterface.dismissLoginAuthActivity(needCloseAnim, new RequestCallback<String>() {
             @Override
             public void onResult(int code, String desc) {
@@ -150,11 +150,11 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
     @JSMethod(uiThread = true)
     public void setCustomUIWithConfigAndroid(JSONObject jsonObjectPortrait, JSONObject jsonObjectLandscape) {
 
-        if(jsonObjectLandscape == null){
+        if (jsonObjectLandscape == null) {
             JLogger.d("setCustomUIWithConfigAndroid all");
             JVerifyUIConfig.Builder uiConfig = getBuilder(jsonObjectPortrait);
             JVerificationInterface.setCustomUIWithConfig(uiConfig.build());
-        }else{
+        } else {
             JLogger.d("setCustomUIWithConfigAndroid portrait and landscape");
             JVerifyUIConfig.Builder uiConfigPortrait = getBuilder(jsonObjectPortrait);
             JVerifyUIConfig.Builder uiConfigLandscape = getBuilder(jsonObjectLandscape);
@@ -163,6 +163,7 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
     }
 
     private JSCallback mCustomViewsClickCallback;
+
     @JSMethod(uiThread = true)
     public void addCustomViewsClickCallback(final JSCallback callback) {
         mCustomViewsClickCallback = callback;
@@ -179,14 +180,14 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
     // 获取验证码
     @JSMethod(uiThread = true)
     public void getCode(JSONObject object, final JSCallback jsCallback) {
-        System.out.println("object:"+object);
+        System.out.println("object:" + object);
         String phoneNumber = "";
         String signID = "";
         String templateID = "";
         if (object != null) {
-            phoneNumber = object.containsKey(JConstants.PHONE_NUMBER) ? object.getString(JConstants.PHONE_NUMBER):"18925247365";
-            signID = object.containsKey(JConstants.SING_ID) ? object.getString(JConstants.SING_ID):"13649";
-            templateID = object.containsKey(JConstants.TEMPLATE_ID) ? object.getString(JConstants.TEMPLATE_ID):"1";
+            phoneNumber = object.containsKey(JConstants.PHONE_NUMBER) ? object.getString(JConstants.PHONE_NUMBER) : "18925247365";
+            signID = object.containsKey(JConstants.SING_ID) ? object.getString(JConstants.SING_ID) : "13649";
+            templateID = object.containsKey(JConstants.TEMPLATE_ID) ? object.getString(JConstants.TEMPLATE_ID) : "1";
         }
         JVerificationInterface.getSmsCode(mWXSDKInstance.getContext(), phoneNumber, signID, templateID, new RequestCallback<String>() {
             @Override
@@ -194,7 +195,7 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
                 if (jsCallback == null) return;
                 JSONObject result = new JSONObject();
                 result.put("code", code);
-                if(code == 3000) {
+                if (code == 3000) {
                     result.put("uuid", msg);
                     result.put("msg", "");
                 } else {
@@ -205,19 +206,60 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
             }
         });
     }
+
     // 设置前后两次获取验证码的时间间隔
     @JSMethod(uiThread = true)
     public void setTimeWithConfig(int timeInter) {
-        System.out.println("object:"+timeInter);
+        System.out.println("object:" + timeInter);
         JVerificationInterface.setSmsIntervalTime(timeInter);
     }
 
     private void setUiConfig(JVerifyUIConfig.Builder uiConfigBuilder, JSONObject jsonObject) {
+
+        //  设置授权页背景
+        if (jsonObject.containsKey(JConstants.setAuthBGImgPathFromJs)) {
+            String pathAndName = jsonObject.getString(JConstants.setAuthBGImgPathFromJs);
+            String realPath = getRealPath(pathAndName);
+            uiConfigBuilder.setAuthBGImgPath(realPath);
+        }
+
+        if (jsonObject.containsKey(JConstants.setNavReturnImgPathFromJs)) {
+            String pathAndName = jsonObject.getString(JConstants.setNavReturnImgPathFromJs);
+            String realPath = getRealPath(pathAndName);
+            uiConfigBuilder.setNavReturnImgPath(realPath);
+        }
+
+        if (jsonObject.containsKey(JConstants.setLogoImgPathFromJs)) {
+            String pathAndName = jsonObject.getString(JConstants.setLogoImgPathFromJs);
+            String realPath = getRealPath(pathAndName);
+            uiConfigBuilder.setLogoImgPath(realPath);
+        }
+
+        if (jsonObject.containsKey(JConstants.setLogBtnImgPathFromJs)) {
+            String pathAndName = jsonObject.getString(JConstants.setLogBtnImgPathFromJs);
+            String realPath = getRealPath(pathAndName);
+            uiConfigBuilder.setLogBtnImgPath(realPath);
+        }
+
+        if (jsonObject.containsKey(JConstants.setLoadingViewEnable)) {
+            boolean b = jsonObject.getBooleanValue(JConstants.setLoadingViewEnable);
+            if (b) {
+                Context context = mWXSDKInstance.getContext();
+                ImageView loadingView = new ImageView(context);
+                loadingView.setImageResource(R.drawable.umcsdk_load_dot_white);
+                RelativeLayout.LayoutParams loadingParam = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                loadingParam.addRule(RelativeLayout.CENTER_IN_PARENT);
+                loadingView.setLayoutParams(loadingParam);
+
+                Animation animation = AnimationUtils.loadAnimation(context, R.anim.umcsdk_anim_loading);
+                uiConfigBuilder.setLoadingView(loadingView, animation);
+            }
+        }
+
         //  设置授权页背景
         if (jsonObject.containsKey(JConstants.setAuthBGImgPath)) {
             String pathAndName = jsonObject.getString(JConstants.setAuthBGImgPath);
-            String realPath = getRealPath(pathAndName);
-            uiConfigBuilder.setAuthBGImgPath(realPath);
+            uiConfigBuilder.setAuthBGImgPath(pathAndName);
         }
         // 状态栏
         if (jsonObject.containsKey(JConstants.setStatusBarColorWithNav)) {
@@ -247,8 +289,7 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
         }
         if (jsonObject.containsKey(JConstants.setNavReturnImgPath)) {
             String pathAndName = jsonObject.getString(JConstants.setNavReturnImgPath);
-            String realPath = getRealPath(pathAndName);
-            uiConfigBuilder.setNavReturnImgPath(realPath);
+            uiConfigBuilder.setNavReturnImgPath(pathAndName);
         }
         if (jsonObject.containsKey(JConstants.setNavTransparent)) {
             uiConfigBuilder.setNavTransparent(jsonObject.getBooleanValue(JConstants.setNavTransparent));
@@ -293,8 +334,7 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
         }
         if (jsonObject.containsKey(JConstants.setLogoImgPath)) {
             String pathAndName = jsonObject.getString(JConstants.setLogoImgPath);
-            String realPath = getRealPath(pathAndName);
-            uiConfigBuilder.setLogoImgPath(realPath);
+            uiConfigBuilder.setLogoImgPath(pathAndName);
         }
         if (jsonObject.containsKey(JConstants.setLogoOffsetX)) {
             uiConfigBuilder.setLogoOffsetX(jsonObject.getIntValue(JConstants.setLogoOffsetX));
@@ -326,7 +366,6 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
             uiConfigBuilder.setNumberFieldHeight(jsonObject.getIntValue(JConstants.setNumberFieldHeight));
         }
 
-
         //  授权页登录按钮
         if (jsonObject.containsKey(JConstants.setLogBtnText)) {
             uiConfigBuilder.setLogBtnText(jsonObject.getString(JConstants.setLogBtnText));
@@ -335,7 +374,8 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
             uiConfigBuilder.setLogBtnTextColor(jsonObject.getIntValue(JConstants.setLogBtnTextColor));
         }
         if (jsonObject.containsKey(JConstants.setLogBtnImgPath)) {
-            uiConfigBuilder.setLogBtnImgPath(jsonObject.getString(JConstants.setLogBtnImgPath));
+            String pathAndName = jsonObject.getString(JConstants.setLogBtnImgPath);
+            uiConfigBuilder.setLogBtnImgPath(pathAndName);
         }
         if (jsonObject.containsKey(JConstants.setLogBtnOffsetY)) {
             uiConfigBuilder.setLogBtnOffsetY(jsonObject.getIntValue(JConstants.setLogBtnOffsetY));
@@ -481,36 +521,36 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
         if (jsonObject.containsKey(JConstants.PRIVACY_NEED_CLOSE) && jsonObject.containsKey(JConstants.PRIVACY_CLOSE_THEME)) {
             boolean needClose = jsonObject.getBoolean(JConstants.PRIVACY_NEED_CLOSE);
             Context context = mWXSDKInstance.getContext();
-            if(needClose) {
+            if (needClose) {
                 //自定义返回按钮示例 
                 ImageButton sampleReturnBtn = new ImageButton(context);
                 sampleReturnBtn.setImageResource(R.drawable.umcsdk_return_bg);
-                
+
                 RelativeLayout.LayoutParams returnLP = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 // 返回按钮样式
                 JSONArray array = jsonObject.containsKey(JConstants.PRIVACY_CLOSE_THEME) ? jsonObject.getJSONArray(JConstants.PRIVACY_CLOSE_THEME) : null;
-                returnLP.setMargins(array.getIntValue(0), array.getIntValue(1),array.getIntValue(2), array.getIntValue(3));
+                returnLP.setMargins(array.getIntValue(0), array.getIntValue(1), array.getIntValue(2), array.getIntValue(3));
                 sampleReturnBtn.setLayoutParams(returnLP);
-                uiConfigBuilder.addCustomView(sampleReturnBtn,true,null);
+                uiConfigBuilder.addCustomView(sampleReturnBtn, true, null);
             }
         }
 
-        if(jsonObject.containsKey(JConstants.addCustomViews)){
+        if (jsonObject.containsKey(JConstants.addCustomViews)) {
             JSONArray jsonArray = jsonObject.getJSONArray(JConstants.addCustomViews);
-            JLogger.d("setCustomViews:"+jsonArray.toJSONString());
+            JLogger.d("setCustomViews:" + jsonArray.toJSONString());
             for (int i = 0; i < jsonArray.size(); i++) {
-                JSONObject viewConfig =jsonArray.getJSONObject(i);
-                String type  = viewConfig.getString(JConstants.type);
+                JSONObject viewConfig = jsonArray.getJSONObject(i);
+                String type = viewConfig.getString(JConstants.type);
 
-                int width  = viewConfig.getIntValue(JConstants.width);
-                int height  = viewConfig.getIntValue(JConstants.height);
-                RelativeLayout.LayoutParams mLayoutParams = new RelativeLayout.LayoutParams(dp2Pix( width), dp2Pix(height));
+                int width = viewConfig.getIntValue(JConstants.width);
+                int height = viewConfig.getIntValue(JConstants.height);
+                RelativeLayout.LayoutParams mLayoutParams = new RelativeLayout.LayoutParams(dp2Pix(width), dp2Pix(height));
 
-                if(viewConfig.containsKey(JConstants.align)){
+                if (viewConfig.containsKey(JConstants.align)) {
                     int align = viewConfig.getIntValue(JConstants.align);
                     mLayoutParams.addRule(align, RelativeLayout.TRUE);
                 }
-                if(viewConfig.containsKey(JConstants.margins)){
+                if (viewConfig.containsKey(JConstants.margins)) {
                     JSONArray marigns = viewConfig.getJSONArray(JConstants.margins);
                     mLayoutParams.setMargins(dp2Pix(marigns.getIntValue(0)), dp2Pix(marigns.getIntValue(1)), dp2Pix(marigns.getIntValue(2)), dp2Pix(marigns.getIntValue(3)));
 
@@ -522,59 +562,59 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
                 int textSize = viewConfig.getIntValue(JConstants.textSize);
                 int bgColor = viewConfig.getIntValue(JConstants.backgroundColor);
                 String bgImgPath = viewConfig.getString(JConstants.backgroundImg);
-                View view =null;
-                if(type.equals(JConstants.type_text) ){
+                View view = null;
+                if (type.equals(JConstants.type_text)) {
                     TextView textView = new TextView(mWXSDKInstance.getContext());
                     textView.setText(text);
-                    if(viewConfig.containsKey(JConstants.textColor)){
+                    if (viewConfig.containsKey(JConstants.textColor)) {
                         textView.setTextColor(textColor);
                     }
-                    if(viewConfig.containsKey(JConstants.textSize)){
+                    if (viewConfig.containsKey(JConstants.textSize)) {
                         textView.setTextSize(textSize);
                     }
-                    if(viewConfig.containsKey(JConstants.backgroundColor)){
+                    if (viewConfig.containsKey(JConstants.backgroundColor)) {
                         textView.setBackgroundColor(bgColor);
                     }
                     textView.setLayoutParams(mLayoutParams);
                     view = textView;
 
-                }else if(type.equals(JConstants.type_button)){
+                } else if (type.equals(JConstants.type_button)) {
                     Button button = new Button(mWXSDKInstance.getContext());
                     button.setText(text);
-                    if(viewConfig.containsKey(JConstants.textColor)){
+                    if (viewConfig.containsKey(JConstants.textColor)) {
                         button.setTextColor(textColor);
                     }
-                    if(viewConfig.containsKey(JConstants.textSize)){
+                    if (viewConfig.containsKey(JConstants.textSize)) {
                         button.setTextSize(textSize);
                     }
-                    if(viewConfig.containsKey(JConstants.backgroundColor)){
+                    if (viewConfig.containsKey(JConstants.backgroundColor)) {
                         button.setBackgroundColor(bgColor);
                     }
-                    if(viewConfig.containsKey(JConstants.backgroundImg)){
+                    if (viewConfig.containsKey(JConstants.backgroundImg)) {
                         Bitmap bm = getAssetsBitmap(getAssetPicPath(bgImgPath));
-                        Drawable drawable = new BitmapDrawable(mWXSDKInstance.getContext().getResources(),bm);
+                        Drawable drawable = new BitmapDrawable(mWXSDKInstance.getContext().getResources(), bm);
                         button.setBackground(drawable);
                     }
                     button.setLayoutParams(mLayoutParams);
                     view = button;
 
-                }else if(type.equals(JConstants.type_image)){
-                    if(viewConfig.containsKey(JConstants.backgroundImg)){
+                } else if (type.equals(JConstants.type_image)) {
+                    if (viewConfig.containsKey(JConstants.backgroundImg)) {
                         ImageView imageView = new ImageView(mWXSDKInstance.getContext());
                         imageView.setImageBitmap(getAssetsBitmap(getAssetPicPath(bgImgPath)));
                         imageView.setLayoutParams(mLayoutParams);
                         view = imageView;
                     }
                 }
-                if(view!=null){
-                    boolean finishFlag  = viewConfig.getBooleanValue(JConstants.finishFlag);
-                    view.setTag(R.id.tag_custom_id,id);
-                    uiConfigBuilder.addCustomView(view,finishFlag, new JVerifyUIClickCallback() {
+                if (view != null) {
+                    boolean finishFlag = viewConfig.getBooleanValue(JConstants.finishFlag);
+                    view.setTag(R.id.tag_custom_id, id);
+                    uiConfigBuilder.addCustomView(view, finishFlag, new JVerifyUIClickCallback() {
                         @Override
                         public void onClicked(Context context, View view) {
                             String id = (String) view.getTag(R.id.tag_custom_id);
-                            JLogger.d( "click custom view :"+id);
-                            if(mCustomViewsClickCallback!=null){
+                            JLogger.d("click custom view :" + id);
+                            if (mCustomViewsClickCallback != null) {
                                 mCustomViewsClickCallback.invokeAndKeepAlive(id);
                             }
                         }
@@ -587,31 +627,33 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
     }
 
 
-    private String getRealPath(String pathName){
+    private String getRealPath(String pathName) {
         Context context = mWXSDKInstance.getContext();
         String assetPicPath = getAssetPicPath(pathName);
         String realPath = context.getCacheDir().getPath() + File.separator + pathName;
         File file = new File(realPath);
-        JLogger.d(" full name : " + assetPicPath+ " size "+ assetPicPath.length());
+        JLogger.d(" full name : " + assetPicPath + " size " + assetPicPath.length());
         CopyUtils.copyFile(context, assetPicPath, realPath);
-        JLogger.d(" full name : " + realPath+ " size "+ realPath.length());
+        JLogger.d(" full name : " + realPath + " size " + realPath.length());
         return realPath;
     }
 
-    public  String getAssetPicPath(String imgPath){
+    public String getAssetPicPath(String imgPath) {
         String bundle = mWXSDKInstance.getBundleUrl();
-        JLogger.d( "mWXSDKInstance.getBundleUrl():"+bundle);
-        String path =bundle.substring(bundle.lastIndexOf("apps/__UNI__"),bundle.lastIndexOf("/"))+"/"+imgPath;
-        JLogger.d("getAssetPicPath:"+ path);
+        JLogger.d("mWXSDKInstance.getBundleUrl():" + bundle);
+        String path = bundle.substring(bundle.lastIndexOf("apps/__UNI__"), bundle.lastIndexOf("/")) + "/" + imgPath;
+        JLogger.d("getAssetPicPath:" + path);
         return path;
     }
 
 
-    /** 根据路径获取Bitmap图片
+    /**
+     * 根据路径获取Bitmap图片
+     *
      * @param path
      * @return
      */
-    public  Bitmap getAssetsBitmap(String path){
+    public Bitmap getAssetsBitmap(String path) {
         AssetManager am = mWXSDKInstance.getContext().getAssets();
         InputStream inputStream = null;
         try {
@@ -623,7 +665,7 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
         return bitmap;
     }
 
-    private int dp2Pix( float dp) {
+    private int dp2Pix(float dp) {
         try {
             float density = mWXSDKInstance.getContext().getResources().getDisplayMetrics().density;
             return (int) (dp * density + 0.5F);
