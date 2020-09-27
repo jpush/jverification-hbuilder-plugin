@@ -149,7 +149,11 @@
 						setLogBtnText:" 极光认证测试 ",
 						setPrivacyState:false,
 						setAppPrivacyColor:[0xff00f000,0xff000000],
-						setLogoImgPath:"static/weixin.png",
+						setLogoImgPathFromJs:"static/weixin.png",
+						setLogBtnImgPathFromJs:"static/login.png",
+						setAuthBGImgPathFromJs:"static/bg.jpeg",
+						setLoadingViewEnable:true,
+						setStatusBarTransparent:true,
 						addCustomViews:[{
 							type:"text",
 							finishFlag:false,

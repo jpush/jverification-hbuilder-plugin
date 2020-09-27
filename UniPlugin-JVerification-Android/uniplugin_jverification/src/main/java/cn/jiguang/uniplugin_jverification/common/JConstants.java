@@ -14,6 +14,14 @@ public class JConstants {
 
     //*******************************自定义登录页面*******************************
 
+
+    //从 js static 设置图片名称
+    public static final String setAuthBGImgPathFromJs = "setAuthBGImgPathFromJs";
+    public static final String setNavReturnImgPathFromJs = "setNavReturnImgPathFromJs";
+    public static final String setLogoImgPathFromJs = "setLogoImgPathFromJs";
+    public static final String setLogBtnImgPathFromJs = "setLogBtnImgPathFromJs";
+
+    public static final String setLoadingViewEnable = "setLoadingViewEnable";
     //设置授权页背景
     public static final String setAuthBGImgPath = "setAuthBGImgPath";
     //    状态栏
