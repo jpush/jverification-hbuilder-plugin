@@ -1,21 +1,21 @@
 ### Andorid 
 
 ### JVerifyUIConfig 配置元素说明
- 
+
 ***x 轴未设置偏移则所有组件默认横向居中***
- 
+
 + 设置授权页背景
 + 支持的版本 ：2.1.1
 + 说明：
 + 图片会默认拉伸铺满整个屏幕，适配不同尺寸手机，建议使用 .9.png 图片来解决适配问题。
- 
+
 |方法|参数类型|说明|
 |:-----:|:----:|:----:|
 |setAuthBGImgPath|String|设置背景图片|
- 
- 
+
+
 + 授权页状态栏
- 
+
 |方法|参数类型|说明|
 |:-----:|:----:|:----:|
 |setStatusBarColorWithNav|boolean|设置状态栏与导航栏同色。仅在 android 5.0 以上设备生效。 since 2.4.1|
@@ -68,7 +68,7 @@
 |setNumberFieldHeight|int|设置号码栏高度。since 2.4.8|
 
 + 授权页登录按钮
- 
+
 |方法|参数类型|说明|
 |:-----:|:----:|:----:|
 |setLogBtnText|String|设置登录按钮文字|
@@ -128,7 +128,7 @@
 |setSloganBottomOffsetY|int|设置 slogan 相对于屏幕底部下边缘y轴偏移。since 2.3.8|
 |setSloganTextSize|int|设置 slogan 字体大小。since 2.4.8|
 |setSloganHidden|boolean|设置 slogan 是否隐藏。since 2.4.8|
-              
+
 + 授权页动画
 
 |方法|参数类型|说明|
@@ -186,15 +186,35 @@ type = image 的属性
 |bgImgPath|String|背景图片|
 
 
-  
+
 
 ![JVerification](https://docs.jiguang.cn/jverification/image/cutomeUI_description_android.png)
 
 #### 关于图片资源
-##### addCustomViews 中的bgImgPath 属性
-添加自定义控件中的背景图片可以直接引用 uniapp 项目中的图片资源。比如"static/qq.png"
+### addCustomViews 图片资源
 
-##### 其他的图片资源设置
+- **HBuilder 添加图片资源**
+
+  支持在HBuilder项目的static目录中添加的图片资源如下：
+
+  |           属性            | 参数类型 |               说明                |
+  | :-----------------------: | :------: | :-------------------------------: |
+  |  setAuthBGImgPathFromJs   |  String  |             背景图片              |
+  | setNavReturnImgPathFromJs |  String  |      设置导航栏返回按钮图标       |
+  |   setLogoImgPathFromJs    |  String  |           设置logo图片            |
+  |  setLogBtnImgPathFromJs   |  String  |       设置授权登录按钮图片        |
+  |   setLoadingViewEnable    | boolean  | 设置是否在屏幕中间显示LoadingView |
+
+  ```js
+  jv.setCustomUIWithConfigAndroid({
+  		setAuthBGImgPathFromJs:"static/bg.jpeg"
+  	})
+  ```
+
+  
+
+- **其他的图片资源设置**（适合于原生图片资源替换）
+
 Android 请将图片放到原生 res/drawable 目录下,设置路径时直接填图片名称即可。
 
 比如需要设置一键登录授权页背景图片，在 res/drawable 添加了 bg.png 图片后，调用
