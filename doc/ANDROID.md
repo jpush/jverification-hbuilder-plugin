@@ -193,7 +193,7 @@ type = image 的属性
 #### 关于图片资源
 ### addCustomViews 图片资源
 
-- **HBuilder 添加图片资源**
+- **HBuilder 添加图片资源**（since **2.6.7**）
 
   支持在HBuilder项目的static目录中添加的图片资源如下：
 
