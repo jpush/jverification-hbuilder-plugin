@@ -24,6 +24,7 @@ public class JConstants {
     public static final String setLoadingViewEnable = "setLoadingViewEnable";
     //设置授权页背景
     public static final String setAuthBGImgPath = "setAuthBGImgPath";
+    public static final String setDimAmount = "setDimAmount";
     //    状态栏
     public static final String setStatusBarColorWithNav = "setStatusBarColorWithNav";
     public static final String setStatusBarDarkMode = "setStatusBarDarkMode";
