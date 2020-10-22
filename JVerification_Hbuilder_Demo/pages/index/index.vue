@@ -180,6 +180,7 @@
 				}
 			},
 			setCustomDialog:function(){
+						
 				if(uni.getSystemInfoSync().platform == "ios"){
 					this.jv.setCustomUIWithConfigiOS({
 						navCustom:true,
@@ -215,7 +216,7 @@
 						setDialogTheme:[300, 400, 0, 0, false],
 						setLogoImgPathFromJs:"static/big.jpg",
 						setAuthBGImgPathFromJs:"static/bg.jpeg",
-						privacyNeedClose:true,                       //弹窗是否需要关闭按钮 
+						privacyNeedClose:true,           //弹窗是否需要关闭按钮 
 						privacyCloseTheme:[10, 60, 0, 0],            //弹窗关闭按钮偏移量 privacyNeedClose为true时，必须设置它的偏移量
 					})
 				}

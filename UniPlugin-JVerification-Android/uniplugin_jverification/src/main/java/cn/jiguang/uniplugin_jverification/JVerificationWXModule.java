@@ -261,6 +261,12 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
             String pathAndName = jsonObject.getString(JConstants.setAuthBGImgPath);
             uiConfigBuilder.setAuthBGImgPath(pathAndName);
         }
+
+        if (jsonObject.containsKey(JConstants.setDimAmount)) {
+            float dimAmount = jsonObject.getFloat(JConstants.setDimAmount);
+            uiConfigBuilder.setDimAmount(dimAmount);
+        }
+
         // 状态栏
         if (jsonObject.containsKey(JConstants.setStatusBarColorWithNav)) {
             uiConfigBuilder.setStatusBarColorWithNav(jsonObject.getBooleanValue(JConstants.setStatusBarColorWithNav));
