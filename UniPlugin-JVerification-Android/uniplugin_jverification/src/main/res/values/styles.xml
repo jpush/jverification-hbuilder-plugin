@@ -8,7 +8,7 @@
         <item name="android:windowIsTranslucent">true</item>
         <!--dialog圆角-->
         <item name="android:windowBackground">@drawable/dialog_bg</item>
-        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:backgroundDimEnabled">true</item>
     </style>
 
 </resources>
