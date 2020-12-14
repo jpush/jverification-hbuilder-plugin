@@ -61,7 +61,7 @@ WX_EXPORT_METHOD(@selector(addCustomViewsClickCallback:))
 WX_EXPORT_METHOD(@selector(getCode:callback:))
 WX_EXPORT_METHOD(@selector(setTimeWithConfig:))
 
-BOOL debugMode = false;
+BOOL debugMode = true;
 
 - (void)setDebugMode:(BOOL)debug
 {
