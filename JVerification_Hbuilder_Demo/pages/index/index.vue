@@ -10,6 +10,7 @@
 		<button type="primary" @click="loginAuth()">请求授权一键登录</button>
 		<button type="primary" @click="setCustomUIWithConfig()">自定义授权页面样式</button>
 		<button type="primary" @click="setCustomDialog()">自定义弹窗授权页</button>
+		<button type="primary" @click="autoLayoutUI()">自动布局授权页</button>
 		<button type="primary" @click="getCode()">获取验证码</button>
 		<button type="primary" @click="setTimeWithConfig()">设置获取验证码时间间隔</button>
 		<view class="msg-box" >
@@ -101,7 +102,7 @@
 						navColor:0xff000000,
 						logBtnText:"极光认证测试",
 						privacyState:true,
-						appPrivacyColor:[0xff000200,0xff000000],
+						appPrivacyColor:[0xff000200,0xff000000],						
 						addCustomViews:[{
 								type:"label",
 								width:120,
@@ -179,8 +180,47 @@
 					})
 				}
 			},
+			autoLayoutUI:function(){ //开发者可以自己布局授权页视图UI控件
+				if(uni.getSystemInfoSync().platform == "ios"){
+					this.jv.setCustomUIWithConfigiOS({
+						navCustom:false,
+						autoLayout:true,
+						showWindow:false,
+						navReturnHidden:false,
+						//logo
+						logoImg:"static/logo.png",
+						logoConstraints:[0,-200,60,60],
+						//number
+						numberConstraints:[0,-132,200,14],
+						//slogn
+						sloganConstraints:[0,-112,200,14],
+						//登录按钮
+						logBtnConstraints:[0,-80,220,40],
+						logBtnText:"一键登录",
+						logBtnTextColor:0x0000FF,
+						privacyConstraints:[0,180,200,40],
+						checkViewConstraints:[-108,180,10,10],
+						loadingConstraints:[0,0,20,20],
+					})
+				}else{
+					this.jv.setCustomUIWithConfigAndroid({
+						// setNavColor:0xff000000,
+						// setLogBtnText:" 极光认证测试弹窗 ",
+						// setPrivacyState:false,
+						// setAppPrivacyColor:[0xff00f000,0xff000000],
+						// setDialogTheme:[300, 400, 0, 0, false],
+						// setLogoImgPathFromJs:"static/big.jpg",
+						// setAuthBGImgPathFromJs:"static/bg.jpeg",
+						// setDimAmount: 0.5,
+						// privacyNeedClose:true,           //弹窗是否需要关闭按钮 
+						// privacyCloseTheme:[10, 60, 0, 0],            //弹窗关闭按钮偏移量 privacyNeedClose为true时，必须设置它的偏移量
+					})
+				}
+				
+			
+				
+			},
 			setCustomDialog:function(){
-						
 				if(uni.getSystemInfoSync().platform == "ios"){
 					this.jv.setCustomUIWithConfigiOS({
 						navCustom:true,

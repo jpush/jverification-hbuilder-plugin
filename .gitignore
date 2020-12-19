@@ -290,3 +290,4 @@ iOSInjectionProject/
 !*.xcodeproj/xcshareddata/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
+UniPlugin-JVerification-iOS/HBuilder-uniPluginDemo/HBuilder-Hello
