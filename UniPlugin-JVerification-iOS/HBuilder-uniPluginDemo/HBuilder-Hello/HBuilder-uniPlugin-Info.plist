@@ -77,7 +77,7 @@
 	<string>13453452345</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
-	<key>JVerification</key>
+	<key>JCore</key>
 	<dict>
 		<key>APP_KEY</key>
 		<string>60e02a2a65ac4cdc6f80b776</string>
@@ -449,6 +449,21 @@
 					<string>JVerificationModule</string>
 					<key>name</key>
 					<string>JG-JVerification</string>
+					<key>type</key>
+					<string>module</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>hooksClass</key>
+			<string></string>
+			<key>plugins</key>
+			<array>
+				<dict>
+					<key>class</key>
+					<string>JCoreModule</string>
+					<key>name</key>
+					<string>JG-JCore</string>
 					<key>type</key>
 					<string>module</string>
 				</dict>

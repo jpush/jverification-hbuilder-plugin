@@ -26,9 +26,9 @@
 
 #define UIColorFromRGBValue(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-NSString *const infoConfig_JVerification     = @"JVerification";
-NSString *const infoConfig_JVerification_APP_KEY     = @"APP_KEY";
-NSString *const infoConfig_JVerification_CHANNEL     = @"CHANNEL";
+NSString *const infoConfig_JCore     = @"JCore";
+NSString *const infoConfig_JCore_APP_KEY     = @"APP_KEY";
+NSString *const infoConfig_JCore_CHANNEL     = @"CHANNEL";
 typedef void (^clickCallBack)(NSString* identifer);
 
 @interface JVCustomViewModel : NSObject
@@ -75,8 +75,8 @@ BOOL debugMode = NO;
 {
     NSString *path = [[NSBundle mainBundle]pathForResource:@"Info" ofType:@"plist"];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
-    NSString *appkey = dict[infoConfig_JVerification][infoConfig_JVerification_APP_KEY];
-    NSString *channel = dict[infoConfig_JVerification][infoConfig_JVerification_CHANNEL];
+    NSString *appkey = dict[infoConfig_JCore][infoConfig_JCore_APP_KEY];
+    NSString *channel = dict[infoConfig_JCore][infoConfig_JCore_CHANNEL];
     if (channel == nil ||channel.length == 0) {
         channel = @"developer-default";
     }

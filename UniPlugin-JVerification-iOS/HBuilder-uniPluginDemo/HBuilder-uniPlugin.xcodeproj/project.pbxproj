@@ -70,6 +70,7 @@
 		24BD5AF21C994A1700B05AA2 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BD5AF11C994A1700B05AA2 /* libicucore.tbd */; };
 		24BD5AF61C994BB200B05AA2 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BD5AF51C994BB200B05AA2 /* libc++.tbd */; };
 		24F990131DFBDA3300848C2B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F990121DFBDA3300848C2B /* CoreData.framework */; };
+		2A45A95725C15C4A00940829 /* UniPluginJCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A45A95325C1590D00940829 /* UniPluginJCore.framework */; };
 		2F0BA3F9215B48A700F67004 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F0BA3F8215B48A700F67004 /* Images.xcassets */; };
 		2F0BA410215B784100F67004 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0BA40F215B784000F67004 /* Contacts.framework */; };
 		2F0BA412215B814100F67004 /* liblibVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0BA411215B814000F67004 /* liblibVideo.a */; };
@@ -217,6 +218,20 @@
 			remoteGlobalIDString = 037179F123C8496A004399A2;
 			remoteInfo = UniPluginJVerification;
 		};
+		2A45A95225C1590D00940829 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A45A94E25C1590C00940829 /* UniPluginJCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2AC5D67025B83B9A00EA873C;
+			remoteInfo = UniPluginJCore;
+		};
+		2A45A95525C15C2D00940829 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A45A94E25C1590C00940829 /* UniPluginJCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2AC5D66F25B83B9A00EA873C;
+			remoteInfo = UniPluginJCore;
+		};
 		9DF1078825834406001B4C1D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 037179FC23C8496B004399A2 /* UniPluginJVerification.xcodeproj */;
@@ -306,6 +321,7 @@
 		24BD5AF51C994BB200B05AA2 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		24F990121DFBDA3300848C2B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		24F990141DFBDA5600848C2B /* MiPassport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MiPassport.framework; path = ../SDK/Libs/MiPassport.framework; sourceTree = "<group>"; };
+		2A45A94E25C1590C00940829 /* UniPluginJCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UniPluginJCore.xcodeproj; path = UniPluginJCore/UniPluginJCore.xcodeproj; sourceTree = "<group>"; };
 		2F0BA3F8215B48A700F67004 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../HBuilder/Images.xcassets; sourceTree = "<group>"; };
 		2F0BA40D215B6E6800F67004 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		2F0BA40F215B784000F67004 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
@@ -644,6 +660,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A45A95725C15C4A00940829 /* UniPluginJCore.framework in Frameworks */,
 				9DF1078225822897001B4C1D /* UniPluginJVerification.framework in Frameworks */,
 				67A9340323A8BAF6004A4DF4 /* libSDWebImage.a in Frameworks */,
 				6731F3AA232F5B97007838BC /* Photos.framework in Frameworks */,
@@ -791,9 +808,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2A45A94F25C1590C00940829 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A45A95325C1590D00940829 /* UniPluginJCore.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		8EED628F198A1D13000A4449 = {
 			isa = PBXGroup;
 			children = (
+				2A45A94E25C1590C00940829 /* UniPluginJCore.xcodeproj */,
 				037179FC23C8496B004399A2 /* UniPluginJVerification.xcodeproj */,
 				8EED62A1198A1D13000A4449 /* HBuilder-Hello */,
 				8EED629A198A1D13000A4449 /* Frameworks */,
@@ -1337,6 +1363,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				2A45A95625C15C2D00940829 /* PBXTargetDependency */,
 				9DF1078925834406001B4C1D /* PBXTargetDependency */,
 			);
 			name = HBuilder;
@@ -1374,6 +1401,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 2A45A94F25C1590C00940829 /* Products */;
+					ProjectRef = 2A45A94E25C1590C00940829 /* UniPluginJCore.xcodeproj */;
+				},
+				{
 					ProductGroup = 037179FD23C8496B004399A2 /* Products */;
 					ProjectRef = 037179FC23C8496B004399A2 /* UniPluginJVerification.xcodeproj */;
 				},
@@ -1391,6 +1422,13 @@
 			fileType = wrapper.framework;
 			path = UniPluginJVerification.framework;
 			remoteRef = 03717A0023C8496C004399A2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2A45A95325C1590D00940829 /* UniPluginJCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = UniPluginJCore.framework;
+			remoteRef = 2A45A95225C1590D00940829 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1483,6 +1521,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2A45A95625C15C2D00940829 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = UniPluginJCore;
+			targetProxy = 2A45A95525C15C2D00940829 /* PBXContainerItemProxy */;
+		};
 		9DF1078925834406001B4C1D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = UniPluginJVerification;

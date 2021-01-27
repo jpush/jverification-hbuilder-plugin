@@ -12,7 +12,7 @@
 				"class": "JVerificationModule"
 			}],
 			"integrateType": "framework",
-			"deploymentTarget": "8.0",
+			"deploymentTarget": "9.0",
 			"frameworks": [
 				"AdSupport.framework",
 				"CoreLocation.framework",
@@ -30,17 +30,7 @@
 			],
 			"resources": [
 				"JVerificationResource.bundle"
-			],
-			"parameters": {  
-                "JPUSH_APPKEY_IOS": {  
-                    "des": "[iOS]极光 portal 配置应用信息时分配的 AppKey",  
-                    "key": "JVerification:APP_KEY"  
-				},
-				"JPUSH_CHANNEL_IOS": {  
-                    "des": "[iOS]用于统计分发渠道，不需要可填默认值 developer-default",  
-                    "key": "JVerification:CHANNEL"  
-				}
-            }
+			]
 		},
 		"android": {
 			"plugins": [
