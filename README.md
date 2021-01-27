@@ -7,18 +7,19 @@
 
 ## 接入
 - 1.将 nativeplugins/JG-JVerification 导入项目对应位置。
-- 2.项目 manifest.json 中接入 JG-JVerification 插件。并配置好 appkey([极光 portal]() 注册分配)，channel 信息。
-
-<p align="center">
-    <a target="_blank">
-        <img src="doc/conf.png" alt="config" width=600/>
-    </a>
-</p>
-
+- 2.项目 manifest.json 中接入 JG-JVerification 插件。
 - 3.在项目中引用插件
 ```
 const jv = uni.requireNativePlugin('JG-JVerification');
 ```
+- 4.从 v2.0.0 版本开始还需引入[JG-JCore 插件](https://github.com/jpush/jcore-hbuilder-plugin)。
+
+### since v2.0.0 注意事项
+为了适配更多的极光 Uniapp 插件，我们引入了极光 [Jcore 基础插件库](https://github.com/jpush/jcore-hbuilder-plugin)。
+
+从极光认证插件 2.0.0 版本开始，必须同时接入 JCore 插件才能正常使用。
+
+已接入 2.0.0 版本之前的应用升级时请注意 appkey 和 channel 配置信息已转移至 JCore 中。
 
 
 ## DEMO 体验

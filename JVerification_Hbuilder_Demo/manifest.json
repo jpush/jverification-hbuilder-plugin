@@ -1,6 +1,6 @@
 {
     "name" : "JVerification_Hbuilder_Demo",
-    "appid" : "__UNI__6F8A505",
+    "appid" : "__UNI__6D60B07",
     "description" : "极光认证 Hbuilder 集成 Demo",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -54,11 +54,36 @@
             }
         },
         "nativePlugins" : {
+            "JG-JCore" : {
+                "JPUSH_APPKEY_ANDROID" : "7b4b94cca0d185d611e53cca",
+                "JPUSH_CHANNEL_ANDROID" : "ddd",
+                "__plugin_info__" : {
+                    "name" : "JG-JCore",
+                    "description" : "极光推送JCore插件",
+                    "platforms" : "Android,iOS",
+                    "url" : "",
+                    "android_package_name" : "",
+                    "ios_bundle_id" : "",
+                    "isCloud" : false,
+                    "bought" : -1,
+                    "pid" : "",
+                    "parameters" : {
+                        "JPUSH_APPKEY_ANDROID" : {
+                            "des" : "[Android]极光 portal 配置应用信息时分配的 AppKey",
+                            "key" : "JPUSH_APPKEY",
+                            "value" : ""
+                        },
+                        "JPUSH_CHANNEL_ANDROID" : {
+                            "des" : "[Android]用于统计分发渠道，不需要可填默认值 developer-default",
+                            "key" : "JPUSH_CHANNEL",
+                            "value" : ""
+                        }
+                    }
+                }
+            },
             "JG-JVerification" : {
+                "JPUSH_APPKEY_IOS" : "",
                 "JPUSH_CHANNEL_IOS" : "",
-                "JPUSH_APPKEY_ANDROID" : "3bc7fe126f892557a954aa07",
-                "JPUSH_CHANNEL_ANDROID" : "",
-                "JPUSH_APPKEY_IOS" : "60e02a2a65ac4cdc6f80b776",
                 "__plugin_info__" : {
                     "name" : "JG-JVerification",
                     "description" : "极光认证Hbuilder插件",
@@ -70,24 +95,14 @@
                     "bought" : -1,
                     "pid" : "",
                     "parameters" : {
-                        "JPUSH_CHANNEL_IOS" : {
-                            "des" : "[iOS]用于统计分发渠道，不需要可填默认值 developer-default",
-                            "key" : "JVerification:CHANNEL",
-                            "value" : ""
-                        },
-                        "JPUSH_APPKEY_ANDROID" : {
-                            "des" : "[Android]极光 portal 配置应用信息时分配的 AppKey",
-                            "key" : "JPUSH_APPKEY",
-                            "value" : ""
-                        },
-                        "JPUSH_CHANNEL_ANDROID" : {
-                            "des" : "[Android]用于统计分发渠道，不需要可填默认值 developer-default",
-                            "key" : "JPUSH_CHANNEL",
-                            "value" : ""
-                        },
                         "JPUSH_APPKEY_IOS" : {
                             "des" : "[iOS]极光 portal 配置应用信息时分配的 AppKey",
                             "key" : "JVerification:APP_KEY",
+                            "value" : ""
+                        },
+                        "JPUSH_CHANNEL_IOS" : {
+                            "des" : "[iOS]用于统计分发渠道，不需要可填默认值 developer-default",
+                            "key" : "JVerification:CHANNEL",
                             "value" : ""
                         }
                     }

@@ -1,7 +1,7 @@
 {
 	"name": "JG-JVerification",
 	"id": "JG-JVerification",
-	"version": "1.1.4",
+	"version": "2.0.0",
 	"description": "极光认证Hbuilder插件",
 	"_dp_type":"nativeplugin",
 	"_dp_nativeplugin":{
@@ -51,7 +51,7 @@
 				}
 			],
 			"integrateType": "aar",
-			"minSdkVersion": "16",
+			"minSdkVersion": "19",
 			"permissions": [
 				"android.permission.INTERNET",
 				"android.permission.READ_PHONE_STATE",
@@ -65,22 +65,7 @@
 				"android.permission.GET_TASKS",
 				"android.permission.VIBRATE",
 				"android.permission.WAKE_LOCK"
-			],
-			"abis": [  
-				"armeabi-v7a",  
-				"arm64-v8a",
-				"x86"  
-			],
-			"parameters": {  
-                "JPUSH_APPKEY_ANDROID": {  
-                    "des": "[Android]极光 portal 配置应用信息时分配的 AppKey",  
-                    "key": "JPUSH_APPKEY"  
-				},
-				"JPUSH_CHANNEL_ANDROID":{
-					"des": "[Android]用于统计分发渠道，不需要可填默认值 developer-default",  
-                    "key": "JPUSH_CHANNEL"
-				}
-            }
+			]
 		}
 	}
 }
