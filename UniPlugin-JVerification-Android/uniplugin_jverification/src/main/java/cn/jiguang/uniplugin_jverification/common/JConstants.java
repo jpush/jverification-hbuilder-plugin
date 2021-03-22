@@ -20,6 +20,7 @@ public class JConstants {
     public static final String setNavReturnImgPathFromJs = "setNavReturnImgPathFromJs";
     public static final String setLogoImgPathFromJs = "setLogoImgPathFromJs";
     public static final String setLogBtnImgPathFromJs = "setLogBtnImgPathFromJs";
+    public static final String setPrivacyNavReturnBtnPathFromJs = "setPrivacyNavReturnBtnPathFromJs";
 
     public static final String setLoadingViewEnable = "setLoadingViewEnable";
     //设置授权页背景

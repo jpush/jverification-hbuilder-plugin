@@ -223,6 +223,12 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
             uiConfigBuilder.setAuthBGImgPath(realPath);
         }
 
+        if (jsonObject.containsKey(JConstants.setPrivacyNavReturnBtnPathFromJs)) {
+            String pathAndName = jsonObject.getString(JConstants.setPrivacyNavReturnBtnPathFromJs);
+            String realPath = getRealPath(pathAndName);
+            uiConfigBuilder.setPrivacyNavReturnBtnPath(realPath);
+        }
+
         if (jsonObject.containsKey(JConstants.setNavReturnImgPathFromJs)) {
             String pathAndName = jsonObject.getString(JConstants.setNavReturnImgPathFromJs);
             String realPath = getRealPath(pathAndName);

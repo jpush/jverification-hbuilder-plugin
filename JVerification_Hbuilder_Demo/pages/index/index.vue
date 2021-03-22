@@ -153,6 +153,7 @@
 						setLogoImgPathFromJs:"static/weixin.png",
 						setLogBtnImgPathFromJs:"static/login.png",
 						setAuthBGImgPathFromJs:"static/bg.jpeg",
+						setPrivacyNavReturnBtnPathFromJs:"static/weixin.png",
 						setLoadingViewEnable:true,
 						setStatusBarTransparent:true,
 						addCustomViews:[{
