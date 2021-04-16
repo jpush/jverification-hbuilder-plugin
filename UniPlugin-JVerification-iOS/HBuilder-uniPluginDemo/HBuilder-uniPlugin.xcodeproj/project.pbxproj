@@ -72,6 +72,7 @@
 		24F990131DFBDA3300848C2B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F990121DFBDA3300848C2B /* CoreData.framework */; };
 		2A187AA625C427B0007BA1E4 /* jcore-ios-2.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A187AA525C427B0007BA1E4 /* jcore-ios-2.4.0.a */; };
 		2A45A95725C15C4A00940829 /* UniPluginJCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A45A95325C1590D00940829 /* UniPluginJCore.framework */; };
+		2A8A0F7B26293F98005148D7 /* jverification-ios-2.7.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A8A0F7A26293F83005148D7 /* jverification-ios-2.7.0.a */; };
 		2F0BA3F9215B48A700F67004 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F0BA3F8215B48A700F67004 /* Images.xcassets */; };
 		2F0BA410215B784100F67004 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0BA40F215B784000F67004 /* Contacts.framework */; };
 		2F0BA412215B814100F67004 /* liblibVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0BA411215B814000F67004 /* liblibVideo.a */; };
@@ -202,7 +203,6 @@
 		9D8A1B29258DD706004A1A94 /* weex-polyfill.js in Resources */ = {isa = PBXBuildFile; fileRef = 9D8A1B0C258DD706004A1A94 /* weex-polyfill.js */; };
 		9D8A1B2A258DD706004A1A94 /* weexUniJs.js in Resources */ = {isa = PBXBuildFile; fileRef = 9D8A1B0D258DD706004A1A94 /* weexUniJs.js */; };
 		9D8A1B35258E0AE4004A1A94 /* account_login_sdk_noui_core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8A1B2E258E0AE3004A1A94 /* account_login_sdk_noui_core.framework */; };
-		9D8A1B36258E0AE4004A1A94 /* jverification-ios-2.6.7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8A1B2F258E0AE3004A1A94 /* jverification-ios-2.6.7.a */; };
 		9D8A1B37258E0AE4004A1A94 /* EAccountApiSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8A1B30258E0AE3004A1A94 /* EAccountApiSDK.framework */; };
 		9D8A1B39258E0AE4004A1A94 /* OAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8A1B32258E0AE4004A1A94 /* OAuth.framework */; };
 		9D8A1B3A258E0AE4004A1A94 /* TYRZUISDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D8A1B33258E0AE4004A1A94 /* TYRZUISDK.framework */; };
@@ -323,6 +323,7 @@
 		24F990141DFBDA5600848C2B /* MiPassport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MiPassport.framework; path = ../SDK/Libs/MiPassport.framework; sourceTree = "<group>"; };
 		2A187AA525C427B0007BA1E4 /* jcore-ios-2.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jcore-ios-2.4.0.a"; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JCore/ios/jcore-ios-2.4.0.a"; sourceTree = "<group>"; };
 		2A45A94E25C1590C00940829 /* UniPluginJCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UniPluginJCore.xcodeproj; path = UniPluginJCore/UniPluginJCore.xcodeproj; sourceTree = "<group>"; };
+		2A8A0F7A26293F83005148D7 /* jverification-ios-2.7.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jverification-ios-2.7.0.a"; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/jverification-ios-2.7.0.a"; sourceTree = "<group>"; };
 		2F0BA3F8215B48A700F67004 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../HBuilder/Images.xcassets; sourceTree = "<group>"; };
 		2F0BA40D215B6E6800F67004 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		2F0BA40F215B784000F67004 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
@@ -462,9 +463,7 @@
 		9D8A1B0C258DD706004A1A94 /* weex-polyfill.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "weex-polyfill.js"; sourceTree = "<group>"; };
 		9D8A1B0D258DD706004A1A94 /* weexUniJs.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = weexUniJs.js; sourceTree = "<group>"; };
 		9D8A1B2E258E0AE3004A1A94 /* account_login_sdk_noui_core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = account_login_sdk_noui_core.framework; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/account_login_sdk_noui_core.framework"; sourceTree = "<group>"; };
-		9D8A1B2F258E0AE3004A1A94 /* jverification-ios-2.6.7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jverification-ios-2.6.7.a"; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/jverification-ios-2.6.7.a"; sourceTree = "<group>"; };
 		9D8A1B30258E0AE3004A1A94 /* EAccountApiSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EAccountApiSDK.framework; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/EAccountApiSDK.framework"; sourceTree = "<group>"; };
-		9D8A1B31258E0AE4004A1A94 /* jcore-ios-2.2.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jcore-ios-2.2.5.a"; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/jcore-ios-2.2.5.a"; sourceTree = "<group>"; };
 		9D8A1B32258E0AE4004A1A94 /* OAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuth.framework; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/OAuth.framework"; sourceTree = "<group>"; };
 		9D8A1B33258E0AE4004A1A94 /* TYRZUISDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TYRZUISDK.framework; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/TYRZUISDK.framework"; sourceTree = "<group>"; };
 		9D8A1B34258E0AE4004A1A94 /* ESOneKeyLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ESOneKeyLogin.framework; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/ESOneKeyLogin.framework"; sourceTree = "<group>"; };
@@ -680,6 +679,7 @@
 				67AB0B4321EEEAE50029B229 /* AMapFoundationKit.framework in Frameworks */,
 				2F0BA418215B8B5C00F67004 /* libbz2.1.0.tbd in Frameworks */,
 				03515D5123CD9106009F3256 /* AdSupport.framework in Frameworks */,
+				2A8A0F7B26293F98005148D7 /* jverification-ios-2.7.0.a in Frameworks */,
 				2FD11BBB215C79C5000A23AD /* liblibAdSupport.a in Frameworks */,
 				2F0BA416215B8B1400F67004 /* VideoToolbox.framework in Frameworks */,
 				24BD5AF61C994BB200B05AA2 /* libc++.tbd in Frameworks */,
@@ -718,7 +718,6 @@
 				67AB0B4121EEEACA0029B229 /* MAMapKit.framework in Frameworks */,
 				67566B1F2251DC3A00BDF218 /* liblibSqlite.a in Frameworks */,
 				24AFD84E1CB50C4000C0F062 /* liblibCache.a in Frameworks */,
-				9D8A1B36258E0AE4004A1A94 /* jverification-ios-2.6.7.a in Frameworks */,
 				24AFD84F1CB50C4000C0F062 /* liblibCamera.a in Frameworks */,
 				24AFD8501CB50C4000C0F062 /* liblibContacts.a in Frameworks */,
 				6756AB6821F58ACD00765F52 /* liblibBeacon.a in Frameworks */,
@@ -839,12 +838,11 @@
 		8EED629A198A1D13000A4449 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2A8A0F7A26293F83005148D7 /* jverification-ios-2.7.0.a */,
 				2A187AA525C427B0007BA1E4 /* jcore-ios-2.4.0.a */,
 				9D8A1B2E258E0AE3004A1A94 /* account_login_sdk_noui_core.framework */,
 				9D8A1B30258E0AE3004A1A94 /* EAccountApiSDK.framework */,
 				9D8A1B34258E0AE4004A1A94 /* ESOneKeyLogin.framework */,
-				9D8A1B31258E0AE4004A1A94 /* jcore-ios-2.2.5.a */,
-				9D8A1B2F258E0AE3004A1A94 /* jverification-ios-2.6.7.a */,
 				9D8A1B32258E0AE4004A1A94 /* OAuth.framework */,
 				9D8A1B33258E0AE4004A1A94 /* TYRZUISDK.framework */,
 				03515D5323CD9171009F3256 /* libc++.1.tbd */,
@@ -1674,7 +1672,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.jiguang.login;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a7e03077-46db-4b91-b0c4-20fd613c1e14";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 i386 x86_64";
