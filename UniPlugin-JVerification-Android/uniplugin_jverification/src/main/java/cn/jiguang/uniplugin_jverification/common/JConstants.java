@@ -17,6 +17,9 @@ public class JConstants {
 
     //从 js static 设置图片名称
     public static final String setAuthBGImgPathFromJs = "setAuthBGImgPathFromJs";
+//    public static final String setAuthBGGifPathFromJs = "setAuthBGGifPathFromJs";
+    public static final String setAuthBGVideoPathFromJs = "setAuthBGVideoPathFromJs";
+
     public static final String setNavReturnImgPathFromJs = "setNavReturnImgPathFromJs";
     public static final String setLogoImgPathFromJs = "setLogoImgPathFromJs";
     public static final String setLogBtnImgPathFromJs = "setLogBtnImgPathFromJs";

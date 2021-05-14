@@ -152,8 +152,9 @@
 						setAppPrivacyColor:[0xff00f000,0xff000000],
 						setLogoImgPathFromJs:"static/weixin.png",
 						setLogBtnImgPathFromJs:"static/login.png",
-						setAuthBGImgPathFromJs:"static/bg.jpeg",
+						// setAuthBGImgPathFromJs:"static/bg.jpeg",
 						setPrivacyNavReturnBtnPathFromJs:"static/weixin.png",
+						setAuthBGVideoPathFromJs:"static/videmo.mp4",
 						setLoadingViewEnable:true,
 						setStatusBarTransparent:true,
 						addCustomViews:[{
