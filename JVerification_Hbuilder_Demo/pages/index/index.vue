@@ -102,7 +102,12 @@
 						navColor:0xff000000,
 						logBtnText:"极光认证测试",
 						privacyState:true,
-						appPrivacyColor:[0xff000200,0xff000000],						
+						appPrivacyColor:[0xff000200,0xff000000],
+						// authPageBackgroudVideo:{
+						// 	videoPath:"static/videoBg.mp4",
+						// 	videoPlaceHolderImagePath:"static/big.jpg",
+						// },
+
 						addCustomViews:[{
 								type:"label",
 								width:120,

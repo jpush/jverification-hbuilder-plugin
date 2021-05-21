@@ -259,6 +259,7 @@ static  NSString* authPageBackgroundImage=@"authPageBackgroundImage";
 static  NSString* autoLayout=@"autoLayout";
 static  NSString* shouldAutorotate=@"shouldAutorotate";
 static  NSString* dismissAnimationFlag=@"dismissAnimationFlag";
+static  NSString* authPageBackgroudVideo=@"authPageBackgroudVideo";
 //导航栏
 static  NSString* navCustom=@"navCustom";
 static  NSString* navColor=@"navColor";
@@ -564,6 +565,20 @@ JVUIConfig *jvUIConfig){
     }else if ([key isEqualToString:@"loadingHorizontalConstraints"]){
          NSArray* loadingHorizontalConstraints = dict[key];
          jvUIConfig.loadingHorizontalConstraints = [JVerificationModule configConstraintWithAttributes:loadingHorizontalConstraints];
+    }
+    
+    // 授权页背景视频
+    else if ([key isEqualToString:authPageBackgroudVideo]) {
+        NSDictionary* videos = dict[key];
+        if ([videos isKindOfClass:[NSDictionary class]]) {
+            NSString *videoPath = videos[@"videoPath"];
+            NSString *placeHolderImagePath = videos[@"videoPlaceHolderImagePath"];
+            NSString *backgroundImagePath = [appinfo.wwwPath stringByAppendingFormat:@"/%@",videoPath];
+            NSString *videoImageParh = [appinfo.wwwPath stringByAppendingFormat:@"/%@",placeHolderImagePath];
+
+            [jvUIConfig setVideoBackgroudResource:backgroundImagePath placeHolder:videoImageParh];
+        }
+       
     }
 }
 // type  top,left,right,bottom, width, height  backgroundColor cornerRadius  //公有属性
