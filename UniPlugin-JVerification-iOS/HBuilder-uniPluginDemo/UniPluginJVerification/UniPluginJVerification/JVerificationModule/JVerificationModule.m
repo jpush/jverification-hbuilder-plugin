@@ -301,6 +301,7 @@ static  NSString* checkViewHidden=@"checkViewHidden";
 static  NSString* privacyState=@"privacyState";
 static  NSString* checkViewConstraints=@"checkViewConstraints";
 static  NSString* checkViewHorizontalConstraints=@"checkViewHorizontalConstraints";
+static  NSString* privacyCheckToastMessage=@"privacyCheckToastMessage";
 
 
 //隐私协议栏
@@ -461,6 +462,19 @@ JVUIConfig *jvUIConfig){
         NSArray* checkViewHorizontalConstraints = dict[key];
         jvUIConfig.checkViewHorizontalConstraints = [JVerificationModule configConstraintWithAttributes:checkViewHorizontalConstraints];
     }
+    
+    // checkBox 未选中时点击登录按钮弹出提示框的提示语：当此参数存在时，checkBox 未选中，登录按钮可点击，且点击后会弹窗提醒用户勾选，提示语为该参数的设置值
+    else if ([key isEqualToString:privacyCheckToastMessage]) {
+        NSString *privacyCheckToastMessage = dict[key];
+        if ([key isKindOfClass:[NSString class]]) {
+            jvUIConfig.customPrivacyAlertViewBlock = ^(UIViewController *vc) {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:privacyCheckToastMessage message:nil preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil]];
+                [vc presentViewController:alert animated:true completion:nil];
+            };
+        }
+    }
+    
     //    隐私协议栏
     
     else if([key isEqualToString:appPrivacyOne]){
@@ -578,7 +592,6 @@ JVUIConfig *jvUIConfig){
 
             [jvUIConfig setVideoBackgroudResource:backgroundImagePath placeHolder:videoImageParh];
         }
-       
     }
 }
 // type  top,left,right,bottom, width, height  backgroundColor cornerRadius  //公有属性

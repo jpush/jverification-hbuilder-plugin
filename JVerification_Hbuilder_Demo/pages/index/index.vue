@@ -107,7 +107,7 @@
 						// 	videoPath:"static/videoBg.mp4",
 						// 	videoPlaceHolderImagePath:"static/big.jpg",
 						// },
-
+                        // privacyCheckToastMessage: "请点击同意协议",
 						addCustomViews:[{
 								type:"label",
 								width:120,
@@ -230,6 +230,7 @@
 			setCustomDialog:function(){
 				if(uni.getSystemInfoSync().platform == "ios"){
 					this.jv.setCustomUIWithConfigiOS({
+						// privacyCheckToastMessage:"请点击同意协议",
 						navCustom:true,
 						autoLayout:true,
 						showWindow:true,

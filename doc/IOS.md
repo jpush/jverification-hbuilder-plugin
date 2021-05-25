@@ -73,6 +73,7 @@
 |checkedImg|String|checkBox 选中时图片|
 |checkViewHidden|BOOL|checkBox 是否隐藏，默认不隐藏|
 |privacyState|BOOL|隐私条款 check 框默认状态 默认:NO|
+|privacyCheckToastMessage|String|checkBox 未选中时点击登录按钮弹出提示框的提示语：当此参数存在时，checkBox 未选中，登录按钮可点击，且点击后会弹窗提醒用户勾选，提示语为该参数的设置值；该值未设置时，checkBox 未选中，登录按钮不可点击。|
 |checkViewConstraints|数组[float,float,float,float]|竖屏方向上，checkBox相对于整个授权页根视图，布局约束。例如：[centerX，centerY,width,heigt]  意味着 （checkBox相对屏幕中心的x轴偏移量，checkBox相对屏幕中心的y轴偏移量，checkBox宽度，checkBox高度）|
 |checkViewHorizontalConstraints|数组[float,float,float,float]|横屏方向上checkBox相对于整个授权页根视图，布局约束。例如：[centerX，centerY,width,heigt]  意味着 （checkBox相对屏幕中心的x轴偏移量，checkBox相对屏幕中心的y轴偏移量，checkBox宽度，checkBox高度）|
 
