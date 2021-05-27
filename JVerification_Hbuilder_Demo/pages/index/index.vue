@@ -160,6 +160,9 @@
 						// setAuthBGImgPathFromJs:"static/bg.jpeg",
 						setPrivacyNavReturnBtnPathFromJs:"static/weixin.png",
 						setAuthBGVideoPathFromJs:"static/videmo.mp4",
+						setPrivacyTextSize:12,
+						setPrivacyCheckboxSize:14,
+						enableHintToast:true,
 						setLoadingViewEnable:true,
 						setStatusBarTransparent:true,
 						addCustomViews:[{

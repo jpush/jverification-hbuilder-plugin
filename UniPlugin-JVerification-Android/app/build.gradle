@@ -14,6 +14,14 @@ android {
         ndk {
             abiFilters 'x86','armeabi-v7a'
         }
+
+        manifestPlaceholders = [
+                // 设置manifest.xml中的变量
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "9c0aa59694d967b7f9df7f3c",
+                JPUSH_CHANNEL: "fe02297abab404ece843dbf706b4772e",
+        ]
+
     }
     buildTypes {
         release {

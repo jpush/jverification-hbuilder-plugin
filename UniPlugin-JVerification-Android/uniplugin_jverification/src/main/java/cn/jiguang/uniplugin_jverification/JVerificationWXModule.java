@@ -473,10 +473,9 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
         if (jsonObject.containsKey(JConstants.setPrivacyCheckboxInCenter)) {
             uiConfigBuilder.setPrivacyCheckboxInCenter(jsonObject.getBooleanValue(JConstants.setPrivacyCheckboxInCenter));
         }
-        if (jsonObject.containsKey(JConstants.setPrivacyTextWidth)) {
-            uiConfigBuilder.setPrivacyTextWidth(jsonObject.getIntValue(JConstants.setPrivacyTextWidth));
+        if (jsonObject.containsKey(JConstants.enableHintToast)) {
+            uiConfigBuilder.enableHintToast(jsonObject.getBooleanValue(JConstants.enableHintToast), null);
         }
-
         //  授权页隐私协议web页面
         if (jsonObject.containsKey(JConstants.setPrivacyNavColor)) {
             uiConfigBuilder.setPrivacyNavColor(jsonObject.getIntValue(JConstants.setPrivacyNavColor));

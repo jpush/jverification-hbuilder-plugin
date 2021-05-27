@@ -17,7 +17,7 @@ public class JConstants {
 
     //从 js static 设置图片名称
     public static final String setAuthBGImgPathFromJs = "setAuthBGImgPathFromJs";
-//    public static final String setAuthBGGifPathFromJs = "setAuthBGGifPathFromJs";
+    //    public static final String setAuthBGGifPathFromJs = "setAuthBGGifPathFromJs";
     public static final String setAuthBGVideoPathFromJs = "setAuthBGVideoPathFromJs";
 
     public static final String setNavReturnImgPathFromJs = "setNavReturnImgPathFromJs";
@@ -92,8 +92,8 @@ public class JConstants {
     public static final String setPrivacyCheckboxSize = "setPrivacyCheckboxSize";
     public static final String setPrivacyWithBookTitleMark = "setPrivacyWithBookTitleMark";
     public static final String setPrivacyCheckboxInCenter = "setPrivacyCheckboxInCenter";
-    public static final String setPrivacyTextWidth = "setPrivacyTextWidth";
-    //    public static final String enableHintToast = "enableHintToast";
+    //    public static final String setPrivacyTextWidth = "setPrivacyTextWidth";
+    public static final String enableHintToast = "enableHintToast";
     //    授权页隐私协议web页面
     public static final String setPrivacyNavColor = "setPrivacyNavColor";
     public static final String setPrivacyNavTitleTextColor = "setPrivacyNavTitleTextColor";

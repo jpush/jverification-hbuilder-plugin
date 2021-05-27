@@ -81,8 +81,6 @@
                     android:scheme="h56131bcf" />
             </intent-filter>
         </activity>
-        <meta-data android:name="JPUSH_APPKEY" android:value="9c0aa59694d967b7f9df7f3c"/>
-        <meta-data android:name="JPUSH_CHANNEL" android:value="fe02297abab404ece843dbf706b4772e"/>
     </application>
 
 </manifest>
