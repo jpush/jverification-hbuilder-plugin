@@ -165,6 +165,8 @@
 						enableHintToast:true,
 						setLoadingViewEnable:true,
 						setStatusBarTransparent:true,
+						setCheckedImgPathFromJs:"static/weixin.png",
+						setUncheckedImgPathFromJs:"static/qq.png",
 						addCustomViews:[{
 							type:"text",
 							finishFlag:false,
