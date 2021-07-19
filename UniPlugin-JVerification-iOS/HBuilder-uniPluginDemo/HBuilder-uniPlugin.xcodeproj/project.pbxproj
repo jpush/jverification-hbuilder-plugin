@@ -72,7 +72,7 @@
 		24F990131DFBDA3300848C2B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F990121DFBDA3300848C2B /* CoreData.framework */; };
 		2A187AA625C427B0007BA1E4 /* jcore-ios-2.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A187AA525C427B0007BA1E4 /* jcore-ios-2.4.0.a */; };
 		2A45A95725C15C4A00940829 /* UniPluginJCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A45A95325C1590D00940829 /* UniPluginJCore.framework */; };
-		2A8A0F7B26293F98005148D7 /* jverification-ios-2.7.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A8A0F7A26293F83005148D7 /* jverification-ios-2.7.0.a */; };
+		2AA498C926A566EE003FFF74 /* jverification-ios-2.7.4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AA498C826A566EE003FFF74 /* jverification-ios-2.7.4.a */; };
 		2F0BA3F9215B48A700F67004 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F0BA3F8215B48A700F67004 /* Images.xcassets */; };
 		2F0BA410215B784100F67004 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0BA40F215B784000F67004 /* Contacts.framework */; };
 		2F0BA412215B814100F67004 /* liblibVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F0BA411215B814000F67004 /* liblibVideo.a */; };
@@ -323,7 +323,7 @@
 		24F990141DFBDA5600848C2B /* MiPassport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MiPassport.framework; path = ../SDK/Libs/MiPassport.framework; sourceTree = "<group>"; };
 		2A187AA525C427B0007BA1E4 /* jcore-ios-2.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jcore-ios-2.4.0.a"; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JCore/ios/jcore-ios-2.4.0.a"; sourceTree = "<group>"; };
 		2A45A94E25C1590C00940829 /* UniPluginJCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UniPluginJCore.xcodeproj; path = UniPluginJCore/UniPluginJCore.xcodeproj; sourceTree = "<group>"; };
-		2A8A0F7A26293F83005148D7 /* jverification-ios-2.7.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jverification-ios-2.7.0.a"; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/jverification-ios-2.7.0.a"; sourceTree = "<group>"; };
+		2AA498C826A566EE003FFF74 /* jverification-ios-2.7.4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jverification-ios-2.7.4.a"; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/jverification-ios-2.7.4.a"; sourceTree = "<group>"; };
 		2F0BA3F8215B48A700F67004 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../HBuilder/Images.xcassets; sourceTree = "<group>"; };
 		2F0BA40D215B6E6800F67004 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		2F0BA40F215B784000F67004 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
@@ -679,7 +679,6 @@
 				67AB0B4321EEEAE50029B229 /* AMapFoundationKit.framework in Frameworks */,
 				2F0BA418215B8B5C00F67004 /* libbz2.1.0.tbd in Frameworks */,
 				03515D5123CD9106009F3256 /* AdSupport.framework in Frameworks */,
-				2A8A0F7B26293F98005148D7 /* jverification-ios-2.7.0.a in Frameworks */,
 				2FD11BBB215C79C5000A23AD /* liblibAdSupport.a in Frameworks */,
 				2F0BA416215B8B1400F67004 /* VideoToolbox.framework in Frameworks */,
 				24BD5AF61C994BB200B05AA2 /* libc++.tbd in Frameworks */,
@@ -780,6 +779,7 @@
 				8E6E37AC1B0E1B580036EB48 /* ImageIO.framework in Frameworks */,
 				8E163D021A8D208500308A8B /* AssetsLibrary.framework in Frameworks */,
 				8EED6596198A574C000A4449 /* CoreLocation.framework in Frameworks */,
+				2AA498C926A566EE003FFF74 /* jverification-ios-2.7.4.a in Frameworks */,
 				8EED65A8198A6273000A4449 /* OpenGLES.framework in Frameworks */,
 				8EED65A6198A626B000A4449 /* MapKit.framework in Frameworks */,
 				8EED65A0198A5789000A4449 /* Accounts.framework in Frameworks */,
@@ -838,7 +838,7 @@
 		8EED629A198A1D13000A4449 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2A8A0F7A26293F83005148D7 /* jverification-ios-2.7.0.a */,
+				2AA498C826A566EE003FFF74 /* jverification-ios-2.7.4.a */,
 				2A187AA525C427B0007BA1E4 /* jcore-ios-2.4.0.a */,
 				9D8A1B2E258E0AE3004A1A94 /* account_login_sdk_noui_core.framework */,
 				9D8A1B30258E0AE3004A1A94 /* EAccountApiSDK.framework */,

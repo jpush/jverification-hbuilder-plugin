@@ -260,6 +260,7 @@ static  NSString* autoLayout=@"autoLayout";
 static  NSString* shouldAutorotate=@"shouldAutorotate";
 static  NSString* dismissAnimationFlag=@"dismissAnimationFlag";
 static  NSString* authPageBackgroudVideo=@"authPageBackgroudVideo";
+static  NSString* modalTransitionStyle=@"modalTransitionStyle";
 //导航栏
 static  NSString* navCustom=@"navCustom";
 static  NSString* navColor=@"navColor";
@@ -591,6 +592,21 @@ JVUIConfig *jvUIConfig){
             NSString *videoImageParh = [appinfo.wwwPath stringByAppendingFormat:@"/%@",placeHolderImagePath];
 
             [jvUIConfig setVideoBackgroudResource:backgroundImagePath placeHolder:videoImageParh];
+        }
+    }
+    // 授权页弹出方式
+    else if ([key isEqualToString:modalTransitionStyle]) {
+        NSString *value = dict[key];
+        if ([value isKindOfClass:[NSString class]] && value.length > 0) {
+            if ([value isEqualToString:@"CoverVertical"]) {
+                jvUIConfig.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            }else if ([value isEqualToString:@"FlipHorizontal"]) {
+                jvUIConfig.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            }else if ([value isEqualToString:@"CrossDissolve"]) {
+                jvUIConfig.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            }else if ([value isEqualToString:@"PartialCurl"]) {
+                jvUIConfig.modalTransitionStyle = UIModalTransitionStylePartialCurl;
+            }
         }
     }
 }

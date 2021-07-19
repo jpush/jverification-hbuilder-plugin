@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#define JVER_VERSION_NUMBER 2.7.0
+#define JVER_VERSION_NUMBER 2.7.4
 
 
 /**
@@ -35,6 +35,14 @@ typedef NS_ENUM(NSUInteger, JVLayoutItem) {
     JVLayoutItemSuper
 };
 
+/**
+ 设置隐私Label的垂直对齐方式
+ */
+typedef NS_ENUM(NSInteger,JVVerAlignment){
+    JVVerAlignmentTop = 0,//default
+    JVVerAlignmentMiddle,
+    JVVerAlignmentBottom
+};
 
 @interface JVLayoutConstraint : NSObject
 /**
@@ -59,7 +67,7 @@ typedef NS_ENUM(NSUInteger, JVLayoutItem) {
  @param c 常量
  @return JVLayoutConstraint布局对象
  */
-+(instancetype)constraintWithAttribute:(NSLayoutAttribute)attr1
++(instancetype _Nullable )constraintWithAttribute:(NSLayoutAttribute)attr1
                              relatedBy:(NSLayoutRelation)relation
                                 toItem:(JVLayoutItem)item
                              attribute:(NSLayoutAttribute)attr2
@@ -194,6 +202,13 @@ typedef NS_ENUM(NSUInteger, JVLayoutItem) {
  条款链接， 支持在线文件和NSBundle本地文件，  沙盒中文件仅支持 NSTemporaryDirectory() 路径下文件
  */
 @property (nonatomic,strong) NSArray *appPrivacyTwo;
+
+/**隐私条款组合:数组
+ @[privacyComponents,条款名称,条款链接]
+ 条款链接， 支持在线文件和NSBundle本地文件，  沙盒中文件仅支持 NSTemporaryDirectory() 路径下文件
+ */
+@property (nonatomic,strong) NSArray * _Nullable appPrivacys;
+
 /**隐私条款名称颜色
  @[基础文字颜色,条款颜色]
  */
@@ -219,6 +234,8 @@ typedef NS_ENUM(NSUInteger, JVLayoutItem) {
 @property (nonatomic, copy) NSArray <JVLayoutConstraint *>* privacyHorizontalConstraints;
 /**隐私条款check框默认状态 默认:NO */
 @property (nonatomic,assign) BOOL privacyState;
+/*隐私条约Label的垂直对齐方式*/
+@property (nonatomic,assign) JVVerAlignment textVerAlignment;
 /*
  当自定义Alert view,当隐私条款未选中时,点击登录按钮时回调
  当此参数存在时,未选中隐私条款的情况下，登录按钮可以被点击

@@ -103,6 +103,7 @@
 						logBtnText:"极光认证测试",
 						privacyState:true,
 						appPrivacyColor:[0xff000200,0xff000000],
+						// modalTransitionStyle:"FlipHorizontal",
 						// authPageBackgroudVideo:{
 						// 	videoPath:"static/videoBg.mp4",
 						// 	videoPlaceHolderImagePath:"static/big.jpg",

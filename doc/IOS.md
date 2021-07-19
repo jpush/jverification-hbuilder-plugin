@@ -16,6 +16,7 @@
 |shouldAutorotate|BOOL|是否支持自动旋转 默认 YES|
 |dismissAnimationFlag|BOOL|关闭授权页是否有动画。默认 YES,有动画。参数仅作用于以下两种情况：1、一键登录接口设置登录完成后，自动关闭授权页 2、用户点击授权页关闭按钮，关闭授权页|
 |authPageBackgroudVideo|Dictionary|授权界面背景视频 需填以下两字段： 1、"videoPath":String类型,视频路径支持在线url或者本地视频路径， 2、"videoPlaceHolderImagePath":String类型,视频未准备好播放时的占位图片名称}|
+|modalTransitionStyle|String|授权页弹出方式 可填参数："CoverVertical"、"FlipHorizontal"、"CrossDissolve"、"PartialCurl" , 弹窗模式下不支持 "PartialCurl"|
 
 
 + 导航栏
