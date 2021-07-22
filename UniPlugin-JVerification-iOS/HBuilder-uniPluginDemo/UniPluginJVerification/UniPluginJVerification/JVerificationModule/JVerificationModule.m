@@ -316,6 +316,8 @@ static  NSString* privacyShowBookSymbol=@"privacyShowBookSymbol";
 static  NSString* privacyLineSpacing=@"privacyLineSpacing";
 static  NSString* privacyConstraints=@"privacyConstraints";
 static  NSString* privacyHorizontalConstraints=@"privacyHorizontalConstraints";
+static  NSString* appPrivacys=@"appPrivacys";
+static  NSString* privacyTextAlignment = @"privacyTextAlignment";
 
 //隐私协议页面
 static  NSString* agreementNavBackgroundColor=@"agreementNavBackgroundColor";
@@ -505,6 +507,34 @@ JVUIConfig *jvUIConfig){
     }else if ([key isEqualToString:privacyHorizontalConstraints]){
         NSArray* privacyHorizontalConstraints = dict[key];
         jvUIConfig.privacyHorizontalConstraints = [JVerificationModule configConstraintWithAttributes:privacyHorizontalConstraints];
+    }else if ([key isEqualToString:appPrivacys]){
+        NSArray *appPrivacys = dict[key];
+        NSMutableArray *result = [NSMutableArray array];
+        for (int i = 0; i < appPrivacys.count; i++) {
+            id item = appPrivacys[i];
+            if ([item isKindOfClass:[NSString class]]) {
+                [result addObject:item];
+            }else if ([item isKindOfClass:[NSArray class]]) {
+                NSArray *itemArr = item;
+                if (itemArr.count == 4 && [itemArr[3] isKindOfClass:[NSArray class]] && [itemArr[3] count] == 3) {
+                    NSMutableArray *newItemArr = [NSMutableArray array];
+                    [newItemArr addObject:itemArr[0]];
+                    [newItemArr addObject:itemArr[1]];
+                    [newItemArr addObject:itemArr[2]];
+                    NSAttributedString *str = getNSAttributedString(itemArr[3]);
+                    [newItemArr addObject:str];
+                    [result addObject:newItemArr];
+                }
+            }
+        }
+        jvUIConfig.appPrivacys = [result copy];
+    }else if ([key isEqualToString:privacyTextAlignment]){
+        NSString *privacyTextAlignment = dict[key];
+        if ([privacyTextAlignment isEqualToString:@"left"]) {
+            jvUIConfig.privacyTextAlignment = NSTextAlignmentLeft;
+        }else if ([privacyTextAlignment isEqualToString:@"center"]){
+            jvUIConfig.privacyTextAlignment = NSTextAlignmentCenter;
+        }
     }
     
     //    隐私协议页面

@@ -104,6 +104,13 @@
 						privacyState:true,
 						appPrivacyColor:[0xff000200,0xff000000],
 						// modalTransitionStyle:"FlipHorizontal",
+						// appPrivacys:[
+						// 	"头部文字",
+						// ["、","自定义条款1","https://www.taobao.com/",["内部自定义条款1",0xff000000,12]],
+						// ["、","自定义条款2","https://www.taobao.com/",["内部自定义条款2",0xff000000,12]],
+						// ["、","自定义条款3","https://www.taobao.com/",["内部自定义条款3",0xff000000,12]],
+						// "尾部文字"],
+						// privacyTextAlignment:"center",
 						// authPageBackgroudVideo:{
 						// 	videoPath:"static/videoBg.mp4",
 						// 	videoPlaceHolderImagePath:"static/big.jpg",
