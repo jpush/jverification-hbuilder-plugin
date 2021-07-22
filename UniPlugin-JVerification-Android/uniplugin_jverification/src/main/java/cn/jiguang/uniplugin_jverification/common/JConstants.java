@@ -90,6 +90,7 @@ public class JConstants {
     public static final String setPrivacyOffsetX = "setPrivacyOffsetX";
     public static final String setPrivacyTextCenterGravity = "setPrivacyTextCenterGravity";
     public static final String setPrivacyText = "setPrivacyText";
+    public static final String setPrivacyNameAndUrlBeanList = "setPrivacyNameAndUrlBeanList";
     public static final String setPrivacyTextSize = "setPrivacyTextSize";
     public static final String setPrivacyTopOffsetY = "setPrivacyTopOffsetY";
     public static final String setPrivacyCheckboxHidden = "setPrivacyCheckboxHidden";
