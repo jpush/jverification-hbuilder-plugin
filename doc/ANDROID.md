@@ -85,8 +85,8 @@
 
 |方法|参数类型|说明|
 |:-----:|:----:|:----:|
-|setAppPrivacyOne|String,String|设置开发者隐私条款1名称和URL(名称，url)|
-|setAppPrivacyTwo|String,String|设置开发者隐私条款2名称和URL(名称，url)|
+| ~~setAppPrivacyOne~~ |String,String|设置开发者隐私条款1名称和URL(名称，url),插件 v2.0.9 开始废弃，新增 setPrivacyNameAndUrlBeanList 设置隐私协议|
+| ~~setAppPrivacyTwo~~ |String,String|设置开发者隐私条款2名称和URL(名称，url),插件 v2.0.9 开始废弃， 新增setPrivacyNameAndUrlBeanList 设置隐私协议|
 |setAppPrivacyColor|int,int|设置隐私条款名称颜色(基础文字颜色，协议文字颜色)|
 |setPrivacyOffsetY|int|设置隐私条款相对于授权页面底部下边缘y偏移|
 |setCheckedImgPath|String|设置复选框选中时图片|
@@ -94,7 +94,8 @@
 |setPrivacyState|boolean|设置隐私条款默认选中状态，默认不选中。since 2.3.2|
 |setPrivacyOffsetX|int|设置隐私条款相对于屏幕左边x轴偏移。since 2.3.8|
 |setPrivacyTextCenterGravity|boolean|设置隐私条款文字是否居中对齐（默认左对齐）。since 2.3.8|
-|setPrivacyText|String,String,String,String|设置隐私条款名称外的文字。<br>如：登录即同意...和...、...并使用本机号码登录<br>参数1为："登录即同意"。<br>参数2为："和"。<br>参数3为："、"。<br>参数4为："并使用本机号码登录"。<br>since 2.3.8|
+|~~setPrivacyText~~| ~~String,String,String,String~~ | ~~设置隐私条款名称外的文字。<br>如：登录即同意...和...、...并使用本机号码登录<br>参数1为："登录即同意"。<br>参数2为："和"。<br>参数3为："、"。<br>参数4为："并使用本机号码登录"。~~ 插件v2.0.9开始仅支持设置两个参数。|
+|~~setPrivacyText~~|String,String|设置隐私条款头尾文字。<br>如：登录即同意...和...、...并使用本机号码登录<br>参数1为："登录即同意"。<br>参数2为："并使用本机号码登录"。|
 |setPrivacyTextSize|int|设置隐私条款文字字体大小（单位：sp）。since 2.4.1|
 |setPrivacyTopOffsetY|int|设置隐私条款相对导航栏下端y轴偏移。since 2.4.8|
 |setPrivacyCheckboxHidden|boolean|设置隐私条款checkbox是否隐藏。since 2.4.8|
@@ -102,6 +103,15 @@
 |setPrivacyWithBookTitleMark|boolean|设置隐私条款运营商协议名是否加书名号。since 2.4.8|
 |setPrivacyCheckboxInCenter|boolean|设置隐私条款checkbox是否相对协议文字纵向居中。默认居顶。since 2.4.8|
 |setPrivacyTextWidth|int|设置隐私条款文字栏宽度。since 2.5.0|
+|setPrivacyNameAndUrlBeanList|PivateBean 数组|设置隐私条款组|
+
++ PivateBean since 原生 v2.7.3 插件 v2.0.9
+|方法|参数类型|说明|
+|:-----:|:----:|:----:|
+|name|String|隐私协议名称|
+|url|String|点击隐私协议跳转链接|
+|beforeName|String|隐私协议前部字符串|
+|afterName|String|隐私协议后部字符串|
 
 + 授权页隐私协议web页面
 
