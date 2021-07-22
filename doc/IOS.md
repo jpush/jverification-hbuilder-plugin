@@ -92,6 +92,8 @@
 |privacyLineSpacing|float|隐私条款行距，默认跟随系统|
 |privacyConstraints| 数组[float,float,float,float] |竖屏方向上，隐私协议栏相对于整个授权页根视图，布局约束。例如：[centerX，centerY,width,heigt]  意味着 （隐私协议栏相对屏幕中心的x轴偏移量，隐私协议栏相对屏幕中心的y轴偏移量，隐私协议栏宽度，隐私协议栏高度）|
 |privacyHorizontalConstraints|数组[float,float,float,float]|横屏方向上，隐私协议栏相对于整个授权页根视图，布局约束。例如：[centerX，centerY,width,heigt]  意味着 （隐私协议栏相对屏幕中心的x轴偏移量，隐私协议栏相对屏幕中心的y轴偏移量，隐私协议栏宽度，隐私协议栏高度）|
+|appPrivacys|数组[string,[string,string,string,[string,int,int]] ... ,string]|隐私条款组合:可以存在多个自定义隐私条款。使用该字段的话，appPrivacyOne、appPrivacyTwo、privacyComponents、firstPrivacyAgreementNavText、secondPrivacyAgreementNavText字段则不生效。 [string,array1,array2...arrayN,string],头尾部的string，一个是头部文字一个是尾部文字，可不传，不传的话使用默认的文字。中间字段的array可以有多个，是多个隐私协议的数组组合。每一个array的格式为["与上一条款拼接文本","条款名称","条款链接",["条款详情页导航栏标题",条款详情页导航栏标题颜色,条款详情页导航栏标题文字大小]]|
+|privacyTextAlignment|string|隐私条款文本对齐方式,目前仅支持 left、center|
 
 
 + 隐私协议页面
