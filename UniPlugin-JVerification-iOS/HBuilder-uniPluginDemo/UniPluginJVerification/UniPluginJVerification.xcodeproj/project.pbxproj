@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		03717A0D23C855E6004399A2 /* JVerificationModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 03717A0B23C855E6004399A2 /* JVerificationModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		03717A0E23C855E6004399A2 /* JVerificationModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 03717A0C23C855E6004399A2 /* JVerificationModule.m */; };
-		2A37125F26A91A110089C14D /* JVERIFICATIONService.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A37125E26A91A100089C14D /* JVERIFICATIONService.h */; };
+		2A37128626A97F490089C14D /* JVERIFICATIONService.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A37128526A97F480089C14D /* JVERIFICATIONService.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,7 +17,7 @@
 		037179F523C8496A004399A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03717A0B23C855E6004399A2 /* JVerificationModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVerificationModule.h; sourceTree = "<group>"; };
 		03717A0C23C855E6004399A2 /* JVerificationModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVerificationModule.m; sourceTree = "<group>"; };
-		2A37125E26A91A100089C14D /* JVERIFICATIONService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVERIFICATIONService.h; path = "../../../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/JVERIFICATIONService.h"; sourceTree = "<group>"; };
+		2A37128526A97F480089C14D /* JVERIFICATIONService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVERIFICATIONService.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +50,7 @@
 		037179F323C8496A004399A2 /* UniPluginJVerification */ = {
 			isa = PBXGroup;
 			children = (
-				2A37125E26A91A100089C14D /* JVERIFICATIONService.h */,
+				2A37128526A97F480089C14D /* JVERIFICATIONService.h */,
 				03C1373E23CC825700AAFD1B /* JVerificationModule */,
 				037179F523C8496A004399A2 /* Info.plist */,
 			);
@@ -73,7 +73,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A37125F26A91A110089C14D /* JVERIFICATIONService.h in Headers */,
+				2A37128626A97F490089C14D /* JVERIFICATIONService.h in Headers */,
 				03717A0D23C855E6004399A2 /* JVerificationModule.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
