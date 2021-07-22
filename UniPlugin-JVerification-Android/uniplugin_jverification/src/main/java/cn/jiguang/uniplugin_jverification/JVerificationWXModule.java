@@ -25,6 +25,8 @@ import com.taobao.weex.bridge.JSCallback;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.jiguang.uniplugin_jverification.common.CopyUtils;
 import cn.jiguang.uniplugin_jverification.common.JConstants;
@@ -35,6 +37,7 @@ import cn.jiguang.verifysdk.api.JVerifyUIClickCallback;
 import cn.jiguang.verifysdk.api.JVerifyUIConfig;
 import cn.jiguang.verifysdk.api.LoginSettings;
 import cn.jiguang.verifysdk.api.PreLoginListener;
+import cn.jiguang.verifysdk.api.PrivacyBean;
 import cn.jiguang.verifysdk.api.RequestCallback;
 import cn.jiguang.verifysdk.api.VerifyListener;
 
@@ -434,13 +437,33 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
         }
 
         //  授权页隐私栏
-        if (jsonObject.containsKey(JConstants.setAppPrivacyOne)) {
-            JSONArray jsonArraySetAppPrivacyOne = jsonObject.getJSONArray(JConstants.setAppPrivacyOne);
-            uiConfigBuilder.setAppPrivacyOne(jsonArraySetAppPrivacyOne.getString(0), jsonArraySetAppPrivacyOne.getString(1));
-        }
-        if (jsonObject.containsKey(JConstants.setAppPrivacyTwo)) {
-            JSONArray jsonArraySetAppPrivacyTwo = jsonObject.getJSONArray(JConstants.setAppPrivacyTwo);
-            uiConfigBuilder.setAppPrivacyTwo(jsonArraySetAppPrivacyTwo.getString(0), jsonArraySetAppPrivacyTwo.getString(1));
+        // 273 后 setAppPrivacyOne和setAppPrivacyTwo废弃，用 setPrivacyNameAndUrlBeanList 代替
+//        if (jsonObject.containsKey(JConstants.setAppPrivacyOne)) {
+//            JSONArray jsonArraySetAppPrivacyOne = jsonObject.getJSONArray(JConstants.setAppPrivacyOne);
+//            uiConfigBuilder.setAppPrivacyOne(jsonArraySetAppPrivacyOne.getString(0), jsonArraySetAppPrivacyOne.getString(1));
+//        }
+//        if (jsonObject.containsKey(JConstants.setAppPrivacyTwo)) {
+//            JSONArray jsonArraySetAppPrivacyTwo = jsonObject.getJSONArray(JConstants.setAppPrivacyTwo);
+//            uiConfigBuilder.setAppPrivacyTwo(jsonArraySetAppPrivacyTwo.getString(0), jsonArraySetAppPrivacyTwo.getString(1));
+//        }
+
+        if (jsonObject.containsKey(JConstants.setPrivacyNameAndUrlBeanList)) {// since 273
+            JSONArray jsonArray = jsonObject.getJSONArray(JConstants.setPrivacyNameAndUrlBeanList);
+            if(jsonArray!=null&&jsonArray.size()!=0){
+                List<PrivacyBean> beanArrayList = new ArrayList<>();
+
+                for (int i=0;i<jsonArray.size();i++){
+                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                    String name = jsonObject1.getString("name");
+                    String url = jsonObject1.getString("url");
+                    String beforeName = jsonObject1.getString("beforeName");
+                    String afterName = jsonObject1.getString("afterName");
+                    JLogger.d("setPrivacyNameAndUrlBeanList:"+beforeName+name+afterName+":"+url);
+                    beanArrayList.add(new PrivacyBean(name!=null?name:"",url!=null?url:"",beforeName!=null?beforeName:"",afterName!=null?afterName:""));
+
+                }
+                uiConfigBuilder.setPrivacyNameAndUrlBeanList(beanArrayList);
+            }
         }
         if (jsonObject.containsKey(JConstants.setAppPrivacyColor)) {
             JSONArray jsonArraySetAppPrivacyColor = jsonObject.getJSONArray(JConstants.setAppPrivacyColor);
@@ -466,7 +489,7 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
         }
         if (jsonObject.containsKey(JConstants.setPrivacyText)) {
             JSONArray jsonArray = jsonObject.getJSONArray(JConstants.setPrivacyText);
-            uiConfigBuilder.setPrivacyText(jsonArray.getString(0), jsonArray.getString(1), jsonArray.getString(2), jsonArray.getString(3));
+            uiConfigBuilder.setPrivacyText(jsonArray.getString(0), jsonArray.getString(1));
         }
         if (jsonObject.containsKey(JConstants.setPrivacyTextSize)) {
             uiConfigBuilder.setPrivacyTextSize(jsonObject.getIntValue(JConstants.setPrivacyTextSize));
@@ -667,7 +690,7 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
         Context context = mWXSDKInstance.getContext();
         String assetPicPath = getAssetPicPath(pathName);
         String realPath = context.getCacheDir().getPath() + File.separator + pathName;
-        File file = new File(realPath);
+//        File file = new File(realPath);
         JLogger.d(" full name : " + assetPicPath + " size " + assetPicPath.length());
         CopyUtils.copyFile(context, assetPicPath, realPath);
         JLogger.d(" full name : " + realPath + " size " + realPath.length());

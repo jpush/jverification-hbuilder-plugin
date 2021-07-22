@@ -162,19 +162,32 @@
 						setNavColor:0xff000000,
 						setLogBtnText:" 极光认证测试 ",
 						setPrivacyState:false,
-						setAppPrivacyColor:[0xff00f000,0xff000000],
+						setPrivacyNameAndUrlBeanList:[{
+							name:"条款1",
+							url:"https://www.jiguang.cn/about",
+							beforeName:",",
+							afterName:","
+						},{
+							name:"条款2",
+							url:"https://www.jiguang.cn/about",
+							beforeName:"",
+							afterName:""
+						},{
+							name:"条款3",
+							url:"https://www.jiguang.cn/about",
+							beforeName:",",
+							afterName:","
+						}],
+						setAppPrivacyColor:[0xff4169E1,0xffFF6347],
 						setLogoImgPathFromJs:"static/weixin.png",
 						setLogBtnImgPathFromJs:"static/login.png",
-						// setAuthBGImgPathFromJs:"static/bg.jpeg",
+						setAuthBGImgPathFromJs:"static/bg.jpeg",
 						setPrivacyNavReturnBtnPathFromJs:"static/weixin.png",
-						setAuthBGVideoPathFromJs:"static/videmo.mp4",
 						setPrivacyTextSize:12,
 						setPrivacyCheckboxSize:14,
 						enableHintToast:true,
 						setLoadingViewEnable:true,
 						setStatusBarTransparent:true,
-						setCheckedImgPathFromJs:"static/weixin.png",
-						setUncheckedImgPathFromJs:"static/qq.png",
 						addCustomViews:[{
 							type:"text",
 							finishFlag:false,
