@@ -106,12 +106,14 @@
 |setPrivacyNameAndUrlBeanList|PivateBean 数组|设置隐私条款组|
 
 + PivateBean since 原生 v2.7.3 插件 v2.0.9
+
 |方法|参数类型|说明|
 |:-----:|:----:|:----:|
 |name|String|隐私协议名称|
 |url|String|点击隐私协议跳转链接|
 |beforeName|String|隐私协议前部字符串|
 |afterName|String|隐私协议后部字符串|
+
 
 + 授权页隐私协议web页面
 
