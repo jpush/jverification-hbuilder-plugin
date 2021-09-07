@@ -39,14 +39,14 @@ dependencies {
     debugImplementation fileTree(include: ['uniapp-release.aar'], dir: '../app/libs')
     debugImplementation 'com.alibaba:fastjson:1.2.70'
     debugImplementation 'com.facebook.fresco:fresco:1.13.0'
-    debugImplementation 'cn.jiguang.sdk:jverification:2.7.3'
-    debugImplementation 'cn.jiguang.sdk:jcore:2.8.2'
+    debugImplementation 'cn.jiguang.sdk:jverification:2.7.4'
+    debugImplementation 'cn.jiguang.sdk:jcore:2.9.0'
 
 //    releaseCompileOnly fileTree(include: ['*.jar'], dir: 'libs')
     releaseCompileOnly fileTree(include: ['uniapp-release.aar'], dir: '../app/libs')
     releaseCompileOnly 'com.alibaba:fastjson:1.2.70'
     releaseCompileOnly 'com.facebook.fresco:fresco:1.13.0'
-    releaseCompileOnly 'cn.jiguang.sdk:jverification:2.7.3'
-    releaseCompileOnly 'cn.jiguang.sdk:jcore:2.8.2'
+    releaseCompileOnly 'cn.jiguang.sdk:jverification:2.7.4'
+    releaseCompileOnly 'cn.jiguang.sdk:jcore:2.9.0'
 }
 
