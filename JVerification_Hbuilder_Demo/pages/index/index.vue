@@ -186,6 +186,7 @@
 						setPrivacyTextSize:12,
 						setPrivacyCheckboxSize:14,
 						enableHintToast:true,
+						enableHintToastText:"自定义提示linux",
 						setLoadingViewEnable:true,
 						setStatusBarTransparent:true,
 						addCustomViews:[{

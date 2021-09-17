@@ -100,11 +100,12 @@
 |setPrivacyTopOffsetY|int|设置隐私条款相对导航栏下端y轴偏移。since 2.4.8|
 |setPrivacyCheckboxHidden|boolean|设置隐私条款checkbox是否隐藏。since 2.4.8|
 |setPrivacyCheckboxSize|int|设置隐私条款checkbox尺寸。since 2.4.8|
+|enableHintToast|boolean|checkbo没选中时是否提示用户。since 2.4.8|
+|enableHintToastText|String|checkbo没选中时，自定义提示用户的内容。since 2.4.8|
 |setPrivacyWithBookTitleMark|boolean|设置隐私条款运营商协议名是否加书名号。since 2.4.8|
 |setPrivacyCheckboxInCenter|boolean|设置隐私条款checkbox是否相对协议文字纵向居中。默认居顶。since 2.4.8|
 |setPrivacyTextWidth|int|设置隐私条款文字栏宽度。since 2.5.0|
 |setPrivacyNameAndUrlBeanList|PrivateBean 数组|设置隐私条款组|
-
 + PrivateBean since 原生 v2.7.3 插件 v2.0.9
 
 |方法|参数类型|说明|

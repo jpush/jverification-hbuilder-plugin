@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -15,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -510,7 +512,16 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
             uiConfigBuilder.setPrivacyCheckboxInCenter(jsonObject.getBooleanValue(JConstants.setPrivacyCheckboxInCenter));
         }
         if (jsonObject.containsKey(JConstants.enableHintToast)) {
-            uiConfigBuilder.enableHintToast(jsonObject.getBooleanValue(JConstants.enableHintToast), null);
+            String enableHintToastText=null;
+            if (jsonObject.containsKey(JConstants.enableHintToastText)) {
+                enableHintToastText=jsonObject.getString(JConstants.enableHintToastText);
+            }
+            if(TextUtils.isEmpty(enableHintToastText)) {
+                uiConfigBuilder.enableHintToast(jsonObject.getBooleanValue(JConstants.enableHintToast), null);
+            }
+            else {
+                uiConfigBuilder.enableHintToast(jsonObject.getBooleanValue(JConstants.enableHintToast), Toast.makeText(mWXSDKInstance.getContext(), enableHintToastText, Toast.LENGTH_SHORT));
+            }
         }
         //  授权页隐私协议web页面
         if (jsonObject.containsKey(JConstants.setPrivacyNavColor)) {

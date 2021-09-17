@@ -99,6 +99,8 @@ public class JConstants {
     public static final String setPrivacyCheckboxInCenter = "setPrivacyCheckboxInCenter";
     //    public static final String setPrivacyTextWidth = "setPrivacyTextWidth";
     public static final String enableHintToast = "enableHintToast";
+    public static final String enableHintToastText = "enableHintToastText";
+    public static final String enableHintToastDuration = "enableHintToastDuration";
     //    授权页隐私协议web页面
     public static final String setPrivacyNavColor = "setPrivacyNavColor";
     public static final String setPrivacyNavTitleTextColor = "setPrivacyNavTitleTextColor";
