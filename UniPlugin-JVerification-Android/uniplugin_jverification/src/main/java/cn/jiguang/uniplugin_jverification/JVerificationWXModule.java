@@ -461,7 +461,7 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
                     String beforeName = jsonObject1.getString("beforeName");
                     String afterName = jsonObject1.getString("afterName");
                     JLogger.d("setPrivacyNameAndUrlBeanList:"+beforeName+name+afterName+":"+url);
-                    beanArrayList.add(new PrivacyBean(name!=null?name:"",url!=null?url:"",beforeName!=null?beforeName:"",afterName!=null?afterName:""));
+                    beanArrayList.add(new PrivacyBean(name!=null?name:"",url!=null?url:"",beforeName!=null?beforeName:""));
 
                 }
                 uiConfigBuilder.setPrivacyNameAndUrlBeanList(beanArrayList);

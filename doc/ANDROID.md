@@ -89,8 +89,8 @@
 | ~~setAppPrivacyTwo~~ | ~~String,String~~ | ~~设置开发者隐私条款2名称和URL(名称，url)~~ 插件 v2.0.9 开始废弃， 新增setPrivacyNameAndUrlBeanList 设置隐私协议|
 |setAppPrivacyColor|int,int|设置隐私条款名称颜色(基础文字颜色，协议文字颜色)|
 |setPrivacyOffsetY|int|设置隐私条款相对于授权页面底部下边缘y偏移|
-|setCheckedImgPath|String|设置复选框选中时图片|
-|setUncheckedImgPath|String|设置复选框未选中时图片|
+|setCheckedImgPathJs|String|设置复选框选中时图片|
+|setUncheckedImgPathJs|String|设置复选框未选中时图片|
 |setPrivacyState|boolean|设置隐私条款默认选中状态，默认不选中。since 2.3.2|
 |setPrivacyOffsetX|int|设置隐私条款相对于屏幕左边x轴偏移。since 2.3.8|
 |setPrivacyTextCenterGravity|boolean|设置隐私条款文字是否居中对齐（默认左对齐）。since 2.3.8|
