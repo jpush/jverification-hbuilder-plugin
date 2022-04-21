@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
-	<string>HelloH5</string>
+	<string>JVerification_Hbuilder_Demo</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons</key>
@@ -21,7 +21,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.5.3</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -72,7 +72,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>20503</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>DCLOUD_AD_ID</key>
 	<string>13453452345</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
@@ -80,9 +80,18 @@
 	<key>JCore</key>
 	<dict>
 		<key>APP_KEY</key>
-		<string>60e02a2a65ac4cdc6f80b776</string>
+		<string>a0e6ace8d5b3e0247e3f58db</string>
 		<key>CHANNEL</key>
 		<string>test</string>
+	</dict>
+	<key>JVaas</key>
+	<dict>
+		<key>USER_ID</key>
+		<string>123</string>
+		<key>USER_NAME</key>
+		<string>Alan</string>
+		<key>USER_PHONE</key>
+		<string>18565775329</string>
 	</dict>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
@@ -110,9 +119,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MiSDKAppID</key>
-	<string>2882303761517526143</string>
+	<string>8FFCA8A</string>
 	<key>MiSDKAppKey</key>
-	<string>5211752656143</string>
+	<string>d359c7d9c4544ad7818109a88ce87318</string>
 	<key>MiSDKRun</key>
 	<string>debug</string>
 	<key>NSAppTransportSecurity</key>
@@ -138,6 +147,8 @@
 	<string>访问麦克风</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>相册</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>请放心，开启权限不会获取您在其他站点的隐私信息，该权限仅用于标识设备并保障服务安全与提示浏览体验</string>
 	<key>StatusBarBackground</key>
 	<string>#FFFFFF</string>
 	<key>UIApplicationShortcutItems</key>
@@ -169,9 +180,9 @@
 		</dict>
 	</array>
 	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
+	<array/>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>UILaunchImages</key>
 	<array>
 		<dict>
@@ -388,6 +399,8 @@
 			<string>{834, 1112}</string>
 		</dict>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>UIStatusBarHidden</key>
 	<false/>
 	<key>UIStatusBarStyle</key>
@@ -419,29 +432,31 @@
 	<key>amap</key>
 	<dict>
 		<key>appkey</key>
-		<string>41c8f3ec724fc03639b804dd6d4d8917</string>
+		<string>去官方申请对应的key</string>
 	</dict>
 	<key>baidu</key>
 	<dict>
 		<key>appkey</key>
-		<string>mRFUA0lOYyCGXOcFkZ4cP44K</string>
+		<string>去官方申请对应的key</string>
 	</dict>
 	<key>baiduspeech</key>
 	<dict>
 		<key>API_KEY</key>
-		<string>0IBn3m2b2XzyVACYYQlC8itE</string>
+		<string>去官方申请对应的key</string>
 		<key>APP_ID</key>
-		<string>10466026</string>
+		<string>去官方申请对应的id</string>
 		<key>SECRET_KEY</key>
-		<string>x6tLv1aRUnmzQ6i7sun1fHDOxyeMNiPD</string>
+		<string>去官方申请获取对应的值</string>
 	</dict>
+	<key>dcloud_appkey</key>
+	<string>40752d5501eb272e99388e3dcd847af9</string>
 	<key>dcloud_uninview_background</key>
 	<true/>
 	<key>dcloud_uniplugins</key>
 	<array>
 		<dict>
 			<key>hooksClass</key>
-			<string></string>
+			<string>TestPluginProxy</string>
 			<key>plugins</key>
 			<array>
 				<dict>
@@ -452,13 +467,6 @@
 					<key>type</key>
 					<string>module</string>
 				</dict>
-			</array>
-		</dict>
-		<dict>
-			<key>hooksClass</key>
-			<string></string>
-			<key>plugins</key>
-			<array>
 				<dict>
 					<key>class</key>
 					<string>JCoreModule</string>
@@ -469,61 +477,28 @@
 				</dict>
 			</array>
 		</dict>
+		<dict>
+			<key>hooksClass</key>
+			<string>DCRichAlertProxy</string>
+			<key>plugins</key>
+			<array>
+				<dict>
+					<key>class</key>
+					<string>DCRichAlertModule</string>
+					<key>name</key>
+					<string>DCloud-RichAlert</string>
+					<key>type</key>
+					<string>module</string>
+				</dict>
+			</array>
+		</dict>
 	</array>
-	<key>getui</key>
-	<dict>
-		<key>appid</key>
-		<string>bBPiGM1VQ66mhMI3d9tG0A</string>
-		<key>appkey</key>
-		<string>uS09ESNrE46NQgnHmSYjL2</string>
-		<key>appsecret</key>
-		<string>nG809brIPr7aTF7o0VpZM1</string>
-	</dict>
-	<key>iFly</key>
-	<dict>
-		<key>appid</key>
-		<string>535a0afe</string>
-	</dict>
-	<key>marketChannel</key>
-	<string>io.dcloud.helloH5|HelloH5|13453452345</string>
-	<key>sinaweibo</key>
-	<dict>
-		<key>appSecret</key>
-		<string>b8fa3ec4b7e47a152044d9e8265cf593</string>
-		<key>appkey</key>
-		<string>3662743235</string>
-		<key>redirectURI</key>
-		<string>http://www.dcloud.io/</string>
-	</dict>
-	<key>tencentweibo</key>
-	<dict>
-		<key>appSecret</key>
-		<string>0b3ac9d885c09a1f45c0c08304291546</string>
-		<key>appkey</key>
-		<string>801494298</string>
-		<key>redirectURI</key>
-		<string>http://d.m3w.cn/helloh5p/</string>
-	</dict>
-	<key>umeng</key>
-	<dict>
-		<key>appkey</key>
-		<string>51d6a5a856240b66f0005651</string>
-	</dict>
 	<key>weixinoauth</key>
 	<dict>
 		<key>appSecret</key>
-		<string>3e4eaaefe9ab84cd9d2c1a14a5a2cc9d</string>
+		<string>去官方申请对应的值</string>
 		<key>appid</key>
-		<string>wxbe7f03382358338d</string>
-	</dict>
-	<key>xiaomioauth</key>
-	<dict>
-		<key>appid</key>
-		<string>2882303761517526143</string>
-		<key>appsecret</key>
-		<string>RHYzhpJEut+Ijt9tGBhL3g==</string>
-		<key>redirectURI</key>
-		<string>http://www.dcloud.io/</string>
+		<string>去官方申请对应的appid</string>
 	</dict>
 </dict>
 </plist>

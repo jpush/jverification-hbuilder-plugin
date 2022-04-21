@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#define JVER_VERSION_NUMBER 2.7.4
+#define JVER_VERSION_NUMBER 2.7.8
 
 
 /**
@@ -88,7 +88,8 @@ typedef NS_ENUM(NSInteger,JVVerAlignment){
 
 
 //MARK:导航栏*************
-
+/**运营商类型*/
+@property(nonatomic,strong)NSString *operatorType;
 /**导航栏颜色*/
 @property (nonatomic,strong) UIColor *navColor;
 /**授权页navigation bar style，已废弃。建议使用preferredStatusBarStyle控制状态栏。preferredStatusBarStyle默认为UIStatusBarStyleDefault,当barStyle的效果和preferredStatusBarStyle冲突时，barStyle的效果会失效。 */
@@ -203,9 +204,17 @@ typedef NS_ENUM(NSInteger,JVVerAlignment){
  */
 @property (nonatomic,strong) NSArray *appPrivacyTwo;
 
-/**隐私条款组合:数组
- @[privacyComponents,条款名称,条款链接]
- 条款链接， 支持在线文件和NSBundle本地文件，  沙盒中文件仅支持 NSTemporaryDirectory() 路径下文件
+/**隐私条款组合:数组，使用此参数，则默认放弃appPrivacyOne、appPrivacyTwo的效果。
+ //隐私---新方法 存在appPrivacys则默认使用appPrivacys方式
+ config.appPrivacys = @[
+     @"头部文字",//头部文字
+     @[@"、",@"应用自定义服务条款1",@"https://www.taobao.com/",@"应用自定义服务条款1",],
+     @[@"、",@"应用自定义服务条款2",@"https://www.jiguang.cn/",@"应用自定义服务条款2",],
+     @[@"、",@"应用自定义服务条款3",@"https://www.baidu.com/", @"应用自定义服务条款3",],
+     @[@"、",@"应用自定义服务条款4",@"https://www.taobao.com/",@"应用自定义服务条款4",],
+     @[@"、",@"应用自定义服务条款5",@"https://www.taobao.com/",@"应用自定义服务条款5",],
+     @"尾部文字。"
+ ];
  */
 @property (nonatomic,strong) NSArray * _Nullable appPrivacys;
 
@@ -223,6 +232,8 @@ typedef NS_ENUM(NSInteger,JVVerAlignment){
 @property (nonatomic,assign) CGFloat privacyLineSpacing;
 /**隐私条款Y偏移量(注:此属性为与屏幕底部的距离)*/
 @property (nonatomic,assign) CGFloat privacyOffsetY DEPRECATED_MSG_ATTRIBUTE("Please use privacyConstraints");
+/**是否隐藏导航栏*/
+@property (nonatomic,assign) BOOL privacysNavCustom;
 /**隐私条款拼接文本数组，数组限制4个NSString对象，否则无效
  默认文本1为：”登录即同意“，文本2:”和“，文本3：”、“，文本4：”并使用本机号码登录“
  设置后，隐私协议栏文本修改为 文本1 + 运营商默认协议名称 + 文本2 + 开发者协议名称1 + 文本3 + 开发者协议文本2 + 文本4

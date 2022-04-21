@@ -516,13 +516,12 @@ JVUIConfig *jvUIConfig){
                 [result addObject:item];
             }else if ([item isKindOfClass:[NSArray class]]) {
                 NSArray *itemArr = item;
-                if (itemArr.count == 4 && [itemArr[3] isKindOfClass:[NSArray class]] && [itemArr[3] count] == 3) {
+                if (itemArr.count == 4 && [itemArr[3] isKindOfClass:[NSString class]]) {
                     NSMutableArray *newItemArr = [NSMutableArray array];
                     [newItemArr addObject:itemArr[0]];
                     [newItemArr addObject:itemArr[1]];
                     [newItemArr addObject:itemArr[2]];
-                    NSAttributedString *str = getNSAttributedString(itemArr[3]);
-                    [newItemArr addObject:str];
+                    [newItemArr addObject:itemArr[3]];
                     [result addObject:newItemArr];
                 }
             }

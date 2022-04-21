@@ -38,14 +38,10 @@
  */
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
     BOOL ret = [PDRCore initEngineWihtOptions:launchOptions
                                   withRunMode:PDRCoreRunModeNormal withDelegate:self];
-    UIViewController* adViewController = nil;
-#if defined(ENABLEAD)
-    DCADManager *adManager = [DCADManager adManager];
-    adManager.delegate = self;
-    adViewController = [adManager getADViewController];
-#endif
+
     UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window = window;
     
@@ -55,9 +51,7 @@
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     self.rootViewController = navigationController;
     navigationController.navigationBarHidden = YES;
-    if ( adViewController ) {
-        [navigationController pushViewController:adViewController animated:NO];
-    } else {
+    {
         [self startMainApp];
         self.h5ViewContoller.showLoadingView = YES;
     }
@@ -65,20 +59,6 @@
     [self.window makeKeyAndVisible];
     return ret;
 }
-
-
-#pragma mark - core delegate
-- (BOOL)interruptCloseSplash {
-#if defined(ENABLEAD)
-    return [[DCADManager adManager] interruptCloseSplash];//self.isAdInterruptCloseLoadingPage;
-#endif
-    return NO;
-}
-#if defined(ENABLEAD)
-- (void)settingLoadEnd {
-    [DCADManager adManager];
-}
-#endif
 
 -(BOOL)getStatusBarHidden {
     return [self.h5ViewContoller getStatusBarHidden];

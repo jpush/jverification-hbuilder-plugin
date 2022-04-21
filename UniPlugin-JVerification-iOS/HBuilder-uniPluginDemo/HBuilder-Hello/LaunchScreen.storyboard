@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,8 +19,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app" translatesAutoresizingMaskIntoConstraints="NO" id="chI-mp-JJn">
-                                <rect key="frame" x="147" y="120" width="81" height="81"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app.png" translatesAutoresizingMaskIntoConstraints="NO" id="chI-mp-JJn">
+                                <rect key="frame" x="147" y="100" width="81" height="81"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="81" id="1H3-O0-44D"/>
                                     <constraint firstAttribute="height" constant="81" id="clJ-nz-OrU"/>
@@ -35,7 +33,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HBuilder Hello" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lAp-n0-0hk">
-                                <rect key="frame" x="0.0" y="221" width="375" height="24"/>
+                                <rect key="frame" x="0.0" y="201" width="375" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="uFn-lJ-cpp"/>
                                 </constraints>
@@ -47,9 +45,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="chI-mp-JJn" firstAttribute="centerX" secondItem="z0m-pv-cfa" secondAttribute="centerX" id="42Z-Cr-3Xf"/>
-                            <constraint firstItem="chI-mp-JJn" firstAttribute="top" secondItem="aN7-qZ-KCL" secondAttribute="bottom" constant="100" id="AMC-3E-oVh"/>
                             <constraint firstItem="lAp-n0-0hk" firstAttribute="leading" secondItem="z0m-pv-cfa" secondAttribute="leading" id="Dbn-k8-Zle"/>
                             <constraint firstAttribute="trailing" secondItem="lAp-n0-0hk" secondAttribute="trailing" id="XC1-Es-H4H"/>
+                            <constraint firstItem="chI-mp-JJn" firstAttribute="top" secondItem="z0m-pv-cfa" secondAttribute="top" constant="100" id="pJB-gQ-UXh"/>
                             <constraint firstItem="lAp-n0-0hk" firstAttribute="top" secondItem="chI-mp-JJn" secondAttribute="bottom" constant="20" id="xri-EJ-2Z7"/>
                         </constraints>
                     </view>
@@ -60,6 +58,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="app" width="60" height="60"/>
+        <image name="app.png" width="16" height="16"/>
     </resources>
 </document>
