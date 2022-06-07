@@ -80,18 +80,9 @@
 	<key>JCore</key>
 	<dict>
 		<key>APP_KEY</key>
-		<string>a0e6ace8d5b3e0247e3f58db</string>
+		<string>59705dfaf33d8f339047b670</string>
 		<key>CHANNEL</key>
 		<string>test</string>
-	</dict>
-	<key>JVaas</key>
-	<dict>
-		<key>USER_ID</key>
-		<string>123</string>
-		<key>USER_NAME</key>
-		<string>Alan</string>
-		<key>USER_PHONE</key>
-		<string>18565775329</string>
 	</dict>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
@@ -121,7 +112,7 @@
 	<key>MiSDKAppID</key>
 	<string>8FFCA8A</string>
 	<key>MiSDKAppKey</key>
-	<string>d359c7d9c4544ad7818109a88ce87318</string>
+	<string>9e5aae62cad7bf458a0557e1e5609ef6</string>
 	<key>MiSDKRun</key>
 	<string>debug</string>
 	<key>NSAppTransportSecurity</key>
@@ -449,7 +440,7 @@
 		<string>去官方申请获取对应的值</string>
 	</dict>
 	<key>dcloud_appkey</key>
-	<string>40752d5501eb272e99388e3dcd847af9</string>
+	<string>9e5aae62cad7bf458a0557e1e5609ef6</string>
 	<key>dcloud_uninview_background</key>
 	<true/>
 	<key>dcloud_uniplugins</key>

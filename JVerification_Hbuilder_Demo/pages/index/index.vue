@@ -96,12 +96,11 @@
 				this.jv.addCustomViewsClickCallback(id=>{
 					self.showModal('customViewclick',"id:"+id);
 				});
-				
 				if(uni.getSystemInfoSync().platform == "ios"){
 					this.jv.setCustomUIWithConfigiOS({
 						navColor:0xff000000,
 						logBtnText:"极光认证测试",
-						privacyState:true,
+						privacyState:false,
 						appPrivacyColor:[0xff000200,0xff000000],
 						modalTransitionStyle:"FlipHorizontal",
 						appPrivacys:[
@@ -110,8 +109,10 @@
 						["、","自定义条款2","https://www.taobao.com/","内部自定义条款2"],
 						["、","自定义条款3","https://www.taobao.com/","内部自定义条款3"],
 						"尾部文字"],
+						isAlertPrivacyVC:true,
+						privacyCheckToastMessage:"请点击同意协议",
 						navTransparent:true,
-						agreementNavBackgroundColor:0x00ff00,
+						agreementNavBackgroundColor:0xff7b68ee,
 						privacyTextAlignment:"center",
 						// authPageBackgroudVideo:{
 						// 	videoPath:"static/videoBg.mp4",

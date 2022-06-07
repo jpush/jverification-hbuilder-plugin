@@ -304,6 +304,8 @@ static  NSString* checkViewConstraints=@"checkViewConstraints";
 static  NSString* checkViewHorizontalConstraints=@"checkViewHorizontalConstraints";
 static  NSString* privacyCheckToastMessage=@"privacyCheckToastMessage";
 
+//隐私协议弹窗 是否允许弹窗
+static  NSString* isAlertPrivacyVC=@"isAlertPrivacyVC";
 
 //隐私协议栏
 static  NSString* appPrivacyOne=@"appPrivacyOne";
@@ -470,12 +472,21 @@ JVUIConfig *jvUIConfig){
     else if ([key isEqualToString:privacyCheckToastMessage]) {
         NSString *privacyCheckToastMessage = dict[key];
         if ([key isKindOfClass:[NSString class]]) {
-            jvUIConfig.customPrivacyAlertViewBlock = ^(UIViewController *vc) {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:privacyCheckToastMessage message:nil preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil]];
-                [vc presentViewController:alert animated:true completion:nil];
-            };
+            if (!jvUIConfig.isAlertPrivacyVC) {
+                jvUIConfig.customPrivacyAlertViewBlock = ^(UIViewController *vc) {
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:privacyCheckToastMessage message:nil preferredStyle:UIAlertControllerStyleAlert];
+                    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil]];
+                    [vc presentViewController:alert animated:true completion:nil];
+                };
+            }else{
+                jvUIConfig.customPrivacyAlertViewBlock = ^(UIViewController *vc) {
+                };
+            }
         }
+    }
+    //未勾选时点击登录按钮是否需要弹窗提示
+    else if([key isEqualToString:isAlertPrivacyVC]){
+        jvUIConfig.isAlertPrivacyVC = [dict[key] boolValue];
     }
     
     //    隐私协议栏

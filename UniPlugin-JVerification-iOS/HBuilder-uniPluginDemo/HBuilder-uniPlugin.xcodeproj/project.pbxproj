@@ -9,14 +9,12 @@
 /* Begin PBXBuildFile section */
 		081CE3622811432600BD38E3 /* JVerificationResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 081CE3612811432600BD38E3 /* JVerificationResource.bundle */; };
 		081CE36E2811485C00BD38E3 /* TYRZUISDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 081CE3662811446400BD38E3 /* TYRZUISDK.framework */; };
-		081CE3722811485C00BD38E3 /* OAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 081CE36B2811446500BD38E3 /* OAuth.framework */; };
-		081CE3742811485C00BD38E3 /* jverification-ios-2.7.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 081CE3692811446500BD38E3 /* jverification-ios-2.7.8.a */; };
-		081CE3752811485D00BD38E3 /* ESOneKeyLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 081CE3672811446400BD38E3 /* ESOneKeyLogin.framework */; };
+		081CE3742811485C00BD38E3 /* jverification-ios-2.7.9.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 081CE3692811446500BD38E3 /* jverification-ios-2.7.9.a */; };
 		081CE3772811485D00BD38E3 /* EAccountApiSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 081CE36C2811446500BD38E3 /* EAccountApiSDK.framework */; };
 		081CE3792811485D00BD38E3 /* account_login_sdk_noui_core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 081CE3682811446500BD38E3 /* account_login_sdk_noui_core.framework */; };
 		081CE37C281148D900BD38E3 /* jcore-ios-2.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 081CE37B281148BE00BD38E3 /* jcore-ios-2.4.0.a */; };
 		081CE3852811845C00BD38E3 /* UniPluginJCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E1FF7F27D511980023318A /* UniPluginJCore.framework */; };
-		081CE3882811846000BD38E3 /* UniPluginJVerification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 088FFA6428110BB30044B543 /* UniPluginJVerification.framework */; };
+		08FBC1FD284F5DED008187D6 /* UniPluginJVerification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 088FFA6428110BB30044B543 /* UniPluginJVerification.framework */; };
 		240905031C200AEF0070786F /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 240905021C200AEF0070786F /* CoreBluetooth.framework */; };
 		242725CB1D2666ED00EBD79E /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242725CA1D2666ED00EBD79E /* JavaScriptCore.framework */; };
 		242725CD1D26686700EBD79E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242725CC1D26686700EBD79E /* CoreMotion.framework */; };
@@ -222,13 +220,10 @@
 /* Begin PBXFileReference section */
 		081CE3612811432600BD38E3 /* JVerificationResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = JVerificationResource.bundle; path = "../../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/JVerificationResource.bundle"; sourceTree = "<group>"; };
 		081CE3662811446400BD38E3 /* TYRZUISDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TYRZUISDK.framework; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/TYRZUISDK.framework"; sourceTree = "<group>"; };
-		081CE3672811446400BD38E3 /* ESOneKeyLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ESOneKeyLogin.framework; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/ESOneKeyLogin.framework"; sourceTree = "<group>"; };
 		081CE3682811446500BD38E3 /* account_login_sdk_noui_core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = account_login_sdk_noui_core.framework; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/account_login_sdk_noui_core.framework"; sourceTree = "<group>"; };
-		081CE3692811446500BD38E3 /* jverification-ios-2.7.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jverification-ios-2.7.8.a"; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/jverification-ios-2.7.8.a"; sourceTree = "<group>"; };
+		081CE3692811446500BD38E3 /* jverification-ios-2.7.9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jverification-ios-2.7.9.a"; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/jverification-ios-2.7.9.a"; sourceTree = "<group>"; };
 		081CE36A2811446500BD38E3 /* QuickLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLogin.framework; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/QuickLogin.framework"; sourceTree = "<group>"; };
-		081CE36B2811446500BD38E3 /* OAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuth.framework; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/OAuth.framework"; sourceTree = "<group>"; };
 		081CE36C2811446500BD38E3 /* EAccountApiSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EAccountApiSDK.framework; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/EAccountApiSDK.framework"; sourceTree = "<group>"; };
-		081CE36D2811446500BD38E3 /* UniPluginJVerification.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniPluginJVerification.framework; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/UniPluginJVerification.framework"; sourceTree = "<group>"; };
 		081CE37B281148BE00BD38E3 /* jcore-ios-2.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jcore-ios-2.4.0.a"; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JCore/ios/jcore-ios-2.4.0.a"; sourceTree = "<group>"; };
 		081CE3832811841B00BD38E3 /* UniPluginJVerification.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UniPluginJVerification.framework; sourceTree = "<group>"; };
 		0840755127CDCDD4008AAEED /* UniPluginJCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UniPluginJCore.xcodeproj; path = UniPluginJCore/UniPluginJCore.xcodeproj; sourceTree = "<group>"; };
@@ -677,7 +672,6 @@
 				7A49810B2126B01200D20880 /* libiconv.tbd in Frameworks */,
 				24F990131DFBDA3300848C2B /* CoreData.framework in Frameworks */,
 				67AB0BA021EF111D0029B229 /* BaiduMapAPI_Cloud.framework in Frameworks */,
-				081CE3752811485D00BD38E3 /* ESOneKeyLogin.framework in Frameworks */,
 				8EED629E198A1D13000A4449 /* CoreGraphics.framework in Frameworks */,
 				8EED629C198A1D13000A4449 /* Foundation.framework in Frameworks */,
 				8EED62A0198A1D13000A4449 /* UIKit.framework in Frameworks */,
@@ -717,6 +711,7 @@
 				6756AB6A21F58CA300765F52 /* liblibBlueTooth.a in Frameworks */,
 				24AFD8581CB50C4000C0F062 /* liblibNativeUI.a in Frameworks */,
 				24AFD8591CB50C4000C0F062 /* liblibNavigator.a in Frameworks */,
+				08FBC1FD284F5DED008187D6 /* UniPluginJVerification.framework in Frameworks */,
 				24AFD85A1CB50C4000C0F062 /* liblibOauth.a in Frameworks */,
 				2430A7011E11603E00D3D42D /* libcrypto.a in Frameworks */,
 				24AFD85B1CB50C4000C0F062 /* liblibOrientation.a in Frameworks */,
@@ -725,7 +720,6 @@
 				24AFD85E1CB50C4000C0F062 /* liblibPGInvocation.a in Frameworks */,
 				24AFD85F1CB50C4000C0F062 /* liblibPGProximity.a in Frameworks */,
 				24AFD8601CB50C4000C0F062 /* liblibPush.a in Frameworks */,
-				081CE3722811485C00BD38E3 /* OAuth.framework in Frameworks */,
 				24AFD8611CB50C4000C0F062 /* liblibShare.a in Frameworks */,
 				67D6390921C12945005D1E8F /* libBaiduSpeechSDK.a in Frameworks */,
 				24AFD8621CB50C4000C0F062 /* liblibSpeech.a in Frameworks */,
@@ -758,7 +752,6 @@
 				2F0BA412215B814100F67004 /* liblibVideo.a in Frameworks */,
 				95DA22F0276A0B1E00071681 /* UMAPM.framework in Frameworks */,
 				24BD5AEA1C99492A00B05AA2 /* libiconv.2.tbd in Frameworks */,
-				081CE3882811846000BD38E3 /* UniPluginJVerification.framework in Frameworks */,
 				24BD5AE81C99491D00B05AA2 /* libsqlite3.0.tbd in Frameworks */,
 				2430A7021E11603E00D3D42D /* libssl.a in Frameworks */,
 				240905031C200AEF0070786F /* CoreBluetooth.framework in Frameworks */,
@@ -781,7 +774,7 @@
 				8EED6416198A2635000A4449 /* CoreVideo.framework in Frameworks */,
 				8EED6414198A262C000A4449 /* CoreMedia.framework in Frameworks */,
 				8EED6412198A2622000A4449 /* MobileCoreServices.framework in Frameworks */,
-				081CE3742811485C00BD38E3 /* jverification-ios-2.7.8.a in Frameworks */,
+				081CE3742811485C00BD38E3 /* jverification-ios-2.7.9.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1109,12 +1102,9 @@
 				081CE37B281148BE00BD38E3 /* jcore-ios-2.4.0.a */,
 				081CE3682811446500BD38E3 /* account_login_sdk_noui_core.framework */,
 				081CE36C2811446500BD38E3 /* EAccountApiSDK.framework */,
-				081CE3672811446400BD38E3 /* ESOneKeyLogin.framework */,
-				081CE3692811446500BD38E3 /* jverification-ios-2.7.8.a */,
-				081CE36B2811446500BD38E3 /* OAuth.framework */,
+				081CE3692811446500BD38E3 /* jverification-ios-2.7.9.a */,
 				081CE36A2811446500BD38E3 /* QuickLogin.framework */,
 				081CE3662811446400BD38E3 /* TYRZUISDK.framework */,
-				081CE36D2811446500BD38E3 /* UniPluginJVerification.framework */,
 				9564C420278FE5E900C804D3 /* liblibWebNavi.a */,
 				95DA22EE276A0B1E00071681 /* UMAPM.framework */,
 				95DA22EF276A0B1E00071681 /* UMDevice.framework */,

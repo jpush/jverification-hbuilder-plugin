@@ -64,7 +64,7 @@
                     "platforms" : "Android,iOS",
                     "url" : "",
                     "android_package_name" : "",
-                    "ios_bundle_id" : "",
+                    "ios_bundle_id" : "com.jiguang.prliu",
                     "isCloud" : false,
                     "bought" : -1,
                     "pid" : "",
