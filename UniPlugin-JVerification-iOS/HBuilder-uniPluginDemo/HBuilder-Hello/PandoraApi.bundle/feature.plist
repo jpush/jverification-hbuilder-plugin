@@ -9,12 +9,24 @@
 		<key>global</key>
 		<false/>
 	</dict>
+	<key>Ad</key>
+	<dict>
+		<key>class</key>
+		<string>FeatureUniAd</string>
+		<key>global</key>
+		<true/>
+	</dict>
 	<key>Audio</key>
 	<dict>
 		<key>class</key>
 		<string>PGAudio</string>
 		<key>global</key>
 		<false/>
+	</dict>
+	<key>Bluetooth</key>
+	<dict>
+		<key>class</key>
+		<string>libBlueTooth</string>
 	</dict>
 	<key>Cache</key>
 	<dict>
@@ -107,6 +119,13 @@
 			<string>com.baidu.keyverify</string>
 		</dict>
 	</dict>
+	<key>Media</key>
+	<dict>
+		<key>class</key>
+		<string>PGMediaVideo</string>
+		<key>global</key>
+		<true/>
+	</dict>
 	<key>Messaging</key>
 	<dict>
 		<key>class</key>
@@ -152,6 +171,8 @@
 		<string>PGOauthManager</string>
 		<key>extend</key>
 		<dict>
+			<key>apple</key>
+			<string>PGAppleOauth</string>
 			<key>qihoo</key>
 			<string>PGQHOauth</string>
 			<key>qq</key>
@@ -182,9 +203,7 @@
 			<key>alix</key>
 			<string>PGAlixPay</string>
 			<key>appleiap</key>
-			<string>PGPayIAP</string>
-			<key>pingpp</key>
-			<string>PGPingpp</string>
+			<string>PGPlatbyIAP</string>
 			<key>weixin</key>
 			<string>PGWXPay</string>
 		</dict>
@@ -225,6 +244,10 @@
 	</dict>
 	<key>Share</key>
 	<dict>
+		<key>argument</key>
+		<string>weixin</string>
+		<key>autostart</key>
+		<true/>
 		<key>class</key>
 		<string>PGShareManager</string>
 		<key>extend</key>
@@ -261,6 +284,13 @@
 		</dict>
 		<key>global</key>
 		<true/>
+	</dict>
+	<key>Sqlite</key>
+	<dict>
+		<key>class</key>
+		<string>libSqlite</string>
+		<key>global</key>
+		<false/>
 	</dict>
 	<key>Statistic</key>
 	<dict>
@@ -349,6 +379,20 @@
 		<string>Fingerprint</string>
 		<key>global</key>
 		<true/>
+	</dict>
+	<key>iBeacon</key>
+	<dict>
+		<key>class</key>
+		<string>PGBeacon</string>
+		<key>global</key>
+		<false/>
+	</dict>
+	<key>plugintest</key>
+	<dict>
+		<key>class</key>
+		<string>PGPluginTest</string>
+		<key>global</key>
+		<false/>
 	</dict>
 </dict>
 </plist>

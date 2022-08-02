@@ -28,7 +28,7 @@
             [[UIApplication sharedApplication] setStatusBarHidden:_isFullScreen];
         }
     }
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor blackColor];
     [h5Engine setContainerView:self.view];
     h5Engine.persentViewController = self;
     if ( self.showLoadingView ) {
@@ -38,6 +38,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+
 }
 
 #pragma mark -

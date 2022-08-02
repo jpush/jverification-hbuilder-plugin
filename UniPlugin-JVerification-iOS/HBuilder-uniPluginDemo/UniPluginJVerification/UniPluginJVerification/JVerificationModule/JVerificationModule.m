@@ -304,6 +304,8 @@ static  NSString* checkViewConstraints=@"checkViewConstraints";
 static  NSString* checkViewHorizontalConstraints=@"checkViewHorizontalConstraints";
 static  NSString* privacyCheckToastMessage=@"privacyCheckToastMessage";
 
+//隐私协议弹窗 是否允许弹窗
+static  NSString* isAlertPrivacyVC=@"isAlertPrivacyVC";
 
 //隐私协议栏
 static  NSString* appPrivacyOne=@"appPrivacyOne";
@@ -470,12 +472,21 @@ JVUIConfig *jvUIConfig){
     else if ([key isEqualToString:privacyCheckToastMessage]) {
         NSString *privacyCheckToastMessage = dict[key];
         if ([key isKindOfClass:[NSString class]]) {
-            jvUIConfig.customPrivacyAlertViewBlock = ^(UIViewController *vc) {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:privacyCheckToastMessage message:nil preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil]];
-                [vc presentViewController:alert animated:true completion:nil];
-            };
+            if (!jvUIConfig.isAlertPrivacyVC) {
+                jvUIConfig.customPrivacyAlertViewBlock = ^(UIViewController *vc) {
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:privacyCheckToastMessage message:nil preferredStyle:UIAlertControllerStyleAlert];
+                    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil]];
+                    [vc presentViewController:alert animated:true completion:nil];
+                };
+            }else{
+                jvUIConfig.customPrivacyAlertViewBlock = ^(UIViewController *vc) {
+                };
+            }
         }
+    }
+    //未勾选时点击登录按钮是否需要弹窗提示
+    else if([key isEqualToString:isAlertPrivacyVC]){
+        jvUIConfig.isAlertPrivacyVC = [dict[key] boolValue];
     }
     
     //    隐私协议栏
@@ -516,13 +527,12 @@ JVUIConfig *jvUIConfig){
                 [result addObject:item];
             }else if ([item isKindOfClass:[NSArray class]]) {
                 NSArray *itemArr = item;
-                if (itemArr.count == 4 && [itemArr[3] isKindOfClass:[NSArray class]] && [itemArr[3] count] == 3) {
+                if (itemArr.count == 4 && [itemArr[3] isKindOfClass:[NSString class]]) {
                     NSMutableArray *newItemArr = [NSMutableArray array];
                     [newItemArr addObject:itemArr[0]];
                     [newItemArr addObject:itemArr[1]];
                     [newItemArr addObject:itemArr[2]];
-                    NSAttributedString *str = getNSAttributedString(itemArr[3]);
-                    [newItemArr addObject:str];
+                    [newItemArr addObject:itemArr[3]];
                     [result addObject:newItemArr];
                 }
             }
