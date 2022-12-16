@@ -1,5 +1,5 @@
 {
-    "name" : "JVerification_Hbuilder_Demo",
+    "name" : "JVerification_Hbuilder_Demo_PR",
     "appid" : "__UNI__8FFCA8A",
     "description" : "极光认证 Hbuilder 集成 Demo",
     "versionName" : "1.0.0",
@@ -46,52 +46,15 @@
                 ]
             },
             /* ios打包配置 */
-            "ios" : {},
+            "ios" : {
+                "dSYMs" : false
+            },
             /* SDK配置 */
             "sdkConfigs" : {
                 "ad" : {}
             }
         },
         "nativePlugins" : {
-            "JG-JCore" : {
-                "JPUSH_APPKEY_IOS" : "60e02a2a65ac4cdc6f80b776",
-                "JPUSH_CHANNEL_IOS" : "test",
-                "JPUSH_CHANNEL_ANDROID" : "",
-                "JPUSH_APPKEY_ANDROID" : "7b4b94cca0d185d611e53cca",
-                "__plugin_info__" : {
-                    "name" : "JG-JCore",
-                    "description" : "极光推送JCore插件",
-                    "platforms" : "Android,iOS",
-                    "url" : "",
-                    "android_package_name" : "",
-                    "ios_bundle_id" : "com.jiguang.prliu",
-                    "isCloud" : false,
-                    "bought" : -1,
-                    "pid" : "",
-                    "parameters" : {
-                        "JPUSH_APPKEY_IOS" : {
-                            "des" : "[iOS]极光portal配置应用信息时分配的AppKey",
-                            "key" : "JCore:APP_KEY",
-                            "value" : ""
-                        },
-                        "JPUSH_CHANNEL_IOS" : {
-                            "des" : "[iOS]用于统计分发渠道，不需要可填默认值developer-default",
-                            "key" : "JCore:CHANNEL",
-                            "value" : ""
-                        },
-                        "JPUSH_CHANNEL_ANDROID" : {
-                            "des" : "[Android]用于统计分发渠道，不需要可填默认值developer-default",
-                            "key" : "JPUSH_CHANNEL",
-                            "value" : ""
-                        },
-                        "JPUSH_APPKEY_ANDROID" : {
-                            "des" : "[Android]极光portal配置应用信息时分配的AppKey",
-                            "key" : "JPUSH_APPKEY",
-                            "value" : ""
-                        }
-                    }
-                }
-            },
             "JG-JVerification" : {
                 "__plugin_info__" : {
                     "name" : "JG-JVerification",
