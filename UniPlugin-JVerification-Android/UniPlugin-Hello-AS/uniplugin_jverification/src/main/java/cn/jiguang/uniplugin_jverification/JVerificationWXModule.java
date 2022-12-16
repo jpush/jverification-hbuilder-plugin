@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -634,6 +635,9 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
                 int textSize = viewConfig.getIntValue(JConstants.textSize);
                 int bgColor = viewConfig.getIntValue(JConstants.backgroundColor);
                 String bgImgPath = viewConfig.getString(JConstants.backgroundImg);
+                int textAlignment = viewConfig.getIntValue(JConstants.textAlignment);
+                int textViewGravity = viewConfig.getIntValue(JConstants.textViewGravity);
+
                 View view = null;
                 if (type.equals(JConstants.type_text)) {
                     TextView textView = new TextView(mWXSDKInstance.getContext());
@@ -646,6 +650,14 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
                     }
                     if (viewConfig.containsKey(JConstants.backgroundColor)) {
                         textView.setBackgroundColor(bgColor);
+                    }
+                    if (viewConfig.containsKey(JConstants.textAlignment)) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                            textView.setTextAlignment(textAlignment);
+                        }
+                    }else
+                    if (viewConfig.containsKey(JConstants.textViewGravity)) {
+                        textView.setGravity(textViewGravity);
                     }
                     textView.setLayoutParams(mLayoutParams);
                     view = textView;

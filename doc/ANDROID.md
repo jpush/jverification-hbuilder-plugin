@@ -181,6 +181,8 @@ type = text 的属性
 |textColor|int|文字颜色|
 |textSize|int|文字大小|
 |bgColor|int|背景颜色|
+|textAlignment|int|文字的对齐方式,类比系统的textAlignment 设置了textAlignment 则Gravity不生效|
+|textViewGravity|int|控件的对齐方式,类比系统的Gravity 设置了textAlignment 则Gravity不生效|
 
 type = button 的属性
 

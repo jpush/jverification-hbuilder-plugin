@@ -200,7 +200,9 @@
 							text:"自定义tv",
 							textSize:20,
 							align:15,
-							margins:[0,100,0,0],
+							margins:[100,100,0,0],
+							textAlignment:4,
+							textViewGravity:2,
 							bgColor:0xff7b68ee
 						},
 						{

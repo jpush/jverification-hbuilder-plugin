@@ -141,6 +141,8 @@ public class JConstants {
     public static final String textColor = "textColor";
     public static final String backgroundColor = "bgColor";
     public static final String backgroundImg = "bgImgPath";
+    public static final String textAlignment = "textAlignment";
+    public static final String textViewGravity = "textViewGravity";
 
     //*******************************验证码*******************************
     public static final String PHONE_NUMBER = "phoneNumber";
