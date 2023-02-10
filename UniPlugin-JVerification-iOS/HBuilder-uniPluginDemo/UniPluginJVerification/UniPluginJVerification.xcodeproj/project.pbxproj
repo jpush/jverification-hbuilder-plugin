@@ -122,7 +122,7 @@
 				Base,
 			);
 			mainGroup = 037179E723C8496A004399A2;
-			productRefGroup = 037179E723C8496A004399A2 /* Products */;
+			productRefGroup = 037179E723C8496A004399A2;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -284,7 +284,7 @@
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../SDK/inc\"/**";
 				INFOPLIST_FILE = UniPluginJVerification/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -292,6 +292,7 @@
 				);
 				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-fno-objc-msgsend-selector-stubs";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.jiguang.login1;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -316,7 +317,7 @@
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../SDK/inc\"/**";
 				INFOPLIST_FILE = UniPluginJVerification/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -324,6 +325,7 @@
 				);
 				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-fno-objc-msgsend-selector-stubs";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.jiguang.login1;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

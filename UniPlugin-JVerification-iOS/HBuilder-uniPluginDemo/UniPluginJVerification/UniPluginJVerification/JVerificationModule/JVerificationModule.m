@@ -61,6 +61,9 @@ WX_EXPORT_METHOD(@selector(addCustomViewsClickCallback:))
 WX_EXPORT_METHOD(@selector(getCode:callback:))
 WX_EXPORT_METHOD(@selector(setTimeWithConfig:))
 
+WX_EXPORT_METHOD(@selector(setLocationEanable:))
+
+
 BOOL debugMode = NO;
 
 - (void)setDebugMode:(BOOL)debug
@@ -251,6 +254,11 @@ BOOL debugMode = NO;
 {
     NSTimeInterval time  = timeInter;
     [JVERIFICATIONService setGetCodeInternal:time];
+}
+
+// 地理位置采集开关
+- (void)setLocationEanable:(BOOL)isEanble{
+    [JVERIFICATIONService setLocationEanable:isEanble];
 }
 
 

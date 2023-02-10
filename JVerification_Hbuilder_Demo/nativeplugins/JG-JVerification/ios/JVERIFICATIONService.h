@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#define JVER_VERSION_NUMBER 2.7.9
+#define JVER_VERSION_NUMBER 2.9.4
 
 
 /**
@@ -86,6 +86,7 @@ typedef NS_ENUM(NSInteger,JVVerAlignment){
 
 /*----------------------------------------授权页面-----------------------------------*/
 
+#pragma mark --导航栏
 
 //MARK:导航栏*************
 /**运营商类型*/
@@ -123,13 +124,17 @@ typedef NS_ENUM(NSInteger,JVVerAlignment){
 @property (nonatomic,assign) BOOL prefersStatusBarHidden;
 
 
-
+#pragma mark --图片设置
 
 //MARK:图片设置************
 /**授权界面背景图片*/
 @property (nonatomic,strong) UIImage *authPageBackgroundImage;
 /**授权界面背景gif资源路径，与authPageBackgroundImage属性不可生效*/
 @property (nonatomic,copy) NSString *authPageGifImagePath;
+/**授权界面背景视频资源路径，与authPageBackgroundImage属性不可生效*/
+@property (nonatomic,copy) NSString *authPageVideoPath;
+/**授权界面背景视频单帧默认图片资源路径，与authPageBackgroundImage属性不可生效*/
+@property (nonatomic,copy) NSString *authPageVideoPlaceHolderImageName;
 /**LOGO图片*/
 @property (nonatomic,strong) UIImage *logoImg;
 /**LOGO图片宽度*/
@@ -144,6 +149,8 @@ typedef NS_ENUM(NSInteger,JVVerAlignment){
 @property (nonatomic, copy) NSArray <JVLayoutConstraint*>* logoHorizontalConstraints;
 /**LOGO图片隐藏*/
 @property (nonatomic,assign) BOOL logoHidden;
+
+#pragma mark -- 登录按钮
 
 //MARK:登录按钮************
 
@@ -165,6 +172,8 @@ typedef NS_ENUM(NSInteger,JVVerAlignment){
  */
 @property (nonatomic,copy) NSArray *logBtnImgs;
 
+#pragma mark -- 号码框设置
+
 //MARK:号码框设置************
 
 /**手机号码字体颜色*/
@@ -180,8 +189,10 @@ typedef NS_ENUM(NSInteger,JVVerAlignment){
 /*号码栏 横屏布局,横屏时优先级高于numberConstraints*/
 @property (nonatomic, copy) NSArray <JVLayoutConstraint*>* numberHorizontalConstraints;
 
-//MARK:隐私条款************
 
+#pragma mark -- 隐私条款
+
+//MARK:隐私条款************
 /**复选框未选中时图片*/
 @property (nonatomic,strong) UIImage *uncheckedImg;
 /**复选框选中时图片*/
@@ -247,6 +258,9 @@ typedef NS_ENUM(NSInteger,JVVerAlignment){
 @property (nonatomic,assign) BOOL privacyState;
 /*隐私条约Label的垂直对齐方式*/
 @property (nonatomic,assign) JVVerAlignment textVerAlignment;
+/*隐私协议点击 是否用浏览器打开*/
+///2.9.4+生效
+@property (nonatomic,assign) BOOL openPrivacyInBrowser;
 /*
  当自定义Alert view,当隐私条款未选中时,点击登录按钮时回调
  当此参数存在时,未选中隐私条款的情况下，登录按钮可以被点击
@@ -290,6 +304,7 @@ typedef NS_ENUM(NSInteger,JVVerAlignment){
 @property (nonatomic,copy) void(^customLoadingViewBlock)(UIView * View);
 
 
+#pragma mark -- 弹窗样式设置
 
 /*弹窗样式设置*/
 /*是否弹窗，默认no*/
@@ -325,6 +340,8 @@ typedef NS_ENUM(NSInteger,JVVerAlignment){
  注意:当授权页为弹框样式时,参数无效，屏幕方向由当前视图控制器控制 */
 @property (nonatomic, assign) UIInterfaceOrientation orientation;
 
+#pragma mark -- 协议页导航栏设置
+
 /**协议页导航栏背景颜色*/
 @property (nonatomic, strong) UIColor *agreementNavBackgroundColor;
 /*授权页点击运营商默认协议，进入协议页时, 协议页自定义导航栏标题*/
@@ -355,11 +372,8 @@ typedef NS_ENUM(NSInteger,JVVerAlignment){
  2、用户点击授权页关闭按钮，关闭授权页
  */
 @property (nonatomic, assign) BOOL dismissAnimationFlag;
+
 @end
-
-
-
-
 
 DEPRECATED_MSG_ATTRIBUTE("Please use JVUIConfig") @interface JVMobileUIConfig : JVUIConfig
 @end
@@ -367,10 +381,6 @@ DEPRECATED_MSG_ATTRIBUTE("Please use JVUIConfig") @interface JVUnicomUIConfig : 
 @end
 DEPRECATED_MSG_ATTRIBUTE("Please use JVUIConfig") @interface JVTelecomUIConfig : JVUIConfig
 @end
-
-
-
-
 
 
 @interface JVAuthConfig : NSObject
@@ -485,6 +495,7 @@ DEPRECATED_MSG_ATTRIBUTE("Please use JVUIConfig") @interface JVTelecomUIConfig :
 */
 + (void)dismissLoginControllerAnimated: (BOOL)flag completion: (void (^)(void))completion;
 
+
 /*!
  * @abstract 设置是否打印sdk产生的Debug级log信息, 默认为NO(不打印log)
  *
@@ -519,6 +530,7 @@ DEPRECATED_MSG_ATTRIBUTE("Please use JVUIConfig") @interface JVTelecomUIConfig :
  @param customViewsBlk 添加自定义视图block
 */
 + (void)customUIWithConfig:(JVUIConfig *)UIConfig customViews:(void(^)(UIView *customAreaView))customViewsBlk;
+
 
 /**
  *  获取短信验证码 （最小间隔时间内只能调用一次）

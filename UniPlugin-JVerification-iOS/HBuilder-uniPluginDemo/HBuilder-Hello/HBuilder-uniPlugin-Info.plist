@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
-	<string>JVerification_Hbuilder_Demo</string>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons</key>
@@ -21,7 +21,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(MARKETING_VERSION)</string>
+	<string>2.5.3</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -72,7 +72,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<string>20503</string>
 	<key>DCLOUD_AD_ID</key>
 	<string>13453452345</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
@@ -80,7 +80,7 @@
 	<key>JCore</key>
 	<dict>
 		<key>APP_KEY</key>
-		<string>59705dfaf33d8f339047b670</string>
+		<string>4fcc3e237eec4c4fb804ad49</string>
 		<key>CHANNEL</key>
 		<string>test</string>
 	</dict>
@@ -110,9 +110,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MiSDKAppID</key>
-	<string>8FFCA8A</string>
+	<string>去官方申请对应的appid</string>
 	<key>MiSDKAppKey</key>
-	<string>9e5aae62cad7bf458a0557e1e5609ef6</string>
+	<string>去官方申请对应的key</string>
 	<key>MiSDKRun</key>
 	<string>debug</string>
 	<key>NSAppTransportSecurity</key>
@@ -172,8 +172,6 @@
 	</array>
 	<key>UIBackgroundModes</key>
 	<array/>
-	<key>UIFileSharingEnabled</key>
-	<true/>
 	<key>UILaunchImages</key>
 	<array>
 		<dict>
@@ -440,7 +438,7 @@
 		<string>去官方申请获取对应的值</string>
 	</dict>
 	<key>dcloud_appkey</key>
-	<string>9e5aae62cad7bf458a0557e1e5609ef6</string>
+	<string>77679c7f47cf09f51167f2492712fe3f</string>
 	<key>dcloud_uninview_background</key>
 	<true/>
 	<key>dcloud_uniplugins</key>
@@ -455,14 +453,6 @@
 					<string>JVerificationModule</string>
 					<key>name</key>
 					<string>JG-JVerification</string>
-					<key>type</key>
-					<string>module</string>
-				</dict>
-				<dict>
-					<key>class</key>
-					<string>JCoreModule</string>
-					<key>name</key>
-					<string>JG-JCore</string>
 					<key>type</key>
 					<string>module</string>
 				</dict>
@@ -484,7 +474,7 @@
 			</array>
 		</dict>
 	</array>
-	<key>weixinoauth</key>
+	<key>weixin</key>
 	<dict>
 		<key>appSecret</key>
 		<string>去官方申请对应的值</string>
