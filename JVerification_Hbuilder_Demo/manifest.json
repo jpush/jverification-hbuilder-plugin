@@ -55,6 +55,45 @@
             }
         },
         "nativePlugins" : {
+            "JG-JCore" : {
+                "JPUSH_APPKEY_ANDROID" : "",
+                "JPUSH_APPKEY_IOS" : "",
+                "JPUSH_CHANNEL_ANDROID" : "",
+                "JPUSH_CHANNEL_IOS" : "",
+                "__plugin_info__" : {
+                    "name" : "极光JCore官方SDK",
+                    "description" : "极光JCore官方SDK HBuilder插件版本",
+                    "platforms" : "Android,iOS",
+                    "url" : "https://ext.dcloud.net.cn/plugin?id=4028",
+                    "android_package_name" : "cn.jiguang.auth",
+                    "ios_bundle_id" : "cn.jiguang.hxhg",
+                    "isCloud" : true,
+                    "bought" : 1,
+                    "pid" : "4028",
+                    "parameters" : {
+                        "JPUSH_APPKEY_ANDROID" : {
+                            "des" : "[Android]极光portal配置应用信息时分配的AppKey",
+                            "key" : "JPUSH_APPKEY",
+                            "value" : ""
+                        },
+                        "JPUSH_APPKEY_IOS" : {
+                            "des" : "[iOS]极光portal配置应用信息时分配的AppKey",
+                            "key" : "JCore:APP_KEY",
+                            "value" : ""
+                        },
+                        "JPUSH_CHANNEL_ANDROID" : {
+                            "des" : "[Android]用于统计分发渠道，不需要可填默认值developer-default",
+                            "key" : "JPUSH_CHANNEL",
+                            "value" : ""
+                        },
+                        "JPUSH_CHANNEL_IOS" : {
+                            "des" : "[iOS]用于统计分发渠道，不需要可填默认值developer-default",
+                            "key" : "JCore:CHANNEL",
+                            "value" : ""
+                        }
+                    }
+                }
+            },
             "JG-JVerification" : {
                 "__plugin_info__" : {
                     "name" : "JG-JVerification",
