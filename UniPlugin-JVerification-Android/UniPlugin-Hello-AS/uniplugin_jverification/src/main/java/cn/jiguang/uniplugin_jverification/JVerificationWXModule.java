@@ -760,22 +760,37 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
 
     private JSONObject convertToResult(boolean enable) {
         JSONObject result = new JSONObject();
-        result.put(JConstants.ENABLE, enable);
+        try{
+            result.put(JConstants.ENABLE, enable);
+            return result;
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         return result;
     }
 
     private JSONObject convertToResult(int code, String content) {
         JSONObject result = new JSONObject();
-        result.put(JConstants.CODE, code);
-        result.put(JConstants.CONTENT, content);
+        try{
+            result.put(JConstants.CODE, code);
+            result.put(JConstants.CONTENT, content);
+            return result;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return result;
     }
 
     private JSONObject convertToResult(int code, String content, String operator) {
         JSONObject result = new JSONObject();
-        result.put(JConstants.CODE, code);
-        result.put(JConstants.CONTENT, content);
-        result.put(JConstants.OPERATOR, operator);
+        try{
+            result.put(JConstants.CODE, code);
+            result.put(JConstants.CONTENT, content);
+            result.put(JConstants.OPERATOR, operator);
+            return result;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return result;
     }
 
