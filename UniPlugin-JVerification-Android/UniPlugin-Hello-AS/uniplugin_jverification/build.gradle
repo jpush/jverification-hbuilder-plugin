@@ -45,7 +45,7 @@ dependencies {
     debugImplementation 'cn.jiguang.sdk:jcore:3.3.2'
 
 //    releaseCompileOnly fileTree(include: ['*.jar'], dir: 'libs')
-    releaseCompileOnly fileTree(include: ['uniapp-release.aar'], dir: '../app/libs')
+    releaseCompileOnly fileTree(dir: '../app/libs', include: ['uniapp-v8-release.aar'])
     releaseCompileOnly 'com.alibaba:fastjson:1.2.70'
     releaseCompileOnly 'com.facebook.fresco:fresco:1.13.0'
     releaseCompileOnly 'cn.jiguang.sdk:jverification:2.9.3'

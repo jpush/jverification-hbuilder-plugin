@@ -8,23 +8,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9204707-381a-41af-937b-53a7af2b93cb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/arm64-v8a/libCtaApiLib.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/arm64-v8a/libCtaApiLib.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/arm64-v8a/libquicklogin.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/arm64-v8a/libquicklogin.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/armeabi-v7a/libCtaApiLib.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/armeabi-v7a/libCtaApiLib.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/armeabi-v7a/libquicklogin.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/armeabi-v7a/libquicklogin.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/armeabi/libCtaApiLib.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/armeabi/libCtaApiLib.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/armeabi/libquicklogin.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/armeabi/libquicklogin.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/jverification-android-not_support_dynamic-release-2.9.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/x86/libCtaApiLib.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/x86/libCtaApiLib.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/x86/libquicklogin.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/x86/libquicklogin.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/x86_64/libCtaApiLib.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/x86_64/libCtaApiLib.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/x86_64/libquicklogin.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/x86_64/libquicklogin.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/pages/index/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/pages/index/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/assets/apps/__UNI__8FFCA8A/www/app-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/apps/__UNI__8FFCA8A/www/app-service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/assets/apps/__UNI__8FFCA8A/www/app-view.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/apps/__UNI__8FFCA8A/www/app-view.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/assets/apps/__UNI__8FFCA8A/www/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/apps/__UNI__8FFCA8A/www/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uniplugin_jverification/src/main/java/cn/jiguang/uniplugin_jverification/JVerificationWXModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/uniplugin_jverification/src/main/java/cn/jiguang/uniplugin_jverification/JVerificationWXModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle____app_libs_uniapp_v8_release_aar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/android-gif-drawable-release@1.2.23.aar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/breakpad-build-release.aar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib.5plus.base-release.aar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/oaid_sdk_1.0.25.aar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/uniapp-v8-release.aar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uniplugin_jverification/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/uniplugin_jverification/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +35,9 @@
           <activation />
         </task>
         <task path="$PROJECT_DIR$/uniplugin_component">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/app">
           <activation />
         </task>
         <projects_view>
@@ -87,6 +81,13 @@
                 <item name="UniPlugin-Hello-AS" type="f1a62948:ProjectNode" />
                 <item name="uniplugin_jverification" type="2d1252cf:ModuleNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="UniPlugin-Hello-AS" type="f1a62948:ProjectNode" />
+                <item name="uniplugin_jverification" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="verification" type="c8890929:TasksNode$1" />
               </path>
               <path>
@@ -118,7 +119,7 @@
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.30964467" />
   </component>
-  <component name="RunManager" selected="Gradle.UniPlugin-Hello-AS:uniplugin_jverification [assemble]">
+  <component name="RunManager" selected="Gradle.UniPlugin-Hello-AS:uniplugin_jverification [assembleRelease]">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -221,6 +222,25 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="UniPlugin-Hello-AS:uniplugin_jverification [assembleRelease]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/uniplugin_jverification" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="assembleRelease" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="UniPlugin-Hello-AS:uniplugin_jverification [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -233,25 +253,6 @@
         <option name="taskNames">
           <list>
             <option value="assemble" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="UniPlugin-Hello-AS:uniplugin_jverification [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/uniplugin_jverification" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="build" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -280,11 +281,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.UniPlugin-Hello-AS:uniplugin_jverification [assembleRelease]" />
         <item itemvalue="Gradle.UniPlugin-Hello-AS:uniplugin_jverification [clean]" />
         <item itemvalue="Gradle.UniPlugin-Hello-AS:uniplugin_jverification [assemble]" />
         <item itemvalue="Gradle.UniPlugin-Hello-AS:uniplugin_jverification [assembleAndroidTest]" />
         <item itemvalue="Gradle.UniPlugin-Hello-AS:uniplugin_component [assemble]" />
-        <item itemvalue="Gradle.UniPlugin-Hello-AS:uniplugin_jverification [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -310,25 +311,29 @@
       <screen x="1440" y="-120" width="1920" height="985" />
     </state>
     <state x="2184" y="155" key="#Web_Browsers/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676514469525" />
-    <state width="1878" height="264" key="GridCell.Tab.0.bottom" timestamp="1676520403368">
+    <state width="1878" height="180" key="GridCell.Tab.0.bottom" timestamp="1676521099033">
       <screen x="1440" y="-120" width="1920" height="985" />
     </state>
-    <state width="1878" height="264" key="GridCell.Tab.0.bottom/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676520403368" />
-    <state width="1878" height="264" key="GridCell.Tab.0.center" timestamp="1676520403367">
+    <state width="1878" height="180" key="GridCell.Tab.0.bottom/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676521099033" />
+    <state width="1878" height="180" key="GridCell.Tab.0.center" timestamp="1676521099033">
       <screen x="1440" y="-120" width="1920" height="985" />
     </state>
-    <state width="1878" height="264" key="GridCell.Tab.0.center/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676520403367" />
-    <state width="1878" height="264" key="GridCell.Tab.0.left" timestamp="1676520403366">
+    <state width="1878" height="180" key="GridCell.Tab.0.center/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676521099033" />
+    <state width="1878" height="180" key="GridCell.Tab.0.left" timestamp="1676521099033">
       <screen x="1440" y="-120" width="1920" height="985" />
     </state>
-    <state width="1878" height="264" key="GridCell.Tab.0.left/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676520403366" />
-    <state width="1878" height="264" key="GridCell.Tab.0.right" timestamp="1676520403367">
+    <state width="1878" height="180" key="GridCell.Tab.0.left/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676521099033" />
+    <state width="1878" height="180" key="GridCell.Tab.0.right" timestamp="1676521099033">
       <screen x="1440" y="-120" width="1920" height="985" />
     </state>
-    <state width="1878" height="264" key="GridCell.Tab.0.right/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676520403367" />
+    <state width="1878" height="180" key="GridCell.Tab.0.right/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676521099033" />
     <state x="2379" y="309" width="659" height="490" key="find.popup" timestamp="1676278558135">
       <screen x="1440" y="-120" width="1920" height="985" />
     </state>
     <state x="2379" y="309" width="659" height="490" key="find.popup/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676278558135" />
+    <state x="2065" y="165" width="670" height="675" key="run.anything.popup" timestamp="1676520934586">
+      <screen x="1440" y="-120" width="1920" height="985" />
+    </state>
+    <state x="2065" y="165" width="670" height="675" key="run.anything.popup/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676520934586" />
   </component>
 </project>
