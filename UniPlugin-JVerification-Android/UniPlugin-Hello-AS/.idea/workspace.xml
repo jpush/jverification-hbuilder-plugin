@@ -8,21 +8,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9204707-381a-41af-937b-53a7af2b93cb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle____app_libs_uniapp_v8_release_aar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__cn_jiguang_sdk_jverification_2_9_3_aar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/android-gif-drawable-release@1.2.23.aar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/breakpad-build-release.aar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib.5plus.base-release.aar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/oaid_sdk_1.0.25.aar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/uniapp-v8-release.aar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/uniplugin_jverification/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/uniplugin_jverification/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uniplugin_jverification/src/main/java/cn/jiguang/uniplugin_jverification/JVerificationWXModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/uniplugin_jverification/src/main/java/cn/jiguang/uniplugin_jverification/JVerificationWXModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uniplugin_jverification/src/main/java/cn/jiguang/uniplugin_jverification/common/JConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/uniplugin_jverification/src/main/java/cn/jiguang/uniplugin_jverification/common/JConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../doc/ANDROID.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/ANDROID.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[83f1ff99]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -311,22 +309,22 @@
       <screen x="1440" y="-120" width="1920" height="985" />
     </state>
     <state x="2184" y="155" key="#Web_Browsers/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676514469525" />
-    <state width="1878" height="180" key="GridCell.Tab.0.bottom" timestamp="1676521099033">
+    <state width="1878" height="170" key="GridCell.Tab.0.bottom" timestamp="1676535247541">
       <screen x="1440" y="-120" width="1920" height="985" />
     </state>
-    <state width="1878" height="180" key="GridCell.Tab.0.bottom/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676521099033" />
-    <state width="1878" height="180" key="GridCell.Tab.0.center" timestamp="1676521099033">
+    <state width="1878" height="170" key="GridCell.Tab.0.bottom/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676535247541" />
+    <state width="1878" height="170" key="GridCell.Tab.0.center" timestamp="1676535247540">
       <screen x="1440" y="-120" width="1920" height="985" />
     </state>
-    <state width="1878" height="180" key="GridCell.Tab.0.center/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676521099033" />
-    <state width="1878" height="180" key="GridCell.Tab.0.left" timestamp="1676521099033">
+    <state width="1878" height="170" key="GridCell.Tab.0.center/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676535247540" />
+    <state width="1878" height="170" key="GridCell.Tab.0.left" timestamp="1676535247539">
       <screen x="1440" y="-120" width="1920" height="985" />
     </state>
-    <state width="1878" height="180" key="GridCell.Tab.0.left/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676521099033" />
-    <state width="1878" height="180" key="GridCell.Tab.0.right" timestamp="1676521099033">
+    <state width="1878" height="170" key="GridCell.Tab.0.left/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676535247539" />
+    <state width="1878" height="170" key="GridCell.Tab.0.right" timestamp="1676535247540">
       <screen x="1440" y="-120" width="1920" height="985" />
     </state>
-    <state width="1878" height="180" key="GridCell.Tab.0.right/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676521099033" />
+    <state width="1878" height="170" key="GridCell.Tab.0.right/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676535247540" />
     <state x="2379" y="309" width="659" height="490" key="find.popup" timestamp="1676278558135">
       <screen x="1440" y="-120" width="1920" height="985" />
     </state>

@@ -101,6 +101,17 @@ public class JConstants {
     public static final String enableHintToast = "enableHintToast";
     public static final String enableHintToastText = "enableHintToastText";
     public static final String enableHintToastDuration = "enableHintToastDuration";
+
+    ///225 -新增
+    public static final String setPrivacyMarginL = "setPrivacyMarginL";
+    public static final String setPrivacyMarginR = "setPrivacyMarginR";
+    public static final String setPrivacyMarginB = "setPrivacyMarginB";
+    public static final String setPrivacyMarginT = "setPrivacyMarginT";
+
+    public static final String setIsPrivacyViewDarkMode = "setIsPrivacyViewDarkMode";
+    public static final String openPrivacyInBrowser = "openPrivacyInBrowser";
+
+
     //    授权页隐私协议web页面
     public static final String setPrivacyNavColor = "setPrivacyNavColor";
     public static final String setPrivacyNavTitleTextColor = "setPrivacyNavTitleTextColor";

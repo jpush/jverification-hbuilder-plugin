@@ -447,6 +447,28 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
             uiConfigBuilder.setLogBtnBottomOffsetY(jsonObject.getIntValue(JConstants.setLogBtnBottomOffsetY));
         }
 
+        //225新增
+        if (jsonObject.containsKey(JConstants.setPrivacyMarginL)) {
+            uiConfigBuilder.setPrivacyMarginL(jsonObject.getIntValue(JConstants.setPrivacyMarginL));
+        }
+        if (jsonObject.containsKey(JConstants.setPrivacyMarginR)) {
+            uiConfigBuilder.setPrivacyMarginR(jsonObject.getIntValue(JConstants.setPrivacyMarginR));
+        }
+        if (jsonObject.containsKey(JConstants.setPrivacyMarginB)) {
+            uiConfigBuilder.setPrivacyMarginB(jsonObject.getIntValue(JConstants.setPrivacyMarginB));
+        }
+        if (jsonObject.containsKey(JConstants.setPrivacyMarginT)) {
+            uiConfigBuilder.setPrivacyMarginT(jsonObject.getIntValue(JConstants.setPrivacyMarginT));
+        }
+
+        if (jsonObject.containsKey(JConstants.setIsPrivacyViewDarkMode)) {
+            uiConfigBuilder.setIsPrivacyViewDarkMode(jsonObject.getBooleanValue(JConstants.setIsPrivacyViewDarkMode));
+        }
+
+        if (jsonObject.containsKey(JConstants.openPrivacyInBrowser)) {
+            uiConfigBuilder.setOpenPrivacyInBrowser(jsonObject.getBooleanValue(JConstants.openPrivacyInBrowser));
+        }
+
         //  授权页隐私栏
         // 273 后 setAppPrivacyOne和setAppPrivacyTwo废弃，用 setPrivacyNameAndUrlBeanList 代替
 //        if (jsonObject.containsKey(JConstants.setAppPrivacyOne)) {
