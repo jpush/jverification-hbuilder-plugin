@@ -177,6 +177,12 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
         mCustomViewsClickCallback = callback;
     }
 
+    @JSMethod(uiThread = true)
+    public  void setLocationEanable(final  boolean eanable){
+        JLogger.d("setLocationEanable :"+eanable);
+        JVerificationInterface.setDebugMode(eanable);
+    }
+
 
     private JVerifyUIConfig.Builder getBuilder(JSONObject jsonObject) {
 

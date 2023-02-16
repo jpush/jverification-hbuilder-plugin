@@ -13,6 +13,8 @@
 		<button type="primary" @click="autoLayoutUI()">自动布局授权页</button>
 		<button type="primary" @click="getCode()">获取验证码</button>
 		<button type="primary" @click="setTimeWithConfig()">设置获取验证码时间间隔</button>
+		<button type="primary" @click="setLocationEanable()">关闭地址位置采集</button>
+
 		<view class="msg-box" >
 			<text class="msg">{{msg}}</text>
 		</view>
@@ -325,6 +327,10 @@
 			// 设置前后两次获取验证码的时间间隔
 			setTimeWithConfig:function(){
 				this.jv.setTimeWithConfig(1000)
+			},
+			// 关闭地址位置采集
+			setLocationEanable:function(){
+				this.jv.setLocationEanable(false)
 			}
 		}
 	}

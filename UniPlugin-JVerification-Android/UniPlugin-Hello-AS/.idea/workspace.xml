@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b9204707-381a-41af-937b-53a7af2b93cb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/arm64-v8a/libCtaApiLib.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/arm64-v8a/libCtaApiLib.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/arm64-v8a/libquicklogin.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/arm64-v8a/libquicklogin.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/armeabi-v7a/libCtaApiLib.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/armeabi-v7a/libCtaApiLib.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/armeabi-v7a/libquicklogin.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/armeabi-v7a/libquicklogin.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/armeabi/libCtaApiLib.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/armeabi/libCtaApiLib.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/armeabi/libquicklogin.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/armeabi/libquicklogin.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/jverification-android-not_support_dynamic-release-2.9.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/x86/libCtaApiLib.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/x86/libCtaApiLib.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/x86/libquicklogin.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/x86/libquicklogin.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/x86_64/libCtaApiLib.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/x86_64/libCtaApiLib.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/x86_64/libquicklogin.so" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/android/libs/x86_64/libquicklogin.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/pages/index/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../JVerification_Hbuilder_Demo/pages/index/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/apps/__UNI__8FFCA8A/www/app-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/apps/__UNI__8FFCA8A/www/app-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/apps/__UNI__8FFCA8A/www/app-view.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/apps/__UNI__8FFCA8A/www/app-view.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/apps/__UNI__8FFCA8A/www/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/apps/__UNI__8FFCA8A/www/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uniplugin_jverification/src/main/java/cn/jiguang/uniplugin_jverification/JVerificationWXModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/uniplugin_jverification/src/main/java/cn/jiguang/uniplugin_jverification/JVerificationWXModule.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[83f1ff99]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/uniplugin_jverification">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/uniplugin_component">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="UniPlugin-Hello-AS" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="UniPlugin-Hello-AS" type="f1a62948:ProjectNode" />
+                <item name="uniplugin_component" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="UniPlugin-Hello-AS" type="f1a62948:ProjectNode" />
+                <item name="uniplugin_component" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="UniPlugin-Hello-AS" type="f1a62948:ProjectNode" />
+                <item name="uniplugin_jverification" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="UniPlugin-Hello-AS" type="f1a62948:ProjectNode" />
+                <item name="uniplugin_jverification" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="UniPlugin-Hello-AS" type="f1a62948:ProjectNode" />
+                <item name="uniplugin_jverification" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="UniPlugin-Hello-AS" type="f1a62948:ProjectNode" />
+                <item name="uniplugin_jverification" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="verification" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="UniPlugin-Hello-AS" type="f1a62948:ProjectNode" />
+                <item name="uniplugin_jverification" type="2d1252cf:ModuleNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="2Lg1a0ZrL7G9jAftz4aSA7UlPXc" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.30964467" />
+  </component>
+  <component name="RunManager" selected="Gradle.UniPlugin-Hello-AS:uniplugin_jverification [assemble]">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="UniPlugin-Hello-AS.app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UniPlugin-Hello-AS:uniplugin_component [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/uniplugin_component" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="assemble" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="UniPlugin-Hello-AS:uniplugin_jverification [assembleAndroidTest]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/uniplugin_jverification" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="assembleAndroidTest" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="UniPlugin-Hello-AS:uniplugin_jverification [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/uniplugin_jverification" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="assemble" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="UniPlugin-Hello-AS:uniplugin_jverification [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/uniplugin_jverification" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="UniPlugin-Hello-AS:uniplugin_jverification [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/uniplugin_jverification" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.UniPlugin-Hello-AS:uniplugin_jverification [clean]" />
+        <item itemvalue="Gradle.UniPlugin-Hello-AS:uniplugin_jverification [assemble]" />
+        <item itemvalue="Gradle.UniPlugin-Hello-AS:uniplugin_jverification [assembleAndroidTest]" />
+        <item itemvalue="Gradle.UniPlugin-Hello-AS:uniplugin_component [assemble]" />
+        <item itemvalue="Gradle.UniPlugin-Hello-AS:uniplugin_jverification [build]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b9204707-381a-41af-937b-53a7af2b93cb" name="Default Changelist" comment="" />
+      <created>1676277971692</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1676277971692</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1925" y="108" key="#PSD" timestamp="1676518722074">
+      <screen x="1440" y="-120" width="1920" height="985" />
+    </state>
+    <state x="1925" y="108" key="#PSD/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676518722074" />
+    <state x="2184" y="155" key="#Web_Browsers" timestamp="1676514469525">
+      <screen x="1440" y="-120" width="1920" height="985" />
+    </state>
+    <state x="2184" y="155" key="#Web_Browsers/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676514469525" />
+    <state width="1878" height="264" key="GridCell.Tab.0.bottom" timestamp="1676520403368">
+      <screen x="1440" y="-120" width="1920" height="985" />
+    </state>
+    <state width="1878" height="264" key="GridCell.Tab.0.bottom/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676520403368" />
+    <state width="1878" height="264" key="GridCell.Tab.0.center" timestamp="1676520403367">
+      <screen x="1440" y="-120" width="1920" height="985" />
+    </state>
+    <state width="1878" height="264" key="GridCell.Tab.0.center/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676520403367" />
+    <state width="1878" height="264" key="GridCell.Tab.0.left" timestamp="1676520403366">
+      <screen x="1440" y="-120" width="1920" height="985" />
+    </state>
+    <state width="1878" height="264" key="GridCell.Tab.0.left/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676520403366" />
+    <state width="1878" height="264" key="GridCell.Tab.0.right" timestamp="1676520403367">
+      <screen x="1440" y="-120" width="1920" height="985" />
+    </state>
+    <state width="1878" height="264" key="GridCell.Tab.0.right/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676520403367" />
+    <state x="2379" y="309" width="659" height="490" key="find.popup" timestamp="1676278558135">
+      <screen x="1440" y="-120" width="1920" height="985" />
+    </state>
+    <state x="2379" y="309" width="659" height="490" key="find.popup/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676278558135" />
+  </component>
+</project>

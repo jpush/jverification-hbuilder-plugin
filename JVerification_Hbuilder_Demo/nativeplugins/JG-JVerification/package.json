@@ -1,7 +1,7 @@
 {
 	"name": "JG-JVerification",
 	"id": "JG-JVerification",
-	"version": "2.2.0",
+	"version": "2.2.5",
 	"description": "极光认证Hbuilder插件",
 	"_dp_type":"nativeplugin",
 	"_dp_nativeplugin":{
@@ -12,7 +12,10 @@
 				"class": "JVerificationModule"
 			}],
 			"integrateType": "framework",
-			"deploymentTarget": "9.0",
+			"deploymentTarget": "11.0",	
+			"validArchitectures": [    
+				"arm64"
+			],
 			"frameworks": [
 				"AdSupport.framework",
 				"CoreLocation.framework",

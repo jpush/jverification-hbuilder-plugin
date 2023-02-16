@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: ./app/libs/breakpad-build-release.aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9ebfe1c2ab737b5274cd67721b9e7dcd/jetified-breakpad-build-release/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9ebfe1c2ab737b5274cd67721b9e7dcd/jetified-breakpad-build-release/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9ebfe1c2ab737b5274cd67721b9e7dcd/jetified-breakpad-build-release/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
