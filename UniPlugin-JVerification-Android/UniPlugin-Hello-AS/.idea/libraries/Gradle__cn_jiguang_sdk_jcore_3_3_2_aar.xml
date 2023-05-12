@@ -2,9 +2,8 @@
   <library name="Gradle: cn.jiguang.sdk:jcore:3.3.2@aar">
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/52f180d09c024107a93e6ad48fab6177/jetified-jcore-3.3.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/52f180d09c024107a93e6ad48fab6177/jetified-jcore-3.3.2/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/52f180d09c024107a93e6ad48fab6177/jetified-jcore-3.3.2/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/52f180d09c024107a93e6ad48fab6177/jetified-jcore-3.3.2/jars/libs/jcore-android-3.3.2.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/52f180d09c024107a93e6ad48fab6177/jetified-jcore-3.3.2/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

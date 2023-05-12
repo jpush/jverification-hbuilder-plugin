@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/UniPlugin-Hello-AS.iml" filepath="$PROJECT_DIR$/.idea/UniPlugin-Hello-AS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/UniPlugin-Hello-AS.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/UniPlugin-Hello-AS.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/UniPlugin-Hello-AS.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/UniPlugin-Hello-AS.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/UniPlugin-Hello-AS.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/UniPlugin-Hello-AS.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/UniPlugin-Hello-AS.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/UniPlugin-Hello-AS.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/uniplugin_component/UniPlugin-Hello-AS.uniplugin_component.iml" filepath="$PROJECT_DIR$/.idea/modules/uniplugin_component/UniPlugin-Hello-AS.uniplugin_component.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/uniplugin_component/UniPlugin-Hello-AS.uniplugin_component.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/uniplugin_component/UniPlugin-Hello-AS.uniplugin_component.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/uniplugin_component/UniPlugin-Hello-AS.uniplugin_component.main.iml" filepath="$PROJECT_DIR$/.idea/modules/uniplugin_component/UniPlugin-Hello-AS.uniplugin_component.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/uniplugin_component/UniPlugin-Hello-AS.uniplugin_component.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/uniplugin_component/UniPlugin-Hello-AS.uniplugin_component.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/uniplugin_jverification/UniPlugin-Hello-AS.uniplugin_jverification.iml" filepath="$PROJECT_DIR$/.idea/modules/uniplugin_jverification/UniPlugin-Hello-AS.uniplugin_jverification.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/uniplugin_jverification/UniPlugin-Hello-AS.uniplugin_jverification.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/uniplugin_jverification/UniPlugin-Hello-AS.uniplugin_jverification.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/uniplugin_jverification/UniPlugin-Hello-AS.uniplugin_jverification.main.iml" filepath="$PROJECT_DIR$/.idea/modules/uniplugin_jverification/UniPlugin-Hello-AS.uniplugin_jverification.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/uniplugin_jverification/UniPlugin-Hello-AS.uniplugin_jverification.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/uniplugin_jverification/UniPlugin-Hello-AS.uniplugin_jverification.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/uniplugin_module/UniPlugin-Hello-AS.uniplugin_module.iml" filepath="$PROJECT_DIR$/.idea/modules/uniplugin_module/UniPlugin-Hello-AS.uniplugin_module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/uniplugin_module/UniPlugin-Hello-AS.uniplugin_module.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/uniplugin_module/UniPlugin-Hello-AS.uniplugin_module.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/uniplugin_module/UniPlugin-Hello-AS.uniplugin_module.main.iml" filepath="$PROJECT_DIR$/.idea/modules/uniplugin_module/UniPlugin-Hello-AS.uniplugin_module.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/uniplugin_module/UniPlugin-Hello-AS.uniplugin_module.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/uniplugin_module/UniPlugin-Hello-AS.uniplugin_module.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/uniplugin_richalert/UniPlugin-Hello-AS.uniplugin_richalert.iml" filepath="$PROJECT_DIR$/.idea/modules/uniplugin_richalert/UniPlugin-Hello-AS.uniplugin_richalert.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/uniplugin_richalert/UniPlugin-Hello-AS.uniplugin_richalert.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/uniplugin_richalert/UniPlugin-Hello-AS.uniplugin_richalert.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/uniplugin_richalert/UniPlugin-Hello-AS.uniplugin_richalert.main.iml" filepath="$PROJECT_DIR$/.idea/modules/uniplugin_richalert/UniPlugin-Hello-AS.uniplugin_richalert.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/uniplugin_richalert/UniPlugin-Hello-AS.uniplugin_richalert.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/uniplugin_richalert/UniPlugin-Hello-AS.uniplugin_richalert.unitTest.iml" />
+    </modules>
+  </component>
+</project>

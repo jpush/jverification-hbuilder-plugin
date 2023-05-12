@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
@@ -8,19 +13,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9204707-381a-41af-937b-53a7af2b93cb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__cn_jiguang_sdk_jverification_2_9_3_aar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uniplugin_jverification/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/uniplugin_jverification/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uniplugin_jverification/src/main/java/cn/jiguang/uniplugin_jverification/JVerificationWXModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/uniplugin_jverification/src/main/java/cn/jiguang/uniplugin_jverification/JVerificationWXModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uniplugin_jverification/src/main/java/cn/jiguang/uniplugin_jverification/common/JConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/uniplugin_jverification/src/main/java/cn/jiguang/uniplugin_jverification/common/JConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../doc/ANDROID.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/ANDROID.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[000002354c35e64e]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -59,6 +59,13 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="UniPlugin-Hello-AS" type="f1a62948:ProjectNode" />
+                <item name="uniplugin_component" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="UniPlugin-Hello-AS" type="f1a62948:ProjectNode" />
                 <item name="uniplugin_jverification" type="2d1252cf:ModuleNode" />
               </path>
               <path>
@@ -66,13 +73,6 @@
                 <item name="UniPlugin-Hello-AS" type="f1a62948:ProjectNode" />
                 <item name="uniplugin_jverification" type="2d1252cf:ModuleNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="UniPlugin-Hello-AS" type="f1a62948:ProjectNode" />
-                <item name="uniplugin_jverification" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
@@ -85,14 +85,7 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="UniPlugin-Hello-AS" type="f1a62948:ProjectNode" />
                 <item name="uniplugin_jverification" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="verification" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="UniPlugin-Hello-AS" type="f1a62948:ProjectNode" />
-                <item name="uniplugin_jverification" type="2d1252cf:ModuleNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
             <select />
@@ -104,20 +97,32 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2Lg1a0ZrL7G9jAftz4aSA7UlPXc" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.17" />
-    <property name="project.structure.side.proportion" value="0.30964467" />
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "memory.settings.postsync.last.time.stamp": "1683860023845",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/uniplugin_jverification/libs" />
+    </key>
   </component>
-  <component name="RunManager" selected="Gradle.UniPlugin-Hello-AS:uniplugin_jverification [assembleRelease]">
+  <component name="RunManager" selected="Android App.app">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -125,21 +130,22 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
-      <module name="UniPlugin-Hello-AS.app" />
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
+      <module name="UniPlugin-Hello-AS.app.main" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="DEPLOY_AS_INSTANT" value="false" />
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
       <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="CLEAR_APP_STORAGE" value="false" />
       <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
@@ -170,7 +176,7 @@
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_PROFILING_ENABLED" value="false" />
         <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
         <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
         <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
       </Profilers>
@@ -198,7 +204,9 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <configuration name="UniPlugin-Hello-AS:uniplugin_jverification [assembleAndroidTest]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -217,7 +225,9 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <configuration name="UniPlugin-Hello-AS:uniplugin_jverification [assembleRelease]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -236,7 +246,9 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <configuration name="UniPlugin-Hello-AS:uniplugin_jverification [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -255,7 +267,9 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <configuration name="UniPlugin-Hello-AS:uniplugin_jverification [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -274,19 +288,22 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.UniPlugin-Hello-AS:uniplugin_jverification [assembleRelease]" />
-        <item itemvalue="Gradle.UniPlugin-Hello-AS:uniplugin_jverification [clean]" />
         <item itemvalue="Gradle.UniPlugin-Hello-AS:uniplugin_jverification [assemble]" />
+        <item itemvalue="Gradle.UniPlugin-Hello-AS:uniplugin_jverification [clean]" />
         <item itemvalue="Gradle.UniPlugin-Hello-AS:uniplugin_jverification [assembleAndroidTest]" />
         <item itemvalue="Gradle.UniPlugin-Hello-AS:uniplugin_component [assemble]" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -300,38 +317,26 @@
     </task>
     <servers />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="1925" y="108" key="#PSD" timestamp="1676518722074">
-      <screen x="1440" y="-120" width="1920" height="985" />
-    </state>
-    <state x="1925" y="108" key="#PSD/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676518722074" />
-    <state x="2184" y="155" key="#Web_Browsers" timestamp="1676514469525">
-      <screen x="1440" y="-120" width="1920" height="985" />
-    </state>
-    <state x="2184" y="155" key="#Web_Browsers/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676514469525" />
-    <state width="1878" height="170" key="GridCell.Tab.0.bottom" timestamp="1676535247541">
-      <screen x="1440" y="-120" width="1920" height="985" />
-    </state>
-    <state width="1878" height="170" key="GridCell.Tab.0.bottom/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676535247541" />
-    <state width="1878" height="170" key="GridCell.Tab.0.center" timestamp="1676535247540">
-      <screen x="1440" y="-120" width="1920" height="985" />
-    </state>
-    <state width="1878" height="170" key="GridCell.Tab.0.center/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676535247540" />
-    <state width="1878" height="170" key="GridCell.Tab.0.left" timestamp="1676535247539">
-      <screen x="1440" y="-120" width="1920" height="985" />
-    </state>
-    <state width="1878" height="170" key="GridCell.Tab.0.left/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676535247539" />
-    <state width="1878" height="170" key="GridCell.Tab.0.right" timestamp="1676535247540">
-      <screen x="1440" y="-120" width="1920" height="985" />
-    </state>
-    <state width="1878" height="170" key="GridCell.Tab.0.right/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676535247540" />
-    <state x="2379" y="309" width="659" height="490" key="find.popup" timestamp="1676278558135">
-      <screen x="1440" y="-120" width="1920" height="985" />
-    </state>
-    <state x="2379" y="309" width="659" height="490" key="find.popup/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676278558135" />
-    <state x="2065" y="165" width="670" height="675" key="run.anything.popup" timestamp="1676520934586">
-      <screen x="1440" y="-120" width="1920" height="985" />
-    </state>
-    <state x="2065" y="165" width="670" height="675" key="run.anything.popup/0.25.1440.875/1440.-120.1920.985@1440.-120.1920.985" timestamp="1676520934586" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/uniplugin_jverification/src/main/java/cn/jiguang/uniplugin_jverification/JVerificationWXModule.java</url>
+          <line>623</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

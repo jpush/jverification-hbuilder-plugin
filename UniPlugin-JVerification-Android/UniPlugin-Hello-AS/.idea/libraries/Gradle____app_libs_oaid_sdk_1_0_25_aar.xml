@@ -1,9 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: ./app/libs/oaid_sdk_1.0.25.aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/60b91a08fe9e9213854fbafa0e5f4f8d/jetified-oaid_sdk_1.0.25/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/60b91a08fe9e9213854fbafa0e5f4f8d/jetified-oaid_sdk_1.0.25/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/60b91a08fe9e9213854fbafa0e5f4f8d/jetified-oaid_sdk_1.0.25/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/067eb153b050510a5af91578d7aa4b9a/jetified-oaid_sdk_1.0.25/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/067eb153b050510a5af91578d7aa4b9a/jetified-oaid_sdk_1.0.25/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
