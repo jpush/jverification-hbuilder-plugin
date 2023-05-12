@@ -21,8 +21,11 @@ android {
         }
     }
     sourceSets {
-        main {
+        debug {
             jniLibs.srcDirs = ['libs']
+        }
+        release {
+
         }
     }
 }
@@ -35,20 +38,20 @@ repositories {
 
 dependencies {
     // 正式打包时[gradle-->:uniplugin_jverification->assembleRelease] ,请将 implementation 改为 compileOnly。
-//    debugImplementation fileTree(include: ['*.jar'], dir: 'libs')
+    debugImplementation fileTree(include: ['*.jar'], dir: 'libs')
     debugImplementation fileTree(include: ['uniapp-release.aar'], dir: '../app/libs')
     debugImplementation fileTree(dir: '../app/libs', include: ['uniapp-v8-release.aar'])
 
     debugImplementation 'com.alibaba:fastjson:1.2.70'
     debugImplementation 'com.facebook.fresco:fresco:1.13.0'
-    debugImplementation 'cn.jiguang.sdk:jverification:2.9.6'
+//    debugImplementation 'cn.jiguang.sdk:jverification:3.0.1'
     debugImplementation 'cn.jiguang.sdk:jcore:3.3.2'
 
-//    releaseCompileOnly fileTree(include: ['*.jar'], dir: 'libs')
+    releaseCompileOnly fileTree(include: ['*.jar'], dir: 'libs')
     releaseCompileOnly fileTree(dir: '../app/libs', include: ['uniapp-v8-release.aar'])
     releaseCompileOnly 'com.alibaba:fastjson:1.2.70'
     releaseCompileOnly 'com.facebook.fresco:fresco:1.13.0'
-    releaseCompileOnly 'cn.jiguang.sdk:jverification:2.9.6'
+//    releaseCompileOnly 'cn.jiguang.sdk:jverification:3.0.1'
     releaseCompileOnly 'cn.jiguang.sdk:jcore:3.3.2'
 }
 

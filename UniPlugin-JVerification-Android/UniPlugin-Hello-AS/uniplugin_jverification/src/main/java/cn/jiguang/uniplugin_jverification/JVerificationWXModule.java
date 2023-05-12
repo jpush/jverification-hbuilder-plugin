@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -618,12 +619,89 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
             uiConfigBuilder.setDialogTheme(jsonArray.getIntValue(0), jsonArray.getIntValue(1),
                     jsonArray.getIntValue(2), jsonArray.getIntValue(3), jsonArray.getBooleanValue(4));
         }
+
+        //二次协议弹窗
+        if(jsonObject.containsKey(JConstants.setPrivacyCheckDialogConfig)){
+            JSONObject privacyCheckDialogConfig = jsonObject.getJSONObject(JConstants.setPrivacyCheckDialogConfig);
+            if(privacyCheckDialogConfig!=null && privacyCheckDialogConfig.size()!=0) {
+
+                if(privacyCheckDialogConfig.containsKey(JConstants.enablePrivacyCheckDialog)){
+                    boolean enablePrivacyCheckDialog = privacyCheckDialogConfig.getBoolean(JConstants.enablePrivacyCheckDialog);
+                    uiConfigBuilder.enablePrivacyCheckDialog(enablePrivacyCheckDialog);
+                }
+
+                if(privacyCheckDialogConfig.containsKey(JConstants.setPrivacyCheckDialogTitleTextSize)){
+                    int setPrivacyCheckDialogTitleTextSize = privacyCheckDialogConfig.getIntValue(JConstants.setPrivacyCheckDialogTitleTextSize);
+                    uiConfigBuilder.setPrivacyCheckDialogTitleTextSize(setPrivacyCheckDialogTitleTextSize);
+                }
+
+                if (privacyCheckDialogConfig.containsKey(JConstants.setPrivacyCheckDialogTitleTextColor)) {
+                    uiConfigBuilder.setPrivacyCheckDialogTitleTextColor(privacyCheckDialogConfig.getIntValue(JConstants.setPrivacyCheckDialogTitleTextColor));
+                }
+
+                if (privacyCheckDialogConfig.containsKey(JConstants.setPrivacyCheckDialogContentTextGravity)) {
+                    int setPrivacyCheckDialogContentTextGravity =  getAlignmentFromString(privacyCheckDialogConfig.getString(JConstants.setPrivacyCheckDialogContentTextGravity));
+                    uiConfigBuilder.setPrivacyCheckDialogContentTextGravity(setPrivacyCheckDialogContentTextGravity);
+                }
+
+                if(privacyCheckDialogConfig.containsKey(JConstants.setPrivacyCheckDialogContentTextSize)){
+                    int setPrivacyCheckDialogContentTextSize = privacyCheckDialogConfig.getIntValue(JConstants.setPrivacyCheckDialogContentTextSize);
+                    uiConfigBuilder.setPrivacyCheckDialogContentTextSize(setPrivacyCheckDialogContentTextSize);
+                }
+
+                if(privacyCheckDialogConfig.containsKey(JConstants.setPrivacyCheckDialogLogBtnImgPath)){
+                    String setPrivacyCheckDialogLogBtnImgPath = privacyCheckDialogConfig.getString(JConstants.setPrivacyCheckDialogLogBtnImgPath);
+                    uiConfigBuilder.setPrivacyCheckDialogLogBtnImgPath(setPrivacyCheckDialogLogBtnImgPath);
+                }
+
+                if (privacyCheckDialogConfig.containsKey(JConstants.setPrivacyCheckDialogLogBtnTextColor)) {
+                    uiConfigBuilder.setPrivacyCheckDialoglogBtnTextColor(privacyCheckDialogConfig.getIntValue(JConstants.setPrivacyCheckDialogLogBtnTextColor));
+                }
+
+                if(privacyCheckDialogConfig.containsKey(JConstants.setPrivacyCheckDialogWidth)){
+                    int setPrivacyCheckDialogWidth = privacyCheckDialogConfig.getIntValue(JConstants.setPrivacyCheckDialogWidth);
+                    uiConfigBuilder.setPrivacyCheckDialogWidth(setPrivacyCheckDialogWidth);
+                }
+
+                if(privacyCheckDialogConfig.containsKey(JConstants.setPrivacyCheckDialogHeight)){
+                    int setPrivacyCheckDialogHeight = privacyCheckDialogConfig.getIntValue(JConstants.setPrivacyCheckDialogHeight);
+                    uiConfigBuilder.setPrivacyCheckDialogHeight(setPrivacyCheckDialogHeight);
+                }
+
+                if (privacyCheckDialogConfig.containsKey(JConstants.setPrivacyCheckDialogGravity)) {
+                    int setPrivacyCheckDialogGravity =  getAlignmentFromString(privacyCheckDialogConfig.getString(JConstants.setPrivacyCheckDialogGravity));
+                    uiConfigBuilder.setprivacyCheckDialogGravity(setPrivacyCheckDialogGravity);
+                }
+
+                if(privacyCheckDialogConfig.containsKey(JConstants.setPrivacyCheckDialogOffsetX)){
+                    int setPrivacyCheckDialogOffsetX = privacyCheckDialogConfig.getIntValue(JConstants.setPrivacyCheckDialogOffsetX);
+                    uiConfigBuilder.setPrivacyCheckDialogOffsetX(setPrivacyCheckDialogOffsetX);
+                }
+
+                if(privacyCheckDialogConfig.containsKey(JConstants.setPrivacyCheckDialogOffsetY)){
+                    int setPrivacyCheckDialogOffsetY = privacyCheckDialogConfig.getIntValue(JConstants.setPrivacyCheckDialogOffsetY);
+                    uiConfigBuilder.setPrivacyCheckDialogOffsetY(setPrivacyCheckDialogOffsetY);
+                }
+
+                if(privacyCheckDialogConfig.containsKey(JConstants.setPrivacyCheckDialogLogBtnWidth)){
+                    int setPrivacyCheckDialogLogBtnWidth = privacyCheckDialogConfig.getIntValue(JConstants.setPrivacyCheckDialogLogBtnWidth);
+                    uiConfigBuilder.setPrivacyCheckDialogLogBtnWidth(setPrivacyCheckDialogLogBtnWidth);
+                }
+
+                if(privacyCheckDialogConfig.containsKey(JConstants.setPrivacyCheckDialogLogBtnHeight)){
+                    int setPrivacyCheckDialogLogBtnHeight = privacyCheckDialogConfig.getIntValue(JConstants.setPrivacyCheckDialogLogBtnHeight);
+                    uiConfigBuilder.setPrivacyCheckDialogLogBtnHeight(setPrivacyCheckDialogLogBtnHeight);
+                }
+
+            }
+        }
+
         // 弹窗是否需要关闭
         if (jsonObject.containsKey(JConstants.PRIVACY_NEED_CLOSE) && jsonObject.containsKey(JConstants.PRIVACY_CLOSE_THEME)) {
             boolean needClose = jsonObject.getBoolean(JConstants.PRIVACY_NEED_CLOSE);
             Context context = mWXSDKInstance.getContext();
             if (needClose) {
-                //自定义返回按钮示例 
+                //自定义返回按钮示例
                 ImageButton sampleReturnBtn = new ImageButton(context);
                 sampleReturnBtn.setImageResource(R.drawable.umcsdk_return_bg);
 
@@ -736,6 +814,36 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
             }
 
         }
+    }
+
+    /**
+     * 获取对齐方式
+     */
+    private int getAlignmentFromString(String alignmet) {
+        int a = 0;
+        if (alignmet != null) {
+            switch (alignmet) {
+                case "left":
+                    a = Gravity.LEFT;
+                    break;
+                case "top":
+                    a = Gravity.TOP;
+                    break;
+                case "right":
+                    a = Gravity.RIGHT;
+                    break;
+                case "bottom":
+                    a = Gravity.BOTTOM;
+                    break;
+                case "center":
+                    a = Gravity.CENTER;
+                    break;
+                default:
+                    a = Gravity.NO_GRAVITY;
+                    break;
+            }
+        }
+        return a;
     }
 
 

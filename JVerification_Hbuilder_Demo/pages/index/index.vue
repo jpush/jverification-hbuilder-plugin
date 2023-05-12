@@ -193,6 +193,24 @@
 						enableHintToastText:"自定义提示linux",
 						setLoadingViewEnable:true,
 						setStatusBarTransparent:true,
+						//android 协议二次弹窗
+						setPrivacyCheckDialogConfig:{
+							enablePrivacyCheckDialog:true,
+							setPrivacyCheckDialogTitleTextSize : 18,
+							setPrivacyCheckDialogTitleTextColor : 0xff4169E1,
+							setPrivacyCheckDialogContentTextGravity : "left",
+							setPrivacyCheckDialogContentTextSize : 16,
+							setPrivacyCheckDialogLogBtnImgPath : "static/login.png",
+							setPrivacyCheckDialogLogBtnTextColor : 0xffFF6347,
+							// setPrivacyCheckDialogWidth : 250,
+							// setPrivacyCheckDialogHeight : 160,
+							setPrivacyCheckDialogGravity : "center",
+							// setPrivacyCheckDialogOffsetX : 0,
+							// setPrivacyCheckDialogOffsetY : 0,
+							setPrivacyCheckDialogGravity : "center",
+							setPrivacyCheckDialogLogBtnWidth : 150,
+							setPrivacyCheckDialogLogBtnHeight : 50
+						},
 						addCustomViews:[{
 							type:"text",
 							finishFlag:false,

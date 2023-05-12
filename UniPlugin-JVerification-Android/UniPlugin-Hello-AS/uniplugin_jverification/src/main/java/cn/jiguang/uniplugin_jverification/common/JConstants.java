@@ -1,5 +1,7 @@
 package cn.jiguang.uniplugin_jverification.common;
 
+import android.view.Gravity;
+
 public class JConstants {
 
     public static final String CODE = "code";
@@ -135,6 +137,24 @@ public class JConstants {
     public static final String setNeedCloseAnim = "setNeedCloseAnim";
     //   授权页弹窗模式 setDialogTheme
     public static final String setDialogTheme = "setDialogTheme";
+
+    // 协议的二次弹窗
+    public static final String setPrivacyCheckDialogConfig = "setPrivacyCheckDialogConfig";
+    public static final String  enablePrivacyCheckDialog = "enablePrivacyCheckDialog";
+    public static final String  setPrivacyCheckDialogTitleTextSize = "setPrivacyCheckDialogTitleTextSize";
+    public static final String  setPrivacyCheckDialogTitleTextColor = "setPrivacyCheckDialogTitleTextColor";
+    public static final String  setPrivacyCheckDialogContentTextGravity = "setPrivacyCheckDialogContentTextGravity";
+    public static final String  setPrivacyCheckDialogContentTextSize = "setPrivacyCheckDialogContentTextSize";
+    public static final String  setPrivacyCheckDialogLogBtnImgPath = "setPrivacyCheckDialogLogBtnImgPath";
+    public static final String  setPrivacyCheckDialogLogBtnTextColor = "setPrivacyCheckDialogLogBtnTextColor";
+    public static final String  setPrivacyCheckDialogWidth = "setPrivacyCheckDialogWidth";
+    public static final String  setPrivacyCheckDialogHeight = "setPrivacyCheckDialogHeight";
+    public static final String  setPrivacyCheckDialogGravity = "setPrivacyCheckDialogGravity";
+    public static final String  setPrivacyCheckDialogOffsetX = "setPrivacyCheckDialogOffsetX";
+    public static final String  setPrivacyCheckDialogOffsetY = "setPrivacyCheckDialogOffsetY";
+    public static final String  setPrivacyCheckDialogLogBtnWidth = "setPrivacyCheckDialogLogBtnWidth";
+    public static final String  setPrivacyCheckDialogLogBtnHeight = "setPrivacyCheckDialogLogBtnHeight";
+
     // 自定义View
     public static final String addCustomViews = "addCustomViews";
     public static final String finishFlag = "finishFlag";
