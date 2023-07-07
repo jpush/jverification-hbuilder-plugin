@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		03717A0D23C855E6004399A2 /* JVerificationModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 03717A0B23C855E6004399A2 /* JVerificationModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		03717A0E23C855E6004399A2 /* JVerificationModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 03717A0C23C855E6004399A2 /* JVerificationModule.m */; };
+		08D7CA4F2A57C74D005A86DE /* TYRZUISDK in Frameworks */ = {isa = PBXBuildFile; fileRef = 08D7CA4E2A57C74C005A86DE /* TYRZUISDK */; };
+		08D7CA512A57C755005A86DE /* TYRZUISDK in Frameworks */ = {isa = PBXBuildFile; fileRef = 08D7CA502A57C755005A86DE /* TYRZUISDK */; };
 		2A37128626A97F490089C14D /* JVERIFICATIONService.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A37128526A97F480089C14D /* JVERIFICATIONService.h */; };
 /* End PBXBuildFile section */
 
@@ -17,6 +19,8 @@
 		037179F523C8496A004399A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03717A0B23C855E6004399A2 /* JVerificationModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVerificationModule.h; sourceTree = "<group>"; };
 		03717A0C23C855E6004399A2 /* JVerificationModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVerificationModule.m; sourceTree = "<group>"; };
+		08D7CA4E2A57C74C005A86DE /* TYRZUISDK */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = TYRZUISDK; sourceTree = "<group>"; };
+		08D7CA502A57C755005A86DE /* TYRZUISDK */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = TYRZUISDK; sourceTree = "<group>"; };
 		2A37128526A97F480089C14D /* JVERIFICATIONService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVERIFICATIONService.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -25,6 +29,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08D7CA512A57C755005A86DE /* TYRZUISDK in Frameworks */,
+				08D7CA4F2A57C74D005A86DE /* TYRZUISDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				2A37128526A97F480089C14D /* JVERIFICATIONService.h */,
+				08D7CA492A57C563005A86DE /* Framework */,
 				03C1373E23CC825700AAFD1B /* JVerificationModule */,
 				037179F523C8496A004399A2 /* Info.plist */,
 			);
@@ -64,6 +71,31 @@
 				03717A0C23C855E6004399A2 /* JVerificationModule.m */,
 			);
 			path = JVerificationModule;
+			sourceTree = "<group>";
+		};
+		08D7CA492A57C563005A86DE /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				08D7CA4C2A57C702005A86DE /* Lib1 */,
+				08D7CA4D2A57C709005A86DE /* Lib2 */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		08D7CA4C2A57C702005A86DE /* Lib1 */ = {
+			isa = PBXGroup;
+			children = (
+				08D7CA502A57C755005A86DE /* TYRZUISDK */,
+			);
+			path = Lib1;
+			sourceTree = "<group>";
+		};
+		08D7CA4D2A57C709005A86DE /* Lib2 */ = {
+			isa = PBXGroup;
+			children = (
+				08D7CA4E2A57C74C005A86DE /* TYRZUISDK */,
+			);
+			path = Lib2;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,6 +344,11 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/UniPluginJVerification/Framework/Lib2",
+					"$(PROJECT_DIR)/UniPluginJVerification/Framework/Lib1",
+				);
 				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-fno-objc-msgsend-selector-stubs";
@@ -346,6 +383,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/UniPluginJVerification/Framework/Lib2",
+					"$(PROJECT_DIR)/UniPluginJVerification/Framework/Lib1",
 				);
 				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = NO;
