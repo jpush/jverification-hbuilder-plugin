@@ -1,7 +1,7 @@
 {
 	"name": "JG-JVerification",
 	"id": "JG-JVerification",
-	"version":"2.2.6",
+	"version":"2.2.7",
 	"description": "极光认证Hbuilder插件",
 	"_dp_type":"nativeplugin",
 	"_dp_nativeplugin":{

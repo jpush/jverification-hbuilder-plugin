@@ -56,8 +56,8 @@
         },
         "nativePlugins" : {
             "JG-JCore" : {
-                "JPUSH_APPKEY_ANDROID" : "",
-                "JPUSH_APPKEY_IOS" : "",
+                "JPUSH_APPKEY_ANDROID" : "4fcc3e237eec4c4fb804ad49",
+                "JPUSH_APPKEY_IOS" : "4fcc3e237eec4c4fb804ad49",
                 "JPUSH_CHANNEL_ANDROID" : "",
                 "JPUSH_CHANNEL_IOS" : "",
                 "__plugin_info__" : {

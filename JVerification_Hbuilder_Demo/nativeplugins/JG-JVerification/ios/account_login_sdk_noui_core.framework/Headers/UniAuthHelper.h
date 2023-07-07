@@ -27,6 +27,7 @@
 //  5.2.7IR01B1208 优化双开时，DNS解析失败问题。优化网络双开判断。
 //                 解决SCNetworkReachabilityGetFlags偶发崩溃时间。
 //                 增强私网ip校验，提升安全性。
+//  5.2.8IR01B0105 解决dns解析失败导致的崩溃问题。
 
 
 #import <Foundation/Foundation.h>
