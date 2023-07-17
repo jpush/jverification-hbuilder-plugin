@@ -213,19 +213,22 @@ BOOL debugMode = NO;
 
 - (void)setCustomUIWithConfigiOS:(NSDictionary*)params
 {
-    [self logger:@"setCustomUIWithConfigiOS:" log:params];
-    JVUIConfig *config = [[JVUIConfig alloc] init];
-    NSArray* arrayKeys = [params allKeys];
-    for(NSString * key in arrayKeys){
-        setJVUIConfig(key,params,config);
-    }
-    [JVERIFICATIONService customUIWithConfig:config customViews:^(UIView *customAreaView) {
-        if ([arrayKeys containsObject:addCustomView]){
-            if([params[addCustomView] isKindOfClass:[NSArray class]]){
-                [self addCustomView:params[addCustomView] superView:customAreaView];
-            }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self logger:@"setCustomUIWithConfigiOS:" log:params];
+        JVUIConfig *config = [[JVUIConfig alloc] init];
+        NSArray* arrayKeys = [params allKeys];
+        for(NSString * key in arrayKeys){
+            setJVUIConfig(key,params,config);
         }
-    }];
+        [JVERIFICATIONService customUIWithConfig:config customViews:^(UIView *customAreaView) {
+            if ([arrayKeys containsObject:addCustomView]){
+                if([params[addCustomView] isKindOfClass:[NSArray class]]){
+                    [self addCustomView:params[addCustomView] superView:customAreaView];
+                }
+            }
+        }];
+    });
+    
 }
 
 // 获取验证码
@@ -295,6 +298,16 @@ static  NSString* logBtnTextColor=@"logBtnTextColor";
 static  NSString* logBtnImgs=@"logBtnImgs";
 static  NSString* logBtnConstraints=@"logBtnConstraints";
 static  NSString* logBtnHorizontalConstraints=@"logBtnHorizontalConstraints";
+
+
+//二次协议登录按钮
+static  NSString* agreementAlertViewTitleTexFont=@"agreementAlertViewTitleTexFont";
+static  NSString* agreementAlertViewTitleTextColor=@"agreementAlertViewTitleTextColor";
+static  NSString* agreementAlertViewContentTextAlignment=@"agreementAlertViewContentTextAlignment";
+static  NSString* agreementAlertViewContentTextFontSize=@"agreementAlertViewContentTextFontSize";
+static  NSString* agreementAlertViewLogBtnImgs=@"agreementAlertViewLogBtnImgs";
+static  NSString* agreementAlertViewLogBtnTextColor=@"agreementAlertViewLogBtnTextColor";
+
 
 //手机号码
 static  NSString* numberColor=@"numberColor";
@@ -417,14 +430,11 @@ JVUIConfig *jvUIConfig){
         jvUIConfig.logoHorizontalConstraints = [JVerificationModule configConstraintWithAttributes:logoHCons];
     }
     //    登录按钮
-    
     else if([key isEqualToString:logBtnText]){
         jvUIConfig.logBtnText = dict[key];
-        NSLog(@"走了这段代码：%@",logBtnText);
     }else if([key isEqualToString:logBtnOffsetY]){
         jvUIConfig.logBtnOffsetY =[dict[key] floatValue];//CGFloat;
     }else if([key isEqualToString:logBtnTextColor]){
-        NSLog(@"走了这段代码");
         jvUIConfig.logBtnTextColor = UIColorFromRGBValue([dict[key] intValue]);//UIColor;
         NSLog(@"logBtnTextColor: %@",UIColorFromRGBValue([dict[key] intValue]));
     }else if([key isEqualToString:logBtnImgs]){
@@ -475,19 +485,18 @@ JVUIConfig *jvUIConfig){
         NSArray* checkViewHorizontalConstraints = dict[key];
         jvUIConfig.checkViewHorizontalConstraints = [JVerificationModule configConstraintWithAttributes:checkViewHorizontalConstraints];
     }
-    
     // checkBox 未选中时点击登录按钮弹出提示框的提示语：当此参数存在时，checkBox 未选中，登录按钮可点击，且点击后会弹窗提醒用户勾选，提示语为该参数的设置值
     else if ([key isEqualToString:privacyCheckToastMessage]) {
         NSString *privacyCheckToastMessage = dict[key];
         if ([key isKindOfClass:[NSString class]]) {
             if (!jvUIConfig.isAlertPrivacyVC) {
-                jvUIConfig.customPrivacyAlertViewBlock = ^(UIViewController *vc) {
+                jvUIConfig.customPrivacyAlertViewBlock = ^(UIViewController *vc , NSArray *appPrivacys,void(^loginAction)(void)) {
                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:privacyCheckToastMessage message:nil preferredStyle:UIAlertControllerStyleAlert];
                     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil]];
                     [vc presentViewController:alert animated:true completion:nil];
                 };
             }else{
-                jvUIConfig.customPrivacyAlertViewBlock = ^(UIViewController *vc) {
+                jvUIConfig.customPrivacyAlertViewBlock = ^(UIViewController *vc , NSArray *appPrivacys,void(^loginAction)(void)) {
                 };
             }
         }
@@ -498,7 +507,6 @@ JVUIConfig *jvUIConfig){
     }
     
     //    隐私协议栏
-    
     else if([key isEqualToString:appPrivacyOne]){
         jvUIConfig.appPrivacyOne = dict[key];
     }else if([key isEqualToString:appPrivacyTwo]){
@@ -583,7 +591,23 @@ JVUIConfig *jvUIConfig){
         NSArray* sloganConstraints = dict[key];
         jvUIConfig.sloganConstraints = [JVerificationModule configConstraintWithAttributes:sloganConstraints];
     }
-    
+    // 协议二次弹窗
+    else if([key isEqualToString:agreementAlertViewContentTextFontSize]){
+        jvUIConfig.agreementAlertViewContentTextFontSize = [dict[key] floatValue];
+    }else if([key isEqualToString:agreementAlertViewTitleTextColor]){
+        jvUIConfig.agreementAlertViewTitleTextColor = UIColorFromRGBValue([dict[key] intValue]);//UIColor;
+    }else if([key isEqualToString:agreementAlertViewLogBtnTextColor]){
+        jvUIConfig.agreementAlertViewLogBtnTextColor = UIColorFromRGBValue([dict[key] intValue]);//UIColor;
+    }else if([key isEqualToString:agreementAlertViewLogBtnImgs]){
+        NSArray* imgPaths = dict[key];
+        NSMutableArray *logBtnImgs = [NSMutableArray arrayWithCapacity:3];
+        for (int i = 0; i < imgPaths.count; i++) {
+            NSString *logBtnPath = [appinfo.wwwPath stringByAppendingFormat:@"/%@",imgPaths[i]];
+            UIImage *logBtnImage = [UIImage imageNamed:logBtnPath];
+            [logBtnImgs addObject:logBtnImage];
+        }
+        jvUIConfig.agreementAlertViewLogBtnImgs = logBtnImgs;
+    }
     
     //    弹窗
     else if([key isEqualToString:showWindow]){
