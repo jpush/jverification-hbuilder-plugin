@@ -10,7 +10,12 @@
 		0835EEDE2996255300CF5775 /* UniPluginJVerification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0835EEDD2996202200CF5775 /* UniPluginJVerification.framework */; };
 		0835EEDF2996255400CF5775 /* UniPluginJVerification.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0835EEDD2996202200CF5775 /* UniPluginJVerification.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0835EEE3299631D000CF5775 /* jcore-ios-3.1.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0835EEE2299631D000CF5775 /* jcore-ios-3.1.2.a */; };
-		0835EEE9299633B100CF5775 /* jverification-ios-2.9.4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0835EEE62996322F00CF5775 /* jverification-ios-2.9.4.a */; };
+		08F7D2F22A64E610004385B7 /* jverification-ios-3.1.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F7D2F12A64E610004385B7 /* jverification-ios-3.1.1.a */; };
+		08F7D2F32A64E73E004385B7 /* EAccountApiSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0835EEE72996323000CF5775 /* EAccountApiSDK.framework */; };
+		08F7D2F42A64E73E004385B7 /* EAccountApiSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0835EEE72996323000CF5775 /* EAccountApiSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		08F7D2F52A64E73F004385B7 /* account_login_sdk_noui_core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0835EEE52996322E00CF5775 /* account_login_sdk_noui_core.framework */; };
+		08F7D2F62A64E73F004385B7 /* account_login_sdk_noui_core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0835EEE52996322E00CF5775 /* account_login_sdk_noui_core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		08F7D2FE2A654889004385B7 /* JVerificationResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 08F7D2FC2A654889004385B7 /* JVerificationResource.bundle */; };
 		240905031C200AEF0070786F /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 240905021C200AEF0070786F /* CoreBluetooth.framework */; };
 		242725CB1D2666ED00EBD79E /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242725CA1D2666ED00EBD79E /* JavaScriptCore.framework */; };
 		242725CD1D26686700EBD79E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242725CC1D26686700EBD79E /* CoreMotion.framework */; };
@@ -213,6 +218,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				08F7D2F42A64E73E004385B7 /* EAccountApiSDK.framework in Embed Frameworks */,
+				08F7D2F62A64E73F004385B7 /* account_login_sdk_noui_core.framework in Embed Frameworks */,
 				0835EEDF2996255400CF5775 /* UniPluginJVerification.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -225,9 +232,10 @@
 		0835EEE2299631D000CF5775 /* jcore-ios-3.1.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-3.1.2.a"; sourceTree = "<group>"; };
 		0835EEE42996322E00CF5775 /* TYRZUISDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TYRZUISDK.xcframework; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/TYRZUISDK.xcframework"; sourceTree = "<group>"; };
 		0835EEE52996322E00CF5775 /* account_login_sdk_noui_core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = account_login_sdk_noui_core.framework; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/account_login_sdk_noui_core.framework"; sourceTree = "<group>"; };
-		0835EEE62996322F00CF5775 /* jverification-ios-2.9.4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jverification-ios-2.9.4.a"; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/jverification-ios-2.9.4.a"; sourceTree = "<group>"; };
 		0835EEE72996323000CF5775 /* EAccountApiSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EAccountApiSDK.framework; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/EAccountApiSDK.framework"; sourceTree = "<group>"; };
 		0835EEE82996323000CF5775 /* JVERIFICATIONService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JVERIFICATIONService.h; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/JVERIFICATIONService.h"; sourceTree = "<group>"; };
+		08F7D2F12A64E610004385B7 /* jverification-ios-3.1.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "jverification-ios-3.1.1.a"; path = "../../JVerification_Hbuilder_Demo/nativeplugins/JG-JVerification/ios/jverification-ios-3.1.1.a"; sourceTree = "<group>"; };
+		08F7D2FC2A654889004385B7 /* JVerificationResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = JVerificationResource.bundle; sourceTree = "<group>"; };
 		240905021C200AEF0070786F /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		242725CA1D2666ED00EBD79E /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		242725CC1D26686700EBD79E /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -679,6 +687,7 @@
 				8EED62A0198A1D13000A4449 /* UIKit.framework in Frameworks */,
 				24A7515F1D9CCCC600C8B0F9 /* QuickLook.framework in Frameworks */,
 				242725CD1D26686700EBD79E /* CoreMotion.framework in Frameworks */,
+				08F7D2F32A64E73E004385B7 /* EAccountApiSDK.framework in Frameworks */,
 				7ACF69AB19FF899A007C64F1 /* CFNetwork.framework in Frameworks */,
 				7ACF69AD19FF89B1007C64F1 /* Security.framework in Frameworks */,
 				67AB0BA221EF111D0029B229 /* BaiduMapAPI_Utils.framework in Frameworks */,
@@ -718,6 +727,7 @@
 				24AFD85E1CB50C4000C0F062 /* liblibPGInvocation.a in Frameworks */,
 				24AFD85F1CB50C4000C0F062 /* liblibPGProximity.a in Frameworks */,
 				24AFD8601CB50C4000C0F062 /* liblibPush.a in Frameworks */,
+				08F7D2F22A64E610004385B7 /* jverification-ios-3.1.1.a in Frameworks */,
 				24AFD8611CB50C4000C0F062 /* liblibShare.a in Frameworks */,
 				67D6390921C12945005D1E8F /* libBaiduSpeechSDK.a in Frameworks */,
 				24AFD8621CB50C4000C0F062 /* liblibSpeech.a in Frameworks */,
@@ -749,6 +759,7 @@
 				2F0BA412215B814100F67004 /* liblibVideo.a in Frameworks */,
 				95DA22F0276A0B1E00071681 /* UMAPM.framework in Frameworks */,
 				24BD5AEA1C99492A00B05AA2 /* libiconv.2.tbd in Frameworks */,
+				08F7D2F52A64E73F004385B7 /* account_login_sdk_noui_core.framework in Frameworks */,
 				24BD5AE81C99491D00B05AA2 /* libsqlite3.0.tbd in Frameworks */,
 				2430A7021E11603E00D3D42D /* libssl.a in Frameworks */,
 				240905031C200AEF0070786F /* CoreBluetooth.framework in Frameworks */,
@@ -766,7 +777,6 @@
 				67AB0B3D21EEEA6B0029B229 /* libAMapImp.a in Frameworks */,
 				8EED6592198A5737000A4449 /* AddressBook.framework in Frameworks */,
 				8EED6422198A2678000A4449 /* AudioToolbox.framework in Frameworks */,
-				0835EEE9299633B100CF5775 /* jverification-ios-2.9.4.a in Frameworks */,
 				8EED6420198A2668000A4449 /* MediaPlayer.framework in Frameworks */,
 				8EED641E198A265F000A4449 /* CoreTelephony.framework in Frameworks */,
 				8EED6416198A2635000A4449 /* CoreVideo.framework in Frameworks */,
@@ -1085,9 +1095,9 @@
 		8EED629A198A1D13000A4449 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				08F7D2F12A64E610004385B7 /* jverification-ios-3.1.1.a */,
 				0835EEE52996322E00CF5775 /* account_login_sdk_noui_core.framework */,
 				0835EEE72996323000CF5775 /* EAccountApiSDK.framework */,
-				0835EEE62996322F00CF5775 /* jverification-ios-2.9.4.a */,
 				0835EEE82996323000CF5775 /* JVERIFICATIONService.h */,
 				0835EEE42996322E00CF5775 /* TYRZUISDK.xcframework */,
 				0835EEE2299631D000CF5775 /* jcore-ios-3.1.2.a */,
@@ -1246,6 +1256,7 @@
 		8EED62A2198A1D13000A4449 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				08F7D2FC2A654889004385B7 /* JVerificationResource.bundle */,
 				2F0BA4DB215BA12300F67004 /* LaunchScreen.storyboard */,
 				2F0BA442215B955200F67004 /* Bundles */,
 				2F0BA3F8215B48A700F67004 /* Images.xcassets */,
@@ -1488,6 +1499,7 @@
 				67065F492243868400DC71CA /* Default-896h@3x.png in Resources */,
 				67B7CAD321DE1F160083E96A /* temp_license_2018-02-24.dat in Resources */,
 				67B7CAD421DE1F160083E96A /* bds_easr_mfe_dnn.dat in Resources */,
+				08F7D2FE2A654889004385B7 /* JVerificationResource.bundle in Resources */,
 				67065F552243868400DC71CA /* Default-Landscape-736h@3x.png in Resources */,
 				67065F4D2243868400DC71CA /* Default-Landscape7@2x~ipad.png in Resources */,
 				2F0BA4DC215BA12300F67004 /* LaunchScreen.storyboard in Resources */,
