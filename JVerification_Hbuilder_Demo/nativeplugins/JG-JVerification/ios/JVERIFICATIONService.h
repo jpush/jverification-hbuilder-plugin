@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#define JVER_VERSION_NUMBER 3.1.1
+#define JVER_VERSION_NUMBER 3.1.2
 
 NS_ASSUME_NONNULL_BEGIN
 /**
