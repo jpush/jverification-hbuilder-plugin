@@ -91,6 +91,10 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
         JLogger.d("getToken with timeout set:" + timeout);
         JVerificationInterface.getToken(mWXSDKInstance.getContext(), timeout, new VerifyListener() {
             @Override
+            public void onResult(int code, String content, String operator, org.json.JSONObject jsonObject) {
+                onResult(code,content,operator);
+            }
+
             public void onResult(int code, String content, String operator) {
                 if (callback == null) return;
                 callback.invoke(convertToResult(code, content, operator));
@@ -103,6 +107,10 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
         JLogger.d("preLogin with timeout set:" + timeout);
         JVerificationInterface.preLogin(mWXSDKInstance.getContext(), timeout, new PreLoginListener() {
             @Override
+            public void onResult(int code, String content, org.json.JSONObject jsonObject) {
+                onResult(code,content);
+            }
+
             public void onResult(int code, String content) {
                 if (callback == null) return;
                 callback.invoke(convertToResult(code, content));
@@ -137,6 +145,10 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
         });//设置授权页事件监听
         JVerificationInterface.loginAuth(mWXSDKInstance.getContext(), settings, new VerifyListener() {
             @Override
+            public void onResult(int code, String content, String operator, org.json.JSONObject jsonObject) {
+                onResult(code, content, operator);
+            }
+
             public void onResult(int code, String content, String operator) {
                 callback.invoke(convertToResult(code, content, operator));
             }
