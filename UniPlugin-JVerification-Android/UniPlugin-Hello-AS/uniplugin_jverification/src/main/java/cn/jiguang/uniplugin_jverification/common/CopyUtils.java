@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,7 +20,9 @@ public class CopyUtils {
     public static void copyFile(Context context, String oldPath, String newPath) {
         InputStream in = null;
         try {
-            in = context.getAssets().open(oldPath);
+            File oldFile = new File(oldPath);
+            in = new FileInputStream(oldFile);
+
             File file = new File(newPath);
             if (file.exists()) {
                 file.delete();

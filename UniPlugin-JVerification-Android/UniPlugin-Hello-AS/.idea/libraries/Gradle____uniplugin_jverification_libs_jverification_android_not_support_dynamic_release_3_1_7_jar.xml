@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: ./uniplugin_jverification/libs/jverification-android-not_support_dynamic-release-3.1.7.jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/uniplugin_jverification/libs/jverification-android-not_support_dynamic-release-3.1.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

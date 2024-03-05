@@ -1,11 +1,11 @@
 package cn.jiguang.uniplugin_jverification;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -23,10 +23,12 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.taobao.weex.WXSDKEngine;
+import com.taobao.weex.adapter.URIAdapter;
 import com.taobao.weex.annotation.JSMethod;
 import com.taobao.weex.bridge.JSCallback;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -44,8 +46,6 @@ import cn.jiguang.verifysdk.api.PreLoginListener;
 import cn.jiguang.verifysdk.api.PrivacyBean;
 import cn.jiguang.verifysdk.api.RequestCallback;
 import cn.jiguang.verifysdk.api.VerifyListener;
-
-import com.taobao.weex.WXSDKEngine;
 
 public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
 
@@ -317,7 +317,8 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
         //  设置授权页背景
         if (jsonObject.containsKey(JConstants.setAuthBGImgPath)) {
             String pathAndName = jsonObject.getString(JConstants.setAuthBGImgPath);
-            uiConfigBuilder.setAuthBGImgPath(pathAndName);
+            String realPath = getRealPath(pathAndName);
+            uiConfigBuilder.setAuthBGImgPath(realPath);
         }
 
         if (jsonObject.containsKey(JConstants.setDimAmount)) {
@@ -353,7 +354,8 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
         }
         if (jsonObject.containsKey(JConstants.setNavReturnImgPath)) {
             String pathAndName = jsonObject.getString(JConstants.setNavReturnImgPath);
-            uiConfigBuilder.setNavReturnImgPath(pathAndName);
+            String realPath = getRealPath(pathAndName);
+            uiConfigBuilder.setNavReturnImgPath(realPath);
         }
         if (jsonObject.containsKey(JConstants.setNavTransparent)) {
             uiConfigBuilder.setNavTransparent(jsonObject.getBooleanValue(JConstants.setNavTransparent));
@@ -398,7 +400,8 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
         }
         if (jsonObject.containsKey(JConstants.setLogoImgPath)) {
             String pathAndName = jsonObject.getString(JConstants.setLogoImgPath);
-            uiConfigBuilder.setLogoImgPath(pathAndName);
+            String realPath = getRealPath(pathAndName);
+            uiConfigBuilder.setLogoImgPath(realPath);
         }
         if (jsonObject.containsKey(JConstants.setLogoOffsetX)) {
             uiConfigBuilder.setLogoOffsetX(jsonObject.getIntValue(JConstants.setLogoOffsetX));
@@ -439,7 +442,8 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
         }
         if (jsonObject.containsKey(JConstants.setLogBtnImgPath)) {
             String pathAndName = jsonObject.getString(JConstants.setLogBtnImgPath);
-            uiConfigBuilder.setLogBtnImgPath(pathAndName);
+            String realPath = getRealPath(pathAndName);
+            uiConfigBuilder.setLogBtnImgPath(realPath);
         }
         if (jsonObject.containsKey(JConstants.setLogBtnOffsetY)) {
             uiConfigBuilder.setLogBtnOffsetY(jsonObject.getIntValue(JConstants.setLogBtnOffsetY));
@@ -519,10 +523,14 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
             uiConfigBuilder.setPrivacyOffsetY(jsonObject.getIntValue(JConstants.setPrivacyOffsetY));
         }
         if (jsonObject.containsKey(JConstants.setCheckedImgPath)) {
-            uiConfigBuilder.setCheckedImgPath(jsonObject.getString(JConstants.setCheckedImgPath));
+            String pathAndName = jsonObject.getString(JConstants.setCheckedImgPath);
+            String realPath = getRealPath(pathAndName);
+            uiConfigBuilder.setCheckedImgPath(realPath);
         }
         if (jsonObject.containsKey(JConstants.setUncheckedImgPath)) {
-            uiConfigBuilder.setUncheckedImgPath(jsonObject.getString(JConstants.setUncheckedImgPath));
+            String pathAndName = jsonObject.getString(JConstants.setUncheckedImgPath);
+            String realPath = getRealPath(pathAndName);
+            uiConfigBuilder.setUncheckedImgPath(realPath);
         }
         if (jsonObject.containsKey(JConstants.setPrivacyState)) {
             uiConfigBuilder.setPrivacyState(jsonObject.getBooleanValue(JConstants.setPrivacyState));
@@ -663,7 +671,8 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
 
                 if(privacyCheckDialogConfig.containsKey(JConstants.setPrivacyCheckDialogLogBtnImgPath)){
                     String setPrivacyCheckDialogLogBtnImgPath = privacyCheckDialogConfig.getString(JConstants.setPrivacyCheckDialogLogBtnImgPath);
-                    uiConfigBuilder.setPrivacyCheckDialogLogBtnImgPath(setPrivacyCheckDialogLogBtnImgPath);
+                    String realPath = getRealPath(setPrivacyCheckDialogLogBtnImgPath);
+                    uiConfigBuilder.setPrivacyCheckDialogLogBtnImgPath(realPath);
                 }
 
                 if (privacyCheckDialogConfig.containsKey(JConstants.setPrivacyCheckDialogLogBtnTextColor)) {
@@ -871,11 +880,9 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
     }
 
     public String getAssetPicPath(String imgPath) {
-        String bundle = mWXSDKInstance.getBundleUrl();
-        JLogger.d("mWXSDKInstance.getBundleUrl():" + bundle);
-        String path = bundle.substring(bundle.lastIndexOf("apps/__UNI__"), bundle.lastIndexOf("/")) + "/" + imgPath;
-        JLogger.d("getAssetPicPath:" + path);
-        return path;
+        Uri uri = mUniSDKInstance.rewriteUri(Uri.parse(imgPath), URIAdapter.FILE);
+        JLogger.d("getAssetPicPath:" + uri.toString());
+        return uri.getPath();
     }
 
 
@@ -886,10 +893,10 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
      * @return
      */
     public Bitmap getAssetsBitmap(String path) {
-        AssetManager am = mWXSDKInstance.getContext().getAssets();
         InputStream inputStream = null;
         try {
-            inputStream = am.open(path);
+            File file = new File(path);
+            inputStream = new FileInputStream(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
