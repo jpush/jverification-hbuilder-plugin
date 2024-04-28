@@ -3,14 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		03717A0D23C855E6004399A2 /* JVerificationModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 03717A0B23C855E6004399A2 /* JVerificationModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		03717A0E23C855E6004399A2 /* JVerificationModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 03717A0C23C855E6004399A2 /* JVerificationModule.m */; };
-		08D7CA532A57CA1B005A86DE /* TYRZUISDK in Frameworks */ = {isa = PBXBuildFile; fileRef = 08D7CA522A57CA1B005A86DE /* TYRZUISDK */; };
-		2A37128626A97F490089C14D /* JVERIFICATIONService.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A37128526A97F480089C14D /* JVERIFICATIONService.h */; };
+		629FA45B2BDDFEEA00006546 /* jverification-ios-3.2.1.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 629FA4572BDDFEEA00006546 /* jverification-ios-3.2.1.xcframework */; };
+		629FA4612BDE201700006546 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 629FA4602BDE201700006546 /* PrivacyInfo.xcprivacy */; };
+		629FA4652BDE215D00006546 /* EAccountApiSDK in Frameworks */ = {isa = PBXBuildFile; fileRef = 629FA4642BDE215D00006546 /* EAccountApiSDK */; };
+		629FA4672BDE216700006546 /* OAuth in Frameworks */ = {isa = PBXBuildFile; fileRef = 629FA4662BDE216700006546 /* OAuth */; };
+		629FA4692BDE217100006546 /* TYRZUISDK in Frameworks */ = {isa = PBXBuildFile; fileRef = 629FA4682BDE217100006546 /* TYRZUISDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,8 +21,11 @@
 		037179F523C8496A004399A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03717A0B23C855E6004399A2 /* JVerificationModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVerificationModule.h; sourceTree = "<group>"; };
 		03717A0C23C855E6004399A2 /* JVerificationModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVerificationModule.m; sourceTree = "<group>"; };
-		08D7CA522A57CA1B005A86DE /* TYRZUISDK */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = TYRZUISDK; sourceTree = "<group>"; };
-		2A37128526A97F480089C14D /* JVERIFICATIONService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVERIFICATIONService.h; sourceTree = "<group>"; };
+		629FA4572BDDFEEA00006546 /* jverification-ios-3.2.1.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "jverification-ios-3.2.1.xcframework"; sourceTree = "<group>"; };
+		629FA4602BDE201700006546 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		629FA4642BDE215D00006546 /* EAccountApiSDK */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = EAccountApiSDK; path = "EAccountApiSDK.xcframework/ios-arm64/EAccountApiSDK.framework/EAccountApiSDK"; sourceTree = "<group>"; };
+		629FA4662BDE216700006546 /* OAuth */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = OAuth; path = "OAuth.xcframework/ios-arm64/OAuth.framework/OAuth"; sourceTree = "<group>"; };
+		629FA4682BDE217100006546 /* TYRZUISDK */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = TYRZUISDK; path = "TYRZUISDK.xcframework/ios-arm64_arm64e/TYRZUISDK.framework/TYRZUISDK"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,7 +33,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08D7CA532A57CA1B005A86DE /* TYRZUISDK in Frameworks */,
+				629FA4672BDE216700006546 /* OAuth in Frameworks */,
+				629FA4652BDE215D00006546 /* EAccountApiSDK in Frameworks */,
+				629FA4692BDE217100006546 /* TYRZUISDK in Frameworks */,
+				629FA45B2BDDFEEA00006546 /* jverification-ios-3.2.1.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,7 +62,7 @@
 		037179F323C8496A004399A2 /* UniPluginJVerification */ = {
 			isa = PBXGroup;
 			children = (
-				2A37128526A97F480089C14D /* JVERIFICATIONService.h */,
+				629FA4602BDE201700006546 /* PrivacyInfo.xcprivacy */,
 				08D7CA492A57C563005A86DE /* Framework */,
 				03C1373E23CC825700AAFD1B /* JVerificationModule */,
 				037179F523C8496A004399A2 /* Info.plist */,
@@ -73,7 +82,10 @@
 		08D7CA492A57C563005A86DE /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				08D7CA522A57CA1B005A86DE /* TYRZUISDK */,
+				629FA4642BDE215D00006546 /* EAccountApiSDK */,
+				629FA4662BDE216700006546 /* OAuth */,
+				629FA4682BDE217100006546 /* TYRZUISDK */,
+				629FA4572BDDFEEA00006546 /* jverification-ios-3.2.1.xcframework */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
@@ -85,7 +97,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A37128626A97F490089C14D /* JVERIFICATIONService.h in Headers */,
 				03717A0D23C855E6004399A2 /* JVerificationModule.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,6 +160,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				629FA4612BDE201700006546 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +327,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/UniPluginJVerification/Framework/EAccountApiSDK.xcframework/ios-arm64",
+				);
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../SDK/inc\"/**";
 				INFOPLIST_FILE = UniPluginJVerification/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -329,6 +345,9 @@
 					"$(PROJECT_DIR)/UniPluginJVerification/Framework/Lib2",
 					"$(PROJECT_DIR)/UniPluginJVerification/Framework/Lib1",
 					"$(PROJECT_DIR)/UniPluginJVerification/Framework",
+					"$(PROJECT_DIR)/UniPluginJVerification/Framework/EAccountApiSDK.xcframework/ios-arm64/EAccountApiSDK.framework",
+					"$(PROJECT_DIR)/UniPluginJVerification/Framework/OAuth.xcframework/ios-arm64/OAuth.framework",
+					"$(PROJECT_DIR)/UniPluginJVerification/Framework/TYRZUISDK.xcframework/ios-arm64_arm64e/TYRZUISDK.framework",
 				);
 				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = NO;
@@ -356,6 +375,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/UniPluginJVerification/Framework/EAccountApiSDK.xcframework/ios-arm64",
+				);
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../SDK/inc\"/**";
 				INFOPLIST_FILE = UniPluginJVerification/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -370,6 +393,9 @@
 					"$(PROJECT_DIR)/UniPluginJVerification/Framework/Lib2",
 					"$(PROJECT_DIR)/UniPluginJVerification/Framework/Lib1",
 					"$(PROJECT_DIR)/UniPluginJVerification/Framework",
+					"$(PROJECT_DIR)/UniPluginJVerification/Framework/EAccountApiSDK.xcframework/ios-arm64/EAccountApiSDK.framework",
+					"$(PROJECT_DIR)/UniPluginJVerification/Framework/OAuth.xcframework/ios-arm64/OAuth.framework",
+					"$(PROJECT_DIR)/UniPluginJVerification/Framework/TYRZUISDK.xcframework/ios-arm64_arm64e/TYRZUISDK.framework",
 				);
 				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = NO;
