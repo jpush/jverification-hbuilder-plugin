@@ -261,7 +261,7 @@ BOOL debugMode = NO;
 
 // 地理位置采集开关
 - (void)setLocationEanable:(BOOL)isEanble{
-    [JVERIFICATIONService setLocationEanable:isEanble];
+//    [JVERIFICATIONService setLocationEanable:isEanble];
 }
 
 
@@ -301,10 +301,15 @@ static  NSString* logBtnHorizontalConstraints=@"logBtnHorizontalConstraints";
 
 
 //二次协议登录按钮
-static  NSString* agreementAlertViewTitleTexFont=@"agreementAlertViewTitleTexFont";
+static  NSString* agreementAlertViewBackgroundImage=@"agreementAlertViewBackgroundImage";
+static  NSString* agreementAlertViewBackgroundColor=@"agreementAlertViewBackgroundColor";
+static  NSString* agreementAlertViewTitleText=@"agreementAlertViewTitleText";
+static  NSString* agreementAlertViewTitleTextFontSize=@"agreementAlertViewTitleTextFontSize";
 static  NSString* agreementAlertViewTitleTextColor=@"agreementAlertViewTitleTextColor";
 static  NSString* agreementAlertViewContentTextAlignment=@"agreementAlertViewContentTextAlignment";
 static  NSString* agreementAlertViewContentTextFontSize=@"agreementAlertViewContentTextFontSize";
+static  NSString* agreementAlertViewLogBtnText=@"agreementAlertViewLogBtnText";
+static  NSString* agreementAlertViewLogBtnTextFontSize=@"agreementAlertViewLogBtnTextFontSize";
 static  NSString* agreementAlertViewLogBtnImgs=@"agreementAlertViewLogBtnImgs";
 static  NSString* agreementAlertViewLogBtnTextColor=@"agreementAlertViewLogBtnTextColor";
 
@@ -596,6 +601,8 @@ JVUIConfig *jvUIConfig){
         jvUIConfig.agreementAlertViewContentTextFontSize = [dict[key] floatValue];
     }else if([key isEqualToString:agreementAlertViewTitleTextColor]){
         jvUIConfig.agreementAlertViewTitleTextColor = UIColorFromRGBValue([dict[key] intValue]);//UIColor;
+    }else if ([key isEqualToString:agreementAlertViewTitleTextFontSize]){
+        jvUIConfig.agreementAlertViewTitleTexFont = [UIFont systemFontOfSize:[dict[key] floatValue]];
     }else if([key isEqualToString:agreementAlertViewLogBtnTextColor]){
         jvUIConfig.agreementAlertViewLogBtnTextColor = UIColorFromRGBValue([dict[key] intValue]);//UIColor;
     }else if([key isEqualToString:agreementAlertViewLogBtnImgs]){
@@ -607,6 +614,19 @@ JVUIConfig *jvUIConfig){
             [logBtnImgs addObject:logBtnImage];
         }
         jvUIConfig.agreementAlertViewLogBtnImgs = logBtnImgs;
+    } else if ([key isEqualToString:agreementAlertViewBackgroundImage]) {
+        NSString* imgPath = dict[key];
+        NSString *path = [appinfo.wwwPath stringByAppendingFormat:@"/%@",imgPath];
+        UIImage *bgImage = [UIImage imageNamed:path];
+        jvUIConfig.agreementAlertViewBackgroundImage = bgImage;
+    } else if ([key isEqualToString:agreementAlertViewBackgroundColor]) {
+        jvUIConfig.agreementAlertViewBackgroundColor = UIColorFromRGBValue([dict[key] intValue]);//UIColor;
+    } else if ([key isEqualToString:agreementAlertViewTitleText]) {
+        jvUIConfig.agreementAlertViewTitleText = dict[key];
+    } else if ([key isEqualToString:agreementAlertViewLogBtnText]) {
+        jvUIConfig.agreementAlertViewLogBtnText = dict[key];
+    } else if ([key isEqualToString:agreementAlertViewLogBtnTextFontSize]) {
+        jvUIConfig.agreementAlertViewLogBtnTextFontSize = [dict[key] floatValue];
     }
     
     //    弹窗

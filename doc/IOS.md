@@ -130,6 +130,22 @@
 |windowConstraints| 数组[float,float,float,float] |竖屏方向，弹窗布局对象(窗口宽度，窗口高度，窗口相对屏幕中心的x轴偏移量，窗口相对屏幕中心的y轴偏移量)|
 |windowCloseBtnHorizontalConstraints|数组[float,float,float,float]|水平方向，弹窗布局对象(窗口宽度，窗口高度，窗口相对屏幕中心的x轴偏移量，窗口相对屏幕中心的y轴偏移量)|
 
++ 协议二次弹窗（未勾选协议默认提示弹窗）
+
+| 参数名称 | 参数类型 | 参数说明 |
+|:-----|:----|:-----|
+|agreementAlertViewBackgroundColor|int| 16进制颜色数值,协议二次弹窗背景颜色|
+|agreementAlertViewBackgroundImage|String|协议二次弹窗背景图片|
+|agreementAlertViewTitleText|String| 协议二次弹窗标题文本|
+|agreementAlertViewTitleTexFont|float| 协议二次弹窗标题文本字体大小|
+|agreementAlertViewTitleTextColor|int| 16进制颜色数值,协议二次弹窗标题文本颜色 |
+|agreementAlertViewContentTextAlignment|int| 协议二次弹窗内容文本对齐方式 0 居左,1 居中,2居右|
+|agreementAlertViewContentTextFontSize|float| 协议二次弹窗内容文本字体大小 |
+|agreementAlertViewLogBtnImgs|Array| 协议二次弹窗登录按钮背景图片添加到数组 |
+|agreementAlertViewLogBtnText|String| 协议二次弹窗登录按钮文本|
+|agreementAlertViewLogBtnTextFontSize|float|协议二次弹窗登录按钮文本字体大小|
+|agreementAlertViewLogBtnTextColor|int| 16进制颜色数值,协议二次弹窗登录按钮文本颜色|
+
 ![JVerification](https://docs.jiguang.cn/jverification/image/cutomeUI_description.png)
 
 + SDK授权页面添加自定义控件

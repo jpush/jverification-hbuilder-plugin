@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#define JVER_VERSION_NUMBER 3.2.1
+#define JVER_VERSION_NUMBER 3.2.6
 
 NS_ASSUME_NONNULL_BEGIN
 /**
@@ -404,6 +404,9 @@ typedef NS_ENUM(NSInteger,JVVerAlignment){
 /*是否在协议二次弹窗添加自定义控件*/
 @property (nonatomic,copy) void(^customAgreementAlertView)(UIView *superView,void(^hidAlertView)(void));
 
+/**协议二次弹窗标题文本*/
+@property (nonatomic,copy) NSString *agreementAlertViewTitleText;
+
 /**协议二次弹窗标题文本样式*/
 @property (nonatomic,strong) UIFont *agreementAlertViewTitleTexFont;
 
@@ -416,11 +419,23 @@ typedef NS_ENUM(NSInteger,JVVerAlignment){
 /**协议二次弹窗内容文本字体大小*/
 @property (nonatomic,assign) NSInteger agreementAlertViewContentTextFontSize;
 
+/**协议二次弹窗背景颜色*/
+@property (nonatomic,strong) UIColor *agreementAlertViewBackgroundColor;
+
+/**协议二次弹窗背景图片*/
+@property (nonatomic,strong) UIImage *agreementAlertViewBackgroundImage;
+
 /**协议二次弹窗登录按钮背景图片添加到数组(顺序如下)
  @[激活状态的图片,失效状态的图片,高亮状态的图片]
  注意:当customPrivacyAlertViewBlock不为空，并且隐私栏为选中时，失效状态的图片设置无效
  */
 @property (nonatomic,copy) NSArray *agreementAlertViewLogBtnImgs;
+
+/**协议二次弹窗登录按钮文本*/
+@property (nonatomic,copy) NSString *agreementAlertViewLogBtnText;
+
+/**协议二次弹窗登录按钮文本字体大小*/
+@property (nonatomic,assign) NSInteger agreementAlertViewLogBtnTextFontSize;
 
 /**协议二次弹窗登录按钮文本颜色*/
 @property (nonatomic,strong) UIColor *agreementAlertViewLogBtnTextColor;
@@ -682,6 +697,9 @@ typedef NS_ENUM(NSInteger,JVVerAlignment){
 /*是否在协议二次弹窗添加自定义控件*/
 @property (nonatomic,copy) void(^smsCustomAgreementAlertView)(UIView *superView,void(^hidAlertView)(void));
 
+/**协议二次弹窗标题文本*/
+@property (nonatomic,copy) NSString *smsAgreementAlertViewTitleText;
+
 /**协议二次弹窗标题文本样式*/
 @property (nonatomic,strong) UIFont *smsAgreementAlertViewTitleTexFont;
 
@@ -694,14 +712,27 @@ typedef NS_ENUM(NSInteger,JVVerAlignment){
 /**协议二次弹窗内容文本字体大小*/
 @property (nonatomic,assign) NSInteger smsAgreementAlertViewContentTextFontSize;
 
+/**协议二次弹窗背景颜色*/
+@property (nonatomic,strong) UIColor *smsAgreementAlertViewBackgroundColor;
+
+/**协议二次弹窗背景图片*/
+@property (nonatomic,strong) UIImage *smsAgreementAlertViewBackgroundImage;
+
 /**协议二次弹窗登录按钮背景图片添加到数组(顺序如下)
  @[激活状态的图片,失效状态的图片,高亮状态的图片]
  注意:当customPrivacyAlertViewBlock不为空，并且隐私栏为选中时，失效状态的图片设置无效
  */
 @property (nonatomic,copy) NSArray *smsAgreementAlertViewLogBtnImgs;
 
+/**协议二次弹窗登录按钮文本*/
+@property (nonatomic,copy) NSString *smsAgreementAlertViewLogBtnText;
+
+/**协议二次弹窗登录按钮文本字体大小*/
+@property (nonatomic,assign) NSInteger smsAgreementAlertViewLogBtnTextFontSize;
+
 /**协议二次弹窗登录按钮文本颜色*/
 @property (nonatomic,strong) UIColor *smsAgreementAlertViewLogBtnTextColor;
+
 @end
 
 DEPRECATED_MSG_ATTRIBUTE("Please use JVUIConfig") @interface JVMobileUIConfig : JVUIConfig
@@ -716,18 +747,8 @@ DEPRECATED_MSG_ATTRIBUTE("Please use JVUIConfig") @interface JVTelecomUIConfig :
 
 @interface JVCollectControl : NSObject
 
-/* model 设备型号。设置为NO,不采集设备型号信息。默认为YES。 */
-@property (nonatomic, assign) BOOL model;
-/* osVersionName 系统版本。设置为NO,不采集系统版本信息。默认为YES。 */
-@property (nonatomic, assign) BOOL osVersionName;
-/* resolution 设备屏幕分辨率。设置为NO,不采集屏幕分辨率信息。默认为YES。 */
-@property (nonatomic, assign) BOOL resolution;
-/* language 设备系统语言。设置为NO,不采集设备系统语言信息。默认为YES。 */
-@property (nonatomic, assign) BOOL language;
-/* systemName 设备系统名称。设置为NO,不采集设备系统名称信息。默认为YES。 */
-@property (nonatomic, assign) BOOL systemName;
-/* gps 经纬度信息。设置为NO,不采集经纬度信息。默认为YES。 */
-@property (nonatomic, assign) BOOL gps;
+/* cell 基站信息。设置为NO,不采集基站信息。默认为YES。*/
+@property (nonatomic, assign) BOOL cell;
 
 @end
 
@@ -955,21 +976,19 @@ DEPRECATED_MSG_ATTRIBUTE("Please use JVUIConfig") @interface JVTelecomUIConfig :
  */
 + (void)setGetCodeInternal:(NSTimeInterval)intervalTime;
 
-
-/*!
- * @abstract 设置SDK地理位置权限开关
- *
- * @discussion 关闭地理位置之后，pushSDK地理围栏的相关功能将受到影响，默认是开启。
- *
- */
-+ (void)setLocationEanable:(BOOL)isEanble;
-
 /**
  数据采集控制
 
  @param control 数据采集配置。
  */
 + (void)setCollectControl:(JVCollectControl *)control;
+
+/**
+ 如果有安全风控需求时可调用该接口
+ 
+ @param enable YES为打开，NO为关闭，默认为YES。
+ */
++ (void)setSecureControl:(BOOL)enable;
 
 @end
 NS_ASSUME_NONNULL_END

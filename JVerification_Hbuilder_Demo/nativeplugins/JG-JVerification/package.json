@@ -1,7 +1,7 @@
 {
 	"name": "JG-JVerification",
 	"id": "JG-JVerification",
-	"version":"2.4.1",
+	"version":"2.4.2",
 	"description": "极光认证Hbuilder插件",
 	"_dp_type":"nativeplugin",
 	"_dp_nativeplugin":{
@@ -29,7 +29,8 @@
 				"Security.framework",
 				"CoreGraphics.framework",
 				"libsqlite3.tbd",
-				"MobileCoreServices.framework"
+				"MobileCoreServices.framework",
+				"Network.framework"
 			],
 			"resources": [
 				"JVerificationResource.bundle"
