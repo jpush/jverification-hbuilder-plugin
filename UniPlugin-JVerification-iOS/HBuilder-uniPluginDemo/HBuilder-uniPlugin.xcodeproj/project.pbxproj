@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,7 +17,6 @@
 		2430A7021E11603E00D3D42D /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2430A7001E11603E00D3D42D /* libssl.a */; };
 		2447371B1D0830BB00D0F08F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2447371A1D0830BB00D0F08F /* WebKit.framework */; };
 		24A7515F1D9CCCC600C8B0F9 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A7515E1D9CCCC600C8B0F9 /* QuickLook.framework */; };
-		24AFD7FF1CB50C3200C0F062 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD7FB1CB50C3200C0F062 /* AlipaySDK.framework */; };
 		24AFD8021CB50C3200C0F062 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD7FE1CB50C3200C0F062 /* TencentOpenAPI.framework */; };
 		24AFD8401CB50C4000C0F062 /* libalixpayment.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8031CB50C3F00C0F062 /* libalixpayment.a */; };
 		24AFD8431CB50C4000C0F062 /* libBaiduMobStatForSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24AFD8061CB50C3F00C0F062 /* libBaiduMobStatForSDK.a */; };
@@ -86,6 +85,7 @@
 		2FDE6A56297147F2004C7701 /* DCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDE6A55297147F2004C7701 /* DCloud.swift */; };
 		4FA53F7C26E5D14400BAD6A0 /* uni-jsframework-vue3.js in Resources */ = {isa = PBXBuildFile; fileRef = 4FA53F7B26E5D14400BAD6A0 /* uni-jsframework-vue3.js */; };
 		4FE3666A254FE5FC00DCD173 /* libuchardet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FE36669254FE5FB00DCD173 /* libuchardet.a */; };
+		5AAE8EED2DD74CD5006AD2B5 /* AlipaySDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AAE8EEC2DD74CD5006AD2B5 /* AlipaySDK.xcframework */; };
 		67065F3A2243868400DC71CA /* Default-896h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67065F1E2243868300DC71CA /* Default-896h@2x.png */; };
 		67065F3B2243868400DC71CA /* Default-Landscape-812h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67065F1F2243868300DC71CA /* Default-Landscape-812h@3x.png */; };
 		67065F3C2243868400DC71CA /* Default-Landscape-896h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67065F202243868300DC71CA /* Default-Landscape-896h@3x.png */; };
@@ -124,7 +124,6 @@
 		672CE2B322DC9118005A0D88 /* DCUniVideoPublic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 672CE2B222DC9118005A0D88 /* DCUniVideoPublic.framework */; };
 		672CE2B522DC916C005A0D88 /* libDCUniZXing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 672CE2B422DC916C005A0D88 /* libDCUniZXing.a */; };
 		6731F3A4232F5B7A007838BC /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6731F3A3232F5B7A007838BC /* libresolv.tbd */; };
-		6731F3A7232F5B87007838BC /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6731F3A5232F5B87007838BC /* UMCommon.framework */; };
 		6731F3AA232F5B97007838BC /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6731F3A9232F5B97007838BC /* Photos.framework */; };
 		673E6E7321E44ABF00C021FE /* liblibFingerprint.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 673E6E7221E44ABF00C021FE /* liblibFingerprint.a */; };
 		67414FA024333E320093CD65 /* uni-jsframework.js in Resources */ = {isa = PBXBuildFile; fileRef = 67414F9F24333E320093CD65 /* uni-jsframework.js */; };
@@ -189,7 +188,6 @@
 		8EED65A6198A626B000A4449 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED65A5198A626B000A4449 /* MapKit.framework */; };
 		8EED65A8198A6273000A4449 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EED65A7198A6273000A4449 /* OpenGLES.framework */; };
 		95DA22F0276A0B1E00071681 /* UMAPM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DA22EE276A0B1E00071681 /* UMAPM.framework */; };
-		95DA22F1276A0B1E00071681 /* UMDevice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DA22EF276A0B1E00071681 /* UMDevice.framework */; };
 		97D33A5D24750907004DDFB5 /* liblibPDRCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 247F85DA1FA32B2C006ECAC6 /* liblibPDRCore.a */; };
 		97D33A5E24750907004DDFB5 /* liblibWeex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDE1569215F468000588710 /* liblibWeex.a */; };
 /* End PBXBuildFile section */
@@ -216,7 +214,6 @@
 		2447371A1D0830BB00D0F08F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		247F85DA1FA32B2C006ECAC6 /* liblibPDRCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibPDRCore.a; path = ../SDK/Libs/liblibPDRCore.a; sourceTree = "<group>"; };
 		24A7515E1D9CCCC600C8B0F9 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
-		24AFD7FB1CB50C3200C0F062 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlipaySDK.framework; path = ../SDK/Libs/AlipaySDK.framework; sourceTree = "<group>"; };
 		24AFD7FD1CB50C3200C0F062 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iflyMSC.framework; path = ../SDK/Libs/iflyMSC.framework; sourceTree = "<group>"; };
 		24AFD7FE1CB50C3200C0F062 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = ../SDK/Libs/TencentOpenAPI.framework; sourceTree = "<group>"; };
 		24AFD8031CB50C3F00C0F062 /* libalixpayment.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libalixpayment.a; path = ../SDK/Libs/libalixpayment.a; sourceTree = "<group>"; };
@@ -430,6 +427,7 @@
 		4FF0ABC6259062C700A54D59 /* SDImageCachesManagerOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCachesManagerOperation.h; sourceTree = "<group>"; };
 		4FF0ABC7259062C700A54D59 /* UIColor+SDHexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SDHexString.h"; sourceTree = "<group>"; };
 		4FF0ABC8259062C700A54D59 /* SDImageAssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageAssetManager.h; sourceTree = "<group>"; };
+		5AAE8EEC2DD74CD5006AD2B5 /* AlipaySDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AlipaySDK.xcframework; path = ../SDK/Libs/AlipaySDK.xcframework; sourceTree = SOURCE_ROOT; };
 		67065F1E2243868300DC71CA /* Default-896h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-896h@2x.png"; sourceTree = "<group>"; };
 		67065F1F2243868300DC71CA /* Default-Landscape-812h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape-812h@3x.png"; sourceTree = "<group>"; };
 		67065F202243868300DC71CA /* Default-Landscape-896h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape-896h@3x.png"; sourceTree = "<group>"; };
@@ -470,7 +468,6 @@
 		672CE2B222DC9118005A0D88 /* DCUniVideoPublic.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DCUniVideoPublic.framework; path = ../SDK/Libs/DCUniVideoPublic.framework; sourceTree = "<group>"; };
 		672CE2B422DC916C005A0D88 /* libDCUniZXing.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDCUniZXing.a; path = ../SDK/Libs/libDCUniZXing.a; sourceTree = "<group>"; };
 		6731F3A3232F5B7A007838BC /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
-		6731F3A5232F5B87007838BC /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMCommon.framework; path = ../SDK/Libs/UMCommon.framework; sourceTree = "<group>"; };
 		6731F3A9232F5B97007838BC /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		673E6E7221E44ABF00C021FE /* liblibFingerprint.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblibFingerprint.a; path = ../SDK/Libs/liblibFingerprint.a; sourceTree = "<group>"; };
 		67414F9F24333E320093CD65 /* uni-jsframework.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "uni-jsframework.js"; sourceTree = "<group>"; };
@@ -616,7 +613,6 @@
 		95D879FC2583A6A800244F71 /* WXAComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXAComponent.h; sourceTree = "<group>"; };
 		95D879FD2583A6A800244F71 /* WXBridgeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXBridgeProtocol.h; sourceTree = "<group>"; };
 		95DA22EE276A0B1E00071681 /* UMAPM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMAPM.framework; path = ../SDK/Libs/UMAPM.framework; sourceTree = "<group>"; };
-		95DA22EF276A0B1E00071681 /* UMDevice.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMDevice.framework; path = ../SDK/Libs/UMDevice.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -628,13 +624,13 @@
 				4FE3666A254FE5FC00DCD173 /* libuchardet.a in Frameworks */,
 				67A9340323A8BAF6004A4DF4 /* libSDWebImage.a in Frameworks */,
 				6731F3AA232F5B97007838BC /* Photos.framework in Frameworks */,
-				6731F3A7232F5B87007838BC /* UMCommon.framework in Frameworks */,
 				6731F3A4232F5B7A007838BC /* libresolv.tbd in Frameworks */,
 				672CE2B322DC9118005A0D88 /* DCUniVideoPublic.framework in Frameworks */,
 				67229AD1230171AE0093F29A /* libDCUniAmap.a in Frameworks */,
 				67229AD2230171AE0093F29A /* libDCUniVideo.a in Frameworks */,
 				0835EEE3299631D000CF5775 /* jcore-ios-3.1.2.a in Frameworks */,
 				67229AD3230171AE0093F29A /* libDCUniBarcode.a in Frameworks */,
+				5AAE8EED2DD74CD5006AD2B5 /* AlipaySDK.xcframework in Frameworks */,
 				67229AD6230171AE0093F29A /* libDCUniGPUImage.a in Frameworks */,
 				67229AD8230171AE0093F29A /* libDCUniMap.a in Frameworks */,
 				672CE2B522DC916C005A0D88 /* libDCUniZXing.a in Frameworks */,
@@ -718,7 +714,6 @@
 				24AFD87B1CB50C4000C0F062 /* libWXOauth.a in Frameworks */,
 				24AFD87C1CB50C4000C0F062 /* libwxpay.a in Frameworks */,
 				2F5FAE6F2865DB9800430AFA /* KSCrash.framework in Frameworks */,
-				24AFD7FF1CB50C3200C0F062 /* AlipaySDK.framework in Frameworks */,
 				24AFD8021CB50C3200C0F062 /* TencentOpenAPI.framework in Frameworks */,
 				24BD5AF21C994A1700B05AA2 /* libicucore.tbd in Frameworks */,
 				24BD5AF01C99494A00B05AA2 /* libz.tbd in Frameworks */,
@@ -736,7 +731,6 @@
 				8EED65A8198A6273000A4449 /* OpenGLES.framework in Frameworks */,
 				8EED65A6198A626B000A4449 /* MapKit.framework in Frameworks */,
 				8EED65A0198A5789000A4449 /* Accounts.framework in Frameworks */,
-				95DA22F1276A0B1E00071681 /* UMDevice.framework in Frameworks */,
 				8EED659E198A5782000A4449 /* Social.framework in Frameworks */,
 				8EED659C198A5773000A4449 /* AddressBookUI.framework in Frameworks */,
 				8EED6598198A5754000A4449 /* MessageUI.framework in Frameworks */,
@@ -1067,10 +1061,8 @@
 				2F5FAE6C2865DB9800430AFA /* BMKLocationKit.framework */,
 				2F5FAE6D2865DB9800430AFA /* KSCrash.framework */,
 				95DA22EE276A0B1E00071681 /* UMAPM.framework */,
-				95DA22EF276A0B1E00071681 /* UMDevice.framework */,
 				4FE36669254FE5FB00DCD173 /* libuchardet.a */,
 				6731F3A9232F5B97007838BC /* Photos.framework */,
-				6731F3A5232F5B87007838BC /* UMCommon.framework */,
 				6731F3A3232F5B7A007838BC /* libresolv.tbd */,
 				67229AC9230171AE0093F29A /* libDCUniAmap.a */,
 				67229ACB230171AE0093F29A /* libDCUniBarcode.a */,
@@ -1159,7 +1151,7 @@
 				24AFD83D1CB50C4000C0F062 /* libweixinShare.a */,
 				24AFD83E1CB50C4000C0F062 /* libWXOauth.a */,
 				24AFD83F1CB50C4000C0F062 /* libwxpay.a */,
-				24AFD7FB1CB50C3200C0F062 /* AlipaySDK.framework */,
+				5AAE8EEC2DD74CD5006AD2B5 /* AlipaySDK.xcframework */,
 				24AFD7FD1CB50C3200C0F062 /* iflyMSC.framework */,
 				24AFD7FE1CB50C3200C0F062 /* TencentOpenAPI.framework */,
 				24BD5AF51C994BB200B05AA2 /* libc++.tbd */,
@@ -1641,7 +1633,10 @@
 				INFOPLIST_FILE = "HBuilder-Hello/HBuilder-uniPlugin-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = JVerification_Hbuilder_Demo_PR;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/../SDK/libs/**",
 					"$(PROJECT_DIR)",
@@ -1699,7 +1694,10 @@
 				INFOPLIST_FILE = "HBuilder-Hello/HBuilder-uniPlugin-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = JVerification_Hbuilder_Demo_PR;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/../SDK/libs/**",
 					"$(PROJECT_DIR)",

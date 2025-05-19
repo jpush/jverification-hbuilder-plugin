@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: ./app/libs/lib.5plus.base-release.aar">
+  <library name="Gradle: ./app/libs/lib.5plus.base-release.aar" external-system-id="GRADLE">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c3d3437388b21734800ebbd6a19266d9/jetified-lib.5plus.base-release/annotations.zip!/" />
     </ANNOTATIONS>

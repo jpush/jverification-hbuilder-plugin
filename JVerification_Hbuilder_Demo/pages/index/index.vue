@@ -43,7 +43,7 @@
 					timeout:7000,
 					isProduction:false,
 				},result=>{
-					self.showModal('init',JSON.stringify(result));
+					self.showModal('init_',JSON.stringify(result));
 				});
 			},
 			// 是否初始化成功
@@ -85,7 +85,7 @@
 					autoFinish:true,
 					timeout:5000
 				},result=>{
-					self.showModal('loginAuth',JSON.stringify(result));
+					self.showModal('loginAuth',JSON.stringify(result));					
 				},event=>{
 					console.log("loginAuthevent:"+JSON.stringify(event));
 				})
@@ -206,6 +206,7 @@
 						//android 协议二次弹窗
 						setPrivacyCheckDialogConfig:{
 							enablePrivacyCheckDialog:true,
+							setPrivacyCheckDialogTitleText : "测试标题",
 							setPrivacyCheckDialogTitleTextSize : 18,
 							setPrivacyCheckDialogTitleTextColor : 0xff4169E1,
 							setPrivacyCheckDialogContentTextGravity : "left",
@@ -293,11 +294,13 @@
 				
 			},
 			showModal:function(title,content){
-				uni.showModal({
-				    title,
-				    content,
-				});
-				this.msg = `${title} :${content}`;
+				setTimeout(()=>{
+					uni.showModal({
+						title,
+						content,
+					});
+					this.msg = `${title} :${content}`;	
+				}, 100);
 			},
 			// 获取验证码
 			getCode:function(){

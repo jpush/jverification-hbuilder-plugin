@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/UniPlugin-Hello-AS.iml" filepath="$PROJECT_DIR$/.idea/UniPlugin-Hello-AS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UniPlugin-Hello-AS.iml" filepath="$PROJECT_DIR$/.idea/modules/UniPlugin-Hello-AS.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/UniPlugin-Hello-AS.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/UniPlugin-Hello-AS.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/UniPlugin-Hello-AS.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/UniPlugin-Hello-AS.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/UniPlugin-Hello-AS.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/UniPlugin-Hello-AS.app.main.iml" />

@@ -1,7 +1,5 @@
 package cn.jiguang.uniplugin_jverification.common;
 
-import android.view.Gravity;
-
 public class JConstants {
 
     public static final String CODE = "code";
@@ -141,6 +139,7 @@ public class JConstants {
     // 协议的二次弹窗
     public static final String setPrivacyCheckDialogConfig = "setPrivacyCheckDialogConfig";
     public static final String  enablePrivacyCheckDialog = "enablePrivacyCheckDialog";
+    public static final String setPrivacyCheckDialogTitleText = "setPrivacyCheckDialogTitleText";   //协议的二次弹窗标题
     public static final String  setPrivacyCheckDialogTitleTextSize = "setPrivacyCheckDialogTitleTextSize";
     public static final String  setPrivacyCheckDialogTitleTextColor = "setPrivacyCheckDialogTitleTextColor";
     public static final String  setPrivacyCheckDialogContentTextGravity = "setPrivacyCheckDialogContentTextGravity";

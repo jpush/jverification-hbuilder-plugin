@@ -108,6 +108,28 @@
 |setPrivacyNameAndUrlBeanList|PrivateBean 数组|设置隐私条款组|
 
 
++  二次协议弹窗配置
+ 
+|方法|参数类型|说明|
+|:-----:|:----:|:----:|
+| setPrivacyCheckDialogConfig | object | 二次弹窗配置对象        |
+| enablePrivacyCheckDialog | boolean | 开启二次弹窗        |
+| setPrivacyCheckDialogTitleText | String | 协议二次弹窗标题        |
+| setPrivacyCheckDialogTitleTextSize | int | 协议二次弹窗字体大小        |
+| setPrivacyCheckDialogTitleTextColor | int | 协议二次弹窗字体颜色        |
+| setPrivacyCheckDialogContentTextGravity | int | 协议二次弹窗协议内容对⻬方式    |
+| setPrivacyCheckDialogContentTextSize | int | 协议二次弹窗协议内容字体大小    |
+| setPrivacyCheckDialogLogBtnImgPath | String | 协议二次弹窗登录按钮的背景图片   |
+| setPrivacyCheckDialoglogBtnTextColor | int | 协议二次弹窗登录按钮的字体颜色   |
+| setPrivacyCheckDialogWidth | int | 协议二次弹窗本身的宽        |
+| setPrivacyCheckDialogHeight | int | 协议二次弹窗本身的高        |
+| setprivacyCheckDialogGravity | int | 协议二次弹窗字体颜色        |
+| setPrivacyCheckDialogOffsetX | int | 协议二次弹窗本身对于父类的对⻬偏移 |
+| setPrivacyCheckDialogOffsetY | int | 协议二次弹窗本身对于父类的对⻬偏移 |
+| setPrivacyCheckDialogLogBtnWidth | int | 协议二次弹窗登录按钮的宽      |
+| setPrivacyCheckDialogLogBtnHeight | int | 协议二次弹窗登录按钮的高      |
+
+
 + PrivateBean since 原生 v2.9.6 插件 v2.2.5
 
 |方法|参数类型|说明|

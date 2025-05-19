@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: com.facebook.fresco:nativeimagetranscoder:1.13.0@aar">
+  <library name="Gradle: com.facebook.fresco:nativeimagetranscoder:1.13.0@aar" external-system-id="GRADLE">
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b2cb82085d99134ed8d8c6a0c06881fa/jetified-nativeimagetranscoder-1.13.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b2cb82085d99134ed8d8c6a0c06881fa/jetified-nativeimagetranscoder-1.13.0/AndroidManifest.xml" />

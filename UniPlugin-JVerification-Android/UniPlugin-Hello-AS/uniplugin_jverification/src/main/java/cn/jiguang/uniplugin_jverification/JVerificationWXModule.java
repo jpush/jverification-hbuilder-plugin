@@ -650,6 +650,11 @@ public class JVerificationWXModule extends WXSDKEngine.DestroyableModule {
                     uiConfigBuilder.enablePrivacyCheckDialog(enablePrivacyCheckDialog);
                 }
 
+                if(privacyCheckDialogConfig.containsKey(JConstants.setPrivacyCheckDialogTitleText)){
+                    String setPrivacyCheckDialogTitleText = privacyCheckDialogConfig.getString(JConstants.setPrivacyCheckDialogTitleText);
+                    uiConfigBuilder.setPrivacyCheckDialogTitleText(setPrivacyCheckDialogTitleText);
+                }
+
                 if(privacyCheckDialogConfig.containsKey(JConstants.setPrivacyCheckDialogTitleTextSize)){
                     int setPrivacyCheckDialogTitleTextSize = privacyCheckDialogConfig.getIntValue(JConstants.setPrivacyCheckDialogTitleTextSize);
                     uiConfigBuilder.setPrivacyCheckDialogTitleTextSize(setPrivacyCheckDialogTitleTextSize);

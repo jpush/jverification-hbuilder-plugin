@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#define JVER_VERSION_NUMBER 3.2.6
+#define JVER_VERSION_NUMBER 3.2.8
 
 NS_ASSUME_NONNULL_BEGIN
 /**
@@ -49,6 +49,16 @@ typedef NS_ENUM(NSInteger,JVVerAlignment){
     JVVerAlignmentMiddle,
     JVVerAlignmentBottom
 };
+
+/**
+ 多语言配置
+ */
+typedef NS_ENUM(NSInteger,JVLanguageType){
+    JVLanguageSimplifiedChinese ,   //简体中文
+    JVLanguageTraditionalChinese,   //繁体中文
+    JVLanguageEnglish               //英文
+};
+
 
 @interface JVLayoutConstraint : NSObject
 /**
@@ -93,6 +103,9 @@ typedef NS_ENUM(NSInteger,JVVerAlignment){
 /*----------------------------------------授权页面-----------------------------------*/
 
 #pragma mark --导航栏
+
+//MARK: 多语言配置
+@property (nonatomic, assign) JVLanguageType appLanguageType;
 
 //MARK:导航栏*************
 /**运营商类型*/
@@ -921,6 +934,13 @@ DEPRECATED_MSG_ATTRIBUTE("Please use JVUIConfig") @interface JVTelecomUIConfig :
  * YES 支持, NO 不支持
  */
 + (BOOL)checkVerifyEnable;
+
+/*!
+ * @abstract 判断当前手机网络环境是否支持认证。（支持移动香港卡）
+ * 如果需要支持移动香港卡，请确保在调用预取号、一键登录和号码认证方法之前先使用该方法判断是否支持认证。在回调isSupport返回YES之后再进行预取号、一键登录和号码认证操作。
+ * @param completion 回调。isSupport：YES 支持, NO 不支持；operatorType：UNKNOW-未知；CM-移动；CU-联通；CT- 电信；CMHK-中国移动香港
+ */
++ (void)checkVerifyEnable:(void(^)(BOOL isSupport, NSString *operatorType))completion;
 
 /*!
  * @abstract 校验预取号缓存是否有效
