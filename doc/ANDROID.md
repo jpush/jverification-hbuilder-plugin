@@ -104,7 +104,6 @@
 |enableHintToastText|String|checkbo没选中时，自定义提示用户的内容。since 2.4.8|
 |setPrivacyWithBookTitleMark|boolean|设置隐私条款运营商协议名是否加书名号。since 2.4.8|
 |setPrivacyCheckboxInCenter|boolean|设置隐私条款checkbox是否相对协议文字纵向居中。默认居顶。since 2.4.8|
-|setPrivacyTextWidth|int|设置隐私条款文字栏宽度。since 2.5.0|
 |setPrivacyNameAndUrlBeanList|PrivateBean 数组|设置隐私条款组|
 
 
@@ -130,15 +129,15 @@
 | setPrivacyCheckDialogLogBtnHeight | int | 协议二次弹窗登录按钮的高      |
 
 
-+ PrivateBean since 原生 v2.9.6 插件 v2.2.5
++ since 原生 v2.9.6 插件 v2.2.5
 
 |方法|参数类型|说明|
 |:-----:|:----:|:----:|
 |name|String|隐私协议名称|
-| setPrivacyMarginL |String|协议距离父类左边的距离|
-| setPrivacyMarginR |String|协议距离父类右边的距离|
-| setPrivacyMarginB |String|协议距离父类底部的距离|
-| setPrivacyMarginT |String|协议距离父类头部的距离|
+| setPrivacyMarginL |int|协议距离父类左边的距离|
+| setPrivacyMarginR |int|协议距离父类右边的距离|
+| setPrivacyMarginB |int|协议距离父类底部的距离|
+| setPrivacyMarginT |int|协议距离父类头部的距离|
 
 | setIsPrivacyViewDarkMode | boolean |是否跟随系统的暗黑模式|
 | openPrivacyInBrowser | boolean |是否用浏览器打开协议页面|
