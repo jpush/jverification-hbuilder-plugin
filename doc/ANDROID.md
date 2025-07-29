@@ -133,7 +133,6 @@
 
 |方法|参数类型|说明|
 |:-----:|:----:|:----:|
-|name|String|隐私协议名称|
 | setPrivacyMarginL |int|协议距离父类左边的距离|
 | setPrivacyMarginR |int|协议距离父类右边的距离|
 | setPrivacyMarginB |int|协议距离父类底部的距离|
