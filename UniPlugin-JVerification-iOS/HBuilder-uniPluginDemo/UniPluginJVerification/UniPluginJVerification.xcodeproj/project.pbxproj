@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		03717A0D23C855E6004399A2 /* JVerificationModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 03717A0B23C855E6004399A2 /* JVerificationModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		03717A0E23C855E6004399A2 /* JVerificationModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 03717A0C23C855E6004399A2 /* JVerificationModule.m */; };
-		5AAE8EEB2DD743C9006AD2B5 /* jverification-ios-3.2.8.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AAE8EEA2DD743C9006AD2B5 /* jverification-ios-3.2.8.xcframework */; };
+		5A2CBC822E8BBFFC009B3898 /* jverification-ios-3.4.3.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A2CBC812E8BBFFC009B3898 /* jverification-ios-3.4.3.xcframework */; };
 		629FA4612BDE201700006546 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 629FA4602BDE201700006546 /* PrivacyInfo.xcprivacy */; };
 		629FA4652BDE215D00006546 /* EAccountApiSDK in Frameworks */ = {isa = PBXBuildFile; fileRef = 629FA4642BDE215D00006546 /* EAccountApiSDK */; };
 		629FA4672BDE216700006546 /* OAuth in Frameworks */ = {isa = PBXBuildFile; fileRef = 629FA4662BDE216700006546 /* OAuth */; };
@@ -21,7 +21,7 @@
 		037179F523C8496A004399A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03717A0B23C855E6004399A2 /* JVerificationModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVerificationModule.h; sourceTree = "<group>"; };
 		03717A0C23C855E6004399A2 /* JVerificationModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVerificationModule.m; sourceTree = "<group>"; };
-		5AAE8EEA2DD743C9006AD2B5 /* jverification-ios-3.2.8.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "jverification-ios-3.2.8.xcframework"; sourceTree = "<group>"; };
+		5A2CBC812E8BBFFC009B3898 /* jverification-ios-3.4.3.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "jverification-ios-3.4.3.xcframework"; sourceTree = "<group>"; };
 		629FA4602BDE201700006546 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		629FA4642BDE215D00006546 /* EAccountApiSDK */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = EAccountApiSDK; path = "EAccountApiSDK.xcframework/ios-arm64/EAccountApiSDK.framework/EAccountApiSDK"; sourceTree = "<group>"; };
 		629FA4662BDE216700006546 /* OAuth */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = OAuth; path = "OAuth.xcframework/ios-arm64/OAuth.framework/OAuth"; sourceTree = "<group>"; };
@@ -34,9 +34,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				629FA4672BDE216700006546 /* OAuth in Frameworks */,
-				5AAE8EEB2DD743C9006AD2B5 /* jverification-ios-3.2.8.xcframework in Frameworks */,
 				629FA4652BDE215D00006546 /* EAccountApiSDK in Frameworks */,
 				629FA4692BDE217100006546 /* TYRZUISDK in Frameworks */,
+				5A2CBC822E8BBFFC009B3898 /* jverification-ios-3.4.3.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +82,7 @@
 		08D7CA492A57C563005A86DE /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				5AAE8EEA2DD743C9006AD2B5 /* jverification-ios-3.2.8.xcframework */,
+				5A2CBC812E8BBFFC009B3898 /* jverification-ios-3.4.3.xcframework */,
 				629FA4642BDE215D00006546 /* EAccountApiSDK */,
 				629FA4662BDE216700006546 /* OAuth */,
 				629FA4682BDE217100006546 /* TYRZUISDK */,
