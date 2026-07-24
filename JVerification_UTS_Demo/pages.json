@@ -1,0 +1,10 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "极光认证 UTS Demo"
+      }
+    }
+  ]
+}

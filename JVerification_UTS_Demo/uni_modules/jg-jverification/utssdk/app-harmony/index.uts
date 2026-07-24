@@ -1,0 +1,795 @@
+import window from '@ohos.window'
+import common from '@ohos.app.ability.common'
+import {
+  GenAuthThemeConfigBuilder,
+  JVerificationInterface,
+  JVerificationLoginSettings,
+  JVerifyUIConfigBuilder,
+  PrivacyBean,
+  SpanEntity
+} from '@jg/verify'
+import {
+  addHarmonyCmLoginPageButton,
+  buildHarmonyAuthCustomView,
+  buildHarmonyCheckDialogCustomView,
+  buildHarmonyCmLoginPage,
+  configureHarmonyAuthCustomView,
+  configureHarmonyCheckDialogCustomView,
+  configureHarmonyCmCheckBoxAlignRule,
+  configureHarmonyCmCheckBoxCenterAlignRule,
+  configureHarmonyCmCheckBoxTopAlignRule,
+  configureHarmonyCmClauseAlignRule,
+  configureHarmonyCmClauseBottomAlignRule,
+  configureHarmonyCmClauseTopAlignRule,
+  configureHarmonyCmDefaultImages,
+  configureHarmonyCmLoginPage,
+  configureHarmonyCmWindowMode,
+  HarmonyCmAuthLoginListener,
+  resolveHarmonyDialogPage
+} from './harmony-ui.ets'
+import {
+  JVerificationAddCustomViewsClickCallback,
+  JVerificationBooleanQuery,
+  JVerificationCallback,
+  JVerificationClearPreLoginCache,
+  JVerificationDismissLoginAuth,
+  JVerificationEventCallback,
+  JVerificationGetToken,
+  JVerificationInit,
+  JVerificationInitOptions,
+  JVerificationLoginAuth,
+  JVerificationLoginAuthOptions,
+  JVerificationOffAuthPageEvent,
+  JVerificationPreLogin,
+  JVerificationRemoveCustomViewsClickCallback,
+  JVerificationResult,
+  JVerificationCustomViewCallback,
+  JVerificationSetDebugMode,
+  JVerificationUIConfig
+} from '../interface.uts'
+
+let appWindow: window.Window | null = null
+let subscribedAuthPageEventCallback: JVerificationEventCallback | null = null
+let legacyAuthPageEventCallback: JVerificationEventCallback | null = null
+let customViewsClickCallback: JVerificationCustomViewCallback | null = null
+
+UTSHarmony.onAppAbilityWindowStageCreate((windowStage: window.WindowStage) => {
+  appWindow = windowStage.getMainWindowSync()
+})
+
+function result(code: number, content: string, operator: string | null = null): JVerificationResult {
+  const value: JVerificationResult = {
+    code: code,
+    content: content,
+    operator: operator,
+    enable: null,
+    uuid: null,
+    msg: null
+  }
+  return value
+}
+
+function booleanResult(enable: boolean): JVerificationResult {
+  const value: JVerificationResult = {
+    code: null,
+    content: null,
+    operator: null,
+    enable: enable,
+    uuid: null,
+    msg: null
+  }
+  return value
+}
+
+function uiContextOrNull(): UIContext | null {
+  if (appWindow == null) {
+    return null
+  }
+  return appWindow.getUIContext()
+}
+
+function applicationContextOrNull(): common.ApplicationContext | null {
+  const uiContext = uiContextOrNull()
+  if (uiContext == null) {
+    return null
+  }
+  const hostContext = uiContext.getHostContext()
+  if (hostContext == null) {
+    return null
+  }
+  return hostContext.getApplicationContext()
+}
+
+function harmonyMediaDataByName(name: string): string {
+  if (name.length == 0) {
+    return ''
+  }
+  const context = applicationContextOrNull()
+  if (context == null) {
+    console.error(`[JVerification HarmonyOS] media resource context unavailable: ${name}`)
+    return ''
+  }
+  try {
+    return context.resourceManager.getMediaBase64ByNameSync(name)
+  } catch (_error) {
+    console.error(`[JVerification HarmonyOS] media resource not found: ${name}`)
+    return ''
+  }
+}
+
+function dispatchCustomViewClick(id: string): void {
+  if (id.length > 0) {
+    customViewsClickCallback?.(id)
+  }
+}
+
+function requiredContext(callback: JVerificationCallback): common.ApplicationContext | null {
+  const context = applicationContextOrNull()
+  if (context == null) {
+    callback(result(-1, 'JVerification HarmonyOS application context is unavailable'))
+  }
+  return context
+}
+
+function has(config: UTSJSONObject, key: string): boolean {
+  return config.get(key) != null
+}
+
+function stringValue(config: UTSJSONObject, key: string): string {
+  return config.getString(key, '')
+}
+
+function numberValue(config: UTSJSONObject, key: string): number {
+  return config.getNumber(key, 0)
+}
+
+function booleanValue(config: UTSJSONObject, key: string): boolean {
+  return config.getBoolean(key, false)
+}
+
+function currentHarmonyPage(): UniPage | null {
+  const pages = getCurrentPages()
+  if (pages.length == 0) {
+    return null
+  }
+  return pages[pages.length - 1]
+}
+
+function currentHarmonyTopSafeAreaHeight(): number {
+  const page = currentHarmonyPage()
+  return page == null ? 0 : page.statusBarHeight
+}
+
+function applyPrivacyList(builder: JVerifyUIConfigBuilder, config: UTSJSONObject): void {
+  const entries = config.getArray<UTSJSONObject>('setPrivacyNameAndUrlBeanList')
+  if (entries == null || entries.length == 0) {
+    return
+  }
+  const values = new Array<PrivacyBean>()
+  for (let i = 0; i < entries.length; i++) {
+    const item = entries[i]
+    const privacy = new PrivacyBean()
+    privacy.name = item.getString('name', '')
+    privacy.url = item.getString('url', '')
+    privacy.separator = item.getString('separator', item.getString('beforeName', ''))
+    privacy.text = item.getString('text', privacy.name)
+    values.push(privacy)
+  }
+  builder.setPrivacyNameAndUrlBeanList(values)
+}
+
+function applyMargin(
+  builder: JVerifyUIConfigBuilder,
+  config: UTSJSONObject,
+  key: string,
+  apply: (margin: Margin) => JVerifyUIConfigBuilder
+): void {
+  const source = config.getJSON(key)
+  if (source == null) {
+    return
+  }
+  const margin: Margin = {
+    top: source.getNumber('top', 0),
+    right: source.getNumber('right', 0),
+    bottom: source.getNumber('bottom', 0),
+    left: source.getNumber('left', 0)
+  }
+  apply(margin)
+}
+
+function marginNumber(source: UTSJSONObject | null, key: string): number {
+  if (source == null) {
+    return 0
+  }
+  return source.getNumber(key, 0)
+}
+
+function applyHarmonyAuthCustomView(builder: JVerifyUIConfigBuilder, config: UTSJSONObject): void {
+  const view = config.getJSON('addCustomView')
+  if (view == null) {
+    return
+  }
+  const margin = view.getJSON('margin')
+  const id = view.getString('id', 'harmony-auth-custom-view')
+  const action = view.getString('action', 'none')
+  configureHarmonyAuthCustomView(
+    view.getString('type', 'button'),
+    view.getString('text', '自定义控件'),
+    view.getNumber('textSize', 15),
+    view.getNumber('textColor', 0xffffffff),
+    view.getNumber('backgroundColor', 0xff359af3),
+    view.getNumber('width', 120),
+    view.getNumber('height', 40),
+    view.getNumber('borderRadius', 8),
+    marginNumber(margin, 'top'),
+    marginNumber(margin, 'right'),
+    marginNumber(margin, 'bottom'),
+    marginNumber(margin, 'left'),
+    (): void => {
+      console.info(`[JVerification HarmonyOS] addCustomView clicked, action=${action}`)
+      dispatchCustomViewClick(id)
+      if (action === 'dismissLoginAuth') {
+        const uiContext = uiContextOrNull()
+        if (uiContext != null) {
+          JVerificationInterface.dismissLoginAuthActivity(uiContext)
+        }
+      }
+    }
+  )
+  builder.addCustomView(wrapBuilder(buildHarmonyAuthCustomView))
+}
+
+function applyHarmonyCheckDialogCustomView(builder: JVerifyUIConfigBuilder, config: UTSJSONObject): void {
+  const view = config.getJSON('addCustomViewToCheckDialog')
+  if (view == null) {
+    return
+  }
+  const margin = view.getJSON('margin')
+  const id = view.getString('id', 'harmony-check-dialog-custom-view')
+  const action = view.getString('action', 'closeCheckDialog')
+  configureHarmonyCheckDialogCustomView(
+    view.getString('type', 'button'),
+    view.getString('text', '不同意'),
+    view.getNumber('textSize', 15),
+    view.getNumber('textColor', 0xff475569),
+    view.getNumber('backgroundColor', 0xffe5e7eb),
+    view.getNumber('width', 120),
+    view.getNumber('height', 40),
+    view.getNumber('borderRadius', 8),
+    marginNumber(margin, 'top'),
+    marginNumber(margin, 'right'),
+    marginNumber(margin, 'bottom'),
+    marginNumber(margin, 'left'),
+    (): void => {
+      console.info(`[JVerification HarmonyOS] addCustomViewToCheckDialog clicked, action=${action}`)
+      dispatchCustomViewClick(id)
+      if (action === 'closeCheckDialog') {
+        JVerificationInterface.closeCheckDialog()
+      }
+    }
+  )
+  builder.addCustomViewToCheckDialog(wrapBuilder(buildHarmonyCheckDialogCustomView))
+}
+
+function applyCmMargin(
+  builder: GenAuthThemeConfigBuilder,
+  config: UTSJSONObject,
+  key: string,
+  apply: (margin: Margin) => GenAuthThemeConfigBuilder
+): void {
+  const source = config.getJSON(key)
+  if (source == null) {
+    return
+  }
+  const margin: Margin = {
+    top: source.getNumber('top', 0),
+    right: source.getNumber('right', 0),
+    bottom: source.getNumber('bottom', 0),
+    left: source.getNumber('left', 0)
+  }
+  apply(margin)
+}
+
+function applyCmClauses(builder: GenAuthThemeConfigBuilder, config: UTSJSONObject): void {
+  const entries = config.getArray<UTSJSONObject>('setClauses')
+  if (entries == null || entries.length == 0) {
+    return
+  }
+  const clauses = new Array<SpanEntity>()
+  for (let i = 0; i < entries.length; i++) {
+    const item = entries[i]
+    const span = new SpanEntity()
+    span.text = item.getString('text', '')
+    span.fontSize = item.getNumber('fontSize', 14)
+    span.fontWeight = item.getBoolean('bold', false) ? FontWeight.Bold : FontWeight.Normal
+    span.isProtocol = item.getBoolean('isProtocol', false)
+    span.fontColor = item.getNumber('fontColor', 0xff64748b)
+    const url = item.getString('url', '')
+    if (url.length > 0) {
+      span.url = url
+    }
+    clauses.push(span)
+  }
+  builder.setClauses(clauses)
+}
+
+function applyCmAlignRules(builder: GenAuthThemeConfigBuilder, config: UTSJSONObject): void {
+  const clause = config.getJSON('setClauseAlignRuleOption')
+  if (clause != null) {
+    const middle = clause.getJSON('middle')
+    const top = clause.getJSON('top')
+    const center = clause.getJSON('center')
+    const bottom = clause.getJSON('bottom')
+    // bottom/top/center 必须分别构造带 ArkUI 枚举的 AlignRules，不能由 UTSJSONObject 直接透传。
+    if (bottom != null) {
+      configureHarmonyCmClauseBottomAlignRule(
+        builder,
+        middle == null ? '__container__' : middle.getString('anchor', '__container__'),
+        middle == null ? 'center' : middle.getString('align', 'center'),
+        bottom.getString('anchor', '__container__'),
+        bottom.getString('align', 'bottom')
+      )
+    } else if (top != null) {
+      configureHarmonyCmClauseTopAlignRule(
+        builder,
+        middle == null ? '__container__' : middle.getString('anchor', '__container__'),
+        middle == null ? 'center' : middle.getString('align', 'center'),
+        top.getString('anchor', 'loginBtn'),
+        top.getString('align', 'bottom')
+      )
+    } else {
+      configureHarmonyCmClauseAlignRule(
+        builder,
+        middle == null ? '__container__' : middle.getString('anchor', '__container__'),
+        middle == null ? 'center' : middle.getString('align', 'center'),
+        center == null ? 'clause_checkBox' : center.getString('anchor', 'clause_checkBox'),
+        center == null ? 'center' : center.getString('align', 'center')
+      )
+    }
+  }
+  const checkBox = config.getJSON('setCheckBoxAlignRuleOption')
+  if (checkBox != null) {
+    const left = checkBox.getJSON('left')
+    const center = checkBox.getJSON('center')
+    const top = checkBox.getJSON('top')
+    const bottom = checkBox.getJSON('bottom')
+    if (center != null) {
+      configureHarmonyCmCheckBoxCenterAlignRule(
+        builder,
+        left == null ? '__container__' : left.getString('anchor', '__container__'),
+        left == null ? 'start' : left.getString('align', 'start'),
+        center.getString('anchor', 'clause_text'),
+        center.getString('align', 'center')
+      )
+    } else if (top != null) {
+      configureHarmonyCmCheckBoxTopAlignRule(
+        builder,
+        left == null ? '__container__' : left.getString('anchor', '__container__'),
+        left == null ? 'start' : left.getString('align', 'start'),
+        top.getString('anchor', 'loginBtn'),
+        top.getString('align', 'bottom')
+      )
+    } else {
+      configureHarmonyCmCheckBoxAlignRule(
+        builder,
+        left == null ? '__container__' : left.getString('anchor', '__container__'),
+        left == null ? 'start' : left.getString('align', 'start'),
+        bottom == null ? '__container__' : bottom.getString('anchor', '__container__'),
+        bottom == null ? 'bottom' : bottom.getString('align', 'bottom')
+      )
+    }
+  }
+}
+
+function applyCmLoginPage(builder: GenAuthThemeConfigBuilder, source: UTSJSONObject): void {
+  const customPage = source.getJSON('setLoginPageComponent')
+  if (customPage == null) {
+    return
+  }
+  const backgroundImageName = customPage.getString('backgroundImage', '')
+  const backgroundImageSource = customPage.getString('backgroundImageSource', '')
+  configureHarmonyCmLoginPage(
+    customPage.getBoolean('showTitle', false),
+    customPage.getString('title', '极光认证'),
+    customPage.getNumber('titleSize', 24),
+    customPage.getNumber('titleColor', 0xff17233d),
+    customPage.getNumber('backgroundColor', 0xffffffff),
+    backgroundImageSource.length > 0 ? backgroundImageSource : harmonyMediaDataByName(backgroundImageName),
+    (id: string, action: string): void => {
+      console.info(`[JVerification HarmonyOS] setLoginPageComponent clicked, id=${id}, action=${action}`)
+      if (action === 'callback' || action === 'dismissLoginAuth') {
+        dispatchCustomViewClick(id)
+      }
+      if (action === 'dismissLoginAuth') {
+        const uiContext = uiContextOrNull()
+        if (uiContext != null) {
+          JVerificationInterface.dismissLoginAuthActivity(uiContext)
+        }
+      }
+    }
+  )
+  const buttons = customPage.getArray<UTSJSONObject>('buttons')
+  if (buttons != null) {
+    for (let i = 0; i < buttons.length; i++) {
+      const button = buttons[i]
+      const margin = button.getJSON('margin')
+      addHarmonyCmLoginPageButton(
+        button.getString('id', `harmony-cm-button-${i}`),
+        button.getString('anchor', 'loginBtn'),
+        button.getString('type', 'button'),
+        button.getString('text', '自定义按钮'),
+        button.getNumber('textSize', 16),
+        button.getNumber('textColor', 0xffffffff),
+        button.getNumber('backgroundColor', 0xff359af3),
+        button.getNumber('width', 180),
+        button.getNumber('height', 44),
+        button.getNumber('borderRadius', 22),
+        marginNumber(margin, 'top'),
+        marginNumber(margin, 'right'),
+        marginNumber(margin, 'bottom'),
+        marginNumber(margin, 'left'),
+        button.getString('action', 'callback')
+      )
+    }
+  } else if (has(customPage, 'buttonText')) {
+    addHarmonyCmLoginPageButton(
+      customPage.getString('buttonId', 'harmony-cm-button'),
+      customPage.getString('buttonAnchor', 'loginBtn'),
+      'button',
+      customPage.getString('buttonText', '关闭授权页'),
+      customPage.getNumber('buttonTextSize', 16),
+      customPage.getNumber('buttonTextColor', 0xffffffff),
+      customPage.getNumber('buttonBackgroundColor', 0xff359af3),
+      customPage.getNumber('buttonWidth', 220),
+      customPage.getNumber('buttonHeight', 44),
+      customPage.getNumber('buttonBorderRadius', 22),
+      customPage.getNumber('buttonMarginTop', 40),
+      0,
+      0,
+      0,
+      customPage.getString('buttonAction', 'dismissLoginAuth')
+    )
+  }
+  builder.setLoginPageComponent(buildHarmonyCmLoginPage)
+}
+
+function applyCmConfig(builder: JVerifyUIConfigBuilder, config: UTSJSONObject): void {
+  const source = config.getJSON('setCmUIConfig')
+  if (source == null) {
+    return
+  }
+  const cmBuilder = new GenAuthThemeConfigBuilder()
+  if (has(source, 'setAuthPageGrayScale')) cmBuilder.setAuthPageGrayScale(numberValue(source, 'setAuthPageGrayScale'))
+  if (has(source, 'setNavTextSize')) cmBuilder.setNavTextSize(numberValue(source, 'setNavTextSize'))
+  if (has(source, 'setNavTextColor')) cmBuilder.setNavTextColor(numberValue(source, 'setNavTextColor'))
+  if (has(source, 'setNavColor')) cmBuilder.setNavColor(numberValue(source, 'setNavColor'))
+  if (has(source, 'setNumberSize')) cmBuilder.setNumberSize(numberValue(source, 'setNumberSize'), source.getBoolean('setNumberBold', false))
+  if (has(source, 'setNumberColor')) cmBuilder.setNumberColor(numberValue(source, 'setNumberColor'))
+  applyCmMargin(cmBuilder, source, 'setNumberMargin', (margin: Margin): GenAuthThemeConfigBuilder => cmBuilder.setNumberMargin(margin))
+  if (has(source, 'setNumberWidth')) cmBuilder.setNumberWidth(numberValue(source, 'setNumberWidth'))
+  if (has(source, 'setNumberHeight')) cmBuilder.setNumberHeight(numberValue(source, 'setNumberHeight'))
+  if (has(source, 'setLanguageType')) cmBuilder.setLanguageType(numberValue(source, 'setLanguageType'))
+  if (has(source, 'setLogBtnText')) cmBuilder.setLogBtnText(stringValue(source, 'setLogBtnText'))
+  if (has(source, 'setLoginBtnTextSize')) cmBuilder.setLoginBtnTextSize(numberValue(source, 'setLoginBtnTextSize'))
+  if (has(source, 'setLoginBtnTextColor')) cmBuilder.setLoginBtnTextColor(numberValue(source, 'setLoginBtnTextColor'))
+  if (has(source, 'setLoginBtnBorderRadius')) cmBuilder.setLoginBtnBorderRadius(numberValue(source, 'setLoginBtnBorderRadius'))
+  if (has(source, 'setLoginBtnColor')) cmBuilder.setLoginBtnColor(numberValue(source, 'setLoginBtnColor'))
+  if (has(source, 'setLoginBtnImgPath')) cmBuilder.setLoginBtnImgPath(stringValue(source, 'setLoginBtnImgPath'))
+  if (has(source, 'setLoginBtnWidth')) cmBuilder.setLoginBtnWidth(numberValue(source, 'setLoginBtnWidth'))
+  if (has(source, 'setLoginBtnHeight')) cmBuilder.setLoginBtnHeight(numberValue(source, 'setLoginBtnHeight'))
+  applyCmMargin(cmBuilder, source, 'setLoginBtnMargin', (margin: Margin): GenAuthThemeConfigBuilder => cmBuilder.setLoginBtnMargin(margin))
+  if (has(source, 'setLoginBtnMarginRight')) cmBuilder.setLoginBtnMarginRight(numberValue(source, 'setLoginBtnMarginRight'))
+  if (has(source, 'setLoginBtnBorderColor')) cmBuilder.setLoginBtnBorderColor(numberValue(source, 'setLoginBtnBorderColor'))
+  if (has(source, 'setLoginBtnBorderWidth')) cmBuilder.setLoginBtnBorderWidth(numberValue(source, 'setLoginBtnBorderWidth'))
+  if (has(source, 'setLoginBtnDisabledTextColor')) cmBuilder.setLoginBtnDisabledTextColor(numberValue(source, 'setLoginBtnDisabledTextColor'))
+  if (has(source, 'setLoginBtnDisabledColor')) cmBuilder.setLoginBtnDisabledColor(numberValue(source, 'setLoginBtnDisabledColor'))
+  if (has(source, 'setLoginBtnDisabledImgPath')) cmBuilder.setLoginBtnDisabledImgPath(stringValue(source, 'setLoginBtnDisabledImgPath'))
+  if (has(source, 'setLoginBtnDisabledBorderColor')) cmBuilder.setLoginBtnDisabledBorderColor(numberValue(source, 'setLoginBtnDisabledBorderColor'))
+  if (has(source, 'setLoginBtnDisabledBorderWidth')) cmBuilder.setLoginBtnDisabledBorderWidth(numberValue(source, 'setLoginBtnDisabledBorderWidth'))
+  const checkBoxSize = source.getArray<number>('setCheckBox')
+  if (checkBoxSize != null && checkBoxSize.length > 1) cmBuilder.setCheckBox(checkBoxSize[0], checkBoxSize[1])
+  applyCmMargin(cmBuilder, source, 'setCheckBoxMargin', (margin: Margin): GenAuthThemeConfigBuilder => cmBuilder.setCheckBoxMargin(margin))
+  if (has(source, 'setCheckTipText')) cmBuilder.setCheckTipText(stringValue(source, 'setCheckTipText'))
+  if (has(source, 'setClauseState')) cmBuilder.setClauseState(booleanValue(source, 'setClauseState'))
+  if (has(source, 'setCheckedColor')) cmBuilder.setCheckedColor(numberValue(source, 'setCheckedColor'))
+  if (has(source, 'setprivacyTextSize')) cmBuilder.setprivacyTextSize(numberValue(source, 'setprivacyTextSize'))
+  if (has(source, 'setPrivacyTextBold')) cmBuilder.setPrivacyTextBold(booleanValue(source, 'setPrivacyTextBold'))
+  if (has(source, 'setclauseBaseColor')) cmBuilder.setclauseBaseColor(numberValue(source, 'setclauseBaseColor'))
+  if (has(source, 'setclauseColor')) cmBuilder.setclauseColor(numberValue(source, 'setclauseColor'))
+  if (has(source, 'setisPrivacyTextGravityCenter')) cmBuilder.setisPrivacyTextGravityCenter(booleanValue(source, 'setisPrivacyTextGravityCenter'))
+  if (has(source, 'setcheckBoxLocation')) cmBuilder.setcheckBoxLocation(numberValue(source, 'setcheckBoxLocation'))
+  applyCmMargin(cmBuilder, source, 'setClauseMargin', (margin: Margin): GenAuthThemeConfigBuilder => cmBuilder.setClauseMargin(margin))
+  if (has(source, 'setprivacyMarginRight')) cmBuilder.setprivacyMarginRight(numberValue(source, 'setprivacyMarginRight'))
+  if (has(source, 'setprivacyOffsetY')) cmBuilder.setprivacyOffsetY(numberValue(source, 'setprivacyOffsetY'))
+  if (has(source, 'setprivacyOffsetYB')) cmBuilder.setprivacyOffsetYB(numberValue(source, 'setprivacyOffsetYB'))
+  if (has(source, 'setprivacyBookSymbol')) cmBuilder.setprivacyBookSymbol(booleanValue(source, 'setprivacyBookSymbol'))
+  if (has(source, 'setauthPageActIn')) cmBuilder.setauthPageActIn(stringValue(source, 'setauthPageActIn'))
+  if (has(source, 'setactivityOut')) cmBuilder.setactivityOut(stringValue(source, 'setactivityOut'))
+  if (has(source, 'setauthPageActOut')) cmBuilder.setauthPageActOut(stringValue(source, 'setauthPageActOut'))
+  if (has(source, 'setactivityIn')) cmBuilder.setactivityIn(stringValue(source, 'setactivityIn'))
+  if (has(source, 'setWindowWidth')) cmBuilder.setWindowWidth(numberValue(source, 'setWindowWidth'))
+  if (has(source, 'setWindowHeight')) cmBuilder.setWindowHeight(numberValue(source, 'setWindowHeight'))
+  if (has(source, 'setwindowX')) cmBuilder.setwindowX(numberValue(source, 'setwindowX'))
+  if (has(source, 'setwindowY')) cmBuilder.setwindowY(numberValue(source, 'setwindowY'))
+  if (has(source, 'setwindowBottom')) cmBuilder.setwindowBottom(numberValue(source, 'setwindowBottom'))
+  if (has(source, 'setthemeId')) cmBuilder.setthemeId(numberValue(source, 'setthemeId'))
+  if (has(source, 'setisFitsSystemWindows')) cmBuilder.setisFitsSystemWindows(booleanValue(source, 'setisFitsSystemWindows'))
+  if (has(source, 'setWebDomStorage')) cmBuilder.setWebDomStorage(booleanValue(source, 'setWebDomStorage'))
+  if (has(source, 'setClauseNavMarginTop')) cmBuilder.setClauseNavMarginTop(numberValue(source, 'setClauseNavMarginTop'))
+  const systemBar = source.getJSON('setSystemBarProperties')
+  if (systemBar != null) {
+    const properties: window.SystemBarProperties = {
+      statusBarColor: systemBar.getString('statusBarColor', '#00000000'),
+      navigationBarColor: systemBar.getString('navigationBarColor', '#00000000'),
+      statusBarContentColor: systemBar.getString('statusBarContentColor', '#000000'),
+      navigationBarContentColor: systemBar.getString('navigationBarContentColor', '#000000')
+    }
+    cmBuilder.setSystemBarProperties(properties)
+  }
+  const windowMode = source.getJSON('setWindowMode')
+  if (windowMode != null) {
+    configureHarmonyCmWindowMode(
+      cmBuilder,
+      windowMode.getString('width', '80%'),
+      windowMode.getString('height', '50%')
+    )
+  }
+  if (source.getBoolean('useDefaultLoginButtonImage', false)) {
+    configureHarmonyCmDefaultImages(cmBuilder)
+  }
+  applyCmClauses(cmBuilder, source)
+  applyCmAlignRules(cmBuilder, source)
+  applyCmLoginPage(cmBuilder, source)
+  const confirmDialog = source.getJSON('setGenAuthLoginConfirmDialog')
+  if (confirmDialog != null) {
+    cmBuilder.setGenAuthLoginListener(new HarmonyCmAuthLoginListener(
+      confirmDialog.getString('message', '是否登录授权'),
+      confirmDialog.getString('confirmText', '确定'),
+      confirmDialog.getString('cancelText', '取消'),
+      confirmDialog.getString('confirmColor', '#000000'),
+      confirmDialog.getString('cancelColor', '#000000')
+    ))
+  }
+  builder.setCmUIConfig(cmBuilder)
+}
+
+function applyConfig(builder: JVerifyUIConfigBuilder, config: JVerificationUIConfig): void {
+  if (has(config, 'setStackLayout')) builder.setStackLayout(booleanValue(config, 'setStackLayout'))
+  if (has(config, 'enableDialogMode')) builder.enableDialogMode(booleanValue(config, 'enableDialogMode'))
+  if (has(config, 'setDialogWidth')) builder.setDialogWidth(numberValue(config, 'setDialogWidth'))
+  if (has(config, 'setDialogHeight')) builder.setDialogHeight(numberValue(config, 'setDialogHeight'))
+  if (has(config, 'setAuthBGImgPath')) builder.setAuthBGImgPath(stringValue(config, 'setAuthBGImgPath'))
+  if (has(config, 'setAuthBGImgPathFromJs')) builder.setAuthBGImgPath(stringValue(config, 'setAuthBGImgPathFromJs'))
+  if (has(config, 'setAuthBGGifPath')) builder.setAuthBGGifPath(stringValue(config, 'setAuthBGGifPath'))
+  if (has(config, 'setAuthBGGifPathFromJs')) builder.setAuthBGGifPath(stringValue(config, 'setAuthBGGifPathFromJs'))
+  if (has(config, 'setAuthBGVideoPath')) {
+    builder.setAuthBGVideoPath(
+      stringValue(config, 'setAuthBGVideoPath'),
+      stringValue(config, 'setAuthBGVideoPlaceholderPath')
+    )
+  }
+  if (has(config, 'setAuthBGVideoPathFromJs')) {
+    builder.setAuthBGVideoPath(
+      stringValue(config, 'setAuthBGVideoPathFromJs'),
+      stringValue(config, 'setAuthBGVideoPlaceholderPathFromJs')
+    )
+  }
+  if (has(config, 'setTopSafeAreaHeight')) {
+    builder.setTopSafeAreaHeight(numberValue(config, 'setTopSafeAreaHeight'))
+  } else {
+    builder.setTopSafeAreaHeight(currentHarmonyTopSafeAreaHeight())
+  }
+  if (has(config, 'setBottomSafeAreaHeight')) builder.setBottomSafeAreaHeight(numberValue(config, 'setBottomSafeAreaHeight'))
+  if (has(config, 'setReturnBtnImgPath')) builder.setReturnBtnImgPath(stringValue(config, 'setReturnBtnImgPath'))
+  if (has(config, 'setNavReturnImgPath')) builder.setReturnBtnImgPath(stringValue(config, 'setNavReturnImgPath'))
+  if (has(config, 'setReturnBtnHidden')) builder.setReturnBtnHidden(booleanValue(config, 'setReturnBtnHidden'))
+  if (has(config, 'setNavReturnBtnHidden')) builder.setReturnBtnHidden(booleanValue(config, 'setNavReturnBtnHidden'))
+  if (has(config, 'setReturnBtnWidth')) builder.setReturnBtnWidth(numberValue(config, 'setReturnBtnWidth'))
+  if (has(config, 'setReturnBtnHeight')) builder.setReturnBtnHeight(numberValue(config, 'setReturnBtnHeight'))
+  if (has(config, 'setReturnBtnOffsetX')) builder.setReturnBtnOffsetX(numberValue(config, 'setReturnBtnOffsetX'))
+  if (has(config, 'setReturnBtnOffsetY')) builder.setReturnBtnOffsetY(numberValue(config, 'setReturnBtnOffsetY'))
+  if (has(config, 'setLogoImgPath')) builder.setLogoImgPath(stringValue(config, 'setLogoImgPath'))
+  if (has(config, 'setLogoImgPathFromJs')) builder.setLogoImgPath(stringValue(config, 'setLogoImgPathFromJs'))
+  if (has(config, 'setLogoWidth')) builder.setLogoWidth(numberValue(config, 'setLogoWidth'))
+  if (has(config, 'setLogoHeight')) builder.setLogoHeight(numberValue(config, 'setLogoHeight'))
+  if (has(config, 'setLogoOffsetX')) builder.setLogoOffsetX(numberValue(config, 'setLogoOffsetX'))
+  if (has(config, 'setLogoOffsetY')) builder.setLogoOffsetY(numberValue(config, 'setLogoOffsetY'))
+  if (has(config, 'setLogoHidden')) builder.setLogoHidden(booleanValue(config, 'setLogoHidden'))
+  if (has(config, 'setNumberColor')) builder.setNumberColor(numberValue(config, 'setNumberColor'))
+  if (has(config, 'setNumberSize')) builder.setNumberSize(numberValue(config, 'setNumberSize'))
+  if (has(config, 'setNumFieldOffsetX')) builder.setNumberFieldOffsetX(numberValue(config, 'setNumFieldOffsetX'))
+  if (has(config, 'setNumFieldOffsetY')) builder.setNumberFieldOffsetY(numberValue(config, 'setNumFieldOffsetY'))
+  if (has(config, 'setNumberFieldWidth')) builder.setNumberFieldWidth(numberValue(config, 'setNumberFieldWidth'))
+  if (has(config, 'setNumberFieldHeight')) builder.setNumberFieldHeight(numberValue(config, 'setNumberFieldHeight'))
+  if (has(config, 'setNumberTextBold')) builder.setNumberTextBold(booleanValue(config, 'setNumberTextBold'))
+  if (has(config, 'setSloganTextColor')) builder.setSloganTextColor(numberValue(config, 'setSloganTextColor'))
+  if (has(config, 'setSloganTextSize')) builder.setSloganTextSize(numberValue(config, 'setSloganTextSize'))
+  if (has(config, 'setSloganOffsetX')) builder.setSloganOffsetX(numberValue(config, 'setSloganOffsetX'))
+  if (has(config, 'setSloganOffsetY')) builder.setSloganOffsetY(numberValue(config, 'setSloganOffsetY'))
+  if (has(config, 'setSloganTextBold')) builder.setSloganTextBold(booleanValue(config, 'setSloganTextBold'))
+  if (has(config, 'setLogBtnText')) builder.setLogBtnText(stringValue(config, 'setLogBtnText'))
+  if (has(config, 'setLogBtnTextColor')) builder.setLogBtnTextColor(numberValue(config, 'setLogBtnTextColor'))
+  if (has(config, 'setLogBtnImgPath')) builder.setLogBtnImgPath(stringValue(config, 'setLogBtnImgPath'))
+  if (has(config, 'setLogBtnOffsetX')) builder.setLogBtnOffsetX(numberValue(config, 'setLogBtnOffsetX'))
+  if (has(config, 'setLogBtnOffsetY')) builder.setLogBtnOffsetY(numberValue(config, 'setLogBtnOffsetY'))
+  if (has(config, 'setLogBtnWidth')) builder.setLogBtnWidth(numberValue(config, 'setLogBtnWidth'))
+  if (has(config, 'setLogBtnHeight')) builder.setLogBtnHeight(numberValue(config, 'setLogBtnHeight'))
+  if (has(config, 'setLogBtnTextSize')) builder.setLogBtnTextSize(numberValue(config, 'setLogBtnTextSize'))
+  if (has(config, 'setLogBtnTextBold')) builder.setLogBtnTextBold(booleanValue(config, 'setLogBtnTextBold'))
+  if (has(config, 'setPrivacyColor')) {
+    const colors = config.getArray<number>('setPrivacyColor')
+    if (colors != null && colors.length > 1) builder.setPrivacyColor(colors[0], colors[1])
+  }
+  if (has(config, 'setPrivacyText')) {
+    const texts = config.getArray<string>('setPrivacyText')
+    if (texts != null && texts.length > 1) builder.setPrivacyText(texts[0], texts[1])
+  }
+  if (has(config, 'setUncheckedImgPath')) builder.setUncheckedImgPath(stringValue(config, 'setUncheckedImgPath'))
+  if (has(config, 'setCheckedImgPath')) builder.setCheckedImgPath(stringValue(config, 'setCheckedImgPath'))
+  if (has(config, 'setPrivacyState')) builder.setPrivacyState(booleanValue(config, 'setPrivacyState'))
+  if (has(config, 'setPrivacyTextCenterGravity')) builder.setPrivacyTextCenterGravity(booleanValue(config, 'setPrivacyTextCenterGravity'))
+  if (has(config, 'setPrivacyTextSize')) builder.setPrivacyTextSize(numberValue(config, 'setPrivacyTextSize'))
+  if (has(config, 'setPrivacyCheckboxSize')) builder.setPrivacyCheckboxSize(numberValue(config, 'setPrivacyCheckboxSize'))
+  if (has(config, 'setPrivacyCheckboxInCenter')) builder.setPrivacyCheckboxInCenter(booleanValue(config, 'setPrivacyCheckboxInCenter'))
+  if (has(config, 'setEnableHintToastText')) builder.setEnableHintToastText(stringValue(config, 'setEnableHintToastText'))
+  if (has(config, 'setEnablePrivacyCheckDialog')) builder.setEnablePrivacyCheckDialog(booleanValue(config, 'setEnablePrivacyCheckDialog'))
+  if (has(config, 'setPrivacyTextBold')) builder.setPrivacyTextBold(booleanValue(config, 'setPrivacyTextBold'))
+  if (has(config, 'setPrivacyUnderlineText')) builder.setPrivacyUnderlineText(booleanValue(config, 'setPrivacyUnderlineText'))
+  if (has(config, 'setPrivacyWithBookTitleMark')) builder.setPrivacyWithBookTitleMark(booleanValue(config, 'setPrivacyWithBookTitleMark'))
+  if (has(config, 'setPrivacyNavColor')) builder.setPrivacyNavColor(numberValue(config, 'setPrivacyNavColor'))
+  if (has(config, 'setPrivacyNavTitleTextColor')) builder.setPrivacyNavTitleTextColor(numberValue(config, 'setPrivacyNavTitleTextColor'))
+  if (has(config, 'setPrivacyNavTitleTextSize')) builder.setPrivacyNavTitleTextSize(numberValue(config, 'setPrivacyNavTitleTextSize'))
+  if (has(config, 'setPrivacyNavReturnBtnPath')) builder.setPrivacyNavReturnBtnPath(stringValue(config, 'setPrivacyNavReturnBtnPath'))
+  if (has(config, 'setPrivacyNavTitleTextBold')) builder.setPrivacyNavTitleTextBold(booleanValue(config, 'setPrivacyNavTitleTextBold'))
+  if (has(config, 'setPrivacyCheckDialogTitleText')) builder.setPrivacyCheckDialogTitleText(stringValue(config, 'setPrivacyCheckDialogTitleText'))
+  if (has(config, 'setPrivacyCheckDialogLogBtnText')) builder.setPrivacyCheckDialogLogBtnText(stringValue(config, 'setPrivacyCheckDialogLogBtnText'))
+  if (has(config, 'setPrivacyCheckDialogTitleTextSize')) builder.setPrivacyCheckDialogTitleTextSize(numberValue(config, 'setPrivacyCheckDialogTitleTextSize'))
+  if (has(config, 'setPrivacyCheckDialogTitleTextColor')) builder.setPrivacyCheckDialogTitleTextColor(numberValue(config, 'setPrivacyCheckDialogTitleTextColor'))
+  if (has(config, 'setPrivacyCheckDialogContentTextGravityCenter')) builder.setPrivacyCheckDialogContentTextGravityCenter(booleanValue(config, 'setPrivacyCheckDialogContentTextGravityCenter'))
+  if (has(config, 'setPrivacyCheckDialogContentTextSize')) builder.setPrivacyCheckDialogContentTextSize(numberValue(config, 'setPrivacyCheckDialogContentTextSize'))
+  applyMargin(builder, config, 'setPrivacyCheckDialogContentTextMargin', (margin: Margin): JVerifyUIConfigBuilder => builder.setPrivacyCheckDialogContentTextMargin(margin))
+  if (has(config, 'setPrivacyCheckDialogLogBtnImgPath')) builder.setPrivacyCheckDialogLogBtnImgPath(stringValue(config, 'setPrivacyCheckDialogLogBtnImgPath'))
+  if (has(config, 'setPrivacyCheckDialogLogBtnTextColor')) builder.setPrivacyCheckDialoglogBtnTextColor(numberValue(config, 'setPrivacyCheckDialogLogBtnTextColor'))
+  if (has(config, 'setPrivacyCheckDialogWidth')) builder.setPrivacyCheckDialogWidth(numberValue(config, 'setPrivacyCheckDialogWidth'))
+  if (has(config, 'setPrivacyCheckDialogHeight')) builder.setPrivacyCheckDialogHeight(numberValue(config, 'setPrivacyCheckDialogHeight'))
+  if (has(config, 'setPrivacyCheckDialogLogBtnWidth')) builder.setPrivacyCheckDialogLogBtnWidth(numberValue(config, 'setPrivacyCheckDialogLogBtnWidth'))
+  if (has(config, 'setPrivacyCheckDialogLogBtnHeight')) builder.setPrivacyCheckDialogLogBtnHeight(numberValue(config, 'setPrivacyCheckDialogLogBtnHeight'))
+  applyMargin(builder, config, 'setPrivacyCheckDialogLogBtnMargin', (margin: Margin): JVerifyUIConfigBuilder => builder.setPrivacyCheckDialogLogBtnMargin(margin))
+  if (has(config, 'setPrivacyCheckDialogBackgroundColor')) builder.setPrivacyCheckDialogBackgroundColor(numberValue(config, 'setPrivacyCheckDialogBackgroundColor'))
+  if (has(config, 'setPrivacyCheckDialogBackgroundImgPath')) builder.setPrivacyCheckDialogBackgroundImgPath(stringValue(config, 'setPrivacyCheckDialogBackgroundImgPath'))
+  applyPrivacyList(builder, config)
+  applyMargin(builder, config, 'setPrivacyMargin', (margin: Margin): JVerifyUIConfigBuilder => builder.setPrivacyMargin(margin))
+  if (config.getBoolean('enableDialogMode', false) || config.getBoolean('setDialogPage', false)) {
+    const dialogPage = resolveHarmonyDialogPage()
+    if (dialogPage != null) {
+      builder.setDialogPage(dialogPage)
+    } else {
+      console.error('JVerification HarmonyOS dialog requires an active uni-app x page')
+    }
+  }
+  applyHarmonyAuthCustomView(builder, config)
+  applyHarmonyCheckDialogCustomView(builder, config)
+  applyCmConfig(builder, config)
+}
+
+export const setDebugMode: JVerificationSetDebugMode = (enable: boolean): void => {
+  JVerificationInterface.setDebugMode(enable)
+}
+
+export const init: JVerificationInit = (options: JVerificationInitOptions, callback: JVerificationCallback): void => {
+  const appKey = options.appKey == null ? '' : options.appKey
+  if (appKey.length == 0) {
+    callback(result(-1, 'HarmonyOS init requires options.appKey'))
+    return
+  }
+  const context = requiredContext(callback)
+  if (context == null) {
+    return
+  }
+  JVerificationInterface.init(context, appKey, (code: number, message: string) => {
+    callback(result(code, message))
+  })
+}
+
+export const isInitSuccess: JVerificationBooleanQuery = (callback: JVerificationCallback): void => {
+  const enable = JVerificationInterface.isInitSuccess()
+  callback(booleanResult(enable))
+}
+
+export const checkVerifyEnable: JVerificationBooleanQuery = (callback: JVerificationCallback): void => {
+  JVerificationInterface.checkVerifyEnable().then((enable: boolean) => {
+    callback(booleanResult(enable))
+  }).catch((error: Error) => {
+    callback(result(-1, error.message))
+  })
+}
+
+export const getToken: JVerificationGetToken = (timeout: number, callback: JVerificationCallback): void => {
+  JVerificationInterface.getToken((code: number, content: string, operator: string) => {
+    callback(result(code, content, operator))
+  }, timeout)
+}
+
+export const preLogin: JVerificationPreLogin = (timeout: number, callback: JVerificationCallback): void => {
+  JVerificationInterface.prelogin((code: number, content: string, operator: string) => {
+    callback(result(code, content, operator))
+  }, timeout)
+}
+
+export const clearPreLoginCache: JVerificationClearPreLoginCache = (): void => {
+  JVerificationInterface.clearPreLoginCache()
+}
+
+/** 注册授权页持续事件。HarmonyOS 与 ArkTS 同环境执行，重复注册直接替换旧引用。 */
+export function onAuthPageEvent(callback: JVerificationEventCallback): void {
+  subscribedAuthPageEventCallback = callback
+}
+
+/** 注销授权页持续事件。 */
+export const offAuthPageEvent: JVerificationOffAuthPageEvent = (): void => {
+  subscribedAuthPageEventCallback = null
+  legacyAuthPageEventCallback = null
+}
+
+/** 注册 HarmonyOS 原生自定义控件点击回调；重复注册直接替换旧引用。 */
+export const addCustomViewsClickCallback: JVerificationAddCustomViewsClickCallback = (
+  callback?: JVerificationCustomViewCallback
+): void => {
+  customViewsClickCallback = callback == null ? null : callback
+}
+
+/** 注销 HarmonyOS 原生自定义控件点击回调。 */
+export const removeCustomViewsClickCallback: JVerificationRemoveCustomViewsClickCallback = (): void => {
+  customViewsClickCallback = null
+}
+
+export const loginAuth: JVerificationLoginAuth = (
+  options: JVerificationLoginAuthOptions,
+  callback: JVerificationCallback,
+  eventCallback?: JVerificationEventCallback
+): void => {
+  // 每次调用先覆盖最近一次旧回调（包括 null）；不根据平台事件码推断生命周期，
+  // 也不能因为后续上下文检查提前返回而继续持有上一次回调。
+  legacyAuthPageEventCallback = eventCallback == null ? null : eventCallback
+  const uiContext = uiContextOrNull()
+  if (uiContext == null) {
+    callback(result(-1, 'JVerification HarmonyOS UI context is unavailable'))
+    return
+  }
+  const settings = new JVerificationLoginSettings(uiContext)
+  // 本插件固定使用 Router 承载授权页，不接受 Navigation / navPathStack。
+  settings.isRouter = true
+  const autoFinish = options.autoFinish
+  if (autoFinish != null) settings.autoFinish = autoFinish == true
+  if (options.timeout != null) settings.timeout = options.timeout
+  settings.authPageEventListener = (code: number, message: string): void => {
+    const event = result(code, message)
+    legacyAuthPageEventCallback?.(event)
+    subscribedAuthPageEventCallback?.(event)
+  }
+  JVerificationInterface.loginAuth(settings, (code: number, content: string, operator: string) => {
+    callback(result(code, content, operator))
+  })
+}
+
+export const dismissLoginAuth: JVerificationDismissLoginAuth = (
+  _needCloseAnim: boolean,
+  callback?: JVerificationCallback
+): void => {
+  const uiContext = uiContextOrNull()
+  if (uiContext == null) {
+    callback?.(result(-1, 'JVerification HarmonyOS UI context is unavailable'))
+    return
+  }
+  JVerificationInterface.dismissLoginAuthActivity(uiContext)
+  callback?.(result(0, 'dismiss requested'))
+}
+
+// HarmonyOS SDK 不支持横屏 UI 配置；直接暴露 UTSJSONObject，保持 JS 代理参数类型正确。
+export const setCustomUIWithConfigHarmony = (
+  config: UTSJSONObject
+): void => {
+  const builder = new JVerifyUIConfigBuilder()
+  applyConfig(builder, config)
+  JVerificationInterface.setCustomUIWithConfig(builder.build())
+}

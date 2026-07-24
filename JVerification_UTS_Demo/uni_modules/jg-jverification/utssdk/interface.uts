@@ -1,0 +1,68 @@
+/**
+ * 极光认证 UTS API 声明。
+ *
+ * 平台能力不是同构集合：仅在支持该 API 的平台导出实现；调用方须使用
+ * APP-ANDROID / APP-IOS / APP-HARMONY 条件编译区分调用。
+ */
+
+export type JVerificationResult = {
+  code?: number,
+  content?: string,
+  operator?: string,
+  /**
+   * 使用 Boolean 保留 iOS UTS 桥接中的 null。若声明为可选 boolean，
+   * HBuilderX 会将其生成默认 false 的非可选 Swift Bool。
+   */
+  enable?: Boolean,
+  uuid?: string,
+  msg?: string
+}
+
+export type JVerificationCallback = (result: JVerificationResult) => void
+export type JVerificationEventCallback = (result: JVerificationResult) => void
+export type JVerificationCustomViewCallback = (id: string) => void
+
+export type JVerificationInitOptions = {
+  /** Android 由原生 AndroidManifest 配置 AppKey；HarmonyOS 必填；iOS 沿用旧插件配置。 */
+  appKey?: string,
+  channel?: string,
+  advertisingId?: string,
+  isProduction?: boolean,
+  timeout?: number
+}
+
+export type JVerificationLoginAuthOptions = {
+  /** 可空包装类型用于区分“未传入”和显式 false。 */
+  autoFinish?: Boolean,
+  timeout?: number,
+  /** 可空包装类型用于区分“未传入”和显式 false。 */
+  animationFlag?: Boolean
+}
+
+export type JVerificationSMSOptions = {
+  phoneNumber: string,
+  signID?: string,
+  templateID?: string
+}
+
+/**
+ * 保持旧插件的 JSON UI 配置契约。不同平台各自只消费所属 SDK 支持的字段。
+ */
+export type JVerificationUIConfig = UTSJSONObject
+
+export type JVerificationSetDebugMode = (enable: boolean) => void
+export type JVerificationInit = (options: JVerificationInitOptions, callback: JVerificationCallback) => void
+export type JVerificationBooleanQuery = (callback: JVerificationCallback) => void
+export type JVerificationGetToken = (timeout: number, callback: JVerificationCallback) => void
+export type JVerificationPreLogin = (timeout: number, callback: JVerificationCallback) => void
+export type JVerificationClearPreLoginCache = () => void
+export type JVerificationLoginAuth = (options: JVerificationLoginAuthOptions, callback: JVerificationCallback, eventCallback?: JVerificationEventCallback) => void
+export type JVerificationOnAuthPageEvent = (callback: JVerificationEventCallback) => void
+export type JVerificationOffAuthPageEvent = () => void
+export type JVerificationDismissLoginAuth = (needCloseAnim: boolean, callback?: JVerificationCallback) => void
+export type JVerificationGetCode = (options: JVerificationSMSOptions, callback: JVerificationCallback) => void
+export type JVerificationSetTimeWithConfig = (interval: number) => void
+export type JVerificationSetCustomUIWithConfig = (config: JVerificationUIConfig, landscapeConfig?: JVerificationUIConfig) => void
+export type JVerificationAddCustomViewsClickCallback = (callback?: JVerificationCustomViewCallback) => void
+export type JVerificationRemoveCustomViewsClickCallback = () => void
+export type JVerificationSetLocationEnable = (enable: boolean) => void

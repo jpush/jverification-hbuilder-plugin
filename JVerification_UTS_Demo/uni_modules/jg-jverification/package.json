@@ -1,0 +1,31 @@
+{
+  "id": "jg-jverification",
+  "displayName": "极光认证 UTS 插件",
+  "version": "3.4.8-uts.0",
+  "description": "极光认证 JVerification 的 uni-app x UTS 插件，支持 Android、iOS 和 HarmonyOS。",
+  "keywords": [
+    "jverification",
+    "jiguang",
+    "authentication",
+    "uni-app-x",
+    "uts"
+  ],
+  "uni_modules": {
+    "platforms": {
+      "cloud": {
+        "tcb": "n"
+      },
+      "client": {
+        "VueVersion": "3",
+        "App": {
+          "app-android": "y",
+          "app-ios": "y",
+          "app-harmony": "y"
+        }
+      }
+    }
+  },
+  "engines": {
+    "HBuilderX": ">=5.11.0"
+  }
+}

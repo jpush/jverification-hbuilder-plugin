@@ -1,0 +1,879 @@
+import Context from 'android.content.Context'
+import Uri from 'android.net.Uri'
+import Button from 'android.widget.Button'
+import ImageButton from 'android.widget.ImageButton'
+import ImageView from 'android.widget.ImageView'
+import RelativeLayout from 'android.widget.RelativeLayout'
+import TextView from 'android.widget.TextView'
+import Toast from 'android.widget.Toast'
+import View from 'android.view.View'
+import ViewGroup from 'android.view.ViewGroup'
+import AnimationUtils from 'android.view.animation.AnimationUtils'
+import Gravity from 'android.view.Gravity'
+import Drawable from 'android.graphics.drawable.Drawable'
+import ArrayList from 'java.util.ArrayList'
+import File from 'java.io.File'
+import FileOutputStream from 'java.io.FileOutputStream'
+import Channels from 'java.nio.channels.Channels'
+import Long from 'java.lang.Long'
+import JSONObject from 'org.json.JSONObject'
+import AuthPageEventListener from 'cn.jiguang.verifysdk.api.AuthPageEventListener'
+import JVerificationInterface from 'cn.jiguang.verifysdk.api.JVerificationInterface'
+import JVerifyUIClickCallback from 'cn.jiguang.verifysdk.api.JVerifyUIClickCallback'
+import JVerifyUIConfig from 'cn.jiguang.verifysdk.api.JVerifyUIConfig'
+import LoginSettings from 'cn.jiguang.verifysdk.api.LoginSettings'
+import PreLoginListener from 'cn.jiguang.verifysdk.api.PreLoginListener'
+import PrivacyBean from 'cn.jiguang.verifysdk.api.PrivacyBean'
+import RequestCallback from 'cn.jiguang.verifysdk.api.RequestCallback'
+import VerifyListener from 'cn.jiguang.verifysdk.api.VerifyListener'
+import {
+  JVerificationBooleanQuery,
+  JVerificationCallback,
+  JVerificationClearPreLoginCache,
+  JVerificationCustomViewCallback,
+  JVerificationDismissLoginAuth,
+  JVerificationEventCallback,
+  JVerificationGetCode,
+  JVerificationGetToken,
+  JVerificationInit,
+  JVerificationInitOptions,
+  JVerificationLoginAuthOptions,
+  JVerificationOffAuthPageEvent,
+  JVerificationPreLogin,
+  JVerificationRemoveCustomViewsClickCallback,
+  JVerificationResult,
+  JVerificationSMSOptions,
+  JVerificationSetDebugMode,
+  JVerificationSetLocationEnable,
+  JVerificationSetTimeWithConfig,
+  JVerificationUIConfig
+} from '../interface.uts'
+
+let customViewsClickCallback: JVerificationCustomViewCallback | null = null
+let subscribedAuthPageEventCallback: JVerificationEventCallback | null = null
+let legacyAuthPageEventCallback: JVerificationEventCallback | null = null
+const PRIVACY_CHECK_DIALOG_TEXT_VIEW_ID: Int = 2002
+
+function result(code: number, content: string, operator: string | null = null): JVerificationResult {
+  const value: JVerificationResult = { code, content }
+  if (operator != null) {
+    value.operator = operator
+  }
+  return value
+}
+
+function booleanResult(enable: boolean): JVerificationResult {
+  const value: JVerificationResult = { enable }
+  return value
+}
+
+function contextOrNull(): Context | null {
+  return UTSAndroid.getAppContext()
+}
+
+/** UI 控件优先使用当前 Activity 的主题；没有前台页面时才退回 Application Context。 */
+function uiContextOrNull(): Context | null {
+  const activity = UTSAndroid.getTopPageActivity()
+  if (activity != null) {
+    return activity
+  }
+  return contextOrNull()
+}
+
+function missingContext(callback: JVerificationCallback): void {
+  callback(result(-1, 'JVerification Android application context is unavailable'))
+}
+
+function has(config: UTSJSONObject, key: string): boolean {
+  return config.get(key) != null
+}
+
+function stringValue(config: UTSJSONObject, key: string): string {
+  return config.getString(key, '')
+}
+
+function numberValue(config: UTSJSONObject, key: string): number {
+  return config.getNumber(key, 0)
+}
+
+function intValue(config: UTSJSONObject, key: string): Int {
+  return numberValue(config, key).toInt()
+}
+
+function floatValue(config: UTSJSONObject, key: string): Float {
+  return numberValue(config, key).toFloat()
+}
+
+function booleanValue(config: UTSJSONObject, key: string): boolean {
+  return config.getBoolean(key, false)
+}
+
+/**
+ * DCloud 官方示例使用 static/logo.png 调用 getResourcePath；这里也接纳 /static/logo.png。
+ * 保持旧 Demo 的 static/... JSON 写法，避免迁移时改变已有配置契约。
+ */
+function nativeResourcePath(path: string): string {
+  let platformPath = path
+  if (path.startsWith('/static/') || path.startsWith('/uni_modules/')) {
+    platformPath = UTSAndroid.getResourcePath(path.substring(1))
+  } else if (path.startsWith('static/') || path.startsWith('uni_modules/')) {
+    platformPath = UTSAndroid.getResourcePath(path)
+  }
+  return materializeAndroidAsset(platformPath)
+}
+
+/**
+ * getResourcePath 在云打包时会返回 file:///android_asset/...。DCloud 推荐用该协议读取代码包，
+ * 但旧 JVerification UI API 对图片字段要求真实文件路径，因此仅在这一种场景复制到缓存目录。
+ */
+function materializeAndroidAsset(path: string): string {
+  const prefix = 'file:///android_asset/'
+  if (!path.startsWith(prefix)) {
+    return path
+  }
+  const context = contextOrNull()
+  if (context == null) {
+    return path
+  }
+  try {
+    const assetPath = path.substring(prefix.length)
+    const targetDirectory = new File(context.getCacheDir(), 'jg-jverification-assets')
+    if (!targetDirectory.exists()) {
+      targetDirectory.mkdirs()
+    }
+    const targetFile = new File(targetDirectory, assetPath.replace('/', '_'))
+    const input = context.getAssets().open(assetPath)
+    try {
+      const assetLength = input.available().toLong()
+      if (assetLength > 0 && targetFile.exists() && targetFile.length() == assetLength) {
+        return targetFile.getAbsolutePath()
+      }
+      const output = new FileOutputStream(targetFile)
+      const inputChannel = Channels.newChannel(input)
+      try {
+        output.getChannel().transferFrom(inputChannel, 0, Long.MAX_VALUE)
+        return targetFile.getAbsolutePath()
+      } finally {
+        inputChannel.close()
+        output.close()
+      }
+    } finally {
+      input.close()
+    }
+  } catch (_error) {
+    return path
+  }
+}
+
+function dpToPx(context: Context, value: number): Int {
+  return Math.round(value * context.getResources().getDisplayMetrics().density).toInt()
+}
+
+function customBackgroundColor(config: UTSJSONObject): Int {
+  if (has(config, 'bgColor')) {
+    return intValue(config, 'bgColor')
+  }
+  return intValue(config, 'backgroundColor')
+}
+
+function customImagePath(config: UTSJSONObject): string {
+  const oldPath = stringValue(config, 'bgImgPath')
+  if (oldPath.length > 0) {
+    return oldPath
+  }
+  const currentPath = stringValue(config, 'backgroundImg')
+  if (currentPath.length > 0) {
+    return currentPath
+  }
+  return stringValue(config, 'imagePath')
+}
+
+function packageResourceId(context: Context, name: string, resourceType: string): Int {
+  return context.getResources().getIdentifier(name, resourceType, context.getPackageName())
+}
+
+class AndroidRequestCallback implements RequestCallback<string> {
+  private callback: JVerificationCallback
+
+  constructor(callback: JVerificationCallback) {
+    this.callback = callback
+  }
+
+  override onResult(code: Int, content: string): void {
+    this.callback(result(code, content))
+  }
+}
+
+class AndroidVerifyListener implements VerifyListener {
+  private callback: JVerificationCallback
+
+  constructor(callback: JVerificationCallback) {
+    this.callback = callback
+  }
+
+  override onResult(code: Int, content: string, operator: string, extra: JSONObject | null): void {
+    this.callback(result(code, content, operator))
+  }
+}
+
+class AndroidPreLoginListener implements PreLoginListener {
+  private callback: JVerificationCallback
+
+  constructor(callback: JVerificationCallback) {
+    this.callback = callback
+  }
+
+  override onResult(code: Int, content: string, extra: JSONObject | null): void {
+    this.callback(result(code, content))
+  }
+}
+
+class AndroidAuthPageEventListener extends AuthPageEventListener {
+  constructor() {
+    super()
+  }
+
+  override onEvent(command: Int, message: string): void {
+    const event = result(command, message)
+    legacyAuthPageEventCallback?.(event)
+    subscribedAuthPageEventCallback?.(event)
+  }
+}
+
+class AndroidCustomViewClickCallback implements JVerifyUIClickCallback {
+  private id: string
+
+  constructor(id: string) {
+    this.id = id
+  }
+
+  override onClicked(context: Context, view: View): void {
+    customViewsClickCallback?.(this.id)
+  }
+}
+
+class AndroidNoopCustomViewClickCallback implements JVerifyUIClickCallback {
+  override onClicked(context: Context, view: View): void {}
+}
+
+function applyPrivacyList(builder: JVerifyUIConfig.Builder, config: UTSJSONObject): void {
+  const entries = config.getArray<UTSJSONObject>('setPrivacyNameAndUrlBeanList')
+  if (entries == null || entries.length == 0) {
+    return
+  }
+  const values = new ArrayList<PrivacyBean>()
+  for (let i = 0; i < entries.length; i++) {
+    const entry = entries[i]
+    const name = entry.getString('name', '')
+    const beforeName = entry.getString('beforeName', '')
+    const afterName = entry.getString('afterName', '')
+    const privacy = new PrivacyBean(name, entry.getString('url', ''), beforeName)
+    if (afterName.length > 0) {
+      // PrivacyBean 的 text 是最终显示文本；构造器只会拼接前缀，需显式保留旧 JSON 的尾部文本。
+      privacy.setText(beforeName + name + afterName)
+    }
+    values.add(privacy)
+  }
+  builder.setPrivacyNameAndUrlBeanList(values)
+}
+
+function customViewLayoutParams(entry: UTSJSONObject, context: Context): RelativeLayout.LayoutParams {
+  const width = entry.getNumber('width', 0)
+  const height = entry.getNumber('height', 0)
+  const layoutParams = new RelativeLayout.LayoutParams(dpToPx(context, width), dpToPx(context, height))
+  if (has(entry, 'align')) {
+    layoutParams.addRule(intValue(entry, 'align'), RelativeLayout.TRUE)
+  }
+  const margins = entry.getArray<number>('margins')
+  if (margins != null && margins.length == 4) {
+    layoutParams.setMargins(
+      dpToPx(context, margins[0]),
+      dpToPx(context, margins[1]),
+      dpToPx(context, margins[2]),
+      dpToPx(context, margins[3])
+    )
+  }
+  return layoutParams
+}
+
+function customView(entry: UTSJSONObject, context: Context): View | null {
+  const type = entry.getString('type', 'text')
+  if (type == 'image') {
+    const imagePath = customImagePath(entry)
+    if (imagePath.length == 0) {
+      return null
+    }
+    const image = new ImageView(context)
+    image.setImageURI(Uri.parse(nativeResourcePath(imagePath)))
+    return image
+  }
+  if (type == 'button') {
+    const button = new Button(context)
+    button.setText(entry.getString('text', ''))
+    if (has(entry, 'textColor')) {
+      button.setTextColor(intValue(entry, 'textColor'))
+    }
+    if (has(entry, 'textSize')) {
+      button.setTextSize(floatValue(entry, 'textSize'))
+    }
+    if (has(entry, 'bgColor') || has(entry, 'backgroundColor')) {
+      button.setBackgroundColor(customBackgroundColor(entry))
+    }
+    const imagePath = customImagePath(entry)
+    if (imagePath.length > 0) {
+      const drawable = Drawable.createFromPath(nativeResourcePath(imagePath))
+      if (drawable != null) {
+        button.setBackground(drawable)
+      }
+    }
+    return button
+  }
+  const text = new TextView(context)
+  text.setText(entry.getString('text', ''))
+  if (has(entry, 'textColor')) {
+    text.setTextColor(intValue(entry, 'textColor'))
+  }
+  if (has(entry, 'textSize')) {
+    text.setTextSize(floatValue(entry, 'textSize'))
+  }
+  if (has(entry, 'bgColor') || has(entry, 'backgroundColor')) {
+    text.setBackgroundColor(customBackgroundColor(entry))
+  }
+  if (has(entry, 'textAlignment')) {
+    text.setTextAlignment(intValue(entry, 'textAlignment'))
+  } else {
+    text.setGravity(entry.getNumber('textViewGravity', Gravity.CENTER).toInt())
+  }
+  return text
+}
+
+function applyCustomViews(builder: JVerifyUIConfig.Builder, config: UTSJSONObject, context: Context): void {
+  const entries = config.getArray<UTSJSONObject>('addCustomViews')
+  if (entries == null) {
+    return
+  }
+  for (let i = 0; i < entries.length; i++) {
+    const entry = entries[i]
+    const view = customView(entry, context)
+    if (view != null) {
+      view.setLayoutParams(customViewLayoutParams(entry, context))
+      builder.addCustomView(
+        view,
+        entry.getBoolean('finishFlag', false),
+        new AndroidCustomViewClickCallback(entry.getString('id', ''))
+      )
+    }
+  }
+}
+
+function applyPrivacyCheckDialogCustomViews(
+  builder: JVerifyUIConfig.Builder,
+  dialog: UTSJSONObject,
+  context: Context
+): void {
+  const entries = dialog.getArray<UTSJSONObject>('addCustomViews')
+  if (entries == null) {
+    return
+  }
+  for (let i = 0; i < entries.length; i++) {
+    const entry = entries[i]
+    const view = customView(entry, context)
+    if (view != null) {
+      const layoutParams = customViewLayoutParams(entry, context)
+      if (entry.getBoolean('belowPrivacyText', true)) {
+        // Android SDK 3.4.8 的二次弹窗协议文本 View ID；与官方 Demo 的布局方式保持一致。
+        layoutParams.addRule(RelativeLayout.BELOW, PRIVACY_CHECK_DIALOG_TEXT_VIEW_ID)
+      }
+      view.setLayoutParams(layoutParams)
+      builder.addCustomViewToCheckDialog(
+        view,
+        new AndroidCustomViewClickCallback(entry.getString('id', ''))
+      )
+    }
+  }
+}
+
+function gravityFromString(value: string): Int {
+  if (value == 'left') return Gravity.LEFT
+  if (value == 'top') return Gravity.TOP
+  if (value == 'right') return Gravity.RIGHT
+  if (value == 'bottom') return Gravity.BOTTOM
+  if (value == 'center') return Gravity.CENTER
+  return Gravity.NO_GRAVITY
+}
+
+/**
+ * 配置文档优先使用易读的方向字符串，同时兼容 Android Gravity 的数值常量。
+ * 这样从旧原生配置迁移时，不必把 17（CENTER）等已有值改写为字符串。
+ */
+function gravityValue(config: UTSJSONObject, key: string): Int {
+  const name = stringValue(config, key)
+  const parsed = gravityFromString(name)
+  return parsed == Gravity.NO_GRAVITY ? intValue(config, key) : parsed
+}
+
+function applyLoadingView(builder: JVerifyUIConfig.Builder, context: Context): void {
+  const drawableId = packageResourceId(context, 'umcsdk_load_dot_white', 'drawable')
+  const animationId = packageResourceId(context, 'umcsdk_anim_loading', 'anim')
+  if (drawableId == 0 || animationId == 0) {
+    return
+  }
+  const loading = new ImageView(context)
+  loading.setImageResource(drawableId)
+  const layout = new RelativeLayout.LayoutParams(
+    ViewGroup.LayoutParams.WRAP_CONTENT,
+    ViewGroup.LayoutParams.WRAP_CONTENT
+  )
+  layout.addRule(RelativeLayout.CENTER_IN_PARENT)
+  loading.setLayoutParams(layout)
+  builder.setLoadingView(loading, AnimationUtils.loadAnimation(context, animationId))
+}
+
+function applyPrivacyCheckDialog(
+  builder: JVerifyUIConfig.Builder,
+  config: UTSJSONObject,
+  context: Context | null
+): void {
+  const dialog = config.getJSON('setPrivacyCheckDialogConfig')
+  if (dialog == null) {
+    return
+  }
+  if (has(dialog, 'enablePrivacyCheckDialog')) builder.enablePrivacyCheckDialog(booleanValue(dialog, 'enablePrivacyCheckDialog'))
+  if (has(dialog, 'setPrivacyCheckDialogTitleText')) builder.setPrivacyCheckDialogTitleText(stringValue(dialog, 'setPrivacyCheckDialogTitleText'))
+  if (has(dialog, 'setPrivacyCheckDialogTitleTextSize')) builder.setPrivacyCheckDialogTitleTextSize(intValue(dialog, 'setPrivacyCheckDialogTitleTextSize'))
+  if (has(dialog, 'setPrivacyCheckDialogTitleTextBold')) builder.setPrivacyCheckDialogTitleTextBold(booleanValue(dialog, 'setPrivacyCheckDialogTitleTextBold'))
+  if (has(dialog, 'setPrivacyCheckDialogTitleTextColor')) builder.setPrivacyCheckDialogTitleTextColor(intValue(dialog, 'setPrivacyCheckDialogTitleTextColor'))
+  if (has(dialog, 'setPrivacyCheckDialogContentTextGravity')) builder.setPrivacyCheckDialogContentTextGravity(gravityValue(dialog, 'setPrivacyCheckDialogContentTextGravity'))
+  if (has(dialog, 'setPrivacyCheckDialogContentTextSize')) builder.setPrivacyCheckDialogContentTextSize(intValue(dialog, 'setPrivacyCheckDialogContentTextSize'))
+  if (has(dialog, 'setPrivacyCheckDialogContentTextPaddingL')) builder.setPrivacyCheckDialogContentTextPaddingL(intValue(dialog, 'setPrivacyCheckDialogContentTextPaddingL'))
+  if (has(dialog, 'setPrivacyCheckDialogContentTextPaddingT')) builder.setPrivacyCheckDialogContentTextPaddingT(intValue(dialog, 'setPrivacyCheckDialogContentTextPaddingT'))
+  if (has(dialog, 'setPrivacyCheckDialogContentTextPaddingR')) builder.setPrivacyCheckDialogContentTextPaddingR(intValue(dialog, 'setPrivacyCheckDialogContentTextPaddingR'))
+  if (has(dialog, 'setPrivacyCheckDialogContentTextPaddingB')) builder.setPrivacyCheckDialogContentTextPaddingB(intValue(dialog, 'setPrivacyCheckDialogContentTextPaddingB'))
+  if (has(dialog, 'setPrivacyCheckDialogLogBtnImgPath')) builder.setPrivacyCheckDialogLogBtnImgPath(nativeResourcePath(stringValue(dialog, 'setPrivacyCheckDialogLogBtnImgPath')))
+  if (has(dialog, 'setPrivacyCheckDialogLogBtnText')) builder.setPrivacyCheckDialogLogBtnText(stringValue(dialog, 'setPrivacyCheckDialogLogBtnText'))
+  if (has(dialog, 'setPrivacyCheckDialogLogBtnTextColor')) builder.setPrivacyCheckDialoglogBtnTextColor(intValue(dialog, 'setPrivacyCheckDialogLogBtnTextColor'))
+  if (has(dialog, 'setPrivacyCheckDialogLogBtnMarginL')) builder.setPrivacyCheckDialogLogBtnMarginL(intValue(dialog, 'setPrivacyCheckDialogLogBtnMarginL'))
+  if (has(dialog, 'setPrivacyCheckDialogLogBtnMarginT')) builder.setPrivacyCheckDialogLogBtnMarginT(intValue(dialog, 'setPrivacyCheckDialogLogBtnMarginT'))
+  if (has(dialog, 'setPrivacyCheckDialogLogBtnMarginR')) builder.setPrivacyCheckDialogLogBtnMarginR(intValue(dialog, 'setPrivacyCheckDialogLogBtnMarginR'))
+  if (has(dialog, 'setPrivacyCheckDialogLogBtnMarginB')) builder.setPrivacyCheckDialogLogBtnMarginB(intValue(dialog, 'setPrivacyCheckDialogLogBtnMarginB'))
+  if (has(dialog, 'setPrivacyCheckDialogWidth')) builder.setPrivacyCheckDialogWidth(intValue(dialog, 'setPrivacyCheckDialogWidth'))
+  if (has(dialog, 'setPrivacyCheckDialogHeight')) builder.setPrivacyCheckDialogHeight(intValue(dialog, 'setPrivacyCheckDialogHeight'))
+  if (has(dialog, 'setPrivacyCheckDialogGravity')) builder.setprivacyCheckDialogGravity(gravityValue(dialog, 'setPrivacyCheckDialogGravity'))
+  if (has(dialog, 'setPrivacyCheckDialogOffsetX')) builder.setPrivacyCheckDialogOffsetX(intValue(dialog, 'setPrivacyCheckDialogOffsetX'))
+  if (has(dialog, 'setPrivacyCheckDialogOffsetY')) builder.setPrivacyCheckDialogOffsetY(intValue(dialog, 'setPrivacyCheckDialogOffsetY'))
+  if (has(dialog, 'setPrivacyCheckDialogLogBtnWidth')) builder.setPrivacyCheckDialogLogBtnWidth(intValue(dialog, 'setPrivacyCheckDialogLogBtnWidth'))
+  if (has(dialog, 'setPrivacyCheckDialogLogBtnHeight')) builder.setPrivacyCheckDialogLogBtnHeight(intValue(dialog, 'setPrivacyCheckDialogLogBtnHeight'))
+  if (has(dialog, 'setPrivacyCheckDialogBackgroundColor')) builder.setPrivacyCheckDialogBackgroundColor(intValue(dialog, 'setPrivacyCheckDialogBackgroundColor'))
+  if (has(dialog, 'setPrivacyCheckDialogBackgroundImgPath')) builder.setPrivacyCheckDialogBackgroundImgPath(nativeResourcePath(stringValue(dialog, 'setPrivacyCheckDialogBackgroundImgPath')))
+  if (context != null) {
+    applyPrivacyCheckDialogCustomViews(builder, dialog, context)
+  }
+}
+
+function applyPrivacyCloseButton(builder: JVerifyUIConfig.Builder, config: UTSJSONObject, context: Context): void {
+  if (!booleanValue(config, 'privacyNeedClose')) {
+    return
+  }
+  const offsets = config.getArray<number>('privacyCloseTheme')
+  if (offsets == null || offsets.length < 4) {
+    return
+  }
+  const drawableId = packageResourceId(context, 'umcsdk_return_bg', 'drawable')
+  if (drawableId == 0) {
+    return
+  }
+  const close = new ImageButton(context)
+  close.setImageResource(drawableId)
+  const layout = new RelativeLayout.LayoutParams(
+    ViewGroup.LayoutParams.WRAP_CONTENT,
+    ViewGroup.LayoutParams.WRAP_CONTENT
+  )
+  layout.setMargins(offsets[0].toInt(), offsets[1].toInt(), offsets[2].toInt(), offsets[3].toInt())
+  close.setLayoutParams(layout)
+  builder.addCustomView(close, true, new AndroidNoopCustomViewClickCallback())
+}
+
+function applyConfig(builder: JVerifyUIConfig.Builder, config: UTSJSONObject, context: Context | null): void {
+  // 保持旧 JSON 字段名；/static/... 会按 uni-app x 官方方式转换为原生路径。
+  if (has(config, 'setAuthBGImgPathFromJs')) builder.setAuthBGImgPath(nativeResourcePath(stringValue(config, 'setAuthBGImgPathFromJs')))
+  if (has(config, 'setAuthBGImgPath')) builder.setAuthBGImgPath(nativeResourcePath(stringValue(config, 'setAuthBGImgPath')))
+  if (has(config, 'setAuthBGGifPathFromJs')) builder.setAuthBGGifPath(nativeResourcePath(stringValue(config, 'setAuthBGGifPathFromJs')))
+  if (has(config, 'setAuthBGVideoPathFromJs')) {
+    const placeholder = has(config, 'setAuthBGVideoPlaceholderPathFromJs')
+      ? nativeResourcePath(stringValue(config, 'setAuthBGVideoPlaceholderPathFromJs'))
+      : null
+    builder.setAuthBGVideoPath(nativeResourcePath(stringValue(config, 'setAuthBGVideoPathFromJs')), placeholder)
+  }
+  if (has(config, 'setAuthBGVideoPath')) {
+    const placeholder = has(config, 'setAuthBGVideoPlaceholderPath')
+      ? nativeResourcePath(stringValue(config, 'setAuthBGVideoPlaceholderPath'))
+      : null
+    builder.setAuthBGVideoPath(nativeResourcePath(stringValue(config, 'setAuthBGVideoPath')), placeholder)
+  }
+  if (has(config, 'setAuthBGVideoScaleType')) builder.setAuthBGVideoScaleType(intValue(config, 'setAuthBGVideoScaleType'))
+  if (has(config, 'setCheckedImgPathFromJs')) builder.setCheckedImgPath(nativeResourcePath(stringValue(config, 'setCheckedImgPathFromJs')))
+  if (has(config, 'setCheckedImgPath')) builder.setCheckedImgPath(nativeResourcePath(stringValue(config, 'setCheckedImgPath')))
+  if (has(config, 'setUncheckedImgPathFromJs')) builder.setUncheckedImgPath(nativeResourcePath(stringValue(config, 'setUncheckedImgPathFromJs')))
+  if (has(config, 'setUncheckedImgPath')) builder.setUncheckedImgPath(nativeResourcePath(stringValue(config, 'setUncheckedImgPath')))
+
+  if (has(config, 'setDimAmount')) builder.setDimAmount(floatValue(config, 'setDimAmount'))
+  if (has(config, 'setStatusBarColorWithNav')) builder.setStatusBarColorWithNav(booleanValue(config, 'setStatusBarColorWithNav'))
+  if (has(config, 'setStatusBarDarkMode')) builder.setStatusBarDarkMode(booleanValue(config, 'setStatusBarDarkMode'))
+  if (has(config, 'setStatusBarTransparent')) builder.setStatusBarTransparent(booleanValue(config, 'setStatusBarTransparent'))
+  if (has(config, 'setStatusBarHidden')) builder.setStatusBarHidden(booleanValue(config, 'setStatusBarHidden'))
+  if (has(config, 'setNavBarDarkMode')) builder.setNavBarDarkMode(booleanValue(config, 'setNavBarDarkMode'))
+  if (has(config, 'setVirtualButtonTransparent')) builder.setVirtualButtonTransparent(booleanValue(config, 'setVirtualButtonTransparent'))
+  if (has(config, 'setVirtualButtonColor')) builder.setVirtualButtonColor(intValue(config, 'setVirtualButtonColor'))
+  if (has(config, 'setVirtualButtonHidden')) builder.setVirtualButtonHidden(booleanValue(config, 'setVirtualButtonHidden'))
+
+  if (has(config, 'setNavColor')) builder.setNavColor(intValue(config, 'setNavColor'))
+  if (has(config, 'setNavText')) builder.setNavText(stringValue(config, 'setNavText'))
+  if (has(config, 'setNavTextColor')) builder.setNavTextColor(intValue(config, 'setNavTextColor'))
+  if (has(config, 'setNavTextSize')) builder.setNavTextSize(intValue(config, 'setNavTextSize'))
+  if (has(config, 'setNavTextBold')) builder.setNavTextBold(booleanValue(config, 'setNavTextBold'))
+  if (has(config, 'setNavTransparent')) builder.setNavTransparent(booleanValue(config, 'setNavTransparent'))
+  if (has(config, 'setNavHidden')) builder.setNavHidden(booleanValue(config, 'setNavHidden'))
+  if (has(config, 'setPrivacyNavReturnBtnPathFromJs')) builder.setPrivacyNavReturnBtnPath(nativeResourcePath(stringValue(config, 'setPrivacyNavReturnBtnPathFromJs')))
+  if (has(config, 'setPrivacyNavReturnBtnPath')) builder.setPrivacyNavReturnBtnPath(nativeResourcePath(stringValue(config, 'setPrivacyNavReturnBtnPath')))
+  if (has(config, 'setNavReturnImgPathFromJs')) builder.setNavReturnImgPath(nativeResourcePath(stringValue(config, 'setNavReturnImgPathFromJs')))
+  if (has(config, 'setNavReturnImgPath')) builder.setNavReturnImgPath(nativeResourcePath(stringValue(config, 'setNavReturnImgPath')))
+  if (has(config, 'setNavReturnBtnHidden')) builder.setNavReturnBtnHidden(booleanValue(config, 'setNavReturnBtnHidden'))
+  if (has(config, 'setNavReturnBtnWidth')) builder.setNavReturnBtnWidth(intValue(config, 'setNavReturnBtnWidth'))
+  if (has(config, 'setNavReturnBtnHeight')) builder.setNavReturnBtnHeight(intValue(config, 'setNavReturnBtnHeight'))
+  if (has(config, 'setNavReturnBtnOffsetX')) builder.setNavReturnBtnOffsetX(intValue(config, 'setNavReturnBtnOffsetX'))
+  if (has(config, 'setNavReturnBtnRightOffsetX')) builder.setNavReturnBtnRightOffsetX(intValue(config, 'setNavReturnBtnRightOffsetX'))
+  if (has(config, 'setNavReturnBtnOffsetY')) builder.setNavReturnBtnOffsetY(intValue(config, 'setNavReturnBtnOffsetY'))
+
+  if (has(config, 'setLogoImgPathFromJs')) builder.setLogoImgPath(nativeResourcePath(stringValue(config, 'setLogoImgPathFromJs')))
+  if (has(config, 'setLogoImgPath')) builder.setLogoImgPath(nativeResourcePath(stringValue(config, 'setLogoImgPath')))
+  if (has(config, 'setLogoWidth')) builder.setLogoWidth(intValue(config, 'setLogoWidth'))
+  if (has(config, 'setLogoHeight')) builder.setLogoHeight(intValue(config, 'setLogoHeight'))
+  if (has(config, 'setLogoHidden')) builder.setLogoHidden(booleanValue(config, 'setLogoHidden'))
+  if (has(config, 'setLogoOffsetX')) builder.setLogoOffsetX(intValue(config, 'setLogoOffsetX'))
+  if (has(config, 'setLogoOffsetY')) builder.setLogoOffsetY(intValue(config, 'setLogoOffsetY'))
+  if (has(config, 'setLogoOffsetBottomY')) builder.setLogoOffsetBottomY(intValue(config, 'setLogoOffsetBottomY'))
+
+  if (has(config, 'setNumberColor')) builder.setNumberColor(intValue(config, 'setNumberColor'))
+  if (has(config, 'setNumberSize')) builder.setNumberSize(numberValue(config, 'setNumberSize'))
+  if (has(config, 'setNumFieldOffsetX')) builder.setNumFieldOffsetX(intValue(config, 'setNumFieldOffsetX'))
+  if (has(config, 'setNumFieldOffsetY')) builder.setNumFieldOffsetY(intValue(config, 'setNumFieldOffsetY'))
+  if (has(config, 'setNumberFieldWidth')) builder.setNumberFieldWidth(intValue(config, 'setNumberFieldWidth'))
+  if (has(config, 'setNumberFieldHeight')) builder.setNumberFieldHeight(intValue(config, 'setNumberFieldHeight'))
+  if (has(config, 'setNumberFieldOffsetBottomY')) builder.setNumberFieldOffsetBottomY(intValue(config, 'setNumberFieldOffsetBottomY'))
+  if (has(config, 'setNumberTextBold')) builder.setNumberTextBold(booleanValue(config, 'setNumberTextBold'))
+
+  if (has(config, 'setLogBtnText')) builder.setLogBtnText(stringValue(config, 'setLogBtnText'))
+  if (has(config, 'setLogBtnTextColor')) builder.setLogBtnTextColor(intValue(config, 'setLogBtnTextColor'))
+  if (has(config, 'setLogBtnImgPathFromJs')) builder.setLogBtnImgPath(nativeResourcePath(stringValue(config, 'setLogBtnImgPathFromJs')))
+  if (has(config, 'setLogBtnImgPath')) builder.setLogBtnImgPath(nativeResourcePath(stringValue(config, 'setLogBtnImgPath')))
+  if (has(config, 'setLogBtnOffsetX')) builder.setLogBtnOffsetX(intValue(config, 'setLogBtnOffsetX'))
+  if (has(config, 'setLogBtnOffsetY')) builder.setLogBtnOffsetY(intValue(config, 'setLogBtnOffsetY'))
+  if (has(config, 'setLogBtnWidth')) builder.setLogBtnWidth(intValue(config, 'setLogBtnWidth'))
+  if (has(config, 'setLogBtnHeight')) builder.setLogBtnHeight(intValue(config, 'setLogBtnHeight'))
+  if (has(config, 'setLogBtnTextSize')) builder.setLogBtnTextSize(intValue(config, 'setLogBtnTextSize'))
+  if (has(config, 'setLogBtnBottomOffsetY')) builder.setLogBtnBottomOffsetY(intValue(config, 'setLogBtnBottomOffsetY'))
+  if (has(config, 'setLogBtnTextBold')) builder.setLogBtnTextBold(booleanValue(config, 'setLogBtnTextBold'))
+
+  if (has(config, 'setPrivacyMarginL')) builder.setPrivacyMarginL(intValue(config, 'setPrivacyMarginL'))
+  if (has(config, 'setPrivacyMarginR')) builder.setPrivacyMarginR(intValue(config, 'setPrivacyMarginR'))
+  if (has(config, 'setPrivacyMarginT')) builder.setPrivacyMarginT(intValue(config, 'setPrivacyMarginT'))
+  if (has(config, 'setPrivacyMarginB')) builder.setPrivacyMarginB(intValue(config, 'setPrivacyMarginB'))
+  if (has(config, 'setPrivacyOffsetX')) builder.setPrivacyOffsetX(intValue(config, 'setPrivacyOffsetX'))
+  if (has(config, 'setPrivacyOffsetY')) builder.setPrivacyOffsetY(intValue(config, 'setPrivacyOffsetY'))
+  if (has(config, 'setPrivacyTextSize')) builder.setPrivacyTextSize(intValue(config, 'setPrivacyTextSize'))
+  if (has(config, 'setPrivacyTopOffsetY')) builder.setPrivacyTopOffsetY(intValue(config, 'setPrivacyTopOffsetY'))
+  if (has(config, 'setPrivacyCheckboxHidden')) builder.setPrivacyCheckboxHidden(booleanValue(config, 'setPrivacyCheckboxHidden'))
+  if (has(config, 'setPrivacyCheckboxSize')) builder.setPrivacyCheckboxSize(intValue(config, 'setPrivacyCheckboxSize'))
+  const checkboxMargin = config.getArray<number>('setPrivacyCheckboxMargin')
+  if (checkboxMargin != null && checkboxMargin.length == 4) {
+      builder.setPrivacyCheckboxMargin(
+        checkboxMargin[0].toInt(),
+        checkboxMargin[1].toInt(),
+        checkboxMargin[2].toInt(),
+        checkboxMargin[3].toInt()
+      )
+  }
+  if (has(config, 'setPrivacyCheckboxInCenter')) builder.setPrivacyCheckboxInCenter(booleanValue(config, 'setPrivacyCheckboxInCenter'))
+  if (has(config, 'setPrivacyTextCenterGravity')) builder.setPrivacyTextCenterGravity(booleanValue(config, 'setPrivacyTextCenterGravity'))
+  if (has(config, 'setIsPrivacyViewDarkMode')) builder.setIsPrivacyViewDarkMode(booleanValue(config, 'setIsPrivacyViewDarkMode'))
+  if (has(config, 'setPrivacyState')) builder.setPrivacyState(booleanValue(config, 'setPrivacyState'))
+  if (has(config, 'setPrivacyWithBookTitleMark')) builder.setPrivacyWithBookTitleMark(booleanValue(config, 'setPrivacyWithBookTitleMark'))
+  if (has(config, 'setPrivacyTextBold')) builder.setPrivacyTextBold(booleanValue(config, 'setPrivacyTextBold'))
+  if (has(config, 'setPrivacyUnderlineText')) builder.setPrivacyUnderlineText(booleanValue(config, 'setPrivacyUnderlineText'))
+  if (has(config, 'setPrivacyTextWidth')) builder.setPrivacyTextWidth(intValue(config, 'setPrivacyTextWidth'))
+  // 传统插件和文档使用 openPrivacyInBrowser；保留曾写入 UTS 版本的
+  // setOpenPrivacyInBrowser 作为别名，优先采用传统字段，避免旧接入失效。
+  if (has(config, 'openPrivacyInBrowser')) {
+    builder.setOpenPrivacyInBrowser(booleanValue(config, 'openPrivacyInBrowser'))
+  } else if (has(config, 'setOpenPrivacyInBrowser')) {
+    builder.setOpenPrivacyInBrowser(booleanValue(config, 'setOpenPrivacyInBrowser'))
+  }
+  if (has(config, 'setPrivacyText')) {
+    const privacyText = config.getArray<string>('setPrivacyText')
+    if (privacyText != null && privacyText.length >= 2) {
+      builder.setPrivacyText(privacyText[0], privacyText[1])
+    }
+  }
+  if (has(config, 'setAppPrivacyColor')) {
+    const colors = config.getArray<number>('setAppPrivacyColor')
+    if (colors != null && colors.length >= 2) {
+      builder.setAppPrivacyColor(colors[0].toInt(), colors[1].toInt())
+    }
+  }
+  if (has(config, 'setAppPrivacyOne')) {
+    const privacy = config.getArray<string>('setAppPrivacyOne')
+    if (privacy != null && privacy.length >= 2) {
+      builder.setAppPrivacyOne(privacy[0], privacy[1])
+    }
+  }
+  if (has(config, 'setAppPrivacyTwo')) {
+    const privacy = config.getArray<string>('setAppPrivacyTwo')
+    if (privacy != null && privacy.length >= 2) {
+      builder.setAppPrivacyTwo(privacy[0], privacy[1])
+    }
+  }
+  applyPrivacyList(builder, config)
+
+  if (context != null && has(config, 'enableHintToast')) {
+    const message = stringValue(config, 'enableHintToastText')
+    const toast = message.length == 0 ? null : Toast.makeText(context, message, Toast.LENGTH_SHORT)
+    builder.enableHintToast(booleanValue(config, 'enableHintToast'), toast)
+  }
+
+  if (has(config, 'setPrivacyNavColor')) builder.setPrivacyNavColor(intValue(config, 'setPrivacyNavColor'))
+  if (has(config, 'setPrivacyNavTitleTextColor')) builder.setPrivacyNavTitleTextColor(intValue(config, 'setPrivacyNavTitleTextColor'))
+  if (has(config, 'setPrivacyNavTitleTextSize')) builder.setPrivacyNavTitleTextSize(intValue(config, 'setPrivacyNavTitleTextSize'))
+  if (has(config, 'setPrivacyNavTitleTextBold')) builder.setPrivacyNavTitleTextBold(booleanValue(config, 'setPrivacyNavTitleTextBold'))
+  if (has(config, 'setAppPrivacyNavTitle1')) builder.setAppPrivacyNavTitle1(stringValue(config, 'setAppPrivacyNavTitle1'))
+  if (has(config, 'setAppPrivacyNavTitle2')) builder.setAppPrivacyNavTitle2(stringValue(config, 'setAppPrivacyNavTitle2'))
+  if (has(config, 'setPrivacyStatusBarColorWithNav')) builder.setPrivacyStatusBarColorWithNav(booleanValue(config, 'setPrivacyStatusBarColorWithNav'))
+  if (has(config, 'setPrivacyStatusBarDarkMode')) builder.setPrivacyStatusBarDarkMode(booleanValue(config, 'setPrivacyStatusBarDarkMode'))
+  if (has(config, 'setPrivacyStatusBarTransparent')) builder.setPrivacyStatusBarTransparent(booleanValue(config, 'setPrivacyStatusBarTransparent'))
+  if (has(config, 'setPrivacyStatusBarHidden')) builder.setPrivacyStatusBarHidden(booleanValue(config, 'setPrivacyStatusBarHidden'))
+  if (has(config, 'setPrivacyVirtualButtonTransparent')) builder.setPrivacyVirtualButtonTransparent(booleanValue(config, 'setPrivacyVirtualButtonTransparent'))
+  if (has(config, 'setPrivacyVirtualButtonColor')) builder.setPrivacyVirtualButtonColor(intValue(config, 'setPrivacyVirtualButtonColor'))
+
+  if (has(config, 'setSloganTextColor')) builder.setSloganTextColor(intValue(config, 'setSloganTextColor'))
+  if (has(config, 'setSloganTextSize')) builder.setSloganTextSize(intValue(config, 'setSloganTextSize'))
+  if (has(config, 'setSloganOffsetX')) builder.setSloganOffsetX(intValue(config, 'setSloganOffsetX'))
+  if (has(config, 'setSloganOffsetY')) builder.setSloganOffsetY(intValue(config, 'setSloganOffsetY'))
+  if (has(config, 'setSloganBottomOffsetY')) builder.setSloganBottomOffsetY(intValue(config, 'setSloganBottomOffsetY'))
+  if (has(config, 'setSloganHidden')) builder.setSloganHidden(booleanValue(config, 'setSloganHidden'))
+  if (has(config, 'setSloganTextBold')) builder.setSloganTextBold(booleanValue(config, 'setSloganTextBold'))
+  if (has(config, 'setNeedStartAnim')) builder.setNeedStartAnim(booleanValue(config, 'setNeedStartAnim'))
+  if (has(config, 'setNeedCloseAnim')) builder.setNeedCloseAnim(booleanValue(config, 'setNeedCloseAnim'))
+  if (has(config, 'setDialogTheme')) {
+    // setDialogTheme 的第 5 项是 boolean，不能使用 getArray<Object>：
+    // Android UTS 会尝试把整个混合数组转换成同一种 Object 类型并返回 null。
+    // 使用非泛型读取保留 UTSArray 中每一项的原始 number / boolean 类型。
+    const dialog = config.getArray('setDialogTheme')
+    if (dialog != null && dialog.length >= 5) {
+      builder.setDialogTheme(
+        (dialog[0] as number).toInt(),
+        (dialog[1] as number).toInt(),
+        (dialog[2] as number).toInt(),
+        (dialog[3] as number).toInt(),
+        dialog[4] as boolean
+      )
+    }
+  }
+  if (context != null && booleanValue(config, 'setLoadingViewEnable')) {
+    applyLoadingView(builder, context)
+  }
+  applyPrivacyCheckDialog(builder, config, context)
+  if (has(config, 'enablePrivacyCheckDialog')) builder.enablePrivacyCheckDialog(booleanValue(config, 'enablePrivacyCheckDialog'))
+  if (has(config, 'setDimensionUnit')) builder.setDimensionUnit(intValue(config, 'setDimensionUnit'))
+  if (has(config, 'setAppLanguageType')) builder.setAppLanguageType(intValue(config, 'setAppLanguageType'))
+  if (context != null) {
+    applyPrivacyCloseButton(builder, config, context)
+  }
+}
+
+function buildUIConfig(config: JVerificationUIConfig): JVerifyUIConfig {
+  const builder = new JVerifyUIConfig.Builder()
+  const context = uiContextOrNull()
+  applyConfig(builder, config, context)
+  if (context != null) {
+    applyCustomViews(builder, config, context)
+  }
+  return builder.build()
+}
+
+export const setDebugMode: JVerificationSetDebugMode = function (enable: boolean): void {
+  JVerificationInterface.setDebugMode(enable)
+}
+
+export const init: JVerificationInit = function (options: JVerificationInitOptions, callback: JVerificationCallback): void {
+  const context = contextOrNull()
+  if (context == null) {
+    missingContext(callback)
+    return
+  }
+  let timeout: Int = 10000
+  const configuredTimeout = options.timeout
+  if (configuredTimeout != null) {
+    timeout = configuredTimeout.toInt()
+  }
+  JVerificationInterface.init(context, timeout, new AndroidRequestCallback(callback))
+}
+
+export const isInitSuccess: JVerificationBooleanQuery = function (callback: JVerificationCallback): void {
+  callback(booleanResult(JVerificationInterface.isInitSuccess()))
+}
+
+export const checkVerifyEnable: JVerificationBooleanQuery = function (callback: JVerificationCallback): void {
+  const context = contextOrNull()
+  if (context == null) {
+    missingContext(callback)
+    return
+  }
+  callback(booleanResult(JVerificationInterface.checkVerifyEnable(context)))
+}
+
+export const getToken: JVerificationGetToken = function (timeout: number, callback: JVerificationCallback): void {
+  const context = contextOrNull()
+  if (context == null) {
+    missingContext(callback)
+    return
+  }
+  JVerificationInterface.getToken(context, timeout.toInt(), new AndroidVerifyListener(callback))
+}
+
+export const preLogin: JVerificationPreLogin = function (timeout: number, callback: JVerificationCallback): void {
+  const context = contextOrNull()
+  if (context == null) {
+    missingContext(callback)
+    return
+  }
+  JVerificationInterface.preLogin(context, timeout.toInt(), new AndroidPreLoginListener(callback))
+}
+
+export const clearPreLoginCache: JVerificationClearPreLoginCache = function (): void {
+  JVerificationInterface.clearPreLoginCache()
+}
+
+/** 注册授权页持续事件。重复注册会替换旧监听器。 */
+@UTSJS.keepAlive
+export function onAuthPageEvent(callback: JVerificationEventCallback): void {
+  subscribedAuthPageEventCallback = callback
+}
+
+/** 注销授权页持续事件，活动授权页后续事件也不再向调用方分发。 */
+export const offAuthPageEvent: JVerificationOffAuthPageEvent = function (): void {
+  subscribedAuthPageEventCallback = null
+  legacyAuthPageEventCallback = null
+}
+
+// 与 iOS 保持一致：认证授权页事件会持续触发，不能在首次事件后回收回调。
+@UTSJS.keepAlive
+export function loginAuth(
+  options: JVerificationLoginAuthOptions,
+  callback: JVerificationCallback,
+  eventCallback?: JVerificationEventCallback
+): void {
+  // 每次调用先覆盖最近一次旧回调（包括 null）；不根据平台事件码推断生命周期，
+  // 也不能因为后续上下文检查提前返回而继续持有上一次回调。
+  legacyAuthPageEventCallback = eventCallback == null ? null : eventCallback
+  const context = contextOrNull()
+  if (context == null) {
+    missingContext(callback)
+    return
+  }
+  const settings = new LoginSettings()
+  const autoFinish = options.autoFinish
+  if (autoFinish != null) {
+    settings.setAutoFinish(autoFinish == true)
+  }
+  const configuredTimeout = options.timeout
+  if (configuredTimeout != null) {
+    settings.setTimeout(configuredTimeout.toInt())
+  }
+  settings.setAuthPageEventListener(new AndroidAuthPageEventListener())
+  JVerificationInterface.loginAuth(context, settings, new AndroidVerifyListener(callback))
+}
+
+export const dismissLoginAuth: JVerificationDismissLoginAuth = function (
+  needCloseAnim: boolean,
+  callback?: JVerificationCallback
+): void {
+  const handled = callback == null ? function (_: JVerificationResult): void {} : callback
+  JVerificationInterface.dismissLoginAuthActivity(needCloseAnim, new AndroidRequestCallback(handled))
+}
+
+// 直接暴露 UTSJSONObject，确保 iOS JS/原生桥接元数据使用内置 JSON 类型。
+// 第二参数使用显式的 null 默认值，避免可选参数在代理元数据中丢失默认值。
+export function setCustomUIWithConfigAndroid(
+  config: UTSJSONObject,
+  landscapeConfig: UTSJSONObject | null = null
+): void {
+  const portrait = buildUIConfig(config)
+  let landscape: JVerifyUIConfig | null = null
+  if (landscapeConfig != null) {
+    landscape = buildUIConfig(landscapeConfig)
+  }
+  // 与极光 Android 官方 Demo 的 setUIConfig 保持一致：切换两套预设前先清空旧配置，
+  // 避免上一套全屏横竖屏配置继续被授权页复用。
+  JVerificationInterface.setCustomUIWithConfig(null, null)
+  JVerificationInterface.setCustomUIWithConfig(portrait, landscape)
+  console.log(
+    `[JVerification UTS] Android UI config applied | dialog=${portrait.isDialogMode()} | ` +
+    `width=${portrait.getDialogWidth()} | height=${portrait.getDialogHeight()}`
+  )
+}
+
+// 自定义控件可在同一授权页生命周期内被多次点击；HBuilderX 4.25+
+// 默认在首次回调后释放函数参数，因此注册型回调必须显式保活。
+@UTSJS.keepAlive
+export function addCustomViewsClickCallback(
+  callback?: JVerificationCustomViewCallback
+): void {
+  customViewsClickCallback = callback == null ? null : callback
+}
+
+/** 显式注销自定义控件点击回调。 */
+export const removeCustomViewsClickCallback: JVerificationRemoveCustomViewsClickCallback = function (): void {
+  customViewsClickCallback = null
+}
+
+/** 正确拼写：调用 Android 认证 SDK 的实际位置采集开关。 */
+export const setLocationEnable: JVerificationSetLocationEnable = function (enable: boolean): void {
+  const context = contextOrNull()
+  if (context != null) {
+    JVerificationInterface.setLocationEanable(context, enable)
+  }
+}
+
+/** @deprecated 请使用 setLocationEnable。保留旧拼写仅用于兼容历史接入。 */
+export const setLocationEanable: JVerificationSetLocationEnable = function (enable: boolean): void {
+  setLocationEnable(enable)
+}
+
+export const getCode: JVerificationGetCode = function (
+  options: JVerificationSMSOptions,
+  callback: JVerificationCallback
+): void {
+  const context = contextOrNull()
+  if (context == null) {
+    missingContext(callback)
+    return
+  }
+  JVerificationInterface.getSmsCode(
+    context,
+    options.phoneNumber,
+    options.signID == null ? '' : options.signID,
+    options.templateID == null ? '' : options.templateID,
+    new AndroidRequestCallback(function (value: JVerificationResult): void {
+      const response: JVerificationResult = {
+        code: value.code,
+        content: value.content,
+        uuid: value.code == 3000 ? value.content : '',
+        msg: value.code == 3000 ? '' : value.content
+      }
+      callback(response)
+    })
+  )
+}
+
+export const setTimeWithConfig: JVerificationSetTimeWithConfig = function (interval: number): void {
+  JVerificationInterface.setSmsIntervalTime(interval.toLong())
+}

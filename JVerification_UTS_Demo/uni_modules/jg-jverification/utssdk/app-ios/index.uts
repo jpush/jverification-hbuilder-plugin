@@ -1,0 +1,123 @@
+import {
+  JVerificationBooleanQuery,
+  JVerificationCallback,
+  JVerificationClearPreLoginCache,
+  JVerificationCustomViewCallback,
+  JVerificationDismissLoginAuth,
+  JVerificationEventCallback,
+  JVerificationGetCode,
+  JVerificationGetToken,
+  JVerificationInit,
+  JVerificationInitOptions,
+  JVerificationLoginAuthOptions,
+  JVerificationOffAuthPageEvent,
+  JVerificationPreLogin,
+  JVerificationRemoveCustomViewsClickCallback,
+  JVerificationSMSOptions,
+  JVerificationSetDebugMode,
+  JVerificationSetTimeWithConfig
+} from '../interface.uts'
+
+/**
+ * iOS 的认证 SDK 是本地 XCFramework。Swift 混编层负责所有 SDK 类型和
+ * UIKit 调用；此处仅保留稳定的 UTS API 契约，避免将 implementationOnly
+ * 原生类型泄露到插件公开的 Swift 接口。
+ */
+export const setDebugMode: JVerificationSetDebugMode = (enable: boolean): void => {
+  jverificationSetDebug(enable)
+}
+
+// `init` 在 UTS 源码层不能作为命名导出；iOS 单独使用可编译名称。
+// 必须直接导出函数表达式，才能让 HBuilderX 为 uvue 页面生成对应的 UTS 代理。
+// 参数和回调协议仍与传统 iOS init 保持一致。
+export const initialize: JVerificationInit = (options: JVerificationInitOptions, callback: JVerificationCallback): void => {
+  jverificationInit(options, callback)
+}
+
+export const isInitSuccess: JVerificationBooleanQuery = (callback: JVerificationCallback): void => {
+  jverificationIsInitSuccess(callback)
+}
+
+export const checkVerifyEnable: JVerificationBooleanQuery = (callback: JVerificationCallback): void => {
+  jverificationCheckVerifyEnable(callback)
+}
+
+export const getToken: JVerificationGetToken = (timeout: number, callback: JVerificationCallback): void => {
+  jverificationGetToken(timeout, callback)
+}
+
+export const preLogin: JVerificationPreLogin = (timeout: number, callback: JVerificationCallback): void => {
+  jverificationPreLogin(timeout, callback)
+}
+
+export const clearPreLoginCache: JVerificationClearPreLoginCache = (): void => {
+  jverificationClearPreLoginCache()
+}
+
+/** 注册授权页持续事件。重复注册会替换旧监听器。 */
+@UTSJS.keepAlive
+export function onAuthPageEvent(callback: JVerificationEventCallback): void {
+  jverificationSetAuthPageEventCallback(callback)
+}
+
+/** 注销授权页持续事件，并解除 Swift 混编层对回调的持有。 */
+export const offAuthPageEvent: JVerificationOffAuthPageEvent = (): void => {
+  jverificationSetAuthPageEventCallback(null)
+}
+
+// 授权页事件（actionBlock）在授权页存活期间会多次回调。HBuilderX 4.25+
+// 默认会在首次回调后释放函数参数，故此处必须明确保持回调存活。
+@UTSJS.keepAlive
+export function loginAuth(
+  options: JVerificationLoginAuthOptions,
+  callback: JVerificationCallback,
+  eventCallback?: JVerificationEventCallback
+): void {
+  // 保持传统插件的默认值：省略时自动关闭授权页、带动画、超时 10 秒。
+  // 先将可选 Boolean 收敛为确定的 boolean，避免 Swift 生成代码把
+  // Optional<Bool> 直接装入 UTSJSONObject；Swift 混编层仍保留同样的兜底。
+  const autoFinish = options.autoFinish == null ? true : options.autoFinish == true
+  const animationFlag = options.animationFlag == null ? true : options.animationFlag == true
+  const resolvedOptions: JVerificationLoginAuthOptions = {
+    autoFinish: autoFinish,
+    timeout: options.timeout == null ? 10000 : options.timeout,
+    animationFlag: animationFlag
+  }
+  jverificationLoginAuth(resolvedOptions, callback, eventCallback)
+}
+
+export const dismissLoginAuth: JVerificationDismissLoginAuth = (
+  needCloseAnim: boolean,
+  callback?: JVerificationCallback
+): void => {
+  jverificationDismissLoginAuth(needCloseAnim, callback)
+}
+
+// iOS 的 JS 桥接需要直接暴露 UTSJSONObject。若经 type alias 暴露，HBuilderX
+// 会将参数元数据错误生成为 `JVerificationUIConfig`，导致 ByJs 桥接在进入
+// 原生实现前失败。iOS SDK 不消费横屏配置，故不导出第二参数。
+export const setCustomUIWithConfigiOS = (config: UTSJSONObject): void => {
+  jverificationSetCustomUI(config, null)
+}
+
+// 自定义控件可在同一授权页生命周期内被多次点击；HBuilderX 4.25+
+// 默认在首次回调后释放函数参数，因此注册型回调必须显式保活。
+@UTSJS.keepAlive
+export function addCustomViewsClickCallback(
+  callback?: JVerificationCustomViewCallback
+): void {
+  jverificationSetCustomViewClickCallback(callback)
+}
+
+/** 显式注销自定义控件点击回调。 */
+export const removeCustomViewsClickCallback: JVerificationRemoveCustomViewsClickCallback = (): void => {
+  jverificationSetCustomViewClickCallback(null)
+}
+
+export const getCode: JVerificationGetCode = (options: JVerificationSMSOptions, callback: JVerificationCallback): void => {
+  jverificationGetSMSCode(options, callback)
+}
+
+export const setTimeWithConfig: JVerificationSetTimeWithConfig = (interval: number): void => {
+  jverificationSetSMSInterval(interval)
+}

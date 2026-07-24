@@ -207,6 +207,13 @@ yarn.lock
 
 *.gitattributes
 
+# uni-app x / HBuilderX generated runtime and custom-base artifacts
+JVerification_UTS_Demo/unpackage/
+JVerification_UTS_Demo/.hbuilderx/launch.json
+
+# Internal requirement-lifecycle and development records
+/需求/
+
 ### Objective-C ###
 # Xcode
 #

@@ -1,0 +1,1172 @@
+<template>
+  <scroll-view class="page" scroll-y="true">
+    <view class="card">
+      <!-- #ifndef APP-ANDROID -->
+      <text class="section-title">基础参数</text>
+      <input class="input" v-model="appKey" placeholder="请输入 AppKey" />
+      <!-- #endif -->
+      <button class="button" @click="initialize">初始化</button>
+      <view class="button-row">
+        <button class="button half" @click="queryInitSuccess">查询初始化状态</button>
+        <button class="button half button-row-second" @click="queryVerifyEnable">检查认证环境</button>
+      </view>
+
+      <text class="section-title">取号与授权</text>
+      <view class="button-row">
+        <button class="button half" @click="preLogin">预取号</button>
+        <button class="button half button-row-second" @click="getToken">获取 token</button>
+      </view>
+      <button class="button" @click="clearCache">清除预取号缓存</button>
+      <button class="button" @click="loginAuth">拉起授权页</button>
+
+      <!-- #ifdef APP-ANDROID -->
+      <text class="section-title">Android 授权页</text>
+      <view class="button-row">
+        <button class="button half" @click="configureAndroidPage">设置基础样式</button>
+        <button class="button half button-row-second" @click="configureAndroidDialog">设置弹窗样式</button>
+      </view>
+      <button class="button" @click="configureAndroidVideo">设置背景视频</button>
+      <!-- #endif -->
+
+      <!-- #ifdef APP-IOS -->
+      <text class="section-title">iOS 授权页</text>
+      <view class="button-row">
+        <button class="button half" @click="configureIOSPage">设置基础样式</button>
+        <button class="button half button-row-second" @click="configureIOSDialog">设置弹窗样式</button>
+      </view>
+      <button class="button" @click="configureIOSVideo">设置背景视频</button>
+      <!-- #endif -->
+
+      <!-- #ifdef APP-HARMONY -->
+      <text class="section-title">HarmonyOS 授权页</text>
+      <view class="button-row">
+        <button class="button half" @click="configureHarmonyBase">设置基础样式</button>
+        <button class="button half button-row-second" @click="configureHarmonyDialog">设置弹窗样式</button>
+      </view>
+      <button class="button" @click="configureHarmonyVideo">设置背景视频</button>
+      <!-- #endif -->
+
+      <text class="section-title">接口回调结果</text>
+      <text class="result">{{ lastResult }}</text>
+      <text class="section-title">授权页事件</text>
+      <text class="result">{{ authPageEventResult }}</text>
+    </view>
+  </scroll-view>
+</template>
+
+<script setup lang="uts">
+import { onUnmounted, ref } from 'vue'
+import {
+  clearPreLoginCache,
+  getToken as jverifyGetToken,
+  isInitSuccess,
+  checkVerifyEnable,
+  loginAuth as jverifyLoginAuth,
+  offAuthPageEvent,
+  onAuthPageEvent,
+  preLogin as jverifyPreLogin,
+  setDebugMode
+} from '../../uni_modules/jg-jverification'
+import type {
+  JVerificationInitOptions,
+  JVerificationLoginAuthOptions,
+  JVerificationResult
+} from '../../uni_modules/jg-jverification'
+
+// #ifdef APP-ANDROID || APP-HARMONY
+import { init as jverifyInit } from '../../uni_modules/jg-jverification'
+// #endif
+
+// #ifdef APP-IOS
+// iOS UTS 不允许将 init 作为命名导出；iOS 使用 initialize，参数和回调协议不变。
+import { initialize as jverifyInit } from '../../uni_modules/jg-jverification'
+// #endif
+
+// #ifdef APP-ANDROID
+import {
+  addCustomViewsClickCallback,
+  removeCustomViewsClickCallback,
+  setCustomUIWithConfigAndroid
+} from '../../uni_modules/jg-jverification'
+// #endif
+
+// #ifdef APP-IOS
+import {
+  addCustomViewsClickCallback,
+  removeCustomViewsClickCallback,
+  setCustomUIWithConfigiOS
+} from '../../uni_modules/jg-jverification'
+// #endif
+
+// #ifdef APP-HARMONY
+import {
+  addCustomViewsClickCallback,
+  removeCustomViewsClickCallback,
+  setCustomUIWithConfigHarmony
+} from '../../uni_modules/jg-jverification'
+// #endif
+
+// #ifdef APP-IOS
+const appKey = ref('4fcc3e237eec4c4fb804ad49')
+// #endif
+// #ifdef APP-HARMONY
+const appKey = ref('667c13ce8023161dbfd75a6e')
+// #endif
+const timeout = 10000
+const lastResult = ref('SDK 调试日志已自动开启')
+const authPageEventResult = ref('等待授权页事件')
+// #ifdef APP-ANDROID
+let selectedAndroidUIConfig: UTSJSONObject | null = null
+// #endif
+
+function trace(message: string): void {
+  console.log(`[JVerification Demo] ${message}`)
+}
+
+setDebugMode(true)
+trace('SDK 调试日志已自动开启')
+
+// 注册型回调在页面生命周期内只注册一次；插件端使用 @UTSJS.keepAlive
+// 保证同一授权页内多次点击自定义控件都能回调。
+// #ifdef APP-ANDROID
+addCustomViewsClickCallback((id: string): void => {
+  lastResult.value = `Android 自定义控件点击 | id=${id}`
+  trace(`回调：${lastResult.value}`)
+})
+// #endif
+
+onUnmounted((): void => {
+  offAuthPageEvent()
+  // #ifdef APP-ANDROID || APP-IOS || APP-HARMONY
+  removeCustomViewsClickCallback()
+  // #endif
+  trace('页面销毁：认证事件与自定义控件回调已注销')
+})
+
+// #ifdef APP-IOS
+addCustomViewsClickCallback((id: string): void => {
+  lastResult.value = `iOS 自定义控件点击 | id=${id}`
+  trace(`回调：${lastResult.value}`)
+})
+// #endif
+
+// #ifdef APP-HARMONY
+addCustomViewsClickCallback((id: string): void => {
+  lastResult.value = `HarmonyOS 自定义控件点击 | id=${id}`
+  trace(`回调：${lastResult.value}`)
+})
+// #endif
+
+function resultText(action: string, response: JVerificationResult): string {
+  let content = action
+  if (response.code != null) content += ` | code=${response.code}`
+  if (response.content != null) content += ` | content=${response.content}`
+  if (response.operator != null) content += ` | operator=${response.operator}`
+  if (response.enable != null) content += ` | enable=${response.enable}`
+  if (response.uuid != null) content += ` | uuid=${response.uuid}`
+  if (response.msg != null) content += ` | msg=${response.msg}`
+  return content
+}
+
+function display(action: string, response: JVerificationResult): void {
+  const content = resultText(action, response)
+  lastResult.value = content
+  trace(`回调：${content}`)
+}
+
+function displayAuthPageEvent(event: JVerificationResult): void {
+  const content = resultText('authPageEvent', event)
+  authPageEventResult.value = content
+  trace(`事件：${content}`)
+}
+
+function handleAuthPageEvent(event: JVerificationResult): void {
+  displayAuthPageEvent(event)
+}
+
+// HBuilderX Android 代理会把 loginAuth 的第三个参数生成为必填；
+// Demo 使用独立订阅展示授权页事件，因此显式传入空兼容回调，避免同一事件重复展示。
+function ignoreLegacyAuthPageEvent(_event: JVerificationResult): void {}
+
+// 授权页事件使用独立订阅接口，避免 loginAuth 的兼容事件回调承担订阅职责。
+// 页面销毁时会显式注销；重复注册会替换已有监听器。
+onAuthPageEvent(handleAuthPageEvent)
+
+function initialize(): void {
+  trace('点击：初始化')
+  const options: JVerificationInitOptions = {
+    channel: 'developer-default',
+    timeout: timeout,
+    isProduction: false
+  }
+  // #ifndef APP-ANDROID
+  options.appKey = appKey.value
+  // #endif
+  jverifyInit(options, (response: JVerificationResult): void => {
+    display('init', response)
+  })
+}
+
+function queryInitSuccess(): void {
+  trace('点击：查询初始化状态')
+  isInitSuccess((response: JVerificationResult): void => {
+    display('isInitSuccess', response)
+  })
+}
+
+function queryVerifyEnable(): void {
+  trace('点击：检查认证环境')
+  checkVerifyEnable((response: JVerificationResult): void => {
+    display('checkVerifyEnable', response)
+  })
+}
+
+function preLogin(): void {
+  trace('点击：预取号')
+  jverifyPreLogin(timeout, (response: JVerificationResult): void => {
+    display('preLogin', response)
+  })
+}
+
+function getToken(): void {
+  trace('点击：获取 token')
+  jverifyGetToken(timeout, (response: JVerificationResult): void => {
+    display('getToken', response)
+  })
+}
+
+function clearCache(): void {
+  trace('点击：清除预取号缓存')
+  clearPreLoginCache()
+  lastResult.value = 'clearPreLoginCache 已调用'
+  trace(`结果：${lastResult.value}`)
+}
+
+function loginAuth(): void {
+  trace('点击：拉起授权页')
+  lastResult.value = '等待 loginAuth 回调'
+  authPageEventResult.value = '等待授权页事件'
+  // #ifdef APP-ANDROID
+  const androidUIConfig = selectedAndroidUIConfig
+  if (androidUIConfig != null) {
+    // Android 官方 Demo 在每次 loginAuth 前重新设置 UI；SDK 会按授权页生命周期释放配置。
+    setCustomUIWithConfigAndroid(androidUIConfig)
+    trace('Android 授权页样式已在 loginAuth 前应用')
+  }
+  // #endif
+  const options: JVerificationLoginAuthOptions = {
+    autoFinish: true,
+    timeout: timeout,
+    animationFlag: true
+  }
+  jverifyLoginAuth(options, (response: JVerificationResult): void => {
+    display('loginAuth', response)
+  }, ignoreLegacyAuthPageEvent)
+}
+
+// #ifdef APP-ANDROID
+function configureAndroidPage(): void {
+  trace('点击：Android 设置基础样式')
+  const config: UTSJSONObject = {
+    setAppLanguageType: 0,
+    setNavTransparent: true,
+    setNavText: '',
+    setNavReturnBtnHidden: false,
+    setLogBtnText: '极光认证测试',
+    setLogBtnTextBold: true,
+    setNumberTextBold: true,
+    setSloganTextBold: true,
+    setVirtualButtonColor: 0xff000000,
+    setPrivacyState: false,
+    setPrivacyNameAndUrlBeanList: [{
+      name: '条款1',
+      url: 'https://www.jiguang.cn/about',
+      beforeName: ',',
+      afterName: ','
+    }, {
+      name: '条款2',
+      url: 'https://www.jiguang.cn/about',
+      beforeName: '',
+      afterName: ''
+    }, {
+      name: '条款3',
+      url: 'https://www.jiguang.cn/about',
+      beforeName: ',',
+      afterName: ','
+    }],
+    setAppPrivacyColor: [0xff4169e1, 0xffff6347],
+    setLogoImgPathFromJs: 'static/jverification/weixin.png',
+    setLogBtnImgPathFromJs: 'static/jverification/login.png',
+    setAuthBGImgPathFromJs: 'static/jverification/bg.jpeg',
+    setPrivacyNavReturnBtnPathFromJs: 'static/jverification/weixin.png',
+    setCheckedImgPathFromJs: 'static/jverification/selected.png',
+    setUncheckedImgPathFromJs: 'static/jverification/unselected.png',
+    setPrivacyTextSize: 12,
+    setPrivacyTextBold: false,
+    setPrivacyUnderlineText: false,
+    setPrivacyTextWidth: 280,
+    setPrivacyCheckboxSize: 14,
+    setPrivacyCheckboxMargin: [0, 0, 0, 0],
+    enableHintToast: true,
+    enableHintToastText: '请先同意隐私协议',
+    setLoadingViewEnable: true,
+    setStatusBarTransparent: true,
+    setPrivacyCheckDialogConfig: {
+      enablePrivacyCheckDialog: true,
+      setPrivacyCheckDialogTitleText: '测试标题',
+      setPrivacyCheckDialogTitleTextSize: 18,
+      setPrivacyCheckDialogTitleTextBold: true,
+      setPrivacyCheckDialogTitleTextColor: 0xff4169e1,
+      setPrivacyCheckDialogContentTextGravity: 'left',
+      setPrivacyCheckDialogContentTextSize: 16,
+      setPrivacyCheckDialogContentTextPaddingL: 20,
+      setPrivacyCheckDialogContentTextPaddingT: 8,
+      setPrivacyCheckDialogContentTextPaddingR: 20,
+      setPrivacyCheckDialogContentTextPaddingB: 8,
+      setPrivacyCheckDialogLogBtnImgPath: 'static/jverification/login.png',
+      setPrivacyCheckDialogLogBtnText: '同意并登录',
+      setPrivacyCheckDialogLogBtnTextColor: 0xffff6347,
+      setPrivacyCheckDialogLogBtnMarginT: 12,
+      setPrivacyCheckDialogLogBtnMarginR: 20,
+      setPrivacyCheckDialogLogBtnMarginB: 16,
+      setPrivacyCheckDialogGravity: 'center',
+      setPrivacyCheckDialogLogBtnWidth: 120,
+      setPrivacyCheckDialogLogBtnHeight: 44,
+      setPrivacyCheckDialogWidth: 300,
+      setPrivacyCheckDialogHeight: 240,
+      setPrivacyCheckDialogBackgroundColor: 0xffffffff,
+      addCustomViews: [{
+        type: 'button',
+        id: 'android-privacy-cancel',
+        text: '取消',
+        textSize: 15,
+        textColor: 0xff475569,
+        backgroundColor: 0xffe5e7eb,
+        width: 120,
+        height: 44,
+        margins: [20, 12, 0, 16],
+        belowPrivacyText: true
+      }]
+    },
+    addCustomViews: [{
+      type: 'text',
+      id: 'android-demo-text',
+      finishFlag: false,
+      width: 100,
+      height: 50,
+      text: '自定义文本',
+      textSize: 20,
+      align: 15,
+      margins: [100, 100, 0, 0],
+      textAlignment: 4,
+      textViewGravity: 2,
+      bgColor: 0xff7b68ee
+    }, {
+      type: 'image',
+      id: 'android-demo-image',
+      finishFlag: true,
+      width: 50,
+      height: 50,
+      align: 13,
+      margins: [0, 0, 0, 0],
+      bgImgPath: 'static/jverification/qq.png'
+    }]
+  }
+  selectedAndroidUIConfig = config
+  lastResult.value = 'Android 基础授权页样式已选择，将在拉起授权页前应用'
+}
+
+function configureAndroidVideo(): void {
+  trace('点击：Android 设置背景视频')
+  const config: UTSJSONObject = {
+    setNavColor: 0xff000000,
+    setNavText: '一键登录',
+    setLogBtnText: '本机号码一键登录',
+    setLogBtnTextBold: true,
+    setNumberColor: 0xffffffff,
+    setSloganTextColor: 0xffffffff,
+    setPrivacyState: false,
+    setAppPrivacyColor: [0xffffffff, 0xff60a5fa],
+    setAuthBGVideoPathFromJs: 'static/jverification/videobg.mp4',
+    setAuthBGVideoPlaceholderPathFromJs: 'static/jverification/bg.jpeg',
+    setAuthBGVideoScaleType: 2,
+    enableHintToast: true,
+    enableHintToastText: '请先同意隐私协议'
+  }
+  selectedAndroidUIConfig = config
+  lastResult.value = 'Android 背景视频样式已选择，将在拉起授权页前应用'
+}
+
+function configureAndroidDialog(): void {
+  trace('点击：Android 设置弹窗样式')
+  const config: UTSJSONObject = {
+    setNavColor: 0xff000000,
+    setLogBtnText: '极光认证测试弹窗',
+    setPrivacyState: false,
+    setNavTextBold: true,
+    setLogBtnTextBold: true,
+    setAppPrivacyColor: [0xff00f000, 0xff000000],
+    setDialogTheme: [300, 390, 0, 0, false],
+    setLogoWidth: 70,
+    setLogoHeight: 70,
+    setLogoOffsetY: 25,
+    setNumFieldOffsetY: 130,
+    setSloganOffsetY: 160,
+    setLogBtnOffsetY: 184,
+    setLogBtnWidth: 200,
+    setPrivacyOffsetY: 5,
+    setPrivacyMarginB: 30,
+    setLogoImgPathFromJs: 'static/jverification/big.jpg',
+    setLogBtnImgPathFromJs: 'static/jverification/login.png',
+    setCheckedImgPathFromJs: 'static/jverification/selected.png',
+    setUncheckedImgPathFromJs: 'static/jverification/unselected.png',
+    setAuthBGImgPathFromJs: 'static/jverification/bg.jpeg',
+    setDimAmount: 0.5,
+    enableHintToast: true,
+    enableHintToastText: '请先同意隐私协议',
+    setPrivacyCheckDialogConfig: {
+      enablePrivacyCheckDialog: true,
+      setPrivacyCheckDialogTitleText: '请阅读并同意协议',
+      setPrivacyCheckDialogTitleTextSize: 18,
+      setPrivacyCheckDialogTitleTextBold: true,
+      setPrivacyCheckDialogTitleTextColor: 0xff17233d,
+      setPrivacyCheckDialogContentTextGravity: 'left',
+      setPrivacyCheckDialogContentTextSize: 14,
+      setPrivacyCheckDialogContentTextPaddingL: 20,
+      setPrivacyCheckDialogContentTextPaddingT: 8,
+      setPrivacyCheckDialogContentTextPaddingR: 20,
+      setPrivacyCheckDialogContentTextPaddingB: 8,
+      setPrivacyCheckDialogLogBtnImgPath: 'static/jverification/login.png',
+      setPrivacyCheckDialogLogBtnText: '同意并登录',
+      setPrivacyCheckDialogLogBtnTextColor: 0xffffffff,
+      setPrivacyCheckDialogLogBtnMarginT: 12,
+      setPrivacyCheckDialogLogBtnMarginR: 20,
+      setPrivacyCheckDialogLogBtnMarginB: 16,
+      setPrivacyCheckDialogLogBtnWidth: 120,
+      setPrivacyCheckDialogLogBtnHeight: 44,
+      setPrivacyCheckDialogWidth: 300,
+      setPrivacyCheckDialogHeight: 240,
+      setPrivacyCheckDialogGravity: 'center',
+      setPrivacyCheckDialogBackgroundColor: 0xffffffff,
+      addCustomViews: [{
+        type: 'button',
+        id: 'android-privacy-cancel',
+        text: '取消',
+        textSize: 15,
+        textColor: 0xff475569,
+        backgroundColor: 0xffe5e7eb,
+        width: 120,
+        height: 44,
+        margins: [20, 12, 0, 16],
+        belowPrivacyText: true
+      }]
+    },
+    privacyNeedClose: true,
+    privacyCloseTheme: [10, 60, 0, 0]
+  }
+  selectedAndroidUIConfig = config
+  lastResult.value = 'Android 弹窗授权页样式已选择；主授权页尺寸 300×390dp，将在拉起前应用'
+}
+
+// #endif
+
+// #ifdef APP-IOS
+function configureIOSPage(): void {
+  trace('点击：iOS 设置基础样式')
+  setCustomUIWithConfigiOS({
+    appLanguageType: 0,
+    shouldAutorotate: true,
+    supportedInterfaceOrientations: 30,
+    navColor: 0xff000000,
+    authPageBackgroundImage: 'static/jverification/bg.jpeg',
+    navReturnImg: 'static/jverification/windowClose.png',
+    navControl: {
+      id: 'ios-nav-help',
+      title: '帮助',
+      textFont: 14,
+      textColor: 0xffffffff,
+      width: 44,
+      height: 44,
+      isFinish: false
+    },
+    preferredStatusBarStyle: 1,
+    agreementPreferredStatusBarStyle: 1,
+    navReturnImageEdgeInsets: { top: 4, left: 4, bottom: 4, right: 4 },
+    agreementNavReturnImage: 'static/jverification/windowClose.png',
+    logoImg: 'static/jverification/logo.png',
+    logBtnText: '极光认证测试',
+    logBtnFont: { size: 16, weight: 'semibold' },
+    logBtnConstraints: [0, 0, 280, 60],
+    privacyState: false,
+    appPrivacyColor: [0xff808080, 0xff0f65c1],
+    privacyTextFontSize: 12,
+    privacyConstraints: [{
+      attribute: 'left', relation: 'equal', toItem: 'super', toAttribute: 'left', constant: 43
+    }, {
+      attribute: 'right', relation: 'equal', toItem: 'super', toAttribute: 'right', constant: -43
+    }, {
+      attribute: 'bottom', relation: 'equal', toItem: 'super', toAttribute: 'bottom', constant: -20
+    }, {
+      attribute: 'height', relation: 'equal', toItem: 'none', toAttribute: 'height', constant: 80
+    }],
+    checkViewConstraints: [{
+      attribute: 'left', relation: 'equal', toItem: 'super', toAttribute: 'left', constant: 20
+    }, {
+      attribute: 'top', relation: 'equal', toItem: 'privacy', toAttribute: 'top', constant: 0
+    }, {
+      attribute: 'width', relation: 'equal', toItem: 'none', toAttribute: 'width', constant: 18
+    }, {
+      attribute: 'height', relation: 'equal', toItem: 'none', toAttribute: 'height', constant: 18
+    }],
+    appPrivacys: [
+      '头部文字',
+      ['、', '自定义条款1', 'https://www.taobao.com/', '内部自定义条款1'],
+      ['、', '自定义条款2', 'https://www.taobao.com/', '内部自定义条款2'],
+      ['、', '自定义条款3', 'https://www.taobao.com/', '内部自定义条款3'],
+      '尾部文字'
+    ],
+    isAlertPrivacyVC: true,
+    agreementAlertViewShowWindow: true,
+    resetAgreementAlertViewFrameBlock: {
+      preset: 'officialDemo'
+    },
+    customAgreementAlertView: {
+      views: [{
+        type: 'button',
+        id: 'ios-agreement-disagree',
+        title: '不同意',
+        textFont: 14,
+        textColor: 0xffffffff,
+        backgroundColor: 0xff1c1b20,
+        left: 0,
+        bottom: 0,
+        widthRatio: 0.5,
+        height: 50,
+        action: 'hideAlertView'
+      }]
+    },
+    windowCornerRadius: 15,
+    navTransparent: true,
+    privacysNavCustom: false,
+    textVerAlignment: 0,
+    openPrivacyInBrowser: false,
+    agreementNavBackgroundColor: 0xff7b68ee,
+    agreementNavTextFont: { size: 16, weight: 'medium' },
+    agreementNavTextColor: 0xffffffff,
+    privacyTextAlignment: 'left',
+    numberFont: { size: 18, weight: 'medium' },
+    sloganFont: { size: 12, weight: 'regular' },
+    logBtnImgs: [
+      'static/jverification/loginBtn_Nor.png',
+      'static/jverification/loginBtn_Dis.png',
+      'static/jverification/loginBtn_Hig.png'
+    ],
+    uncheckedImg: 'static/jverification/unselected.png',
+    checkedImg: 'static/jverification/selected.png',
+    agreementAlertViewLogBtnImgs: [
+      'static/jverification/loginBtn_Nor.png',
+      'static/jverification/loginBtn_Dis.png',
+      'static/jverification/loginBtn_Hig.png'
+    ],
+    agreementAlertViewBackgroundColor: 0xff1c1b20,
+    agreementAlertViewModalTransitionStyle: 'CrossDissolve',
+    agreementAlertViewTitleText: '请阅读并同意以下条款',
+    agreementAlertViewTitleTextFont: { size: 16, weight: 'semibold' },
+    agreementAlertViewTitleTextFontSize: 16,
+    agreementAlertViewTitleTextColor: 0xffffffff,
+    agreementAlertViewContentTextAlignment: 0,
+    agreementAlertViewContentTextFontSize: 13,
+    agreementAlertViewLogBtnText: '同意并登录',
+    agreementAlertViewLogBtnTextFontSize: 14,
+    agreementAlertViewLogBtnTextColor: 0xffffffff,
+    customLoadingViewBlock: {
+      style: 'large',
+      text: '正在登录…',
+      textFont: 14,
+      textColor: 0xffffffff,
+      indicatorColor: 0xffffffff,
+      backgroundColor: 0x00000000
+    },
+    addCustomViews: [{
+      type: 'label',
+      width: 240,
+      height: 20,
+      top: 320,
+      left: 100,
+      backgroundColor: 0xff7b68ee,
+      text: '自定义 Label',
+      textFont: 20,
+      textAlignment: 1,
+      numberOfLines: 2,
+      cornerRadius: 10,
+      textColor: 0xff000000
+    }, {
+      type: 'button',
+      id: 'ios-demo-button',
+      width: 180,
+      height: 44,
+      textColor: 0xff000000,
+      cornerRadius: 22,
+      left: 50,
+      bottom: -100,
+      title: '点击测试',
+      isFinish: true,
+      backgroundImagePath: 'static/jverification/big.jpg'
+    }, {
+      type: 'imageView',
+      width: 50,
+      height: 50,
+      cornerRadius: 25,
+      right: -100,
+      bottom: -100,
+      imagePath: 'static/jverification/qq.png'
+    }]
+  })
+  lastResult.value = 'iOS 基础授权页样式已设置'
+}
+
+function configureIOSVideo(): void {
+  trace('点击：iOS 设置背景视频')
+  setCustomUIWithConfigiOS({
+    shouldAutorotate: true,
+    supportedInterfaceOrientations: 30,
+    navColor: 0xff000000,
+    navReturnImg: 'static/jverification/windowClose.png',
+    agreementNavReturnImage: 'static/jverification/windowClose.png',
+    logoImg: 'static/jverification/logo.png',
+    preferredStatusBarStyle: 1,
+    logBtnText: '本机号码一键登录',
+    logBtnFont: { size: 16, weight: 'semibold' },
+    numberColor: 0xffffffff,
+    sloganTextColor: 0xffffffff,
+    privacyState: false,
+    appPrivacyColor: [0xffffffff, 0xff60a5fa],
+    logBtnImgs: [
+      'static/jverification/loginBtn_Nor.png',
+      'static/jverification/loginBtn_Dis.png',
+      'static/jverification/loginBtn_Hig.png'
+    ],
+    uncheckedImg: 'static/jverification/unselected.png',
+    checkedImg: 'static/jverification/selected.png',
+    isAlertPrivacyVC: true,
+    agreementAlertViewShowWindow: true,
+    agreementAlertViewLogBtnImgs: [
+      'static/jverification/loginBtn_Nor.png',
+      'static/jverification/loginBtn_Dis.png',
+      'static/jverification/loginBtn_Hig.png'
+    ],
+    authPageVideoPath: 'static/jverification/videobg.mp4',
+    authPageVideoPlaceholderImageName: 'static/jverification/bg.jpeg'
+  })
+  lastResult.value = 'iOS 背景视频样式已设置'
+}
+
+function configureIOSDialog(): void {
+  trace('点击：iOS 设置弹窗样式')
+  setCustomUIWithConfigiOS({
+    navCustom: true,
+    autoLayout: true,
+    shouldAutorotate: true,
+    supportedInterfaceOrientations: 30,
+    showWindow: true,
+    windowConstraints: [0, 0, 300, 300],
+    windowBackgroundAlpha: 0.3,
+    logoImg: 'static/jverification/logo.png',
+    agreementNavReturnImage: 'static/jverification/windowClose.png',
+    logoConstraints: [0, -100, 60, 60],
+    numberConstraints: [0, -42, 200, 14],
+    sloganConstraints: [0, -20, 200, 14],
+    logBtnConstraints: [0, 20, 220, 40],
+    logBtnText: '一键登录',
+    logBtnFont: { size: 16, weight: 'bold' },
+    logBtnTextColor: 0xff0000ff,
+    logBtnImgs: [
+      'static/jverification/loginBtn_Nor.png',
+      'static/jverification/loginBtn_Dis.png',
+      'static/jverification/loginBtn_Hig.png'
+    ],
+    privacyState: false,
+    appPrivacyColor: [0xff808080, 0xff0f65c1],
+    uncheckedImg: 'static/jverification/unselected.png',
+    checkedImg: 'static/jverification/selected.png',
+    isAlertPrivacyVC: true,
+    agreementAlertViewShowWindow: true,
+    resetAgreementAlertViewFrameBlock: {
+      preset: 'officialDemo'
+    },
+    customAgreementAlertView: {
+      views: [{
+        type: 'button',
+        id: 'ios-agreement-disagree',
+        title: '不同意',
+        textFont: 14,
+        textColor: 0xffffffff,
+        backgroundColor: 0xff1c1b20,
+        left: 0,
+        bottom: 0,
+        widthRatio: 0.5,
+        height: 50,
+        action: 'hideAlertView'
+      }]
+    },
+    windowCornerRadius: 15,
+    privacyConstraints: [0, 100, 200, 40],
+    checkViewConstraints: [-108, 100, 10, 10],
+    windowCloseBtnConstraints: [-135, -135, 20, 20],
+    loadingConstraints: [0, 0, 20, 20],
+    windowCloseBtnImgs: [
+      'static/jverification/windowClose.png',
+      'static/jverification/windowClose.png'
+    ],
+    windowBackgroundImage: 'static/jverification/bg.jpeg',
+    agreementAlertViewLogBtnImgs: [
+      'static/jverification/loginBtn_Nor.png',
+      'static/jverification/loginBtn_Dis.png',
+      'static/jverification/loginBtn_Hig.png'
+    ],
+    agreementAlertViewBackgroundColor: 0xff1c1b20,
+    agreementAlertViewModalTransitionStyle: 'CrossDissolve',
+    agreementAlertViewTitleText: '请阅读并同意以下条款',
+    agreementAlertViewTitleTextFont: { size: 16, weight: 'semibold' },
+    agreementAlertViewTitleTextFontSize: 16,
+    agreementAlertViewTitleTextColor: 0xffffffff,
+    agreementAlertViewContentTextAlignment: 0,
+    agreementAlertViewContentTextFontSize: 13,
+    agreementAlertViewLogBtnText: '同意并登录',
+    agreementAlertViewLogBtnTextFontSize: 14,
+    agreementAlertViewLogBtnTextColor: 0xffffffff,
+    customLoadingViewBlock: {
+      style: 'large',
+      text: '正在登录…',
+      textFont: 14,
+      textColor: 0xffffffff,
+      indicatorColor: 0xffffffff,
+      backgroundColor: 0x00000000
+    }
+  })
+  lastResult.value = 'iOS 弹窗授权页样式已设置'
+}
+// #endif
+
+// #ifdef APP-HARMONY
+function configureHarmonyBase(): void {
+  trace('点击：HarmonyOS 设置基础样式')
+  setCustomUIWithConfigHarmony({
+    setAuthBGImgPath: 'jverify_background',
+    setReturnBtnImgPath: 'jverify_dialog_close',
+    setReturnBtnHidden: false,
+    setReturnBtnWidth: 30,
+    setReturnBtnHeight: 30,
+    setReturnBtnOffsetX: 10,
+    setReturnBtnOffsetY: 10,
+    setLogoImgPath: 'app_icon',
+    setLogoWidth: 80,
+    setLogoHeight: 80,
+    setLogoOffsetX: -1,
+    setLogoOffsetY: 150,
+    setNumberColor: 0xffffffff,
+    setNumberSize: 30,
+    setNumFieldOffsetX: -1,
+    setNumFieldOffsetY: 7,
+    setNumberFieldWidth: 200,
+    setNumberFieldHeight: 30,
+    setNumberTextBold: false,
+    setSloganTextColor: 0xffcbd5e1,
+    setSloganTextSize: 11,
+    setSloganOffsetX: -1,
+    setSloganOffsetY: 7,
+    setSloganTextBold: false,
+    setLogBtnText: '本机号码一键登录',
+    setLogBtnTextColor: 0xffffffff,
+    setLogBtnOffsetX: -1,
+    setLogBtnOffsetY: 22,
+    setLogBtnWidth: 270,
+    setLogBtnHeight: 50,
+    setLogBtnTextSize: 15,
+    setLogBtnTextBold: true,
+    setPrivacyState: false,
+    setPrivacyText: ['登录即同意', '，并使用本机号码登录'],
+    setPrivacyColor: [0xffcbd5e1, 0xff60a5fa],
+    setPrivacyNameAndUrlBeanList: [{
+      name: '用户协议',
+      url: 'https://www.jiguang.cn/about',
+      separator: '、',
+      text: '用户协议'
+    }],
+    setPrivacyMargin: { right: 20, bottom: 100, left: 10 },
+    setPrivacyTextSize: 11,
+    setPrivacyCheckboxSize: 18,
+    setPrivacyCheckboxInCenter: true,
+    setPrivacyTextCenterGravity: false,
+    setPrivacyTextBold: false,
+    setPrivacyUnderlineText: false,
+    setPrivacyWithBookTitleMark: true,
+    setEnableHintToastText: '请先同意隐私协议',
+    setEnablePrivacyCheckDialog: true,
+    setPrivacyCheckDialogTitleText: '请阅读并同意协议',
+    setPrivacyCheckDialogLogBtnText: '同意并登录',
+    setPrivacyCheckDialogTitleTextSize: 16,
+    setPrivacyCheckDialogTitleTextColor: 0xff17233d,
+    setPrivacyCheckDialogContentTextGravityCenter: false,
+    setPrivacyCheckDialogContentTextSize: 12,
+    setPrivacyCheckDialogContentTextMargin: { top: 30, right: 15, left: 0 },
+    setPrivacyCheckDialogWidth: 300,
+    setPrivacyCheckDialogHeight: 240,
+    setPrivacyCheckDialogLogBtnWidth: 200,
+    setPrivacyCheckDialogLogBtnHeight: 40,
+    setPrivacyCheckDialogLogBtnMargin: { top: 30, right: 25, left: 25 },
+    setPrivacyCheckDialogLogBtnTextColor: 0xffffffff,
+    setPrivacyCheckDialogBackgroundColor: 0xffffffff,
+    addCustomView: {
+      id: 'harmony-auth-custom-view',
+      type: 'button',
+      text: '自定义控件',
+      textSize: 15,
+      textColor: 0xffffffff,
+      backgroundColor: 0xff359af3,
+      width: 100,
+      height: 40,
+      borderRadius: 8,
+      margin: { top: 80, right: 25, left: 100 },
+      action: 'none'
+    },
+    addCustomViewToCheckDialog: {
+      id: 'harmony-check-dialog-disagree',
+      type: 'button',
+      text: '不同意',
+      textSize: 15,
+      textColor: 0xffffffff,
+      backgroundColor: 0xff359af3,
+      width: 100,
+      height: 40,
+      borderRadius: 8,
+      margin: { top: 80, right: 25, left: 100 },
+      action: 'closeCheckDialog'
+    },
+    setCmUIConfig: {
+      setNumberMargin: { top: 100, right: 0, bottom: 0, left: 0 },
+      setLogBtnText: '本机号码一键登录',
+      setLoginBtnTextColor: 0xffffffff,
+      setLoginBtnColor: 0xff2563eb,
+      setLoginBtnDisabledColor: 0xff94a3b8,
+      setLoginBtnDisabledTextColor: 0xffffffff,
+      setLoginBtnTextSize: 16,
+      setClauseNavMarginTop: 30,
+      setNavColor: 0xffffffff,
+      setNavTextColor: 0xff17233d,
+      setWebDomStorage: true,
+      setClauses: [{
+        text: '登录即同意',
+        fontSize: 14,
+        fontColor: 0xff64748b,
+        isProtocol: false
+      }, {
+        text: '《用户协议》',
+        url: 'https://www.jiguang.cn/about',
+        fontSize: 14,
+        fontColor: 0xff2563eb,
+        isProtocol: true
+      }],
+      setClauseAlignRuleOption: {
+        middle: { anchor: '__container__', align: 'center' },
+        bottom: { anchor: '__container__', align: 'bottom' }
+      },
+      setClauseMargin: { top: 0, right: 20, bottom: 20, left: 44 },
+      setCheckBoxAlignRuleOption: {
+        left: { anchor: '__container__', align: 'start' },
+        center: { anchor: 'clause_text', align: 'center' }
+      },
+      setCheckBoxMargin: { top: 0, right: 0, bottom: 0, left: 16 },
+      setLoginPageComponent: {
+        backgroundColor: 0xffffffff,
+        backgroundImage: 'jverify_background',
+        buttons: [{
+          id: 'harmony-cm-base-button',
+          anchor: 'loginBtn',
+          type: 'button',
+          text: '退出授权页',
+          textSize: 15,
+          textColor: 0xffffffff,
+          backgroundColor: 0xff2563eb,
+          width: 120,
+          height: 40,
+          borderRadius: 20,
+          margin: { top: 16, right: 0, bottom: 0, left: 0 },
+          action: 'dismissLoginAuth'
+        }]
+      }
+    }
+  })
+  lastResult.value = 'HarmonyOS 基础授权页样式已设置'
+}
+
+function configureHarmonyVideo(): void {
+  trace('点击：HarmonyOS 设置背景视频')
+  setCustomUIWithConfigHarmony({
+    setStackLayout: false,
+    setAuthBGVideoPath: 'videobg.mp4',
+    setAuthBGVideoPlaceholderPath: 'jverify_background',
+    setReturnBtnImgPath: 'jverify_dialog_close',
+    setReturnBtnHidden: false,
+    setReturnBtnWidth: 30,
+    setReturnBtnHeight: 30,
+    setReturnBtnOffsetX: 10,
+    setReturnBtnOffsetY: 10,
+    setLogoImgPath: 'app_icon',
+    setLogoWidth: 80,
+    setLogoHeight: 80,
+    setLogoOffsetX: -1,
+    setLogoOffsetY: 150,
+    setNumberColor: 0xffffffff,
+    setNumberSize: 30,
+    setNumFieldOffsetX: -1,
+    setNumFieldOffsetY: 7,
+    setNumberFieldWidth: 200,
+    setNumberFieldHeight: 30,
+    setSloganTextColor: 0xffffffff,
+    setSloganTextSize: 11,
+    setSloganOffsetX: -1,
+    setSloganOffsetY: 7,
+    setLogBtnText: '本机号码一键登录',
+    setLogBtnTextColor: 0xffffffff,
+    setLogBtnOffsetX: -1,
+    setLogBtnOffsetY: 22,
+    setLogBtnWidth: 270,
+    setLogBtnHeight: 50,
+    setLogBtnTextSize: 15,
+    setLogBtnTextBold: true,
+    setPrivacyState: false,
+    setPrivacyText: ['登录即同意', '，并使用本机号码登录'],
+    setPrivacyColor: [0xffffffff, 0xff60a5fa],
+    setPrivacyNameAndUrlBeanList: [{
+      name: '用户协议',
+      url: 'https://www.jiguang.cn/about',
+      separator: '、',
+      text: '用户协议'
+    }],
+    setPrivacyMargin: { right: 20, bottom: 100, left: 10 },
+    setPrivacyTextSize: 11,
+    setPrivacyCheckboxSize: 18,
+    setPrivacyCheckboxInCenter: true,
+    setEnableHintToastText: '请先同意隐私协议',
+    setEnablePrivacyCheckDialog: true,
+    setPrivacyCheckDialogTitleText: '请阅读并同意协议',
+    setPrivacyCheckDialogLogBtnText: '同意并登录'
+  })
+  lastResult.value = 'HarmonyOS 背景视频样式已设置'
+}
+
+function configureHarmonyDialog(): void {
+  trace('点击：HarmonyOS 设置弹窗样式')
+  setCustomUIWithConfigHarmony({
+    enableDialogMode: true,
+    setDialogPage: true,
+    setDialogWidth: 275,
+    setDialogHeight: 400,
+    setAuthBGImgPath: 'jverify_background',
+    setReturnBtnImgPath: 'jverify_dialog_close',
+    setReturnBtnHidden: false,
+    setReturnBtnWidth: 30,
+    setReturnBtnHeight: 30,
+    setReturnBtnOffsetX: 10,
+    setReturnBtnOffsetY: 10,
+    setLogoImgPath: 'app_icon',
+    setLogoWidth: 80,
+    setLogoHeight: 80,
+    setLogoOffsetX: -1,
+    setLogoOffsetY: 30,
+    setBottomSafeAreaHeight: 0,
+    setNumberColor: 0xffffffff,
+    setNumberSize: 24,
+    setNumFieldOffsetX: -1,
+    setNumFieldOffsetY: 7,
+    setNumberFieldWidth: 200,
+    setNumberFieldHeight: 30,
+    setNumberTextBold: false,
+    setSloganTextColor: 0xffcbd5e1,
+    setSloganTextSize: 11,
+    setSloganOffsetX: -1,
+    setSloganOffsetY: 7,
+    setSloganTextBold: false,
+    setLogBtnText: '本机号码一键登录',
+    setLogBtnTextColor: 0xffffffff,
+    setLogBtnOffsetX: -1,
+    setLogBtnOffsetY: 30,
+    setLogBtnWidth: 150,
+    setLogBtnHeight: 50,
+    setLogBtnTextSize: 15,
+    setLogBtnTextBold: true,
+    setPrivacyState: false,
+    setPrivacyText: ['登录即同意', '，并使用本机号码登录'],
+    setPrivacyColor: [0xffcbd5e1, 0xff60a5fa],
+    setPrivacyNameAndUrlBeanList: [{
+      name: '用户协议',
+      url: 'https://www.jiguang.cn/about',
+      separator: '、',
+      text: '用户协议'
+    }],
+    setPrivacyTextSize: 11,
+    setPrivacyCheckboxSize: 18,
+    setPrivacyCheckboxInCenter: true,
+    setPrivacyTextCenterGravity: false,
+    setPrivacyMargin: { right: 20, bottom: 20, left: 10 },
+    setPrivacyWithBookTitleMark: true,
+    setEnableHintToastText: '请先同意隐私协议',
+    setEnablePrivacyCheckDialog: true,
+    setPrivacyCheckDialogTitleText: '请阅读并同意协议',
+    setPrivacyCheckDialogLogBtnText: '同意并登录',
+    setPrivacyCheckDialogTitleTextSize: 16,
+    setPrivacyCheckDialogTitleTextColor: 0xff17233d,
+    setPrivacyCheckDialogContentTextGravityCenter: false,
+    setPrivacyCheckDialogContentTextSize: 12,
+    setPrivacyCheckDialogContentTextMargin: { top: 30, right: 15, left: 0 },
+    setPrivacyCheckDialogWidth: 300,
+    setPrivacyCheckDialogHeight: 240,
+    setPrivacyCheckDialogLogBtnWidth: 200,
+    setPrivacyCheckDialogLogBtnHeight: 40,
+    setPrivacyCheckDialogLogBtnMargin: { top: 30, right: 25, left: 25 },
+    setPrivacyCheckDialogLogBtnTextColor: 0xffffffff,
+    setPrivacyCheckDialogBackgroundColor: 0xffffffff,
+    addCustomView: {
+      id: 'harmony-auth-custom-view',
+      type: 'button',
+      text: '自定义控件',
+      textSize: 15,
+      textColor: 0xffffffff,
+      backgroundColor: 0xff359af3,
+      width: 100,
+      height: 40,
+      borderRadius: 8,
+      margin: { top: 80, right: 25, left: 100 },
+      action: 'none'
+    },
+    addCustomViewToCheckDialog: {
+      id: 'harmony-check-dialog-disagree',
+      type: 'button',
+      text: '不同意',
+      textSize: 15,
+      textColor: 0xffffffff,
+      backgroundColor: 0xff359af3,
+      width: 100,
+      height: 40,
+      borderRadius: 8,
+      margin: { top: 80, right: 25, left: 100 },
+      action: 'closeCheckDialog'
+    },
+    setCmUIConfig: {
+      setNumberMargin: { top: 100, right: 0, bottom: 0, left: 0 },
+      setWindowMode: { width: '80%', height: '50%' },
+      setLogBtnText: '本机号码一键登录',
+      setLoginBtnTextColor: 0xffffffff,
+      setLoginBtnColor: 0xff7b68ee,
+      setLoginBtnDisabledColor: 0xff94a3b8,
+      setLoginBtnDisabledTextColor: 0xffffffff,
+      setLoginBtnTextSize: 16,
+      setNavColor: 0xffffffff,
+      setNavTextColor: 0xff17233d,
+      setWebDomStorage: true,
+      setClauseAlignRuleOption: {
+        middle: { anchor: '__container__', align: 'center' },
+        bottom: { anchor: '__container__', align: 'bottom' }
+      },
+      setClauseMargin: { top: 0, right: 20, bottom: 20, left: 44 },
+      setCheckBoxAlignRuleOption: {
+        left: { anchor: '__container__', align: 'start' },
+        center: { anchor: 'clause_text', align: 'center' }
+      },
+      setCheckBoxMargin: { top: 0, right: 0, bottom: 0, left: 16 },
+      setLoginPageComponent: {
+        backgroundColor: 0xffffffff,
+        backgroundImage: 'jverify_dialog_background',
+        buttons: [{
+          id: 'harmony-cm-custom-button',
+          anchor: 'loginBtn',
+          type: 'button',
+          text: '退出授权页',
+          textSize: 15,
+          textColor: 0xffffffff,
+          backgroundColor: 0xff2563eb,
+          width: 120,
+          height: 40,
+          borderRadius: 20,
+          margin: { top: 12, right: 0, bottom: 0, left: 0 },
+          action: 'dismissLoginAuth'
+        }]
+      },
+      setGenAuthLoginConfirmDialog: {
+        message: '是否使用本机号码登录',
+        confirmText: '确定',
+        cancelText: '取消',
+        confirmColor: '#2563eb',
+        cancelColor: '#64748b'
+      }
+    }
+  })
+  lastResult.value = 'HarmonyOS 弹窗授权页样式已设置'
+}
+// #endif
+
+</script>
+
+<style>
+.page {
+  flex: 1;
+  background-color: #f8fafc;
+}
+
+.card {
+  margin: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.section-title {
+  margin-top: 24px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #17233d;
+}
+
+.input {
+  height: 42px;
+  margin-top: 12px;
+  padding: 0 12px;
+  border-width: 1px;
+  border-color: #d9e1ec;
+  border-radius: 6px;
+}
+
+.button-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.button {
+  margin-top: 12px;
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.half {
+  flex: 1;
+}
+
+.button-row-second {
+  margin-left: 8px;
+}
+
+.secondary {
+  background-color: #475569;
+}
+
+.result {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 6px;
+  background-color: #f1f5f9;
+  font-size: 13px;
+  line-height: 20px;
+  color: #334155;
+}
+</style>

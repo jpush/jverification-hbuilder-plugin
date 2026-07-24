@@ -1,0 +1,7 @@
+<script lang="uts">
+export default {
+  onLaunch() {
+    console.log('JVerification UTS Demo launched')
+  }
+}
+</script>

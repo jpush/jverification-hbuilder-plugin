@@ -1,0 +1,25 @@
+{
+  "deploymentTarget": "12.0",
+  "frameworks": [
+    "AdSupport.framework",
+    "AppTrackingTransparency.framework",
+    "AuthenticationServices.framework",
+    "AVFoundation.framework",
+    "CFNetwork.framework",
+    "CoreFoundation.framework",
+    "CoreGraphics.framework",
+    "CoreLocation.framework",
+    "CoreMotion.framework",
+    "CoreTelephony.framework",
+    "CoreText.framework",
+    "MobileCoreServices.framework",
+    "Network.framework",
+    "Security.framework",
+    "SystemConfiguration.framework",
+    "WebKit.framework",
+    "libc++.1.tbd",
+    "libresolv.tbd",
+    "libsqlite3.tbd",
+    "libz.tbd"
+  ]
+}
