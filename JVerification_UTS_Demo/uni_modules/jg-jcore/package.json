@@ -1,0 +1,29 @@
+{
+  "id": "jg-jcore",
+  "displayName": "极光 JCore iOS UTS 共享依赖",
+  "version": "5.5.0-uts.0",
+  "description": "供极光 iOS UTS 插件共同依赖的 JCore 原生基础插件。",
+  "keywords": [
+    "jcore",
+    "jiguang",
+    "uni-app-x",
+    "uts"
+  ],
+  "uni_modules": {
+    "dependencies": [],
+    "platforms": {
+      "cloud": {
+        "tcb": "n"
+      },
+      "client": {
+        "VueVersion": "3",
+        "App": {
+          "app-ios": "y"
+        }
+      }
+    }
+  },
+  "engines": {
+    "HBuilderX": ">=4.51.0"
+  }
+}

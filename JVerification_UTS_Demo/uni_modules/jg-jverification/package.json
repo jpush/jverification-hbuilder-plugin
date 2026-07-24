@@ -23,7 +23,10 @@
           "app-harmony": "y"
         }
       }
-    }
+    },
+    "dependencies": [
+      "jg-jcore"
+    ]
   },
   "engines": {
     "HBuilderX": ">=5.11.0"

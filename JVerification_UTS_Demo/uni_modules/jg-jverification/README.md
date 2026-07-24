@@ -15,7 +15,7 @@
 | 平台 | SDK 集成方式 | 当前版本 |
 | --- | --- | --- |
 | Android | Gradle/Maven 远程依赖 | `cn.jiguang.sdk:jverification:3.4.8`、`cn.jiguang.sdk:jcore:5.4.9` |
-| iOS | 插件内本地 XCFramework 和静态库；授权页 UI 资源由宿主提供 | JVerification `3.4.7`、JCore `5.5.0` |
+| iOS | 本插件提供 JVerification 与运营商库，同级 `jg-jcore` 提供唯一的共享 JCore；授权页 UI 资源由宿主提供 | JVerification `3.4.7`、JCore `5.5.0` |
 | HarmonyOS | ohpm 远程依赖 | `@jg/verify@1.2.0` |
 
 ## 最小调用
@@ -38,4 +38,4 @@ loginAuth(
 )
 ```
 
-初始化方法和 AppKey 配置因平台不同，请先完成仓库根目录的[集成指南](../../../docs/GUIDE.md)中的对应平台步骤。
+安装时必须同时复制同级 `jg-jcore`。初始化方法、AppKey 配置及 JPush iOS 共存方式请先查看仓库根目录的[集成指南](../../../docs/GUIDE.md)。

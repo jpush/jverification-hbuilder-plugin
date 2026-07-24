@@ -6,6 +6,7 @@
 
 - `JVerification_UTS_Demo/`：可直接使用 HBuilderX 打开的 uni-app x 三端测试 Demo。
 - `JVerification_UTS_Demo/uni_modules/jg-jverification/`：可复制到业务项目的 UTS 插件。
+- `JVerification_UTS_Demo/uni_modules/jg-jcore/`：iOS 的共享 JCore UTS 依赖插件，业务代码无需直接调用。
 - `docs/`：集成、公共 API 和三端授权页 UI 文档。
 
 ## 使用
@@ -26,7 +27,7 @@
 | 平台 | 集成方式 |
 | --- | --- |
 | Android | Gradle/Maven 远程依赖；AppKey 由宿主 `manifestPlaceholders.json` 注入 |
-| iOS | 插件目录内本地 XCFramework 和静态库；授权页 UI 资源由宿主显式提供 |
+| iOS | `jg-jverification` 与独立 `jg-jcore` 提供本地 XCFramework 和静态库；授权页 UI 资源由宿主显式提供 |
 | HarmonyOS | ohpm 依赖 `@jg/verify@1.2.0`；宿主使用 Router |
 
-本插件不发布 npm 包或 GitHub Release。开发者从 `jg-uts` 分支获取源码后，将 `uni_modules/jg-jverification` 复制到自己的 uni-app x 项目。
+本插件不发布 npm 包或 GitHub Release。开发者从 `jg-uts` 分支获取源码后，将 `uni_modules/jg-jverification` 和 `uni_modules/jg-jcore` 一起复制到自己的 uni-app x 项目。与 JPush 共存时的 iOS 接入步骤见[集成指南](docs/GUIDE.md#7-与极光推送共存ios)。

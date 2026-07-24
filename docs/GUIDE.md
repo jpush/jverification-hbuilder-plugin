@@ -23,10 +23,18 @@
 ├── docs/
 └── JVerification_UTS_Demo/
     └── uni_modules/
-        └── jg-jverification/
+        ├── jg-jverification/
+        └── jg-jcore/
 ```
 
-将 `JVerification_UTS_Demo/uni_modules/jg-jverification/` 整个复制到业务项目的 `uni_modules/jg-jverification/`。
+将以下两个目录完整复制到业务项目的 `uni_modules/`：
+
+```text
+JVerification_UTS_Demo/uni_modules/jg-jverification/
+JVerification_UTS_Demo/uni_modules/jg-jcore/
+```
+
+`jg-jcore` 是 iOS 原生共享依赖，业务页面不需要导入或调用。`jg-jverification` 已通过 `uni_modules.dependencies` 声明对它的依赖。
 
 插件不是 npm 包，不需要执行 `npm install`。HBuilderX 会根据各平台 `config.json` 解析原生依赖。
 
@@ -140,13 +148,14 @@ init({ timeout: 10000 }, (result) => {
 
 ### 5.1 本地 SDK
 
-iOS 原生依赖已随插件放在 `utssdk/app-ios` 中，当前版本为：
+iOS 原生依赖随两个 uni_modules 本地交付，当前版本为：
 
-- JVerification 3.4.7
-- JCore 5.5.0
-- 对应运营商 XCFramework 和静态库
+- `jg-jverification`：JVerification 3.4.7、对应运营商 XCFramework 和静态库
+- `jg-jcore`：JCore 5.5.0
 
 不要将这些依赖改为远程 CocoaPods；当前交付和链接验证以本地包为准。
+
+`jg-jverification` 初始化时会调用 `jg-jcore` 的内部链接锚点，使 DCloud 生成的认证 UTS Framework 显式依赖唯一的 `unimoduleJgJcore.framework`。不要把 JCore XCFramework 再复制回认证插件。
 
 iOS SDK 不依赖额外原生资源包，插件也不内置授权页 UI 图片或视频。宿主需要把自定义 UI 资源放在项目 `static/` 等可打包目录中，并通过 iOS UI 配置字段显式传入。
 
@@ -251,13 +260,91 @@ init({
 
 当前锁定 `@jg/verify@1.2.0`。插件在每次 `loginAuth` 时强制 `isRouter = true`，不接收 `Navigation` 或 `navPathStack`。
 
-## 7. 与极光推送共存
+## 7. 与极光推送共存（iOS）
 
-- Android：若推送插件也以 Maven 引入同一 JCore 坐标，Gradle 会统一解析；若推送插件携带本地 JCore AAR/JAR，最终依赖树只能保留一份兼容 JCore。
-- iOS：本插件携带本地 JCore 5.5.0。若推送插件也携带 JCore，必须在真机联调确认兼容版本后，从其中一个插件交付物删除重复 JCore，不能同时链接两份静态 JCore。
-- HarmonyOS：认证 SDK 不含 JCore，没有此冲突。
+当前共存方案已使用 HBuilderX 5.15、JVerification iOS 3.4.7、JPush iOS 6.1.0 和 JCore iOS 5.5.0 完成自定义基座及真机运行验证。
 
-插件不会自动修改推送插件，也不会自动删除 JCore。
+iOS 的每个 UTS 插件会编译为独立动态 Framework。只从 JPush 插件删除重复 JCore，会使 JPush Framework 在链接时出现 `Undefined symbols: _JCORE...`；只保留两份 JCore，又会产生重复类或符号冲突。因此必须让两个插件共同依赖 `jg-jcore`。
+
+#### 项目目录
+
+业务项目的 `uni_modules/` 至少应包含：
+
+```text
+uni_modules/
+├── jg-jverification/
+├── jg-jcore/
+└── jg-jpush-u/
+```
+
+认证插件和 `jg-jcore` 直接使用本仓库提供的版本。对当前官方 JPush UTS 插件执行以下修改。
+
+#### 第一步：删除 JPush 内置 JCore
+
+删除：
+
+```text
+uni_modules/jg-jpush-u/utssdk/app-ios/Libs/JCore/
+```
+
+不要删除 JPush 自身的 `Libs/JPush/`。
+
+#### 第二步：声明依赖
+
+在 `uni_modules/jg-jpush-u/package.json` 的 `uni_modules` 节点中加入：
+
+```json
+{
+  "uni_modules": {
+    "dependencies": [
+      "jg-jcore"
+    ]
+  }
+}
+```
+
+如果 `dependencies` 已存在，应把 `jg-jcore` 合并到原数组，不要覆盖其他依赖。
+
+#### 第三步：增加链接锚点
+
+在 `uni_modules/jg-jpush-u/utssdk/app-ios/index.uts` 顶部加入绝对路径导入：
+
+```ts
+import { ensureJCoreLinked } from '@/uni_modules/jg-jcore'
+```
+
+在 JPush 的 `UTSiOSHookProxy.onCreate` 中调用：
+
+```ts
+onCreate(): void {
+  ensureJCoreLinked()
+  // 原有逻辑
+}
+```
+
+同时在公开的 `initPush` 中调用，避免插件生命周期差异导致依赖未建立：
+
+```ts
+export function initPush(param: InitPushParams): void {
+  ensureJCoreLinked()
+  // 原有逻辑
+}
+```
+
+`jg-jverification` 已内置相同的依赖声明和初始化锚点，业务项目不需要再次修改认证插件。
+
+#### 第四步：重制并验证基座
+
+修改原生依赖后必须重新制作 iOS 自定义基座，并卸载或覆盖设备上的旧基座。不要仅同步页面代码后继续使用旧基座。
+
+至少验证：
+
+1. JPush 初始化和 registration ID 获取正常。
+2. JVerification 初始化、预取号和授权页正常。
+3. 推送与认证可以在同一进程连续调用。
+4. 控制台无重复 JCore 类警告、`Undefined symbols: _JCORE...` 或 UTS 插件类不存在错误。
+
+`uni_modules` 的 iOS 插件依赖能力要求 HBuilderX 4.51 或更高版本；本项目整体仍要求 HBuilderX 5.11 或更高版本。
 
 ## 8. 构建与验证
 

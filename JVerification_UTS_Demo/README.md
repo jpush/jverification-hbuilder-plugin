@@ -15,7 +15,7 @@
 | 平台 | 配置 |
 | --- | --- |
 | Android | 包名 `cn.jiguang.auth`；AppKey `1b5965ba23557bcf384e0b08`，已写入 `nativeResources/android/manifestPlaceholders.json` |
-| iOS | 页面默认 AppKey `4fcc3e237eec4c4fb804ad49`；使用本地 JVerification 3.4.7、JCore 5.5.0 |
+| iOS | 页面默认 AppKey `4fcc3e237eec4c4fb804ad49`；使用本地 JVerification 3.4.7 和同级 `jg-jcore` 中的 JCore 5.5.0 |
 | HarmonyOS | 页面默认 AppKey `667c13ce8023161dbfd75a6e`；使用 `@jg/verify@1.2.0` 和 Router |
 
 AppKey、包名/bundleName 和签名必须与极光控制台登记信息一致。更换 AppKey 时请同步修改对应平台应用标识和签名。

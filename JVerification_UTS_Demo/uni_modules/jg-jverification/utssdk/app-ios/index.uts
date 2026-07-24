@@ -17,6 +17,7 @@ import {
   JVerificationSetDebugMode,
   JVerificationSetTimeWithConfig
 } from '../interface.uts'
+import { ensureJCoreLinked } from '@/uni_modules/jg-jcore'
 
 /**
  * iOS 的认证 SDK 是本地 XCFramework。Swift 混编层负责所有 SDK 类型和
@@ -31,6 +32,7 @@ export const setDebugMode: JVerificationSetDebugMode = (enable: boolean): void =
 // 必须直接导出函数表达式，才能让 HBuilderX 为 uvue 页面生成对应的 UTS 代理。
 // 参数和回调协议仍与传统 iOS init 保持一致。
 export const initialize: JVerificationInit = (options: JVerificationInitOptions, callback: JVerificationCallback): void => {
+  ensureJCoreLinked()
   jverificationInit(options, callback)
 }
 

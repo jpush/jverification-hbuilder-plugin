@@ -1,0 +1,4 @@
+/**
+ * 内部链接锚点。业务代码不需要直接调用。
+ */
+export type EnsureJCoreLinked = () => void
