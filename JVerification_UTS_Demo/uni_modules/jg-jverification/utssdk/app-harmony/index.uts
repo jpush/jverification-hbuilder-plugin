@@ -117,6 +117,16 @@ function harmonyMediaDataByName(name: string): string {
   }
 }
 
+// 自定义图片与 setLoginPageComponent 背景的资源规则一致：
+// image 使用 AppScope media 资源名，imageSource 直接透传给 ArkUI Image（URI / Base64）。
+function harmonyImageSource(config: UTSJSONObject): string {
+  const directSource = config.getString('imageSource', '')
+  if (directSource.length > 0) {
+    return directSource
+  }
+  return harmonyMediaDataByName(config.getString('image', ''))
+}
+
 function dispatchCustomViewClick(id: string): void {
   if (id.length > 0) {
     customViewsClickCallback?.(id)
@@ -214,6 +224,7 @@ function applyHarmonyAuthCustomView(builder: JVerifyUIConfigBuilder, config: UTS
   const action = view.getString('action', 'none')
   configureHarmonyAuthCustomView(
     view.getString('type', 'button'),
+    harmonyImageSource(view),
     view.getString('text', '自定义控件'),
     view.getNumber('textSize', 15),
     view.getNumber('textColor', 0xffffffff),
@@ -249,6 +260,7 @@ function applyHarmonyCheckDialogCustomView(builder: JVerifyUIConfigBuilder, conf
   const action = view.getString('action', 'closeCheckDialog')
   configureHarmonyCheckDialogCustomView(
     view.getString('type', 'button'),
+    harmonyImageSource(view),
     view.getString('text', '不同意'),
     view.getNumber('textSize', 15),
     view.getNumber('textColor', 0xff475569),
@@ -381,6 +393,28 @@ function applyCmAlignRules(builder: GenAuthThemeConfigBuilder, config: UTSJSONOb
   }
 }
 
+function appendHarmonyCmLoginPageControl(control: UTSJSONObject, index: number, prefix: string): void {
+  const margin = control.getJSON('margin')
+  addHarmonyCmLoginPageButton(
+    control.getString('id', `${prefix}-${index}`),
+    control.getString('anchor', 'loginBtn'),
+    control.getString('type', 'button'),
+    harmonyImageSource(control),
+    control.getString('text', '自定义按钮'),
+    control.getNumber('textSize', 16),
+    control.getNumber('textColor', 0xffffffff),
+    control.getNumber('backgroundColor', 0xff359af3),
+    control.getNumber('width', 180),
+    control.getNumber('height', 44),
+    control.getNumber('borderRadius', 22),
+    marginNumber(margin, 'top'),
+    marginNumber(margin, 'right'),
+    marginNumber(margin, 'bottom'),
+    marginNumber(margin, 'left'),
+    control.getString('action', 'callback')
+  )
+}
+
 function applyCmLoginPage(builder: GenAuthThemeConfigBuilder, source: UTSJSONObject): void {
   const customPage = source.getJSON('setLoginPageComponent')
   if (customPage == null) {
@@ -397,9 +431,7 @@ function applyCmLoginPage(builder: GenAuthThemeConfigBuilder, source: UTSJSONObj
     backgroundImageSource.length > 0 ? backgroundImageSource : harmonyMediaDataByName(backgroundImageName),
     (id: string, action: string): void => {
       console.info(`[JVerification HarmonyOS] setLoginPageComponent clicked, id=${id}, action=${action}`)
-      if (action === 'callback' || action === 'dismissLoginAuth') {
-        dispatchCustomViewClick(id)
-      }
+      dispatchCustomViewClick(id)
       if (action === 'dismissLoginAuth') {
         const uiContext = uiContextOrNull()
         if (uiContext != null) {
@@ -411,31 +443,23 @@ function applyCmLoginPage(builder: GenAuthThemeConfigBuilder, source: UTSJSONObj
   const buttons = customPage.getArray<UTSJSONObject>('buttons')
   if (buttons != null) {
     for (let i = 0; i < buttons.length; i++) {
-      const button = buttons[i]
-      const margin = button.getJSON('margin')
-      addHarmonyCmLoginPageButton(
-        button.getString('id', `harmony-cm-button-${i}`),
-        button.getString('anchor', 'loginBtn'),
-        button.getString('type', 'button'),
-        button.getString('text', '自定义按钮'),
-        button.getNumber('textSize', 16),
-        button.getNumber('textColor', 0xffffffff),
-        button.getNumber('backgroundColor', 0xff359af3),
-        button.getNumber('width', 180),
-        button.getNumber('height', 44),
-        button.getNumber('borderRadius', 22),
-        marginNumber(margin, 'top'),
-        marginNumber(margin, 'right'),
-        marginNumber(margin, 'bottom'),
-        marginNumber(margin, 'left'),
-        button.getString('action', 'callback')
-      )
+      appendHarmonyCmLoginPageControl(buttons[i], i, 'harmony-cm-button')
     }
-  } else if (has(customPage, 'buttonText')) {
+  }
+  const widgets = customPage.getArray<UTSJSONObject>('widgets')
+  if (widgets != null) {
+    for (let i = 0; i < widgets.length; i++) {
+      appendHarmonyCmLoginPageControl(widgets[i], i, 'harmony-cm-widget')
+    }
+  }
+  if (buttons == null && widgets == null && has(customPage, 'buttonText')) {
     addHarmonyCmLoginPageButton(
       customPage.getString('buttonId', 'harmony-cm-button'),
       customPage.getString('buttonAnchor', 'loginBtn'),
       'button',
+      customPage.getString('buttonImageSource', '').length > 0
+        ? customPage.getString('buttonImageSource', '')
+        : harmonyMediaDataByName(customPage.getString('buttonImage', '')),
       customPage.getString('buttonText', '关闭授权页'),
       customPage.getNumber('buttonTextSize', 16),
       customPage.getNumber('buttonTextColor', 0xffffffff),
@@ -689,6 +713,14 @@ export const init: JVerificationInit = (options: JVerificationInitOptions, callb
   JVerificationInterface.init(context, appKey, (code: number, message: string) => {
     callback(result(code, message))
   })
+}
+
+/** 与 iOS/Android 对齐的通用初始化名称；原 init 继续保持兼容。 */
+export const initialize: JVerificationInit = (
+  options: JVerificationInitOptions,
+  callback: JVerificationCallback
+): void => {
+  init(options, callback)
 }
 
 export const isInitSuccess: JVerificationBooleanQuery = (callback: JVerificationCallback): void => {

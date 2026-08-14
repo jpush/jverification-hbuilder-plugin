@@ -717,6 +717,18 @@ export const init: JVerificationInit = function (options: JVerificationInitOptio
   JVerificationInterface.init(context, timeout, new AndroidRequestCallback(callback))
 }
 
+/**
+ * 统一初始化入口。普通 uni-app 的 APP-PLUS 业务层不区分
+ * APP-IOS / APP-ANDROID 条件导入，因此三端共同导出 initialize。
+ * 原 init 保留给现有 uni-app x Android 接入。
+ */
+export const initialize: JVerificationInit = function (
+  options: JVerificationInitOptions,
+  callback: JVerificationCallback
+): void {
+  init(options, callback)
+}
+
 export const isInitSuccess: JVerificationBooleanQuery = function (callback: JVerificationCallback): void {
   callback(booleanResult(JVerificationInterface.isInitSuccess()))
 }

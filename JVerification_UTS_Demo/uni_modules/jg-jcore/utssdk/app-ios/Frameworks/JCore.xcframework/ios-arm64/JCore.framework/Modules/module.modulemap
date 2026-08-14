@@ -1,0 +1,5 @@
+framework module JCore {
+  header "JGCOREAPI.h"
+  header "JGInforCollectionAuth.h"
+  export *
+}

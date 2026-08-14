@@ -1,4 +1,0 @@
-module JVerification {
-  header "../Headers/JVERIFICATIONService.h"
-  export *
-}

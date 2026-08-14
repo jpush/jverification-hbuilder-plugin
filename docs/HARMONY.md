@@ -121,19 +121,19 @@ setCustomUIWithConfigHarmony({
 | `setPrivacyCheckDialogBackgroundColor` | `number` | 弹窗背景色。 |
 | `setPrivacyCheckDialogBackgroundImgPath` | `string` | 弹窗背景图片资源名。 |
 
-若需要增加“取消”等控件，使用 `addCustomViewToCheckDialog`：
+若需要增加“取消”等控件，使用 `addCustomViewToCheckDialog`。`type` 支持 `text`、`button` 和 `image`：
+
+- `image` 是 `AppScope/resources/base/media` 中不含扩展名的资源名。
+- `imageSource` 是直接交给 ArkUI `Image` 的 URI 或 Base64 字符串，有值时优先于 `image`。
+- `type: 'image'` 渲染为可点击图片；`type: 'button'` 同时传 `image` 或 `imageSource` 时，以图片作为 Button 的内容。
 
 ```ts
 addCustomViewToCheckDialog: {
   id: 'harmony-check-cancel',
   type: 'button',
-  text: '取消',
-  textSize: 15,
-  textColor: 0xff475569,
-  backgroundColor: 0xffe5e7eb,
-  width: 120,
-  height: 44,
-  borderRadius: 22,
+  image: 'jverify_culogo',
+  width: 48,
+  height: 48,
   action: 'closeCheckDialog'
 }
 ```
@@ -147,14 +147,10 @@ addCustomViewToCheckDialog: {
 ```ts
 addCustomView: {
   id: 'harmony-help',
-  type: 'button',
-  text: '其他登录方式',
-  textSize: 15,
-  textColor: 0xffffffff,
-  backgroundColor: 0xff2563eb,
-  width: 180,
-  height: 44,
-  borderRadius: 22,
+  type: 'image',
+  image: 'jverify_ctlogo',
+  width: 48,
+  height: 48,
   margin: { top: 16, right: 0, bottom: 0, left: 0 },
   action: 'none'
 }
@@ -164,7 +160,9 @@ addCustomView: {
 
 ```text
 id
-type: button | text
+type: button | text | image
+image: media 资源名
+imageSource: URI 或 Base64（优先于 image）
 text
 textSize
 textColor
@@ -176,7 +174,7 @@ margin
 action
 ```
 
-授权页控件的 `action` 支持 `none` 和 `dismissLoginAuth`；二次弹窗控件支持 `closeCheckDialog`。
+所有非空 `id` 点击后都会通过 `addCustomViewsClickCallback` 返回。授权页控件的 `action` 支持 `none` 和 `dismissLoginAuth`；二次弹窗控件支持 `closeCheckDialog`。`setLoginBtnImgPath` 仅用于移动 SDK 自身的登录按钮，不用于此类自定义控件。
 
 ## 7. 移动运营商 setCmUIConfig
 
@@ -189,7 +187,7 @@ action
 - checkbox、协议文案和服务条款。
 - window 尺寸与位置。
 - 协议与 checkbox 对齐规则。
-- `setLoginPageComponent` 背景和自定义控件。
+- `setLoginPageComponent` 背景和自定义控件（`buttons` / `widgets`）。
 - 登录确认弹窗。
 
 ### 全部 setCmUIConfig 字段
@@ -263,17 +261,24 @@ setCmUIConfig: {
     backgroundColor: 0xffffffff,
     backgroundImage: 'jverify_background',
     buttons: [{
-      id: 'harmony-cm-exit',
+      id: 'harmony-cm-image-button',
       anchor: 'loginBtn',
       type: 'button',
-      text: '退出授权页',
-      textSize: 15,
-      textColor: 0xffffffff,
-      backgroundColor: 0xff2563eb,
-      width: 160,
+      image: 'jverify_login_test_back',
+      width: 120,
       height: 40,
       borderRadius: 20,
       margin: { top: 16, right: 0, bottom: 0, left: 0 },
+      action: 'callback'
+    }],
+    widgets: [{
+      id: 'harmony-cm-image-exit',
+      anchor: 'harmony-cm-image-button',
+      type: 'image',
+      image: 'jverify_return',
+      width: 32,
+      height: 32,
+      margin: { top: 12, right: 0, bottom: 0, left: 0 },
       action: 'dismissLoginAuth'
     }]
   },
@@ -294,7 +299,8 @@ setCmUIConfig: {
 | `backgroundColor` | `number` | 自定义登录页背景色。 |
 | `backgroundImage` | `string` | `media` 中不带扩展名的资源名。 |
 | `backgroundImageSource` | `string` | ArkUI `Image` 可直接读取的 URL 或 Base64。 |
-| `buttons` | `object[]` | 自定义 button/text 控件。 |
+| `buttons` | `object[]` | 自定义 button/text/image 控件。 |
+| `widgets` | `object[]` | 与 `buttons` 同协议的附加控件，按配置顺序追加。 |
 | `showTitle` | `boolean` | 是否显示自定义页面标题。 |
 | `title` | `string` | 标题文字。 |
 | `titleSize` | `number` | 标题字号。 |
@@ -306,6 +312,8 @@ setCmUIConfig: {
 id
 anchor
 type
+image
+imageSource
 text
 textSize
 textColor
@@ -330,6 +338,8 @@ buttonWidth
 buttonHeight
 buttonBorderRadius
 buttonMarginTop
+buttonImage
+buttonImageSource
 buttonAction
 ```
 
@@ -338,10 +348,11 @@ SDK 登录按钮和协议文本的固定锚点 ID 分别是 `loginBtn` 和 `clau
 - `buttons[].anchor` 默认使用 `loginBtn`。
 - 按钮的 `top` 与 anchor 的 `bottom` 对齐，`margin.top` 是两者间距。
 - 多个按钮可以让后一项 `anchor` 指向前一项的 `id`。
+- `type: 'image'` 生成可点击 `Image`；`type: 'button'` 传 `image` / `imageSource` 时会在 Button 内渲染图片。
+- `image` 使用 media 资源名，`imageSource` 可以使用 URI 或 Base64。单按钮兼容字段对应为 `buttonImage` / `buttonImageSource`。
 - checkbox 应通过 `center` 与 `clause_text` 垂直居中，不应锚定业务自定义按钮。
-- `action: 'callback'` 只回调 ID。
-- `action: 'dismissLoginAuth'` 回调后关闭授权页。
-- `action: 'none'` 不执行额外动作。
+- 所有非空 `id` 都会通过 `addCustomViewsClickCallback` 回调。
+- `action: 'callback'` 只回调 ID；`action: 'dismissLoginAuth'` 回调后关闭授权页；`action: 'none'` 不执行额外动作。
 
 协议区域贴近底部时：
 

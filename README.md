@@ -1,6 +1,6 @@
-# 极光认证 uni-app x UTS 插件
+# 极光认证 uni-app / uni-app x UTS 插件
 
-`jg-uts` 分支只维护极光认证的 uni-app x / UTS 版本，支持 Android、iOS 和 HarmonyOS。传统 uni-app 原生插件继续由 `jg` 分支维护，不属于本分支交付物。
+`jg-uts` 分支只维护极光认证的 UTS 版本，支持普通 uni-app 的 Android/iOS 应用和 uni-app x 的 Android/iOS/HarmonyOS 应用。传统 uni-app 原生插件继续由 `jg` 分支维护，不属于本分支交付物。
 
 ## 目录
 

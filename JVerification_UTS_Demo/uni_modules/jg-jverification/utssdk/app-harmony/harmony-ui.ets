@@ -163,6 +163,7 @@ export function configureHarmonyCmCheckBoxTopAlignRule(
 
 class HarmonyCustomViewStyle {
   type: string = 'button'
+  imageSource: string = ''
   text: string = ''
   textSize: number = 15
   textColor: number = 0xffffffff
@@ -182,6 +183,7 @@ let checkDialogCustomViewStyle = new HarmonyCustomViewStyle()
 
 export function configureHarmonyAuthCustomView(
   type: string,
+  imageSource: string,
   text: string,
   textSize: number,
   textColor: number,
@@ -196,6 +198,7 @@ export function configureHarmonyAuthCustomView(
   onClick: () => void
 ): void {
   authCustomViewStyle.type = type
+  authCustomViewStyle.imageSource = imageSource
   authCustomViewStyle.text = text
   authCustomViewStyle.textSize = textSize
   authCustomViewStyle.textColor = textColor
@@ -212,6 +215,7 @@ export function configureHarmonyAuthCustomView(
 
 export function configureHarmonyCheckDialogCustomView(
   type: string,
+  imageSource: string,
   text: string,
   textSize: number,
   textColor: number,
@@ -226,6 +230,7 @@ export function configureHarmonyCheckDialogCustomView(
   onClick: () => void
 ): void {
   checkDialogCustomViewStyle.type = type
+  checkDialogCustomViewStyle.imageSource = imageSource
   checkDialogCustomViewStyle.text = text
   checkDialogCustomViewStyle.textSize = textSize
   checkDialogCustomViewStyle.textColor = textColor
@@ -255,16 +260,36 @@ export function buildHarmonyAuthCustomView() {
         left: authCustomViewStyle.marginLeft
       })
       .onClick(authCustomViewStyle.onClick)
+  } else if (authCustomViewStyle.type === 'image' && authCustomViewStyle.imageSource.length > 0) {
+    Image(authCustomViewStyle.imageSource)
+      .width(authCustomViewStyle.width)
+      .height(authCustomViewStyle.height)
+      .objectFit(ImageFit.Contain)
+      .margin({
+        top: authCustomViewStyle.marginTop,
+        right: authCustomViewStyle.marginRight,
+        bottom: authCustomViewStyle.marginBottom,
+        left: authCustomViewStyle.marginLeft
+      })
+      .onClick(authCustomViewStyle.onClick)
   } else {
     Button() {
-      Text(authCustomViewStyle.text)
-        .fontSize(authCustomViewStyle.textSize)
-        .fontColor(authCustomViewStyle.textColor)
+      if (authCustomViewStyle.imageSource.length > 0) {
+        Image(authCustomViewStyle.imageSource)
+          .width('100%')
+          .height('100%')
+          .objectFit(ImageFit.Contain)
+      } else {
+        Text(authCustomViewStyle.text)
+          .fontSize(authCustomViewStyle.textSize)
+          .fontColor(authCustomViewStyle.textColor)
+      }
     }
     .width(authCustomViewStyle.width)
     .height(authCustomViewStyle.height)
     .backgroundColor(authCustomViewStyle.backgroundColor)
     .borderRadius(authCustomViewStyle.borderRadius)
+    .padding(0)
     .margin({
       top: authCustomViewStyle.marginTop,
       right: authCustomViewStyle.marginRight,
@@ -290,16 +315,36 @@ export function buildHarmonyCheckDialogCustomView() {
         left: checkDialogCustomViewStyle.marginLeft
       })
       .onClick(checkDialogCustomViewStyle.onClick)
+  } else if (checkDialogCustomViewStyle.type === 'image' && checkDialogCustomViewStyle.imageSource.length > 0) {
+    Image(checkDialogCustomViewStyle.imageSource)
+      .width(checkDialogCustomViewStyle.width)
+      .height(checkDialogCustomViewStyle.height)
+      .objectFit(ImageFit.Contain)
+      .margin({
+        top: checkDialogCustomViewStyle.marginTop,
+        right: checkDialogCustomViewStyle.marginRight,
+        bottom: checkDialogCustomViewStyle.marginBottom,
+        left: checkDialogCustomViewStyle.marginLeft
+      })
+      .onClick(checkDialogCustomViewStyle.onClick)
   } else {
     Button() {
-      Text(checkDialogCustomViewStyle.text)
-        .fontSize(checkDialogCustomViewStyle.textSize)
-        .fontColor(checkDialogCustomViewStyle.textColor)
+      if (checkDialogCustomViewStyle.imageSource.length > 0) {
+        Image(checkDialogCustomViewStyle.imageSource)
+          .width('100%')
+          .height('100%')
+          .objectFit(ImageFit.Contain)
+      } else {
+        Text(checkDialogCustomViewStyle.text)
+          .fontSize(checkDialogCustomViewStyle.textSize)
+          .fontColor(checkDialogCustomViewStyle.textColor)
+      }
     }
     .width(checkDialogCustomViewStyle.width)
     .height(checkDialogCustomViewStyle.height)
     .backgroundColor(checkDialogCustomViewStyle.backgroundColor)
     .borderRadius(checkDialogCustomViewStyle.borderRadius)
+    .padding(0)
     .margin({
       top: checkDialogCustomViewStyle.marginTop,
       right: checkDialogCustomViewStyle.marginRight,
@@ -314,6 +359,7 @@ class HarmonyCmLoginPageButtonStyle {
   id: string = ''
   anchor: string = 'loginBtn'
   type: string = 'button'
+  imageSource: string = ''
   text: string = ''
   textSize: number = 16
   textColor: number = 0xffffffff
@@ -364,6 +410,7 @@ export function addHarmonyCmLoginPageButton(
   id: string,
   anchor: string,
   type: string,
+  imageSource: string,
   text: string,
   textSize: number,
   textColor: number,
@@ -381,6 +428,7 @@ export function addHarmonyCmLoginPageButton(
   style.id = id
   style.anchor = anchor
   style.type = type
+  style.imageSource = imageSource
   style.text = text
   style.textSize = textSize
   style.textColor = textColor
@@ -418,17 +466,44 @@ function buildHarmonyCmLoginPageButton(style: HarmonyCmLoginPageButtonStyle) {
       .onClick((): void => {
         cmLoginPageStyle.onButtonClick(style.id, style.action)
       })
+  } else if (style.type === 'image' && style.imageSource.length > 0) {
+    Image(style.imageSource)
+      .id(style.id)
+      .width(style.width)
+      .height(style.height)
+      .objectFit(ImageFit.Contain)
+      .alignRules({
+        middle: { anchor: '__container__', align: HorizontalAlign.Center },
+        top: { anchor: style.anchor, align: VerticalAlign.Bottom }
+      })
+      .margin({
+        top: style.marginTop,
+        right: style.marginRight,
+        bottom: style.marginBottom,
+        left: style.marginLeft
+      })
+      .onClick((): void => {
+        cmLoginPageStyle.onButtonClick(style.id, style.action)
+      })
   } else {
     Button() {
-      Text(style.text)
-        .fontSize(style.textSize)
-        .fontColor(style.textColor)
+      if (style.imageSource.length > 0) {
+        Image(style.imageSource)
+          .width('100%')
+          .height('100%')
+          .objectFit(ImageFit.Contain)
+      } else {
+        Text(style.text)
+          .fontSize(style.textSize)
+          .fontColor(style.textColor)
+      }
     }
     .id(style.id)
     .width(style.width)
     .height(style.height)
     .backgroundColor(style.backgroundColor)
     .borderRadius(style.borderRadius)
+    .padding(0)
     .alignRules({
       middle: { anchor: '__container__', align: HorizontalAlign.Center },
       top: { anchor: style.anchor, align: VerticalAlign.Bottom }

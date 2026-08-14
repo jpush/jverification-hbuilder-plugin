@@ -1,6 +1,6 @@
 # 极光认证 UTS Demo
 
-使用 HBuilderX 5.11 或更高版本打开本目录，并按 uni-app x 项目运行。插件包含原生 SDK，Android、iOS 请使用自定义基座；HarmonyOS 使用本地原生构建。
+使用 HBuilderX 5.15 或更高版本打开本目录，并按 uni-app x 项目运行。插件包含原生 SDK，Android、iOS 请使用自定义基座；HarmonyOS 使用本地原生构建。
 
 ## 文档
 

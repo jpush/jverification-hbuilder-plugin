@@ -3,8 +3,10 @@ import { EnsureJCoreLinked } from '../interface.uts'
 /**
  * 让依赖插件显式链接 unimoduleJgJcore.framework。
  *
- * JCore 本身由本插件 Frameworks 目录中的原始 XCFramework 提供；
- * DCloud iOS UTS 工程的 -ObjC 链接配置负责将其 Objective-C 符号装入
- * unimoduleJgJcore.framework。
+ * 原生锚点只读取 JGCOREAPI 的类信息，不初始化 SDK，也不改变合规配置。
+ * 它确保云端 Release 链接时将 JCore 静态符号装入唯一的
+ * unimoduleJgJcore.framework，供 JVerification 与 JPush 共同使用。
  */
-export const ensureJCoreLinked: EnsureJCoreLinked = (): void => {}
+export const ensureJCoreLinked: EnsureJCoreLinked = (): void => {
+  jcoreNativeLinkAnchor()
+}

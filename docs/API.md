@@ -1,4 +1,4 @@
-# 极光认证 uni-app x UTS API
+# 极光认证 uni-app / uni-app x UTS API
 
 本文是 Android、iOS、HarmonyOS 共用的 API 入口文档。平台 UI 字段分别见 [Android](ANDROID.md)、[iOS](IOS.md) 和 [HarmonyOS](HARMONY.md) 文档。
 
@@ -8,7 +8,7 @@
 | --- | --- | --- | --- |
 | `setDebugMode` | 支持 | 支持 | 支持 |
 | `init` | 支持 | 不导出 | 支持 |
-| `initialize` | 不导出 | 支持 | 不导出 |
+| `initialize` | 支持 | 支持 | 支持 |
 | `isInitSuccess` | 支持 | 支持 | 支持 |
 | `checkVerifyEnable` | 支持 | 支持 | 支持 |
 | `getToken` | 支持 | 支持 | 支持 |
@@ -94,6 +94,7 @@ import {
   checkVerifyEnable,
   clearPreLoginCache,
   getToken,
+  initialize,
   isInitSuccess,
   loginAuth,
   offAuthPageEvent,
@@ -102,13 +103,6 @@ import {
   setDebugMode
 } from '@/uni_modules/jg-jverification'
 
-// #ifdef APP-ANDROID || APP-HARMONY
-import { init } from '@/uni_modules/jg-jverification'
-// #endif
-
-// #ifdef APP-IOS
-import { initialize } from '@/uni_modules/jg-jverification'
-// #endif
 ```
 
 ## 4. setDebugMode
@@ -130,18 +124,18 @@ setDebugMode(true)
 初始化认证 SDK。
 
 ```ts
-// Android、HarmonyOS
-init(options: JVerificationInitOptions, callback: (result: JVerificationResult) => void): void
-
-// iOS
+// Android、iOS、HarmonyOS 通用，普通 uni-app 应使用此入口
 initialize(options: JVerificationInitOptions, callback: (result: JVerificationResult) => void): void
+
+// Android、HarmonyOS 保留的兼容入口
+init(options: JVerificationInitOptions, callback: (result: JVerificationResult) => void): void
 ```
 
 Android：
 
 ```ts
 // #ifdef APP-ANDROID
-init({ timeout: 10000 }, (result) => {
+initialize({ timeout: 10000 }, (result) => {
   console.log(result.code, result.content)
 })
 // #endif
@@ -166,7 +160,7 @@ HarmonyOS：
 
 ```ts
 // #ifdef APP-HARMONY
-init({ appKey: '你的 HarmonyOS AppKey' }, (result) => {
+initialize({ appKey: '你的 HarmonyOS AppKey' }, (result) => {
   console.log(result.code, result.content)
 })
 // #endif
@@ -372,7 +366,7 @@ onUnmounted(() => {
 })
 ```
 
-回调可能在同一授权页生命周期内多次触发。页面退出时应显式注销。
+回调可能在同一授权页生命周期内多次触发。页面退出时应显式注销。HarmonyOS 的 `addCustomView`、`addCustomViewToCheckDialog` 与移动 `setLoginPageComponent.buttons/widgets` 都支持可点击图片控件；具体配置见 [HarmonyOS UI 文档](HARMONY.md#6-授权页自定义控件)。
 
 ## 16. Android 位置采集开关
 

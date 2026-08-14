@@ -1,6 +1,6 @@
-# 极光认证 uni-app x UTS 插件
+# 极光认证 uni-app / uni-app x UTS 插件
 
-`jg-jverification` 是极光认证的 uni-app x UTS 插件，支持 Android、iOS 和 HarmonyOS。插件在三端分别调用对应的极光认证 SDK，平台接口与 UI 配置不强制同构，接入方应使用条件编译区分调用。
+`jg-jverification` 是极光认证 UTS 插件，支持普通 uni-app 的 Android/iOS 应用和 uni-app x 的 Android/iOS/HarmonyOS 应用。插件在各端分别调用对应的极光认证 SDK，平台接口与 UI 配置不强制同构。
 
 ## 文档
 
@@ -23,12 +23,14 @@
 ```ts
 import {
   checkVerifyEnable,
+  initialize,
   loginAuth,
   preLogin,
   setDebugMode
 } from '@/uni_modules/jg-jverification'
 
 setDebugMode(true)
+initialize({ appKey: '你的 AppKey', timeout: 10000 }, (result) => {})
 checkVerifyEnable((result) => {})
 preLogin(10000, (result) => {})
 loginAuth(

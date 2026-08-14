@@ -1,13 +1,13 @@
-# 极光认证 uni-app x UTS 插件集成指南
+# 极光认证 uni-app / uni-app x UTS 插件集成指南
 
-本文说明如何在 uni-app x 项目中集成 `jg-jverification`。API 调用见 [API 文档](API.md)，授权页配置见 [Android](ANDROID.md)、[iOS](IOS.md) 和 [HarmonyOS](HARMONY.md) UI 文档。
+本文说明如何在 uni-app 或 uni-app x 项目中集成 `jg-jverification`。API 调用见 [API 文档](API.md)，授权页配置见 [Android](ANDROID.md)、[iOS](IOS.md) 和 [HarmonyOS](HARMONY.md) UI 文档。
 
 ## 1. 环境要求
 
 | 项目 | 要求 |
 | --- | --- |
-| HBuilderX | 5.11 或更高版本 |
-| 项目类型 | uni-app x |
+| HBuilderX | 5.15 或更高版本 |
+| 项目类型 | uni-app（Android/iOS）或 uni-app x |
 | Android | minSdk 21；当前交付仅验证 `arm64-v8a` |
 | iOS | iOS 12.0 或更高版本 |
 | HarmonyOS | HBuilderX 5.15 / DevEco 6.0.1 验证；API 21 |
@@ -46,19 +46,15 @@ JVerification_UTS_Demo/uni_modules/jg-jcore/
 import {
   checkVerifyEnable,
   getToken,
+  initialize,
   loginAuth,
   preLogin,
   setDebugMode
 } from '@/uni_modules/jg-jverification'
 
-// #ifdef APP-ANDROID || APP-HARMONY
-import { init } from '@/uni_modules/jg-jverification'
-// #endif
-
-// #ifdef APP-IOS
-import { initialize } from '@/uni_modules/jg-jverification'
-// #endif
 ```
+
+`initialize` 是三端通用入口，也是普通 uni-app `APP-PLUS` 业务层的推荐写法。Android 和 HarmonyOS 原有的 `init` 仍保留给现有 uni-app x 代码。
 
 Android、iOS、HarmonyOS 的 SDK 接口和 UI 字段并不完全一致，不要在未加条件编译的代码中导入当前平台不存在的方法。
 
@@ -92,7 +88,7 @@ nativeResources/android/manifestPlaceholders.json
 }
 ```
 
-这是 uni-app x 对宿主 Gradle `android.defaultConfig.manifestPlaceholders` 的配置入口，HBuilderX 构建时等价注入：
+这是 uni-app / uni-app x 对宿主 Gradle `android.defaultConfig.manifestPlaceholders` 的配置入口，HBuilderX 构建时等价注入：
 
 ```gradle
 android {
@@ -105,7 +101,7 @@ android {
 }
 ```
 
-无需在 uni-app x 项目中另建或修改 HBuilderX 生成的宿主 `build.gradle`，重新制作基座时该文件会被重新生成。
+无需在 uni-app / uni-app x 项目中另建或修改 HBuilderX 生成的宿主 `build.gradle`，重新制作基座时该文件会被重新生成。
 
 AppKey、applicationId 和签名必须与极光控制台登记信息一致。Demo 当前使用：
 
@@ -132,13 +128,13 @@ AppKey: 1b5965ba23557bcf384e0b08
 
 ### 4.5 初始化
 
-Android 的 AppKey 由 Manifest 占位符提供，`init` 不接收页面 AppKey：
+Android 的 AppKey 由 Manifest 占位符提供，`initialize` 传入的 `appKey` 在 Android 上会被忽略：
 
 ```ts
 // #ifdef APP-ANDROID
-import { init } from '@/uni_modules/jg-jverification'
+import { initialize } from '@/uni_modules/jg-jverification'
 
-init({ timeout: 10000 }, (result) => {
+initialize({ timeout: 10000 }, (result) => {
   console.log(result)
 })
 // #endif
@@ -190,7 +186,7 @@ initialize({
 </dict>
 ```
 
-UTS 在 iOS 端不允许将 `init` 作为命名导出，因此 iOS 使用 `initialize`；参数和回调协议不变。
+UTS 在 iOS 端不允许将 `init` 作为命名导出，因此增加三端通用的 `initialize`；参数和回调协议不变。
 
 ### 5.3 自定义基座
 
@@ -244,13 +240,13 @@ HarmonyOS 认证 SDK 不依赖 JCore。
 
 ### 6.3 初始化与 Router
 
-HarmonyOS 必须通过 `init({ appKey })` 传入 AppKey：
+HarmonyOS 必须通过 `initialize({ appKey })` 传入 AppKey：
 
 ```ts
 // #ifdef APP-HARMONY
-import { init } from '@/uni_modules/jg-jverification'
+import { initialize } from '@/uni_modules/jg-jverification'
 
-init({
+initialize({
   appKey: '你的 HarmonyOS AppKey'
 }, (result) => {
   console.log(result)
@@ -344,7 +340,7 @@ export function initPush(param: InitPushParams): void {
 3. 推送与认证可以在同一进程连续调用。
 4. 控制台无重复 JCore 类警告、`Undefined symbols: _JCORE...` 或 UTS 插件类不存在错误。
 
-`uni_modules` 的 iOS 插件依赖能力要求 HBuilderX 4.51 或更高版本；本项目整体仍要求 HBuilderX 5.11 或更高版本。
+本项目要求 HBuilderX 5.15 或更高版本；普通 uni-app 与 uni-app x 均以该版本验证跨 `uni_modules` 的 iOS UTS 插件依赖。
 
 ## 8. 构建与验证
 
